@@ -29,6 +29,68 @@ public class MoListSelectable extends MoListViews {
         this.selectableList = selectableList;
     }
 
+    public MoSelectableList getSelectableList() {
+        return selectableList;
+    }
+
+    public MoListSelectable setSelectableList(MoSelectableList selectableList) {
+        this.selectableList = selectableList;
+        return this;
+    }
+
+    public CheckBox getSelectAllCheckBox() {
+        return selectAllCheckBox;
+    }
+
+    public MoListSelectable setSelectAllCheckBox(CheckBox selectAllCheckBox) {
+        this.selectAllCheckBox = selectAllCheckBox;
+        return this;
+    }
+
+    public TextView getCounterTextView() {
+        return counterTextView;
+    }
+
+    public MoListSelectable setCounterTextView(TextView counterTextView) {
+        this.counterTextView = counterTextView;
+        return this;
+    }
+
+    public String getCounterMessage() {
+        return counterMessage;
+    }
+
+    public MoListSelectable setCounterMessage(String counterMessage) {
+        this.counterMessage = counterMessage;
+        return this;
+    }
+
+    public boolean isLoadTitleAfter() {
+        return loadTitleAfter;
+    }
+
+    public MoListSelectable setLoadTitleAfter(boolean loadTitleAfter) {
+        this.loadTitleAfter = loadTitleAfter;
+        return this;
+    }
+
+    public MoOnCanceledListener getCanceledListener() {
+        return canceledListener;
+    }
+
+    public MoListSelectable setCanceledListener(MoOnCanceledListener canceledListener) {
+        this.canceledListener = canceledListener;
+        return this;
+    }
+
+    public MoOnSelectFinishedListener getSelectFinishedListener() {
+        return selectFinishedListener;
+    }
+
+    public MoListSelectable setSelectFinishedListener(MoOnSelectFinishedListener selectFinishedListener) {
+        this.selectFinishedListener = selectFinishedListener;
+        return this;
+    }
 
     @Override
     public MoListSelectable setCancelButton(int cancelButton) {

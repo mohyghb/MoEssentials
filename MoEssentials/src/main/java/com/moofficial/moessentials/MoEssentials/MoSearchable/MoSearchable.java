@@ -135,9 +135,145 @@ public class MoSearchable extends MoListViews {
         return this;
     }
 
+    public MoSearchable setSearchTextView(TextView searchTextView) {
+        this.searchTextView = searchTextView;
+        return this;
+    }
+
+    public MoSearchable setOnSearchListener(MoOnSearchListener onSearchListener) {
+        this.onSearchListener = onSearchListener;
+        return this;
+    }
+
+    public MoSearchable setSearchButton(ImageButton searchButton) {
+        this.searchButton = searchButton;
+        return this;
+    }
+
+    public MoSearchable setCancelSearch(ImageButton cancelSearch) {
+        this.cancelSearch = cancelSearch;
+        return this;
+    }
+
+    public MoSearchable setClearSearch(ImageButton clearSearch) {
+        this.clearSearch = clearSearch;
+        return this;
+    }
+
+    public MoSearchable setSearchLayout(LinearLayout searchLayout) {
+        this.searchLayout = searchLayout;
+        return this;
+    }
+
+    public MoSearchable setSearchedIndices(List<Integer> searchedIndices) {
+        this.searchedIndices = searchedIndices;
+        return this;
+    }
+
+    public MoSearchable setFindIndex(int findIndex) {
+        this.findIndex = findIndex;
+        return this;
+    }
+
+    public MoSearchable setUpFind(ImageButton upFind) {
+        this.upFind = upFind;
+        return this;
+    }
+
+    public MoSearchable setDownFind(ImageButton downFind) {
+        this.downFind = downFind;
+        return this;
+    }
+
+    public MoSearchable setDeactivateFindOperations(boolean deactivateFindOperations) {
+        this.deactivateFindOperations = deactivateFindOperations;
+        return this;
+    }
+
+    public MoSearchable setDeactivateSearchOperations(boolean deactivateSearchOperations) {
+        this.deactivateSearchOperations = deactivateSearchOperations;
+        return this;
+    }
+
     public MoSearchable setOnScrollToPosition(MoOnScrollToPosition onScrollToPosition) {
         this.onScrollToPosition = onScrollToPosition;
         return this;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public TextView getSearchTextView() {
+        return searchTextView;
+    }
+
+    public MoSearchableList getSearchableList() {
+        return searchableList;
+    }
+
+    public MoOnSearchFinished getOnSearchFinished() {
+        return onSearchFinished;
+    }
+
+    public MoOnSearchCanceled getOnSearchCanceled() {
+        return onSearchCanceled;
+    }
+
+    public MoOnSearchListener getOnSearchListener() {
+        return onSearchListener;
+    }
+
+    public MoOnScrollToPosition getOnScrollToPosition() {
+        return onScrollToPosition;
+    }
+
+    public ImageButton getSearchButton() {
+        return searchButton;
+    }
+
+    public ImageButton getCancelSearch() {
+        return cancelSearch;
+    }
+
+    public ImageButton getClearSearch() {
+        return clearSearch;
+    }
+
+    public LinearLayout getSearchLayout() {
+        return searchLayout;
+    }
+
+    public List<Integer> getSearchedIndices() {
+        return searchedIndices;
+    }
+
+    public int getFindIndex() {
+        return findIndex;
+    }
+
+    public ImageButton getUpFind() {
+        return upFind;
+    }
+
+    public ImageButton getDownFind() {
+        return downFind;
+    }
+
+    public boolean isSearchOnTextChanged() {
+        return searchOnTextChanged;
+    }
+
+    public boolean isShowNothingWhenSearchEmpty() {
+        return showNothingWhenSearchEmpty;
+    }
+
+    public boolean isDeactivateFindOperations() {
+        return deactivateFindOperations;
+    }
+
+    public boolean isDeactivateSearchOperations() {
+        return deactivateSearchOperations;
     }
 
     @Override

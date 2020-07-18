@@ -108,10 +108,36 @@ public class MoListDelete extends MoListSelectable {
     }
 
 
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
 
+    public MoListDelete setProgressBar(ProgressBar progressBar) {
+        this.progressBar = progressBar;
+        return this;
+    }
 
+    public Runnable getOnDeletePressed() {
+        return onDeletePressed;
+    }
 
+    public MoListDeletable getListAdapter() {
+        return listAdapter;
+    }
 
+    public MoListDelete setListAdapter(MoListDeletable listAdapter) {
+        this.listAdapter = listAdapter;
+        return this;
+    }
+
+    public String getDeleteMessage() {
+        return deleteMessage;
+    }
+
+    public MoListDelete setDeleteMessage(String deleteMessage) {
+        this.deleteMessage = deleteMessage;
+        return this;
+    }
 
     /**
      * shows the delete views and hides the normal views
