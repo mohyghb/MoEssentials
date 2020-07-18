@@ -38,6 +38,7 @@ public class MoSearchable extends MoListViews {
     private ImageButton upFind,downFind;
     private boolean searchOnTextChanged = false;
     private boolean showNothingWhenSearchEmpty = false;
+    private boolean runOnAnotherThread = false;
     private boolean deactivateFindOperations =  false;
     private boolean deactivateSearchOperations =  false;
 
@@ -185,6 +186,15 @@ public class MoSearchable extends MoListViews {
         return this;
     }
 
+    public boolean isRunOnAnotherThread() {
+        return runOnAnotherThread;
+    }
+
+    public MoSearchable setRunOnAnotherThread(boolean runOnAnotherThread) {
+        this.runOnAnotherThread = runOnAnotherThread;
+        return this;
+    }
+
     public MoSearchable setDeactivateFindOperations(boolean deactivateFindOperations) {
         this.deactivateFindOperations = deactivateFindOperations;
         return this;
@@ -276,6 +286,8 @@ public class MoSearchable extends MoListViews {
         return deactivateSearchOperations;
     }
 
+
+
     @Override
     public MoSearchable setUnNormalViews(int... views) {
         super.setUnNormalViews(views);
@@ -323,7 +335,7 @@ public class MoSearchable extends MoListViews {
     /**
      * clears the current search
      */
-    private void clearSearch(){
+    public void clearSearch(){
         searchTextView.setText("");
     }
 
@@ -370,27 +382,34 @@ public class MoSearchable extends MoListViews {
     private void performSearch(TextView textView){
         if(onSearchListener!=null){
             onSearchListener.onSearchListener(textView.getText().toString());
-        }
-
-        if(this.searchableList!=null){
+        }else if(this.searchableList!=null){
             // search key word (always lower case)
-            new Thread(){
-                @Override
-                public void run() {
-                    String search = searchTextView.getText().toString().toLowerCase();
-                    if(!search.isEmpty()){
-                        // indexes of where the items match the search
-                        searchedIndices = MoSearchableUtils.search(searchableList.getSearchableItems(),search);
+            if(runOnAnotherThread){
+                new Thread(){
+                    @Override
+                    public void run() {
+                        performSearch();
                     }
-                    // perform actions for search
-                    finishSearch(search);
-                    // perform actions for find
-                    finishFind(search);
-                }
-            }.start();
+                }.start();
+            }else{
+                performSearch();
+            }
         }
 
     }
+
+    public void performSearch(){
+        String search = searchTextView.getText().toString().toLowerCase();
+        if(!search.isEmpty()){
+            // indexes of where the items match the search
+            searchedIndices = MoSearchableUtils.search(searchableList.getSearchableItems(),search);
+        }
+        // perform actions for search
+        finishSearch(search);
+        // perform actions for find
+        finishFind(search);
+    }
+
 
     /**
      * performs different operations on the
@@ -399,7 +418,9 @@ public class MoSearchable extends MoListViews {
      * that we found based on [search]
      * @param search
      */
-    private void finishSearch(String search){
+    public void finishSearch(String search){
+        if(deactivateSearchOperations)
+            return;
         // when search is not null
         // call on search finished with a
         // list of found items
@@ -419,11 +440,17 @@ public class MoSearchable extends MoListViews {
                         this.searchableList.getSearchableItems(),this.searchedIndices
                 ));
             }
-
         }
     }
-    private void finishFind(String search){
-        // for find
+
+    /**
+     * finishing find and going to the index
+     * that contains search
+     * @param search
+     */
+    public void finishFind(String search){
+        if(deactivateFindOperations)
+            return;
         if(search.isEmpty())
             return;
         this.findIndex = 0;
@@ -441,7 +468,7 @@ public class MoSearchable extends MoListViews {
      *          therefore we need to check whether it is legal or not
      *          and also disable the correct buttons for it
      */
-    private void goToFind(int i){
+    public void goToFind(int i){
         int newIndex = this.findIndex + i;
         if(this.upFind == null || this.downFind == null)
             return;
@@ -451,10 +478,10 @@ public class MoSearchable extends MoListViews {
         this.findIndex = newIndex;
         updateFindUI();
         // then check whether or not you can go up or down
-        updateUpDownFindButtons();
+        updateUpDownFindButtons(this.findIndex,this.searchedIndices.size());
     }
 
-    private void updateFindUI() {
+    public void updateFindUI() {
         if(activity!=null){
             activity.runOnUiThread(() -> {
                 // notify that this item is searchable and change its view
@@ -466,7 +493,7 @@ public class MoSearchable extends MoListViews {
     }
 
 
-    private int getFindPosition(){
+    public int getFindPosition(){
         return this.searchedIndices.get(findIndex);
     }
 
@@ -474,16 +501,15 @@ public class MoSearchable extends MoListViews {
      * both find down and up need to be
      * defined for this function to work
      */
-    private void updateUpDownFindButtons(){
-
-        if(searchedIndices.isEmpty()){
+    public void updateUpDownFindButtons(int index,int size){
+        if(size==0){
             enableDisableUpDown(false,false);
             return;
-        }if(findIndex == 0){
+        }if(index == 0){
             // we can't go upper or to the start
             // because we are at it right now
             enableDisableUpDown(false,true);
-        }else if(findIndex == this.searchedIndices.size() - 1){
+        }else if(index == size - 1){
             // we can't go lower or to the end
             enableDisableUpDown(true,false);
         }else{

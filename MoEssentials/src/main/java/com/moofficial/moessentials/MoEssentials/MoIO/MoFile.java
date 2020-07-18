@@ -103,6 +103,17 @@ public class MoFile {
         return jsonObject.toString();
     }
 
+    /**
+     * combination of iterable and objects
+     * when trying to save a list and couple more objects
+     * this makes it easier to get the correct data that we want
+     * @param set
+     * @param objects
+     * @return
+     */
+    public static String getData(Iterable<?> set, Object ... objects){
+        return getData(getData(set),objects);
+    }
 
 
     /**
