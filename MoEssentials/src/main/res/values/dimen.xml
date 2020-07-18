@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="mo_style_card_corner">25dp</dimen>
+    <dimen name="mo_style_card_corner_small">10dp</dimen>
+
+
+</resources>
