@@ -1,6 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoSearchable;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -9,7 +10,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.moofficial.moessentials.MoEssentials.MoKeyboardUtils.MoKeyboardUtils;
 import com.moofficial.moessentials.MoEssentials.MoState.MoOnScrollToPosition;
@@ -21,6 +21,9 @@ import java.util.List;
 public class MoSearchable extends MoListViews {
 
 
+    // activity is needed for multi-threading computation
+    // and then we can call run on ui thread using the activity
+    private Activity activity;
     private TextView searchTextView;
     private MoSearchableList searchableList;
     private MoOnSearchFinished onSearchFinished;
@@ -35,10 +38,14 @@ public class MoSearchable extends MoListViews {
     private ImageButton upFind,downFind;
     private boolean searchOnTextChanged = false;
     private boolean showNothingWhenSearchEmpty = false;
+    private boolean deactivateFindOperations =  false;
+    private boolean deactivateSearchOperations =  false;
 
 
-    public MoSearchable(Activity a, MoSearchableList searchableList) {
-        super(a);
+    // change it so that searchable list is not mandatory
+
+    public MoSearchable(Context c,View parent, MoSearchableList searchableList) {
+        super(c,parent);
         this.searchableList = searchableList;
     }
 
@@ -50,7 +57,7 @@ public class MoSearchable extends MoListViews {
     }
 
     public MoSearchable setSearchTextView(int s) {
-        this.searchTextView = activity.findViewById(s);
+        this.searchTextView = parentView.findViewById(s);
         if(this.searchOnTextChanged){
             this.searchTextView.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -98,17 +105,17 @@ public class MoSearchable extends MoListViews {
     }
 
     public MoSearchable setUpFind(int upFind) {
-        this.upFind = activity.findViewById(upFind);
+        this.upFind = parentView.findViewById(upFind);
         this.upFind.setOnClickListener(view -> {
-            goToFind(-1);
+            onUpFindPressed();
         });
         return this;
     }
 
     public MoSearchable setDownFind(int downFind) {
-        this.downFind = activity.findViewById(downFind);
+        this.downFind = parentView.findViewById(downFind);
         this.downFind.setOnClickListener(view -> {
-            goToFind(1);
+            onDownFindPressed();
         });
         return this;
     }
@@ -147,19 +154,19 @@ public class MoSearchable extends MoListViews {
 
     @Override
     public MoSearchable setCancelButton(int cancelButton) {
-        this.cancelSearch = activity.findViewById(cancelButton);
+        this.cancelSearch = parentView.findViewById(cancelButton);
         this.cancelSearch.setOnClickListener(view -> onCancel());
         return this;
     }
 
     public MoSearchable setClearSearch(int c) {
-        this.clearSearch = activity.findViewById(c);
+        this.clearSearch = parentView.findViewById(c);
         this.clearSearch.setOnClickListener(view -> clearSearch());
         return this;
     }
 
     public MoSearchable setClearSearch(int c, int drawable, View.OnClickListener onClearClickListener) {
-        this.clearSearch = activity.findViewById(c);
+        this.clearSearch = parentView.findViewById(c);
         this.clearSearch.setImageResource(drawable);
         this.clearSearch.setOnClickListener(onClearClickListener);
         return this;
@@ -167,6 +174,13 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setShowNothingWhenSearchEmpty(boolean showNothingWhenSearchEmpty) {
         this.showNothingWhenSearchEmpty = showNothingWhenSearchEmpty;
+        return this;
+    }
+
+
+
+    public MoSearchable setActivity(Activity activity) {
+        this.activity = activity;
         return this;
     }
 
@@ -178,19 +192,13 @@ public class MoSearchable extends MoListViews {
     }
 
     public MoSearchable setSearchButton(int searchButton) {
-        this.searchButton = activity.findViewById(searchButton);
-        this.searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activateSpecialMode();
-
-            }
-        });
+        this.searchButton = parentView.findViewById(searchButton);
+        this.searchButton.setOnClickListener(view -> activateSpecialMode());
         return this;
     }
 
     public MoSearchable setSearchLayout(int searchLayout) {
-        this.searchLayout = activity.findViewById(searchLayout);
+        this.searchLayout = parentView.findViewById(searchLayout);
         return this;
     }
 
@@ -305,12 +313,20 @@ public class MoSearchable extends MoListViews {
             return;
         // set the new index
         this.findIndex = newIndex;
-        // notify that this item is searchable and change its view
-        this.searchableList.notifyItemChanged(getFindPosition());
-        // then scroll to the position on the item list
-        this.onScrollToPosition.scrollTo(getFindPosition());
+        updateFindUI();
         // then check whether or not you can go up or down
         updateUpDownFindButtons();
+    }
+
+    private void updateFindUI() {
+        if(activity!=null){
+            activity.runOnUiThread(() -> {
+                // notify that this item is searchable and change its view
+                searchableList.notifyItemChanged(getFindPosition());
+                // then scroll to the position on the item list
+                onScrollToPosition.scrollTo(getFindPosition());
+            });
+        }
     }
 
 
@@ -325,25 +341,40 @@ public class MoSearchable extends MoListViews {
     private void updateUpDownFindButtons(){
 
         if(searchedIndices.isEmpty()){
-            turnUpDown(false,false);
+            enableDisableUpDown(false,false);
             return;
         }if(findIndex == 0){
             // we can't go upper or to the start
             // because we are at it right now
-            turnUpDown(false,true);
+            enableDisableUpDown(false,true);
         }else if(findIndex == this.searchedIndices.size() - 1){
             // we can't go lower or to the end
-            turnUpDown(true,false);
+            enableDisableUpDown(true,false);
         }else{
             // we can go both ways
-            turnUpDown(true,true);
+            enableDisableUpDown(true,true);
         }
     }
 
 
-    private void turnUpDown(boolean up, boolean down){
+    public void enableDisableUpDown(boolean up, boolean down){
         this.downFind.setEnabled(down);
         this.upFind.setEnabled(up);
+    }
+
+
+    /**
+     * when the user presses the down find button
+     */
+    public void onDownFindPressed(){
+        goToFind(1);
+    }
+
+    /**
+     * when the user presses the up find button
+     */
+    public void onUpFindPressed(){
+        goToFind(-1);
     }
 
 

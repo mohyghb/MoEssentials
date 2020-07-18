@@ -1,6 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoViews;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +14,9 @@ import java.util.List;
 public abstract class MoListViews {
 
 
-    protected Activity activity;
+    protected Context context;
+
+    protected View parentView;
 
     // this mo list view action is
     // synced with others
@@ -41,15 +43,16 @@ public abstract class MoListViews {
 
 
 
-    public MoListViews(Activity a){
-        this.activity = a;
+    public MoListViews(Context context, View parentView){
+        this.context = context;
+        this.parentView = parentView;
     }
 
 
     public MoListViews setUnNormalViews(int ... views){
         this.unNormalViews = new View[views.length];
         for(int i = 0;i < views.length; i++){
-            View view = this.activity.findViewById(views[i]);
+            View view = this.parentView.findViewById(views[i]);
             this.unNormalViews[i] = view;
         }
         return this;
@@ -58,7 +61,7 @@ public abstract class MoListViews {
     public MoListViews setNormalViews(int ... views){
         this.normalViews = new View[views.length];
         for(int i = 0;i < views.length; i++){
-            View view = this.activity.findViewById(views[i]);
+            View view = this.parentView.findViewById(views[i]);
             this.normalViews[i] = view;
         }
         return this;
@@ -82,13 +85,13 @@ public abstract class MoListViews {
     }
 
     public MoListViews setCancelButton(int cancelButton){
-        this.cancelButton = activity.findViewById(cancelButton);
+        this.cancelButton = parentView.findViewById(cancelButton);
         this.cancelButton.setOnClickListener(view -> onCancel());
         return this;
     }
 
     public MoListViews setConfirmButton(int deleteButton){
-        this.confirmButton = activity.findViewById(deleteButton);
+        this.confirmButton = parentView.findViewById(deleteButton);
         this.confirmButton.setOnClickListener(view -> this.onConfirm());
         return this;
     }

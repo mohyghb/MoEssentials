@@ -1,8 +1,8 @@
 package com.moofficial.moessentials.MoEssentials.MoDelete;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,9 +30,8 @@ public class MoListDelete extends MoListSelectable {
 
 
 
-    public MoListDelete(Activity a, MoListDeletable listDeletable){
-        super(a,listDeletable);
-        this.activity = a;
+    public MoListDelete(Context c, View parent, MoListDeletable listDeletable){
+        super(c,parent,listDeletable);
         this.listAdapter = listDeletable;
     }
 
@@ -93,7 +92,7 @@ public class MoListDelete extends MoListSelectable {
     }
 
     public MoListDelete setProgressBar(int progressBar){
-        this.progressBar = activity.findViewById(progressBar);
+        this.progressBar = parentView.findViewById(progressBar);
         this.progressBar.setIndeterminate(false);
         return this;
     }
@@ -225,7 +224,7 @@ public class MoListDelete extends MoListSelectable {
             progressBar.setIndeterminate(false);
             onCancel();
             MoRunnableUtils.runIfNotNull(onDeletePressed);
-            Toast.makeText(activity, deleteMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, deleteMessage, Toast.LENGTH_SHORT).show();
         },100);
     }
 

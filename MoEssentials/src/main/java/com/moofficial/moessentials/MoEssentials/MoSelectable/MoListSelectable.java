@@ -1,7 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoSelectable;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -24,8 +24,8 @@ public class MoListSelectable extends MoListViews {
     private MoOnSelectFinishedListener selectFinishedListener = pickedItems -> {};
 
 
-    public MoListSelectable(Activity a, MoSelectableList selectableList) {
-        super(a);
+    public MoListSelectable(Context c, View parent, MoSelectableList selectableList) {
+        super(c,parent);
         this.selectableList = selectableList;
     }
 
@@ -53,7 +53,7 @@ public class MoListSelectable extends MoListViews {
     }
 
     public MoListSelectable setSelectAllCheckBox(int selectAll){
-        this.selectAllCheckBox = activity.findViewById(selectAll);
+        this.selectAllCheckBox = parentView.findViewById(selectAll);
         this.selectAllCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if(!compoundButton.isPressed()){
                 // return if the actual button was not pressed
@@ -72,7 +72,7 @@ public class MoListSelectable extends MoListViews {
 
     // set counter of items
     public MoListSelectable setCounterView(int ctv, String message){
-        this.counterTextView = activity.findViewById(ctv);
+        this.counterTextView = parentView.findViewById(ctv);
         this.counterMessage = message;
         return this;
     }

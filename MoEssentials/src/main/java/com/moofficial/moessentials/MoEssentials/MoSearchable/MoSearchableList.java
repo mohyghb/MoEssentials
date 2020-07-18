@@ -1,7 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoSearchable;
 
 
-
 import com.moofficial.moessentials.MoEssentials.MoState.MoStateChange;
 
 import java.util.List;
