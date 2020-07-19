@@ -96,7 +96,7 @@ public class MoFile {
      * @return
      */
     public static String getData(Iterable<?> set, Object ... objects){
-        return getData(getData(set),objects);
+        return getData(getData(set),getData(objects));
     }
 
 
