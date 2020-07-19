@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.moofficial.moessentials.MoEssentials.MoRunnable.MoRunnableUtils;
 import com.moofficial.moessentials.MoEssentials.MoSelectable.MoListSelectable;
 import com.moofficial.moessentials.MoEssentials.MoViews.MoListViews;
@@ -17,6 +19,7 @@ public class MoListDelete extends MoListSelectable {
 
 
     private static final String DELETE_VIEW_FAILED = "Sorry, you can not delete right now";
+    private static final String DELETE_SUCCESSFUL = "Delete was successful";
 
 
     //progress bar for visual purposes (indeterminute)
@@ -26,13 +29,14 @@ public class MoListDelete extends MoListSelectable {
     private MoListDeletable listAdapter;
 
 
-    private String deleteMessage = "Delete was successful";
+    private String deleteMessage = DELETE_SUCCESSFUL;
 
 
 
-    public MoListDelete(Context c, View parent, MoListDeletable listDeletable){
+    public MoListDelete(Context c, View parent, @NonNull MoListDeletable listDeletable){
         super(c,parent,listDeletable);
         this.listAdapter = listDeletable;
+        this.listAdapter.setMoDelete(this);
     }
 
 
