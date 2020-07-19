@@ -25,31 +25,42 @@ public class MoFile {
      //     * @return
      //     */
     public static String getData(Object ... params){
-        if(params==null || params.length == 0){
+        if(params==null || params.length == 0) {
             return "";
-        }else{
+        } else{
             JSONObject jsonObject = new JSONObject();
             for(int i = 0; i < params.length; i++){
                 Object o = params[i];
                 try {
-                    if(o!=null){
-                        if(o instanceof Iterable){
-                            //noinspection rawtypes
-                            jsonObject.put(i+"",getData((Iterable) o));
-                        }else if(o instanceof MoSavable){
-                            jsonObject.put(i+"",((MoSavable)o).getData());
-                        }else{
-                            jsonObject.put(i+"",o.toString());
-                        }
-                    }else{
-                        jsonObject.put(i+"",NULL);
-                    }
+                    decideGetData(jsonObject, i, o);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             addLengthToJson(jsonObject, params.length);
             return jsonObject.toString();
+        }
+    }
+
+    /**
+     * decides what type of data needs to be added to this json object
+     * @param jsonObject
+     * @param i
+     * @param o
+     * @throws JSONException
+     */
+    private static void decideGetData(JSONObject jsonObject, int i, Object o) throws JSONException {
+        if(o!=null){
+            if(o instanceof Iterable){
+                //noinspection rawtypes
+                jsonObject.put(i+"",getData((Iterable) o));
+            }else if(o instanceof MoSavable){
+                jsonObject.put(i+"",((MoSavable)o).getData());
+            }else{
+                jsonObject.put(i+"",o.toString());
+            }
+        }else{
+            jsonObject.put(i+"",NULL);
         }
     }
 
@@ -82,15 +93,7 @@ public class MoFile {
         int i = 0;
         for(Object o: set){
             try {
-                if(o!=null){
-                    if(o instanceof MoSavable){
-                        jsonObject.put(i+"",((MoSavable)o).getData());
-                    }else{
-                        jsonObject.put(i+"",o.toString());
-                    }
-                }else{
-                    jsonObject.put(i+"",NULL);
-                }
+                decideGetData(jsonObject,i,o);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -141,6 +144,16 @@ public class MoFile {
         return new String[]{};
     }
 
+
+    /**
+     * returns true if this data can be
+     * divided into smaller parts still
+     * @param c data
+     * @return
+     */
+    public static boolean isValidData(String[] c){
+        return c!=null && c.length!=0;
+    }
 
 
 
