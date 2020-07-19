@@ -17,6 +17,8 @@ public class MoFile {
 
 
     /**
+     *      GOD method
+     *      accepts everything and dynamically produces the right output
      //     * makes it easier to use MoSavable
      //     * @param sepKey
      //     * @param params
@@ -25,9 +27,17 @@ public class MoFile {
     public static String getData(Object ... params){
         JSONObject jsonObject = new JSONObject();
         for(int i = 0; i < params.length; i++){
+            Object o = params[i];
             try {
-                if(params[i]!=null){
-                    jsonObject.put(i+"",params[i].toString());
+                if(o!=null){
+                    if(o instanceof Iterable){
+                        //noinspection rawtypes
+                        jsonObject.put(i+"",getData((Iterable) o));
+                    }else if(o instanceof MoSavable){
+                        jsonObject.put(i+"",((MoSavable)o).getData());
+                    }else{
+                        jsonObject.put(i+"",o.toString());
+                    }
                 }else{
                     jsonObject.put(i+"",NULL);
                 }
@@ -48,9 +58,7 @@ public class MoFile {
         }
     }
 
-
-
-    public static String getData(MoSavable ... list){
+    private static String getData(MoSavable ... list){
         return getData(new ArrayList<>(Arrays.asList(list)));
     }
 
@@ -61,7 +69,7 @@ public class MoFile {
      * @param set
      * @return
      */
-    public static String getData(Iterable<?> set){
+    private static String getData(Iterable<?> set){
         JSONObject jsonObject = new JSONObject();
         int i = 0;
         for(Object o: set){
@@ -95,7 +103,7 @@ public class MoFile {
      * @param objects
      * @return
      */
-    public static String getData(Iterable<?> set, Object ... objects){
+    private static String getData(Iterable<?> set, Object ... objects){
         return getData(getData(set),getData(objects));
     }
 
