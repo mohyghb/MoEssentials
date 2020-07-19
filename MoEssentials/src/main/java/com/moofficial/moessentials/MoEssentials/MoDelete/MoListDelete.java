@@ -144,6 +144,21 @@ public class MoListDelete extends MoListSelectable {
         return this;
     }
 
+    public MoOnDeleteFinished getOnDeleteFinished() {
+        return onDeleteFinished;
+    }
+
+    public MoListDelete setOnDeleteFinished(MoOnDeleteFinished onDeleteFinished) {
+        this.onDeleteFinished = onDeleteFinished;
+        return this;
+    }
+
+    @Override
+    public MoListDelete updateTitleAfter(boolean updateTitleAfter) {
+        super.updateTitleAfter(updateTitleAfter);
+        return this;
+    }
+
     /**
      * shows the delete views and hides the normal views
      */
@@ -161,6 +176,7 @@ public class MoListDelete extends MoListSelectable {
         // every time we get out of it
         // we need to deselect all elements
         listAdapter.deselectAllElements();
+        updateTitle();
     }
 
 
@@ -233,6 +249,7 @@ public class MoListDelete extends MoListSelectable {
     @Override
     public void onCancel() {
         setDeleteMode(false);
+
     }
 
     /**
@@ -250,8 +267,19 @@ public class MoListDelete extends MoListSelectable {
             onDeleteFinished.onDeleteFinished();
             deactivateProgressBar();
             onCancel();
+
             Toast.makeText(context, deleteMessage, Toast.LENGTH_SHORT).show();
         },100);
+    }
+
+    /**
+     * updates the title after deletion was complete
+     * (this is used if the counter is your title of app bar)
+     */
+    private void updateTitle(){
+        if(this.counterTextView!=null){
+            counterTextView.setText(getSavedTitle());
+        }
     }
 
     public void activateProgressBar(){

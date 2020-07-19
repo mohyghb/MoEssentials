@@ -22,6 +22,8 @@ public class MoListSelectable extends MoListViews {
     protected boolean loadTitleAfter;
     private MoOnCanceledListener canceledListener = () -> {};
     private MoOnSelectFinishedListener selectFinishedListener = pickedItems -> {};
+    private boolean updateTitleAfter = true;
+    private String savedTitle = "";
 
 
     public MoListSelectable(Context c, View parent, MoSelectableList selectableList) {
@@ -138,6 +140,7 @@ public class MoListSelectable extends MoListViews {
     public MoListSelectable setCounterView(int ctv, String message){
         this.counterTextView = parentView.findViewById(ctv);
         this.counterMessage = message;
+        this.savedTitle = this.counterTextView.getText().toString();
         return this;
     }
 
@@ -156,6 +159,24 @@ public class MoListSelectable extends MoListViews {
     @Override
     public MoListSelectable setShowOneActionAtTime(boolean showOneActionAtTime) {
         super.setShowOneActionAtTime(showOneActionAtTime);
+        return this;
+    }
+
+    public boolean isUpdateTitleAfter() {
+        return updateTitleAfter;
+    }
+
+    public MoListSelectable updateTitleAfter(boolean updateTitleAfter) {
+        this.updateTitleAfter = updateTitleAfter;
+        return this;
+    }
+
+    public String getSavedTitle() {
+        return savedTitle;
+    }
+
+    public MoListSelectable setSavedTitle(String savedTitle) {
+        this.savedTitle = savedTitle;
         return this;
     }
 
