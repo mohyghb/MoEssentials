@@ -25,28 +25,32 @@ public class MoFile {
      //     * @return
      //     */
     public static String getData(Object ... params){
-        JSONObject jsonObject = new JSONObject();
-        for(int i = 0; i < params.length; i++){
-            Object o = params[i];
-            try {
-                if(o!=null){
-                    if(o instanceof Iterable){
-                        //noinspection rawtypes
-                        jsonObject.put(i+"",getData((Iterable) o));
-                    }else if(o instanceof MoSavable){
-                        jsonObject.put(i+"",((MoSavable)o).getData());
+        if(params==null || params.length == 0){
+            return "";
+        }else{
+            JSONObject jsonObject = new JSONObject();
+            for(int i = 0; i < params.length; i++){
+                Object o = params[i];
+                try {
+                    if(o!=null){
+                        if(o instanceof Iterable){
+                            //noinspection rawtypes
+                            jsonObject.put(i+"",getData((Iterable) o));
+                        }else if(o instanceof MoSavable){
+                            jsonObject.put(i+"",((MoSavable)o).getData());
+                        }else{
+                            jsonObject.put(i+"",o.toString());
+                        }
                     }else{
-                        jsonObject.put(i+"",o.toString());
+                        jsonObject.put(i+"",NULL);
                     }
-                }else{
-                    jsonObject.put(i+"",NULL);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+            addLengthToJson(jsonObject, params.length);
+            return jsonObject.toString();
         }
-        addLengthToJson(jsonObject, params.length);
-        return jsonObject.toString();
     }
 
     private static void addLengthToJson(JSONObject jsonObject, int length) {
@@ -70,6 +74,7 @@ public class MoFile {
      * @return
      */
     private static String getData(Iterable<?> set){
+
         JSONObject jsonObject = new JSONObject();
         int i = 0;
         for(Object o: set){
@@ -87,6 +92,9 @@ public class MoFile {
                 e.printStackTrace();
             }
             i++;
+        }
+        if(i==0){
+            return "";
         }
         addLengthToJson(jsonObject,i);
         return jsonObject.toString();
