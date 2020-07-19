@@ -183,12 +183,6 @@ public class MoListDelete extends MoListSelectable {
 
 
 
-//    public void updateCounter(){
-//        if(this.counterTextView!=null){
-//            this.counterTextView.setText(this.selectedSize + this.counterMessage);
-//        }
-//    }
-
 
 
     @Override
@@ -261,30 +255,16 @@ public class MoListDelete extends MoListSelectable {
 
     // for select all button
     private void updateSelectAll(){
-        if(this.selectedSize == listAdapter.size()){
-            // then it should be turned on
-            this.selectAllCheckBox.setChecked(true);
-        }else{
-            this.selectAllCheckBox.setChecked(false);
+        if(this.selectAllCheckBox!=null){
+            if(this.selectedSize == listAdapter.size()){
+                // then it should be turned on
+                this.selectAllCheckBox.setChecked(true);
+            }else{
+                this.selectAllCheckBox.setChecked(false);
+            }
         }
     }
 
-//    /**
-//     * updates the action buttons of the bottom bar
-//     */
-//    private void updateActions(){
-//        if(showOneActionAtTime){
-//            if(this.selectedSize > 0){
-//                // then delete should be shown
-//                this.confirmButton.setVisibility(View.VISIBLE);
-//                this.cancelButton.setVisibility(View.GONE);
-//            }else{
-//                // then show cancel
-//                this.confirmButton.setVisibility(View.GONE);
-//                this.cancelButton.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
 
 
     public static void deleteIsNotSpecifiedInThisContext(Context context){

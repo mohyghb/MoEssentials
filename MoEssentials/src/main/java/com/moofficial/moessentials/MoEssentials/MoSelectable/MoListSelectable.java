@@ -92,6 +92,8 @@ public class MoListSelectable extends MoListViews {
         return this;
     }
 
+
+
     @Override
     public MoListSelectable setCancelButton(int cancelButton) {
         super.setCancelButton(cancelButton);
@@ -183,7 +185,7 @@ public class MoListSelectable extends MoListViews {
       * updates the action buttons of the bottom bar
       */
     protected void updateActions(){
-        if(showOneActionAtTime){
+        if(showOneActionAtTime && this.confirmButton!=null && this.cancelButton!=null){
             if(this.selectedSize > 0){
                 // then delete should be shown
                 this.confirmButton.setVisibility(View.VISIBLE);
