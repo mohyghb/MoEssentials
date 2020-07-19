@@ -24,7 +24,8 @@ public class MoListDelete extends MoListSelectable {
 
     //progress bar for visual purposes (indeterminute)
     private ProgressBar progressBar;
-    private Runnable onDeletePressed;
+    private MoOnDeletePressed onDeletePressed = ()->{};
+    private MoOnDeleteFinished onDeleteFinished = ()->{};
     // mutual class
     private MoListDeletable listAdapter;
 
@@ -101,7 +102,7 @@ public class MoListDelete extends MoListSelectable {
         return this;
     }
 
-    public MoListDelete setOnDeletePressed(Runnable r){
+    public MoListDelete setOnDeletePressed(MoOnDeletePressed r){
         this.onDeletePressed = r;
         return this;
     }
@@ -121,7 +122,7 @@ public class MoListDelete extends MoListSelectable {
         return this;
     }
 
-    public Runnable getOnDeletePressed() {
+    public MoOnDeletePressed getOnDeletePressed() {
         return onDeletePressed;
     }
 
@@ -240,16 +241,29 @@ public class MoListDelete extends MoListSelectable {
      */
     @Override
     public void onConfirm() {
-        progressBar.setIndeterminate(true);
+        activateProgressBar();
+        this.onDeletePressed.onDeletePressed();
         // delete
         Handler h = new Handler();
         h.postDelayed(() -> {
             listAdapter.deleteSelected();
-            progressBar.setIndeterminate(false);
+            onDeleteFinished.onDeleteFinished();
+            deactivateProgressBar();
             onCancel();
-            MoRunnableUtils.runIfNotNull(onDeletePressed);
             Toast.makeText(context, deleteMessage, Toast.LENGTH_SHORT).show();
         },100);
+    }
+
+    public void activateProgressBar(){
+        if(this.progressBar!=null){
+            progressBar.setIndeterminate(true);
+        }
+    }
+
+    public void deactivateProgressBar(){
+        if(this.progressBar!=null){
+            progressBar.setIndeterminate(false);
+        }
     }
 
 
