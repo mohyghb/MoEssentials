@@ -6,7 +6,7 @@ public class MoSelectableUtils {
      * selects all the items of the iterable
      * @param items iterable of selectable items
      */
-    private static void selectAllItems(Iterable<? extends MoSelectableItem> items){
+    public static void selectAllItems(Iterable<? extends MoSelectableItem> items){
         turnAllItems(true,items);
     }
 
@@ -15,7 +15,7 @@ public class MoSelectableUtils {
      * @param items
      * @param selectable
      */
-    private static void selectAllItems(Iterable<? extends MoSelectableItem> items,MoListSelectable selectable){
+    public static void selectAllItems(Iterable<? extends MoSelectableItem> items,MoListSelectable selectable){
         selectable.setSelectedSize(turnAllItems(true,items));
     }
 
@@ -23,7 +23,7 @@ public class MoSelectableUtils {
      * deselects all the items of the iterable
      * @param items iterable of selectable items
      */
-    private static void deselectAllItems(Iterable<? extends MoSelectableItem> items){
+    public static void deselectAllItems(Iterable<? extends MoSelectableItem> items){
         turnAllItems(false,items);
     }
 
@@ -32,7 +32,7 @@ public class MoSelectableUtils {
      * @param items
      * @param selectable
      */
-    private static void deselectAllItems(Iterable<? extends MoSelectableItem> items,MoListSelectable selectable){
+    public static void deselectAllItems(Iterable<? extends MoSelectableItem> items,MoListSelectable selectable){
         deselectAllItems(items);
         selectable.setSelectedSize(0);
     }
@@ -43,7 +43,7 @@ public class MoSelectableUtils {
      * @param items
      * @return number of items inside items
      */
-    private static int turnAllItems(boolean b,Iterable<? extends MoSelectableItem> items){
+    public static int turnAllItems(boolean b,Iterable<? extends MoSelectableItem> items){
         int i = 0;
         for(MoSelectableItem s : items){
             s.setSelected(b);
