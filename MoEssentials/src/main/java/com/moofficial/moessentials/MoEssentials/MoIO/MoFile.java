@@ -55,8 +55,11 @@ public class MoFile {
 
     private static void addLengthToJson(JSONObject jsonObject, int length) {
         // saving the length for later on
+        // if the length of the json object is greater than zero
         try {
-            jsonObject.put(LENGTH, length);
+            if(jsonObject.length()>0) {
+                jsonObject.put(LENGTH, length);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -97,6 +100,7 @@ public class MoFile {
             return "";
         }
         addLengthToJson(jsonObject,i);
+
         return jsonObject.toString();
     }
 
