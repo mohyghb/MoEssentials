@@ -49,29 +49,6 @@ public class MoFile {
     }
 
 
-    /**
-     * returns the data of a savable list as a JSON string
-     * @param list
-     * @return
-     */
-    public static String getData(List< ? extends MoSavable> list){
-        JSONObject jsonObject = new JSONObject();
-        for(int i = 0; i < list.size(); i++){
-            try {
-                if(list.get(i)!=null){
-                    jsonObject.put(i+"",list.get(i).getData());
-                }else{
-                    jsonObject.put(i+"",NULL);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        // saving the size for later on
-        addLengthToJson(jsonObject, list.size());
-        return jsonObject.toString();
-    }
-
 
     public static String getData(MoSavable ... list){
         return getData(new ArrayList<>(Arrays.asList(list)));
@@ -90,7 +67,11 @@ public class MoFile {
         for(Object o: set){
             try {
                 if(o!=null){
-                    jsonObject.put(i+"",o.toString());
+                    if(o instanceof MoSavable){
+                        jsonObject.put(i+"",((MoSavable)o).getData());
+                    }else{
+                        jsonObject.put(i+"",o.toString());
+                    }
                 }else{
                     jsonObject.put(i+"",NULL);
                 }
@@ -102,6 +83,9 @@ public class MoFile {
         addLengthToJson(jsonObject,i);
         return jsonObject.toString();
     }
+
+
+
 
     /**
      * combination of iterable and objects
