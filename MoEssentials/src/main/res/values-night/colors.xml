@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="error_color">#cf6679</color>
+    <color name="delete_item_low_transparency_color">#7ECF6679</color>
+    <color name="MoBackground">@color/MaterialGrey</color>
+
+</resources>
