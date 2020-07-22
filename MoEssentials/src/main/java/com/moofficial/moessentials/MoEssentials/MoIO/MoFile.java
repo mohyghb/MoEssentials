@@ -54,7 +54,15 @@ public class MoFile {
             if(o instanceof Iterable){
                 //noinspection rawtypes
                 jsonObject.put(i+"",getData((Iterable) o));
-            }else if(o instanceof MoSavable){
+            }else if(o instanceof MoSwitchSavable){
+                // switch savable, check if it can be saved or not
+                // before adding it
+                MoSwitchSavable switchSavable = (MoSwitchSavable)o;
+                if(switchSavable.isSavable()){
+                    jsonObject.put(i+"",switchSavable.getData());
+                }
+            }
+            else if(o instanceof MoSavable){
                 jsonObject.put(i+"",((MoSavable)o).getData());
             }else{
                 jsonObject.put(i+"",o.toString());
@@ -88,7 +96,6 @@ public class MoFile {
      * @return
      */
     private static String getData(Iterable<?> set){
-
         JSONObject jsonObject = new JSONObject();
         int i = 0;
         for(Object o: set){
@@ -110,17 +117,17 @@ public class MoFile {
 
 
 
-    /**
-     * combination of iterable and objects
-     * when trying to save a list and couple more objects
-     * this makes it easier to get the correct data that we want
-     * @param set
-     * @param objects
-     * @return
-     */
-    private static String getData(Iterable<?> set, Object ... objects){
-        return getData(getData(set),getData(objects));
-    }
+//    /**
+//     * combination of iterable and objects
+//     * when trying to save a list and couple more objects
+//     * this makes it easier to get the correct data that we want
+//     * @param set
+//     * @param objects
+//     * @return
+//     */
+//    private static String getData(Iterable<?> set, Object ... objects){
+//        return getData(getData(set),getData(objects));
+//    }
 
 
     /**
@@ -130,6 +137,9 @@ public class MoFile {
      * @return
      */
     public static String[] loadable(String data){
+        if(data == null || data.isEmpty()){
+            return new String[]{};
+        }
         try {
             JSONObject jsonObject = new JSONObject(data);
             // making a list of appropriate length of sub-data
