@@ -41,6 +41,7 @@ public class MoSearchable extends MoListViews {
     private boolean runOnAnotherThread = false;
     private boolean deactivateFindOperations =  false;
     private boolean deactivateSearchOperations =  false;
+    private boolean clearSearchTextAfterDone = true;
 
 
     // change it so that searchable list is not mandatory
@@ -86,13 +87,14 @@ public class MoSearchable extends MoListViews {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     // we should search the char sequence here
-                    new Thread(){
-                        @Override
-                        public void run() {
-                            performSearch(searchTextView);
-                        }
-                    }.start();
-
+                    if(searchTextView.hasFocus()){
+                        new Thread(){
+                            @Override
+                            public void run() {
+                                performSearch(searchTextView);
+                            }
+                        }.start();
+                    }
                 }
 
                 @Override
@@ -189,6 +191,15 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setDownFind(ImageButton downFind) {
         this.downFind = downFind;
+        return this;
+    }
+
+    public boolean isClearSearchTextAfterDone() {
+        return clearSearchTextAfterDone;
+    }
+
+    public MoSearchable setClearSearchTextAfterDone(boolean clearSearchTextAfterDone) {
+        this.clearSearchTextAfterDone = clearSearchTextAfterDone;
         return this;
     }
 
@@ -332,7 +343,11 @@ public class MoSearchable extends MoListViews {
     }
 
 
-
+    /**
+     * very important if they are trying to use the find functionality
+     * @param activity
+     * @return
+     */
     public MoSearchable setActivity(Activity activity) {
         this.activity = activity;
         return this;
@@ -369,7 +384,10 @@ public class MoSearchable extends MoListViews {
             deactivateSpecialMode();
             MoSearchableUtils.cancelSearch(searchableList.getSearchableItems());
             searchableList.notifyDataSetChanged();
-            this.searchTextView.setText("");
+            if(clearSearchTextAfterDone){
+                this.searchTextView.clearFocus();
+                this.searchTextView.setText("");
+            }
         }
 
     }
