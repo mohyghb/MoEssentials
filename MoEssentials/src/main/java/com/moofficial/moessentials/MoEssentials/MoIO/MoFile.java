@@ -29,15 +29,21 @@ public class MoFile {
             return "";
         } else{
             JSONObject jsonObject = new JSONObject();
+            int totalActualSize = 0;
             for(int i = 0; i < params.length; i++){
                 Object o = params[i];
                 try {
-                    decideGetData(jsonObject, i, o);
+                    if(decideGetData(jsonObject, i, o)) {
+                        totalActualSize++;
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            addLengthToJson(jsonObject, params.length);
+            if(totalActualSize == 0){
+                return "";
+            }
+            addLengthToJson(jsonObject, totalActualSize);
             return jsonObject.toString();
         }
     }
@@ -48,8 +54,9 @@ public class MoFile {
      * @param i
      * @param o
      * @throws JSONException
+     * @return true if it added something to the json file
      */
-    private static void decideGetData(JSONObject jsonObject, int i, Object o) throws JSONException {
+    private static boolean decideGetData(JSONObject jsonObject, int i, Object o) throws JSONException {
         if(o!=null){
             if(o instanceof Iterable){
                 //noinspection rawtypes
@@ -60,6 +67,8 @@ public class MoFile {
                 MoSwitchSavable switchSavable = (MoSwitchSavable)o;
                 if(switchSavable.isSavable()){
                     jsonObject.put(i+"",switchSavable.getData());
+                }else{
+                    return false;
                 }
             }
             else if(o instanceof MoSavable){
@@ -70,6 +79,7 @@ public class MoFile {
         }else{
             jsonObject.put(i+"",NULL);
         }
+        return true;
     }
 
     private static void addLengthToJson(JSONObject jsonObject, int length) {
@@ -98,18 +108,21 @@ public class MoFile {
     private static String getData(Iterable<?> set){
         JSONObject jsonObject = new JSONObject();
         int i = 0;
+        int totalActualSize = 0;
         for(Object o: set){
             try {
-                decideGetData(jsonObject,i,o);
+                if(decideGetData(jsonObject,i,o)){
+                    totalActualSize++;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             i++;
         }
-        if(i==0){
+        if(totalActualSize==0){
             return "";
         }
-        addLengthToJson(jsonObject,i);
+        addLengthToJson(jsonObject,totalActualSize);
 
         return jsonObject.toString();
     }
