@@ -59,6 +59,23 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setSearchTextView(int s) {
         this.searchTextView = parentView.findViewById(s);
+        addTextWatcherToSearchText();
+        this.searchTextView.setOnEditorActionListener((textView, actionId, event) -> {
+
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
+                    (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE) {
+                // hide keyboard
+                MoKeyboardUtils.hideSoftKeyboard(textView);
+                // we should search the char sequence here
+                performSearch(textView);
+            }
+            return false;
+        });
+
+        return this;
+    }
+
+    private void addTextWatcherToSearchText() {
         if(this.searchOnTextChanged){
             this.searchTextView.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -84,24 +101,13 @@ public class MoSearchable extends MoListViews {
                 }
             });
         }
-
-        this.searchTextView.setOnEditorActionListener((textView, actionId, event) -> {
-
-            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
-                    (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE) {
-                // hide keyboard
-                MoKeyboardUtils.hideSoftKeyboard(textView);
-                // we should search the char sequence here
-                performSearch(textView);
-            }
-            return false;
-        });
-
-        return this;
     }
 
     public MoSearchable setSearchOnTextChanged(boolean searchOnTextChanged) {
         this.searchOnTextChanged = searchOnTextChanged;
+        if(searchTextView!=null){
+            addTextWatcherToSearchText();
+        }
         return this;
     }
 

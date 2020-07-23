@@ -130,4 +130,29 @@ public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> exte
     }
 
 
+    public boolean isCanPreview() {
+        return canPreview;
+    }
+
+    public MoPreviewAdapter<T, I> setCanPreview(boolean canPreview) {
+        this.canPreview = canPreview;
+        return this;
+    }
+
+    public boolean isPreviewFromEnd() {
+        return previewFromEnd;
+    }
+
+    public int getPreviewSize() {
+        return previewSize;
+    }
+
+    public List<I> getDataSet() {
+        return dataSet;
+    }
+
+    public MoPreviewAdapter<T, I> setDataSet(List<I> dataSet) {
+        this.dataSet = dataSet;
+        return this;
+    }
 }
