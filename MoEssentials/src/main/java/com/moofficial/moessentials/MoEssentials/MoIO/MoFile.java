@@ -30,10 +30,9 @@ public class MoFile {
         } else{
             JSONObject jsonObject = new JSONObject();
             int totalActualSize = 0;
-            for(int i = 0; i < params.length; i++){
-                Object o = params[i];
+            for(Object o : params){
                 try {
-                    if(decideGetData(jsonObject, i, o)) {
+                    if(decideGetData(jsonObject, totalActualSize, o)) {
                         totalActualSize++;
                     }
                 } catch (JSONException e) {
@@ -107,23 +106,20 @@ public class MoFile {
      */
     private static String getData(Iterable<?> set){
         JSONObject jsonObject = new JSONObject();
-        int i = 0;
         int totalActualSize = 0;
         for(Object o: set){
             try {
-                if(decideGetData(jsonObject,i,o)){
+                if(decideGetData(jsonObject,totalActualSize,o)){
                     totalActualSize++;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            i++;
         }
         if(totalActualSize==0){
             return "";
         }
         addLengthToJson(jsonObject,totalActualSize);
-
         return jsonObject.toString();
     }
 
