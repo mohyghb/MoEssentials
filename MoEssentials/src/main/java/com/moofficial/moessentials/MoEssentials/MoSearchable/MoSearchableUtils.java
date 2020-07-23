@@ -26,14 +26,6 @@ public class MoSearchableUtils {
             executor.execute(()->search(finalI,finalI+ITEMS_PER_SEARCH_THREAD,indexes,list,criteria));
         }
 
-//        for(int i = 0;i < list.size();i++){
-//            boolean b = list.get(i).updateSearchable(criteria);
-//            if(b){
-//                indexes.add(i);
-//            }
-//        }
-
-
         executor.shutdown();
         while (!executor.isTerminated()) {}
         return indexes;
@@ -85,5 +77,35 @@ public class MoSearchableUtils {
         }
         return picked;
     }
+
+
+    /**
+     *
+     *
+     * @param listOf fields that we are checking
+     * @return true if any of the items inside the [listOf]
+     *         contains the search text
+     *         returns false otherwise
+     */
+    public static boolean isSearchable(boolean whenEmptyOrNull, Object[] criteria,String ... listOf){
+        if(criteria==null || criteria.length == 0){
+            return whenEmptyOrNull;
+        }
+        String search = (String) criteria[0];
+        if(search.isEmpty()){
+            return whenEmptyOrNull;
+        }
+        String lowerCase = search.toLowerCase().trim();
+        for(String item:listOf){
+            if(item != null && item.toLowerCase().trim().contains(lowerCase)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
 
 }
