@@ -41,6 +41,7 @@ public class MoListDelete extends MoListSelectable {
     }
 
 
+
     @Override
     public MoListDelete setSyncActions(MoListViews... syncActions) {
         super.setSyncActions(syncActions);
