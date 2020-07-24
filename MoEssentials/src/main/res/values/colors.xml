@@ -18,6 +18,7 @@
     <color name="MaterialWhite">#E3E3E3</color>
     <color name="MoWhite">#FAFAFA</color>
     <color name="MoWhite_v2">#FCFCFC</color>
+    <color name="MoWhite_v3">#DCDCDC</color>
     <color name="MoBackground">@color/MoWhite</color>
 
 

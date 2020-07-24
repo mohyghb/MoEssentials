@@ -11,6 +11,10 @@
 
 
 
+    <style name="MoMaterialCardViewStyleBright" parent="Widget.MaterialComponents.CardView">
+        <item name="android:backgroundTint">@color/MaterialGrey</item>
+        <item name="cardElevation">3dp</item>
+    </style>
 
 
 </resources>

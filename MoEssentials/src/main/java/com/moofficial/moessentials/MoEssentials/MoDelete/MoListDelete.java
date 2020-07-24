@@ -272,6 +272,8 @@ public class MoListDelete extends MoListSelectable {
         },100);
     }
 
+
+
     /**
      * updates the title after deletion was complete
      * (this is used if the counter is your title of app bar)
