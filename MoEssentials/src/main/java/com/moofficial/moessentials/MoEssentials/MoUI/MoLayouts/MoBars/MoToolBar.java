@@ -48,15 +48,20 @@ public class MoToolBar extends MoConstraint {
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.mo_tool_bar;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
         title = findViewById(R.id.menu_app_bar_title);
         left = findViewById(R.id.menu_app_bar_back_button);
         middle = findViewById(R.id.menu_app_bar_search_button);
         right = findViewById(R.id.menu_app_bar_more_button);
+    }
+
+    @Override
+    public int[] getAttrs() {
+        return new int[0];
     }
 }

@@ -5,6 +5,10 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toolbar;
+
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.card.MaterialCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
@@ -14,12 +18,9 @@ public class MoSearchBar extends MoConstraint {
 
     private EditText editText;
     private ImageButton left,right;
-    private LinearLayout linearLayout;
-    private MaterialCardView materialCardView;
+    private CardView materialCardView;
 
-    public MoSearchBar(Context context) {
-        super(context);
-    }
+    public MoSearchBar(Context context) {super(context);}
 
     public MoSearchBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,17 +52,21 @@ public class MoSearchBar extends MoConstraint {
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.mo_search_bar;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
         editText = findViewById(R.id.search_edit_text);
         left = findViewById(R.id.close_search_bar);
         right = findViewById(R.id.clear_search_bar);
         materialCardView = findViewById(R.id.search_card_view);
-        linearLayout = findViewById(R.id.search_linear_layout);
+    }
+
+    @Override
+    public int[] getAttrs() {
+        return new int[0];
     }
 
 

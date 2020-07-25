@@ -5,37 +5,35 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
+import com.google.android.material.appbar.AppBarLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoViewBuilder;
-import com.moofficial.moessentials.R;
 
-public abstract class MoConstraint extends ConstraintLayout implements MoViewInterface {
+public abstract class MoAppbarLayout extends AppBarLayout implements MoViewInterface{
 
     protected TypedArray typedArray;
 
-    public MoConstraint(Context context) {
+    public MoAppbarLayout(Context context) {
         super(context);
         init(null);
     }
 
-    public MoConstraint(Context context, AttributeSet attrs) {
+    public MoAppbarLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public MoConstraint(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MoAppbarLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
 
 
-    public MoConstraint customize(MoViewBuilder builder, View viewToCustomize){
+    public MoAppbarLayout customize(MoViewBuilder builder, View viewToCustomize){
         builder.build(viewToCustomize);
         return this;
     }
 
-    public MoConstraint customize(MoViewBuilder builder, int id){
+    public MoAppbarLayout customize(MoViewBuilder builder, int id){
         builder.build(findViewById(id));
         return this;
     }
@@ -53,10 +51,4 @@ public abstract class MoConstraint extends ConstraintLayout implements MoViewInt
         }
         initViews();
     }
-
-
-
-
-
-
 }

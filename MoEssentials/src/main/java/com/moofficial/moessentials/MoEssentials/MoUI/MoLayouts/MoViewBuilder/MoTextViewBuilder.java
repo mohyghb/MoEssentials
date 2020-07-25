@@ -86,6 +86,18 @@ public class MoTextViewBuilder extends MoViewBuilder {
     }
 
     @Override
+    public MoTextViewBuilder setMinHeight(int minHeight) {
+        super.setMinHeight(minHeight);
+        return this;
+    }
+
+    @Override
+    public MoViewBuilder setMinWidth(int minWidth) {
+        super.setMinWidth(minWidth);
+        return this;
+    }
+
+    @Override
     protected <T extends View> void buildItem(T v) {
         TextView t = (TextView) v;
         t.setHint(hint);

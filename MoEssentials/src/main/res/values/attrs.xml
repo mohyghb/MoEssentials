@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MoAppBar">
+        <attr name="title_text" format="string"/>
+        <attr name="subtitle_text" format="string"/>
+        <attr name="toolbar" format="enum">
+            <enum name="mo_tool_bar" value="0"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

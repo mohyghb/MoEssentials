@@ -52,6 +52,18 @@ public class MoImageButtonBuilder extends MoViewBuilder{
     }
 
     @Override
+    public MoImageButtonBuilder setMinHeight(int minHeight) {
+        super.setMinHeight(minHeight);
+        return this;
+    }
+
+    @Override
+    public MoImageButtonBuilder setMinWidth(int minWidth) {
+        super.setMinWidth(minWidth);
+        return this;
+    }
+
+    @Override
     public MoImageButtonBuilder setVisibility(int visibility) {
         super.setVisibility(visibility);
         return this;

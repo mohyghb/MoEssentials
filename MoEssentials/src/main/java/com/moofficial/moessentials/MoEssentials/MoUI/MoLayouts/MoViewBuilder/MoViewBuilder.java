@@ -12,6 +12,7 @@ public abstract class MoViewBuilder extends MoContext {
     protected View.OnLongClickListener longClickListener = view -> {return false;};
     protected MoPaddingBuilder contentPadding = new MoPaddingBuilder(0);
     protected int visibility = View.VISIBLE;
+    protected int minHeight,minWidth;
 
 
     public MoViewBuilder(Context c) {
@@ -50,6 +51,24 @@ public abstract class MoViewBuilder extends MoContext {
         return visibility;
     }
 
+    public int getMinHeight() {
+        return minHeight;
+    }
+
+    public MoViewBuilder setMinHeight(int minHeight) {
+        this.minHeight = minHeight;
+        return this;
+    }
+
+    public int getMinWidth() {
+        return minWidth;
+    }
+
+    public MoViewBuilder setMinWidth(int minWidth) {
+        this.minWidth = minWidth;
+        return this;
+    }
+
     public MoViewBuilder setVisibility(int visibility) {
         this.visibility = visibility;
         return this;
@@ -59,6 +78,8 @@ public abstract class MoViewBuilder extends MoContext {
         v.setOnLongClickListener(longClickListener);
         v.setOnClickListener(clickListener);
         contentPadding.apply(v);
+        v.setMinimumWidth(minWidth);
+        v.setMinimumHeight(minHeight);
         buildItem(v);
     }
 

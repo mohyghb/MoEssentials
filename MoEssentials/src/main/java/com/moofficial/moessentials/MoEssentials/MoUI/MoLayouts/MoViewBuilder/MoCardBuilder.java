@@ -72,6 +72,18 @@ public class MoCardBuilder extends MoViewBuilder {
     }
 
     @Override
+    public MoCardBuilder setMinHeight(int minHeight) {
+        super.setMinHeight(minHeight);
+        return this;
+    }
+
+    @Override
+    public MoCardBuilder setMinWidth(int minWidth) {
+        super.setMinWidth(minWidth);
+        return this;
+    }
+
+    @Override
     protected <T extends View> void buildItem(T v) {
         CardView cardView = (CardView)v;
         cardView.setCardBackgroundColor(cardView.getContext().getColor(backgroundColorId));

@@ -38,13 +38,18 @@ public class MoInputBar extends MoConstraint {
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.mo_input_bar;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
         editText = findViewById(R.id.input_bar_edit_text);
         cardView = findViewById(R.id.input_bar_card_view);
+    }
+
+    @Override
+    public int[] getAttrs() {
+        return new int[0];
     }
 }

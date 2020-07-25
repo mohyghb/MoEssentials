@@ -48,16 +48,21 @@ public class MoFindBar extends MoConstraint {
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.mo_find_bar;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
         editText = findViewById(R.id.find_edit_text);
         left = findViewById(R.id.close_find_bar);
         middle = findViewById(R.id.up_find_bar_button);
         right = findViewById(R.id.down_find_bar_button);
+    }
+
+    @Override
+    public int[] getAttrs() {
+        return new int[0];
     }
 
 

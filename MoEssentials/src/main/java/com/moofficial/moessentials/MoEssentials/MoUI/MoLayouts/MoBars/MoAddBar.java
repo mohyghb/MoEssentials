@@ -50,15 +50,20 @@ public class MoAddBar extends MoConstraint {
 
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.mo_add_bar;
     }
 
     @Override
-    protected void initViews() {
+    public void initViews() {
         editText = findViewById(R.id.add_bar_edit_text);
         right = findViewById(R.id.add_add_bar);
         left = findViewById(R.id.close_add_bar);
         materialCardView = findViewById(R.id.add_card_view);
+    }
+
+    @Override
+    public int[] getAttrs() {
+        return new int[0];
     }
 }
