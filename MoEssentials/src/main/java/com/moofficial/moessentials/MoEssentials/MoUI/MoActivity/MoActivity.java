@@ -2,6 +2,8 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +17,7 @@ public abstract class MoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         setContentView(getLayoutResId());
+        onCreate();
         init();
     }
 
@@ -36,5 +39,15 @@ public abstract class MoActivity extends AppCompatActivity {
      * @return the root view of the current activity
      */
     protected abstract View getRootView();
+
+
+    /**
+     * this is called when the activity was successfully created and ready to go
+     */
+    protected abstract void onCreate();
+
+
+
+
 
 }
