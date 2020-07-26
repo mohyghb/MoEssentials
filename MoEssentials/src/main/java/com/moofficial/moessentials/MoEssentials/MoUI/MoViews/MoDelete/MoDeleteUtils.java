@@ -1,10 +1,10 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoDelete;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoDelete;
 
 import android.content.Context;
 import android.view.View;
 
 import com.moofficial.moessentials.MoEssentials.MoRunnable.MoRunnableUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoSelectable.MoSelectableItem;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable.MoSelectableItem;
 import com.moofficial.moessentials.R;
 
 public class MoDeleteUtils {

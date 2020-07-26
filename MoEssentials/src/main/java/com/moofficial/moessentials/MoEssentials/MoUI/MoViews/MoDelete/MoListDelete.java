@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoDelete;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoDelete;
 
 import android.content.Context;
 import android.os.Handler;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.moofficial.moessentials.MoEssentials.MoUI.MoSelectable.MoListSelectable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable.MoListSelectable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
 
 
@@ -25,6 +25,7 @@ public class MoListDelete extends MoListSelectable {
     private ProgressBar progressBar;
     private MoOnDeletePressed onDeletePressed = ()->{};
     private MoOnDeleteFinished onDeleteFinished = ()->{};
+    private MoOnDeleteChanged onDeleteChanged = isInDeleteMode -> {};
     // mutual class
     private MoListDeletable listAdapter;
 
@@ -48,14 +49,26 @@ public class MoListDelete extends MoListSelectable {
     }
 
     @Override
-    public MoListDelete setUnNormalViews(int... views) {
-        super.setUnNormalViews(views);
+    public MoListDelete addUnNormalViews(int... views) {
+        super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListDelete setNormalViews(int... views) {
-        super.setNormalViews(views);
+    public MoListDelete addUnNormalViews(View... views) {
+        super.addUnNormalViews(views);
+        return this;
+    }
+
+    @Override
+    public MoListDelete addNormalViews(int... views) {
+        super.addNormalViews(views);
+        return this;
+    }
+
+    @Override
+    public MoListDelete addNormalViews(View... views) {
+        super.addNormalViews(views);
         return this;
     }
 
@@ -153,6 +166,15 @@ public class MoListDelete extends MoListSelectable {
         return this;
     }
 
+    public MoOnDeleteChanged getOnDeleteChanged() {
+        return onDeleteChanged;
+    }
+
+    public MoListDelete setOnDeleteChanged(MoOnDeleteChanged onDeleteChanged) {
+        this.onDeleteChanged = onDeleteChanged;
+        return this;
+    }
+
     @Override
     public MoListDelete updateTitleAfter(boolean updateTitleAfter) {
         super.updateTitleAfter(updateTitleAfter);
@@ -188,6 +210,7 @@ public class MoListDelete extends MoListSelectable {
     public void setDeleteMode(boolean isInDeleteMode){
         // change the boolean
         this.isInActionMode = isInDeleteMode;
+        this.onDeleteChanged.onChange(isInDeleteMode);
         // do other work to activate or deactivate the situation
         if(isInDeleteMode){
             activateDeleteMode();
@@ -308,7 +331,6 @@ public class MoListDelete extends MoListSelectable {
             }
         }
     }
-
 
 
     public static void deleteIsNotSpecifiedInThisContext(Context context){

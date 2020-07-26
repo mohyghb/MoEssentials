@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoDelete;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoDelete;
 
 public interface MoOnDeleteFinished {
 

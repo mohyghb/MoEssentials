@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MoViewUtils {
@@ -17,6 +18,10 @@ public class MoViewUtils {
      * @param animation
      */
     static void apply(View[] views, int visibility, int animation){
+        apply(Arrays.asList(views),visibility,animation);
+    }
+
+    static void apply(List<View> views, int visibility, int animation){
         if(views==null)
             return;
 

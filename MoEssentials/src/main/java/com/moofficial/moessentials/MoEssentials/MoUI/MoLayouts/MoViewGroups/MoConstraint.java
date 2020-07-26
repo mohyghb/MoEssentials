@@ -40,6 +40,20 @@ public abstract class MoConstraint extends ConstraintLayout implements MoViewInt
         return this;
     }
 
+    public MoConstraint goInvisible(){
+        setVisibility(View.INVISIBLE);
+        return this;
+    }
+
+    public MoConstraint goVisible(){
+        setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public  MoConstraint goGone(){
+        setVisibility(View.GONE);
+        return this;
+    }
 
     /**
      * inflates the view of this class and does other appropriate things

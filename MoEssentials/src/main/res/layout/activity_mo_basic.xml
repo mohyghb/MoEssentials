@@ -37,6 +37,16 @@
             android:layout_height="match_parent">
 
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/basic_activity_floating_action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
+
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/basic_activity_appbar"
 
@@ -79,15 +89,23 @@
                 android:layout_height="match_parent"
 
 
+                android:layout_marginTop="8dp"
                 android:clipToPadding="false"
-                android:fillViewport="true"
+                android:fillViewport="false"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-                <LinearLayout
-                    android:id="@+id/basic_activity_linear_nested_layout"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/basic_activity_inner_card_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" />
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/basic_activity_linear_nested_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"></LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
 
             </androidx.core.widget.NestedScrollView>
 

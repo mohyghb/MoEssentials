@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoSelectable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -144,15 +144,33 @@ public class MoListSelectable extends MoListViews {
         return this;
     }
 
+
     @Override
-    public MoListSelectable setUnNormalViews(int... views) {
-        super.setUnNormalViews(views);
+    public MoListSelectable addUnNormalViews(int... views) {
+        super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListSelectable setNormalViews(int... views) {
-        super.setNormalViews(views);
+    public MoListSelectable addUnNormalViews(View... views) {
+        super.addUnNormalViews(views);
+        return this;
+    }
+
+    @Override
+    public MoListSelectable addNormalViews(int... views) {
+        super.addNormalViews(views);
+        return this;
+    }
+
+    @Override
+    public MoListSelectable addNormalViews(View... views) {
+        super.addNormalViews(views);
+        return this;
+    }
+
+    public MoListSelectable setUpdateTitleAfter(boolean updateTitleAfter) {
+        this.updateTitleAfter = updateTitleAfter;
         return this;
     }
 

@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoSearchable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSearchable;
 
 public interface MoOnSearchListener {
 

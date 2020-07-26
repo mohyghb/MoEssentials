@@ -5,11 +5,14 @@ import android.util.AttributeSet;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
 
 public class MoToolBar extends MoConstraint {
 
+    private CardView cardView;
     private TextView title;
     private ImageButton left,middle,right;
 
@@ -45,6 +48,10 @@ public class MoToolBar extends MoConstraint {
         return middle.getId();
     }
 
+    public int CId(){
+        return cardView.getId();
+    }
+
 
 
     @Override
@@ -58,6 +65,7 @@ public class MoToolBar extends MoConstraint {
         left = findViewById(R.id.menu_app_bar_back_button);
         middle = findViewById(R.id.menu_app_bar_search_button);
         right = findViewById(R.id.menu_app_bar_more_button);
+        cardView = findViewById(R.id.menu_app_bar_card_view);
     }
 
     @Override

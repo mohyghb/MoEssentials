@@ -1,9 +1,11 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.View;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import com.moofficial.moessentials.R;
 
@@ -11,7 +13,7 @@ public class MoCardBuilder extends MoViewBuilder {
 
     float cornerRadius,elevation;
 
-    int backgroundColorId = R.color.transparent;
+    int backgroundColorId = -1;
 
     public MoCardBuilder(Context c) {
         super(c);
@@ -23,6 +25,16 @@ public class MoCardBuilder extends MoViewBuilder {
 
     public MoCardBuilder setCornerRadius(float cornerRadius) {
         this.cornerRadius = cornerRadius;
+        return this;
+    }
+
+    public MoCardBuilder makeRound() {
+        this.cornerRadius = context.getResources().getDimension(R.dimen.mo_style_card_corner);
+        return this;
+    }
+
+    public MoCardBuilder makeRectangular() {
+        this.cornerRadius = 0f;
         return this;
     }
 
@@ -86,7 +98,11 @@ public class MoCardBuilder extends MoViewBuilder {
     @Override
     protected <T extends View> void buildItem(T v) {
         CardView cardView = (CardView)v;
-        cardView.setCardBackgroundColor(cardView.getContext().getColor(backgroundColorId));
+        if(backgroundColorId!=-1){
+            cardView.setBackgroundTintList(ColorStateList.valueOf(
+                    ContextCompat.getColor(context, backgroundColorId)));
+            //cardView.setCardBackgroundColor(cardView.getContext().getColor(backgroundColorId));
+        }
         cardView.setElevation(elevation);
         cardView.setRadius(cornerRadius);
         contentPadding.apply(cardView);

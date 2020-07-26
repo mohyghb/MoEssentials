@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoSelectable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
 
 import java.util.List;
 

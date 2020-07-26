@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoSearchable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSearchable;
 
 import android.app.Activity;
 import android.content.Context;
@@ -304,16 +304,27 @@ public class MoSearchable extends MoListViews {
     }
 
 
-
     @Override
-    public MoSearchable setUnNormalViews(int... views) {
-        super.setUnNormalViews(views);
+    public MoSearchable addUnNormalViews(int... views) {
+        super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoSearchable setNormalViews(int... views) {
-        super.setNormalViews(views);
+    public MoSearchable addUnNormalViews(View... views) {
+        super.addUnNormalViews(views);
+        return this;
+    }
+
+    @Override
+    public MoSearchable addNormalViews(int... views) {
+        super.addNormalViews(views);
+        return this;
+    }
+
+    @Override
+    public MoSearchable addNormalViews(View... views) {
+        super.addNormalViews(views);
         return this;
     }
 

@@ -5,19 +5,18 @@ import android.view.View;
 import android.widget.Button;
 
 
+import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class MoListViews {
+public abstract class MoListViews extends MoContext {
 
 
-    protected Context context;
 
     protected View parentView;
-
     // this mo list view action is
     // synced with others
     // so we don't show multiple
@@ -25,10 +24,10 @@ public abstract class MoListViews {
     private List<MoListViews> syncActions = new ArrayList<>();
     // un-normal views that are only shown when the
     // a mode is on
-    private View[] unNormalViews;
+    private List<View> unNormalViews = new ArrayList<>();
     // normal views that are shown to the user when
     // it is not in delete mode
-    private View[] normalViews;
+    private List<View> normalViews = new ArrayList<>();
     // canceling the delete mode
     protected Button cancelButton;
     // performing the actual delete
@@ -44,26 +43,34 @@ public abstract class MoListViews {
 
 
     public MoListViews(Context context, View parentView){
-        this.context = context;
+        super(context);
         this.parentView = parentView;
     }
 
 
-    public MoListViews setUnNormalViews(int ... views){
-        this.unNormalViews = new View[views.length];
-        for(int i = 0;i < views.length; i++){
-            View view = this.parentView.findViewById(views[i]);
-            this.unNormalViews[i] = view;
+    public MoListViews addUnNormalViews(int ... views){
+        for (int value : views) {
+            View view = this.parentView.findViewById(value);
+            unNormalViews.add(view);
         }
         return this;
     }
 
-    public MoListViews setNormalViews(int ... views){
-        this.normalViews = new View[views.length];
-        for(int i = 0;i < views.length; i++){
-            View view = this.parentView.findViewById(views[i]);
-            this.normalViews[i] = view;
+    public MoListViews addUnNormalViews(View ... views){
+        unNormalViews.addAll(Arrays.asList(views));
+        return this;
+    }
+
+    public MoListViews addNormalViews(int ... views){
+        for (int value : views) {
+            View view = this.parentView.findViewById(value);
+            normalViews.add(view);
         }
+        return this;
+    }
+
+    public MoListViews addNormalViews(View ... views){
+        normalViews.addAll(Arrays.asList(views));
         return this;
     }
 
@@ -102,14 +109,72 @@ public abstract class MoListViews {
         return this;
     }
 
-    public MoListViews setUnNormalViews(View[] unNormalViews) {
+    public Context getContext() {
+        return context;
+    }
+
+    public MoListViews setContext(Context context) {
+        this.context = context;
+        return this;
+    }
+
+    public View getParentView() {
+        return parentView;
+    }
+
+    public MoListViews setParentView(View parentView) {
+        this.parentView = parentView;
+        return this;
+    }
+
+    public List<MoListViews> getSyncActions() {
+        return syncActions;
+    }
+
+    public List<View> getUnNormalViews() {
+        return unNormalViews;
+    }
+
+    public int getVisible() {
+        return visible;
+    }
+
+    public int getInvisible() {
+        return invisible;
+    }
+
+    public int getVisibleAnimation() {
+        return visibleAnimation;
+    }
+
+    public int getGoneAnimation() {
+        return goneAnimation;
+    }
+
+    public MoListViews setUnNormalViews(List<View> unNormalViews) {
         this.unNormalViews = unNormalViews;
         return this;
     }
 
-    public MoListViews setNormalViews(View[] normalViews) {
+    public List<View> getNormalViews() {
+        return normalViews;
+    }
+
+    public MoListViews setNormalViews(List<View> normalViews) {
         this.normalViews = normalViews;
         return this;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public Button getConfirmButton() {
+        return confirmButton;
+    }
+
+    public boolean isShowOneActionAtTime() {
+        return showOneActionAtTime;
     }
 
     public MoListViews setCancelButton(Button cancelButton) {

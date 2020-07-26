@@ -1,7 +1,7 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoDelete;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoDelete;
 
 
-import com.moofficial.moessentials.MoEssentials.MoUI.MoSelectable.MoSelectableList;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable.MoSelectableList;
 
 public interface MoListDeletable extends MoSelectableList {
 

@@ -1,12 +1,11 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder;
 
+import android.content.Context;
 import android.view.View;
 
-public class MoPaddingBuilder {
+public class MoPaddingBuilder{
 
     int top,left,bottom,right;
-
-    public MoPaddingBuilder(){}
 
     public MoPaddingBuilder(int p){
         top = p;

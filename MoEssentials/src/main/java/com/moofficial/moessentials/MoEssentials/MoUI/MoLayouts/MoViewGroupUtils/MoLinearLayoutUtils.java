@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 public class MoLinearLayoutUtils {
 
+
     public static void addToLinearLayout(LinearLayout linearLayout, View v){
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
