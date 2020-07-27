@@ -1,5 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,28 +15,86 @@ import static com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROL
 public class MoAppbarUtils {
 
 
+
+//    public static void sync(View parent, int appbarLayoutId,int collapsingToolbarId,int bt,int st){
+//         sync(parent.findViewById(appbarLayoutId),parent.findViewById(collapsingToolbarId),
+//                 parent.findViewById(bt),parent.findViewById(st));
+//    }
+
     /**
      * transitions between the title inside the collapsing toolbar
      * and the title of the small toolbar
-     * @param parent view which contains all of the items
-     * @param appbarLayoutId id of the app bar
-     * @param collapsingToolbarId id of the collapsing toolbar
-     * @param bt id of the big title inside collapsing toolbar
-     * @param st id of the small title inside the toolbar
+     * @param appBarLayout app bar layout of the activity
+     * @param collapsingToolbar collapsing toolbar of the view
+     * @param mainTitle main title of the view
+     * @param minorTitles other titles that have to change their Alpha in accordance with
+     *                    the appbar layout and the collapsing toolbar, also chnage their text
+     *                    based on the main title
      */
-    public static void sync(View parent, int appbarLayoutId,int collapsingToolbarId,int bt,int st){
-        AppBarLayout appBarLayout = parent.findViewById(appbarLayoutId);
-        CollapsingToolbarLayout collapsingToolbar = parent.findViewById(collapsingToolbarId);
-        TextView smallTitle = parent.findViewById(st);
-        TextView bigTitle = parent.findViewById(bt);
+    public static void sync(AppBarLayout appBarLayout,
+                            CollapsingToolbarLayout collapsingToolbar,TextView mainTitle, TextView ... minorTitles ){
+        syncText(minorTitles, mainTitle.getText());
+        syncFadingTitles(appBarLayout, collapsingToolbar, mainTitle, minorTitles);
+        syncOnTextChanged(mainTitle, minorTitles);
+    }
+
+    /**
+     *
+     * @param mainTitle
+     * @param minorTitles
+     */
+    // syncing on text change listeners
+    private static void syncOnTextChanged(TextView mainTitle, TextView[] minorTitles) {
+        mainTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                syncText(minorTitles, charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    /**
+     *
+     * @param appBarLayout
+     * @param collapsingToolbar
+     * @param mainTitle
+     * @param minorTitles
+     */
+    // syncing with the position of the app bar layout
+    private static void syncFadingTitles(AppBarLayout appBarLayout, CollapsingToolbarLayout collapsingToolbar, TextView mainTitle, TextView[] minorTitles) {
+
         appBarLayout.addOnOffsetChangedListener((appBarLayout1, verticalOffset) -> {
             int col = collapsingToolbar.getScrimVisibleHeightTrigger();
             int h = collapsingToolbar.getHeight();
             float f = (float)(col-verticalOffset)/h;
             float actualF = verticalOffset==0?0f:Math.abs(verticalOffset)>col?1f:f;
-            smallTitle.setAlpha(actualF);
-            bigTitle.setAlpha(1f-actualF);
+            for(TextView tv: minorTitles){
+                tv.setAlpha(actualF);
+            }
+            mainTitle.setAlpha(1f-actualF);
         });
+    }
+
+    /**
+     *
+     * @param minorTitles
+     * @param text
+     */
+    private static void syncText(TextView[] minorTitles, CharSequence text) {
+        // sync their titles at the beginning
+        for (TextView tv : minorTitles) {
+            tv.setText(text);
+        }
     }
 
 

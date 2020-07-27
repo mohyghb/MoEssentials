@@ -4,9 +4,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -30,7 +32,7 @@ public abstract class MoBasicActivity extends MoActivity {
     protected ConstraintLayout rootView;
     protected CardView cardView,innerCardView;
     protected MoFloatingActionButton floatingActionButton;
-
+    protected NestedScrollView nestedScrollView;
 
     @Override
     protected int getLayoutResId() {
@@ -51,6 +53,7 @@ public abstract class MoBasicActivity extends MoActivity {
         rootView = findViewById(R.id.basic_activity_root);
         cardView = findViewById(R.id.basic_activity_card_view);
         innerCardView = findViewById(R.id.basic_activity_inner_card_view);
+        nestedScrollView = findViewById(R.id.basic_activity_nested_scroll_view);
         floatingActionButton = new MoFloatingActionButton(this,
                 findViewById(R.id.basic_activity_floating_action_button));
     }

@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoBars;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 
 import android.content.Context;
 import android.util.AttributeSet;

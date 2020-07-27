@@ -1,5 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoKeyboardUtils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,6 +18,20 @@ public class MoKeyboardUtils {
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
+        }
+    }
+
+
+    /**
+     * shows the soft keyboard for view v
+     * @param v
+     * @param context
+     */
+    public static void showKeyboard(View v, Context context) {
+        v.requestFocus();
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         }
     }
 }

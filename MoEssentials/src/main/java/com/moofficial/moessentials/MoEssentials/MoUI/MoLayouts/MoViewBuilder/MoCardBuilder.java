@@ -105,7 +105,6 @@ public class MoCardBuilder extends MoViewBuilder {
         }
         cardView.setElevation(elevation);
         cardView.setRadius(cornerRadius);
-        contentPadding.apply(cardView);
     }
 
 }

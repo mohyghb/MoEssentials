@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoBars.MoAppBar
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars.MoAppBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

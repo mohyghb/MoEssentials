@@ -9,6 +9,7 @@
     <dimen name="card_elevation_search_bar">4dp</dimen>
 
 
+    <dimen name="first_letter_radius">50dp</dimen>
 
 
 

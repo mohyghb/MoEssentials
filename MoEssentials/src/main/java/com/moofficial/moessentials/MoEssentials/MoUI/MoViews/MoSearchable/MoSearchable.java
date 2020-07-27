@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.moofficial.moessentials.MoEssentials.MoKeyboardUtils.MoKeyboardUtils;
 import com.moofficial.moessentials.MoEssentials.MoState.MoOnScrollToPosition;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
@@ -32,6 +33,7 @@ public class MoSearchable extends MoListViews {
     private MoOnScrollToPosition onScrollToPosition;
     private ImageButton searchButton,cancelSearch,clearSearch;
     private LinearLayout searchLayout;
+    private AppBarLayout appBarLayout;
     // for finding a searchable item
     private List<Integer> searchedIndices = new ArrayList<>();
     private int findIndex;
@@ -64,7 +66,8 @@ public class MoSearchable extends MoListViews {
         this.searchTextView.setOnEditorActionListener((textView, actionId, event) -> {
 
             if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
-                    (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE) {
+                    (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE
+                    || actionId == EditorInfo.IME_ACTION_SEARCH) {
                 // hide keyboard
                 MoKeyboardUtils.hideSoftKeyboard(textView);
                 // we should search the char sequence here
@@ -191,6 +194,15 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setDownFind(ImageButton downFind) {
         this.downFind = downFind;
+        return this;
+    }
+
+    public AppBarLayout getAppBarLayout() {
+        return appBarLayout;
+    }
+
+    public MoSearchable setAppBarLayout(AppBarLayout appBarLayout) {
+        this.appBarLayout = appBarLayout;
         return this;
     }
 
@@ -373,8 +385,21 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setSearchButton(int searchButton) {
         this.searchButton = parentView.findViewById(searchButton);
-        this.searchButton.setOnClickListener(view -> activateSpecialMode());
+        this.searchButton.setOnClickListener(view -> {
+            collapseAppbarIfNotNull();
+            MoKeyboardUtils.showKeyboard(this.searchTextView,this.context);
+            activateSpecialMode();
+        });
         return this;
+    }
+
+    public void collapseAppbarIfNotNull() {
+        if(appBarLayout!=null){
+            // if the app bar layout is defined
+            // when the user wants to search, we collapse the toolbar
+            // and also focus on the text view
+            appBarLayout.setExpanded(false,true);
+        }
     }
 
     public MoSearchable setSearchLayout(int searchLayout) {
@@ -395,12 +420,17 @@ public class MoSearchable extends MoListViews {
             deactivateSpecialMode();
             MoSearchableUtils.cancelSearch(searchableList.getSearchableItems());
             searchableList.notifyDataSetChanged();
-            if(clearSearchTextAfterDone){
-                this.searchTextView.clearFocus();
-                this.searchTextView.setText("");
-            }
+            clearSearchText();
+            MoKeyboardUtils.hideSoftKeyboard(searchTextView);
         }
 
+    }
+
+    public void clearSearchText() {
+        if(clearSearchTextAfterDone){
+            this.searchTextView.clearFocus();
+            this.searchTextView.setText("");
+        }
     }
 
     /**
