@@ -70,11 +70,20 @@ public class MoString {
      */
     public static String getSignature(String ... texts){
         for(String text: texts){
-            if(text!=null && !text.isEmpty()){
+            if(isValid(text)){
                 return (text.charAt(0) + "").toUpperCase();
             }
         }
         return "";
+    }
+
+    /**
+     * returns true if the text is not null and not empty
+     * @param text
+     * @return
+     */
+    public static boolean isValid(String text){
+        return text!=null && !text.isEmpty();
     }
 
 }
