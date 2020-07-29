@@ -2,6 +2,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ public class MoToolBar extends MoConstraint {
 
     private CardView cardView;
     private TextView title;
-    private ImageButton left,middle,right;
+    private ImageButton leftButton, middleButton, rightButton;
 
     public MoToolBar(Context context) {
         super(context);
@@ -35,17 +36,17 @@ public class MoToolBar extends MoConstraint {
 
     // left button id
     public int LId(){
-        return left.getId();
+        return leftButton.getId();
     }
 
     // right button id
     public int RId(){
-        return right.getId();
+        return rightButton.getId();
     }
 
     // middle button id
     public int MId(){
-        return middle.getId();
+        return middleButton.getId();
     }
 
     public int CId(){
@@ -53,6 +54,80 @@ public class MoToolBar extends MoConstraint {
     }
 
 
+    public MoToolBar hideRight(){
+        rightButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoToolBar hideTitle(){
+        title.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoToolBar hideMiddle(){
+        middleButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoToolBar hideLeft(){
+        leftButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoToolBar onlyTitleAndLeftButtonVisible(){
+        hideMiddle();
+        hideRight();
+        return this;
+    }
+
+    public CardView getCardView() {
+        return cardView;
+    }
+
+    public MoToolBar setCardView(CardView cardView) {
+        this.cardView = cardView;
+        return this;
+    }
+
+    public TextView getTitle() {
+        return title;
+    }
+
+    public MoToolBar setTitle(TextView title) {
+        this.title = title;
+        return this;
+    }
+
+
+
+    public MoToolBar setLeftButton(ImageButton leftButton) {
+        this.leftButton = leftButton;
+        return this;
+    }
+
+    public ImageButton getMiddleButton() {
+        return middleButton;
+    }
+
+    public MoToolBar setMiddleButton(ImageButton middleButton) {
+        this.middleButton = middleButton;
+        return this;
+    }
+
+
+
+    public MoToolBar setRightButton(ImageButton rightButton) {
+        this.rightButton = rightButton;
+        return this;
+    }
+
+    public ImageButton getLeftButton() {
+        return leftButton;
+    }
+
+    public ImageButton getRightButton() {
+        return rightButton;
+    }
 
     @Override
     public int getLayoutId() {
@@ -62,9 +137,9 @@ public class MoToolBar extends MoConstraint {
     @Override
     public void initViews() {
         title = findViewById(R.id.menu_app_bar_title);
-        left = findViewById(R.id.menu_app_bar_back_button);
-        middle = findViewById(R.id.menu_app_bar_search_button);
-        right = findViewById(R.id.menu_app_bar_more_button);
+        leftButton = findViewById(R.id.menu_app_bar_back_button);
+        middleButton = findViewById(R.id.menu_app_bar_search_button);
+        rightButton = findViewById(R.id.menu_app_bar_more_button);
         cardView = findViewById(R.id.menu_app_bar_card_view);
     }
 

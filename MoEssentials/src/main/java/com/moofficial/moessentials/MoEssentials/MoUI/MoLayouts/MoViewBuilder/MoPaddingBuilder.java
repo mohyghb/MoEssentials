@@ -3,6 +3,8 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder;
 import android.content.Context;
 import android.view.View;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
+
 public class MoPaddingBuilder{
 
     int top,left,bottom,right;
@@ -50,6 +52,15 @@ public class MoPaddingBuilder{
 
     public MoPaddingBuilder setRight(int right) {
         this.right = right;
+        return this;
+    }
+
+
+    public MoPaddingBuilder convertValuesToDp(){
+        this.right = MoDynamicUnit.convertDpToPixels(this.right);
+        this.top = MoDynamicUnit.convertDpToPixels(this.top);
+        this.bottom = MoDynamicUnit.convertDpToPixels(this.bottom);
+        this.left = MoDynamicUnit.convertDpToPixels(this.left);
         return this;
     }
 

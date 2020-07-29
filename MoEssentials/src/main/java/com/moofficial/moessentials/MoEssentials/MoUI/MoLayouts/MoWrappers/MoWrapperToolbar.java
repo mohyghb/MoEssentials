@@ -9,11 +9,11 @@ import androidx.appcompat.widget.Toolbar;
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
-public class MoToolbar extends MoWrapper {
+public class MoWrapperToolbar extends MoWrapper {
 
     private Toolbar toolbar;
 
-    public MoToolbar(Context c,Toolbar t) {
+    public MoWrapperToolbar(Context c, Toolbar t) {
         super(c);
         this.toolbar = t;
     }

@@ -10,12 +10,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.R;
 
-public class MoFloatingActionButton extends MoWrapper {
+public class MoWrapperFloatingActionButton extends MoWrapper {
 
     private FloatingActionButton fab;
 
 
-    public MoFloatingActionButton(Context c,FloatingActionButton f) {
+    public MoWrapperFloatingActionButton(Context c, FloatingActionButton f) {
         super(c);
         this.fab = f;
     }
@@ -35,6 +35,13 @@ public class MoFloatingActionButton extends MoWrapper {
     public void setBackgroundColor(int res){
         fab.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(context, res)));
+    }
+
+    public void hide(){
+        fab.setVisibility(View.GONE);
+    }
+    public void show() {
+        fab.setVisibility(View.VISIBLE);
     }
 
     @Override

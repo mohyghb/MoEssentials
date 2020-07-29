@@ -44,6 +44,42 @@ public class MoBottomDeleteBar extends MoConstraint {
         return cardView.getId();
     }
 
+    public CardView getCardView() {
+        return cardView;
+    }
+
+    public MoBottomDeleteBar setCardView(CardView cardView) {
+        this.cardView = cardView;
+        return this;
+    }
+
+    public LinearLayout getLinearLayout() {
+        return linearLayout;
+    }
+
+    public MoBottomDeleteBar setLinearLayout(LinearLayout linearLayout) {
+        this.linearLayout = linearLayout;
+        return this;
+    }
+
+    public Button getCancel() {
+        return cancel;
+    }
+
+    public MoBottomDeleteBar setCancel(Button cancel) {
+        this.cancel = cancel;
+        return this;
+    }
+
+    public Button getDelete() {
+        return delete;
+    }
+
+    public MoBottomDeleteBar setDelete(Button delete) {
+        this.delete = delete;
+        return this;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.mo_bottom_delete_bar;

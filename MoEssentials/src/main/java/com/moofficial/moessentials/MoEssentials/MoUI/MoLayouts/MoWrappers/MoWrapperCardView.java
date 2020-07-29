@@ -7,11 +7,11 @@ import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 
-public class MoCardView extends MoWrapper {
+public class MoWrapperCardView extends MoWrapper {
 
     private CardView cardView;
 
-    public MoCardView(Context c) {
+    public MoWrapperCardView(Context c) {
         super(c);
     }
 

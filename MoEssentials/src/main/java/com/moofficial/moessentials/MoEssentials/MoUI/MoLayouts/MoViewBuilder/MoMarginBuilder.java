@@ -89,4 +89,28 @@ public class MoMarginBuilder extends MoPaddingBuilder{
         return null;
     }
 
+    /**
+     * returns a linear layout params based on the builder
+     * that is passed as the param
+     * @param builder
+     * @return
+     */
+    public static LinearLayout.LayoutParams getLinearParams(MoPaddingBuilder builder){
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        lp.setMargins(builder.left,builder.top,builder.right,builder.bottom);
+        return lp;
+    }
+
+
+
+    public static LinearLayout.LayoutParams getLinearParams(int l,int t,int r,int b){
+        return MoMarginBuilder.getLinearParams(
+                new MoMarginBuilder().setTop(t)
+                                     .setLeft(l)
+                                     .setRight(r)
+                                     .setBottom(b)
+                                     .convertValuesToDp());
+    }
+
 }

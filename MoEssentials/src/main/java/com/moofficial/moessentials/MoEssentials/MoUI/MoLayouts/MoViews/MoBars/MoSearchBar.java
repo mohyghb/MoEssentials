@@ -4,20 +4,16 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toolbar;
 
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.android.material.card.MaterialCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
 
 public class MoSearchBar extends MoConstraint {
 
     private EditText editText;
-    private ImageButton left,right;
+    private ImageButton leftButton, rightButton;
     private CardView materialCardView;
 
     public MoSearchBar(Context context) {super(context);}
@@ -37,12 +33,12 @@ public class MoSearchBar extends MoConstraint {
 
     // left button id
     public int LBId(){
-        return left.getId();
+        return leftButton.getId();
     }
 
     // right button id
     public int RBId(){
-        return right.getId();
+        return rightButton.getId();
     }
 
     // card view id
@@ -50,6 +46,41 @@ public class MoSearchBar extends MoConstraint {
         return materialCardView.getId();
     }
 
+    public EditText getEditText() {
+        return editText;
+    }
+
+    public MoSearchBar setEditText(EditText editText) {
+        this.editText = editText;
+        return this;
+    }
+
+    public ImageButton getLeftButton() {
+        return leftButton;
+    }
+
+    public MoSearchBar setLeftButton(ImageButton leftButton) {
+        this.leftButton = leftButton;
+        return this;
+    }
+
+    public ImageButton getRightButton() {
+        return rightButton;
+    }
+
+    public MoSearchBar setRightButton(ImageButton rightButton) {
+        this.rightButton = rightButton;
+        return this;
+    }
+
+    public CardView getMaterialCardView() {
+        return materialCardView;
+    }
+
+    public MoSearchBar setMaterialCardView(CardView materialCardView) {
+        this.materialCardView = materialCardView;
+        return this;
+    }
 
     @Override
     public int getLayoutId() {
@@ -59,8 +90,8 @@ public class MoSearchBar extends MoConstraint {
     @Override
     public void initViews() {
         editText = findViewById(R.id.search_edit_text);
-        left = findViewById(R.id.close_search_bar);
-        right = findViewById(R.id.clear_search_bar);
+        leftButton = findViewById(R.id.close_search_bar);
+        rightButton = findViewById(R.id.clear_search_bar);
         materialCardView = findViewById(R.id.search_card_view);
     }
 

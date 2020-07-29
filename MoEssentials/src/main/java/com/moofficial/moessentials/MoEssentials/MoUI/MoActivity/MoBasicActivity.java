@@ -1,37 +1,37 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoFloatingActionButton;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoLinearLayout;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoToolbar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperFloatingActionButton;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperLinearLayout;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperToolbar;
 import com.moofficial.moessentials.R;
 
 
+// basic activity with title,subtitle, 3 linear layouts
 public abstract class MoBasicActivity extends MoActivity {
 
 
     protected TextView title,subtitle;
-    protected MoLinearLayout linearNested,linearBottom,linearTop;
+    protected MoWrapperLinearLayout linearNested,linearBottom,linearTop;
     protected AppBarLayout appBarLayout;
-    protected MoToolbar toolbar;
+    protected MoWrapperToolbar toolbar;
     protected CollapsingToolbarLayout collapsingToolbarLayout;
     protected CoordinatorLayout coordinatorLayout;
     protected ConstraintLayout rootView;
     protected CardView cardView,innerCardView;
-    protected MoFloatingActionButton floatingActionButton;
+    protected MoWrapperFloatingActionButton floatingActionButton;
     protected NestedScrollView nestedScrollView;
 
     @Override
@@ -43,19 +43,20 @@ public abstract class MoBasicActivity extends MoActivity {
     protected void onCreate() {
         title = findViewById(R.id.mo_lib_title);
         subtitle = findViewById(R.id.mo_lib_subtitle);
-        linearNested = new MoLinearLayout(this,findViewById(R.id.basic_activity_linear_nested_layout));
-        linearBottom = new MoLinearLayout(this,findViewById(R.id.basic_activity_linear_bottom_layout));
-        linearTop = new MoLinearLayout(this,findViewById(R.id.basic_activity_linear_top_layout));
+        linearNested = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_nested_layout));
+        linearBottom = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_bottom_layout));
+        linearTop = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_top_layout));
         appBarLayout = findViewById(R.id.basic_activity_appbar);
-        toolbar = new MoToolbar(this,findViewById(R.id.basic_activity_toolbar));
+        toolbar = new MoWrapperToolbar(this,findViewById(R.id.basic_activity_toolbar));
         coordinatorLayout = findViewById(R.id.basic_activity_coordinator_layout);
         collapsingToolbarLayout = findViewById(R.id.basic_activity_collapsing_toolbar);
         rootView = findViewById(R.id.basic_activity_root);
         cardView = findViewById(R.id.basic_activity_card_view);
         innerCardView = findViewById(R.id.basic_activity_inner_card_view);
         nestedScrollView = findViewById(R.id.basic_activity_nested_scroll_view);
-        floatingActionButton = new MoFloatingActionButton(this,
+        floatingActionButton = new MoWrapperFloatingActionButton(this,
                 findViewById(R.id.basic_activity_floating_action_button));
+        floatingActionButton.hide();
     }
 
 
@@ -81,6 +82,18 @@ public abstract class MoBasicActivity extends MoActivity {
         innerCardView.setRadius(0f);
     }
 
+    public void customizeCards(MoCardBuilder c){
+        customizeOuterCard(c);
+        customizeInnerCard(c);
+    }
+
+    public void customizeInnerCard(MoCardBuilder c){
+        c.build(innerCardView);
+    }
+
+    public void customizeOuterCard(MoCardBuilder c){
+        c.build(cardView);
+    }
 
 
 
@@ -107,6 +120,12 @@ public abstract class MoBasicActivity extends MoActivity {
 
 
 
+    public void syncTitle(TextView ... tv){
+        MoAppbarUtils.sync(appBarLayout,
+                collapsingToolbarLayout,
+                title,
+                tv);
+    }
 
 
 

@@ -12,7 +12,7 @@ import com.moofficial.moessentials.R;
 public class MoAddBar extends MoConstraint {
 
     private EditText editText;
-    private ImageButton left,right;
+    private ImageButton leftButton, rightButton;
     private MaterialCardView materialCardView;
 
 
@@ -35,18 +35,56 @@ public class MoAddBar extends MoConstraint {
 
     // left button id
     public int LBId(){
-        return left.getId();
+        return leftButton.getId();
     }
 
     // right button id
     public int RBId(){
-        return right.getId();
+        return rightButton.getId();
     }
 
     // card view id
     public int CVId(){
         return materialCardView.getId();
     }
+
+
+    public EditText getEditText() {
+        return editText;
+    }
+
+    public MoAddBar setEditText(EditText editText) {
+        this.editText = editText;
+        return this;
+    }
+
+    public ImageButton getLeftButton() {
+        return leftButton;
+    }
+
+    public MoAddBar setLeftButton(ImageButton leftButton) {
+        this.leftButton = leftButton;
+        return this;
+    }
+
+    public ImageButton getRightButton() {
+        return rightButton;
+    }
+
+    public MoAddBar setRightButton(ImageButton rightButton) {
+        this.rightButton = rightButton;
+        return this;
+    }
+
+    public MaterialCardView getMaterialCardView() {
+        return materialCardView;
+    }
+
+    public MoAddBar setMaterialCardView(MaterialCardView materialCardView) {
+        this.materialCardView = materialCardView;
+        return this;
+    }
+
 
 
     @Override
@@ -57,8 +95,8 @@ public class MoAddBar extends MoConstraint {
     @Override
     public void initViews() {
         editText = findViewById(R.id.add_bar_edit_text);
-        right = findViewById(R.id.add_add_bar);
-        left = findViewById(R.id.close_add_bar);
+        rightButton = findViewById(R.id.add_add_bar);
+        leftButton = findViewById(R.id.close_add_bar);
         materialCardView = findViewById(R.id.add_card_view);
     }
 

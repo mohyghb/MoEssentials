@@ -2,7 +2,9 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
@@ -12,6 +14,7 @@ import com.moofficial.moessentials.R;
 public class MoInputBar extends MoConstraint {
 
 
+    private TextView title;
     private EditText editText;
     private CardView cardView;
 
@@ -36,6 +39,80 @@ public class MoInputBar extends MoConstraint {
         return cardView.getId();
     }
 
+    public int TVId(){
+        return title.getId();
+    }
+
+    public MoInputBar setTitle(String s){
+        title.setText(s);
+        return this;
+    }
+
+    public MoInputBar setTitle(int s){
+        title.setText(s);
+        return this;
+    }
+
+    public MoInputBar hideTitle(){
+        title.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoInputBar setHint(String h){
+        this.editText.setHint(h);
+        return this;
+    }
+
+    public MoInputBar setHint(int h){
+        this.editText.setHint(h);
+        return this;
+    }
+
+    public MoInputBar setText(String h){
+        this.editText.setText(h);
+        return this;
+    }
+
+    public MoInputBar setText(int h){
+        this.editText.setText(h);
+        return this;
+    }
+
+    /**
+     * returns the text of the edit text
+     * @return
+     */
+    public String getInputText(){
+        return editText.getText().toString();
+    }
+
+
+    public TextView getTitle() {
+        return title;
+    }
+
+    public MoInputBar setTitle(TextView title) {
+        this.title = title;
+        return this;
+    }
+
+    public EditText getEditText() {
+        return editText;
+    }
+
+    public MoInputBar setEditText(EditText editText) {
+        this.editText = editText;
+        return this;
+    }
+
+    public CardView getCardView() {
+        return cardView;
+    }
+
+    public MoInputBar setCardView(CardView cardView) {
+        this.cardView = cardView;
+        return this;
+    }
 
     @Override
     public int getLayoutId() {
@@ -46,6 +123,7 @@ public class MoInputBar extends MoConstraint {
     public void initViews() {
         editText = findViewById(R.id.input_bar_edit_text);
         cardView = findViewById(R.id.input_bar_card_view);
+        title = findViewById(R.id.input_bar_title);
     }
 
     @Override

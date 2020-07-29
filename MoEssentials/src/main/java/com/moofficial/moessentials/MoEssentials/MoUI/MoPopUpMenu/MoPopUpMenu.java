@@ -23,12 +23,13 @@ public class MoPopUpMenu {
 
     @SafeVarargs
     public final MoPopUpMenu setEntries(Pair<String, MenuItem.OnMenuItemClickListener>... pair){
-        this.menuItems = Arrays.asList(pair);
+        this.menuItems.addAll(Arrays.asList(pair));
         return this;
     }
 
-    public void addEntry(Pair<String, MenuItem.OnMenuItemClickListener> enrty){
+    public MoPopUpMenu addEntry(Pair<String, MenuItem.OnMenuItemClickListener> enrty){
         this.menuItems.add(enrty);
+        return this;
     }
 
 

@@ -8,8 +8,8 @@ import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 public abstract class MoViewBuilder extends MoContext {
 
 
-    protected View.OnClickListener clickListener = view -> {};
-    protected View.OnLongClickListener longClickListener = view -> {return false;};
+    protected View.OnClickListener clickListener;
+    protected View.OnLongClickListener longClickListener;
     protected MoPaddingBuilder contentPadding;
     protected MoMarginBuilder marginBuilder;
     protected int visibility = View.VISIBLE;
@@ -75,18 +75,24 @@ public abstract class MoViewBuilder extends MoContext {
         return this;
     }
 
-    public <T extends View> void build(T v){
-        v.setOnLongClickListener(longClickListener);
-        v.setOnClickListener(clickListener);
-        if(contentPadding!=null){
-            contentPadding.apply(v);
+    public <T extends View> void build(T ... vs){
+        for(T v: vs){
+            if(longClickListener!=null){
+                v.setOnLongClickListener(longClickListener);
+            }
+            if(clickListener!=null){
+                v.setOnClickListener(clickListener);
+            }
+            if(contentPadding!=null){
+                contentPadding.apply(v);
+            }
+            if(marginBuilder!=null){
+                marginBuilder.apply(v);
+            }
+            v.setMinimumWidth(minWidth);
+            v.setMinimumHeight(minHeight);
+            buildItem(v);
         }
-        if(marginBuilder!=null){
-            marginBuilder.apply(v);
-        }
-        v.setMinimumWidth(minWidth);
-        v.setMinimumHeight(minHeight);
-        buildItem(v);
     }
 
     protected abstract <T extends View> void buildItem(T v);

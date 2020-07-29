@@ -10,7 +10,7 @@ import com.moofficial.moessentials.R;
 
 public class MoFindBar extends MoConstraint {
 
-    private ImageButton left,middle,right;
+    private ImageButton leftButton, middleButton, rightButton;
     private EditText editText;
 
 
@@ -33,19 +33,55 @@ public class MoFindBar extends MoConstraint {
 
     // left button id
     public int LId(){
-        return left.getId();
+        return leftButton.getId();
     }
 
     // right button id
     public int RId(){
-        return right.getId();
+        return rightButton.getId();
     }
 
     // middle button id
     public int MId(){
-        return middle.getId();
+        return middleButton.getId();
     }
 
+
+    public ImageButton getLeftButton() {
+        return leftButton;
+    }
+
+    public MoFindBar setLeftButton(ImageButton leftButton) {
+        this.leftButton = leftButton;
+        return this;
+    }
+
+    public ImageButton getMiddleButton() {
+        return middleButton;
+    }
+
+    public MoFindBar setMiddleButton(ImageButton middleButton) {
+        this.middleButton = middleButton;
+        return this;
+    }
+
+    public ImageButton getRightButton() {
+        return rightButton;
+    }
+
+    public MoFindBar setRightButton(ImageButton rightButton) {
+        this.rightButton = rightButton;
+        return this;
+    }
+
+    public EditText getEditText() {
+        return editText;
+    }
+
+    public MoFindBar setEditText(EditText editText) {
+        this.editText = editText;
+        return this;
+    }
 
     @Override
     public int getLayoutId() {
@@ -55,9 +91,9 @@ public class MoFindBar extends MoConstraint {
     @Override
     public void initViews() {
         editText = findViewById(R.id.find_edit_text);
-        left = findViewById(R.id.close_find_bar);
-        middle = findViewById(R.id.up_find_bar_button);
-        right = findViewById(R.id.down_find_bar_button);
+        leftButton = findViewById(R.id.close_find_bar);
+        middleButton = findViewById(R.id.up_find_bar_button);
+        rightButton = findViewById(R.id.down_find_bar_button);
     }
 
     @Override

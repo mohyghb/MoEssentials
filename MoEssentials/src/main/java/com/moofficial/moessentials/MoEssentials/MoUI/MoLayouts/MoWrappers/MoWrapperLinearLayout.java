@@ -4,20 +4,20 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
 import static com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils.addToLinearLayout;
 
-public class MoLinearLayout extends MoWrapper {
+public class MoWrapperLinearLayout extends MoWrapper {
 
     private LinearLayout linearLayout;
 
 
-    public MoLinearLayout(Context c, LinearLayout l){
+    public MoWrapperLinearLayout(Context c, LinearLayout l){
         super(c);
         this.linearLayout = l;
     }
+
 
 
     public View addView(int rid){
@@ -26,6 +26,16 @@ public class MoLinearLayout extends MoWrapper {
 
     public View addView(View v){
         return addView(v,null);
+    }
+
+    public void addViews(View ... views){
+        addViews(null,views);
+    }
+
+    public void addViews(LinearLayout.LayoutParams lp,View ... views){
+        for(View v:views){
+            addView(v,lp);
+        }
     }
 
     public View addView(View v,LinearLayout.LayoutParams lp){
@@ -37,7 +47,7 @@ public class MoLinearLayout extends MoWrapper {
         return linearLayout;
     }
 
-    public MoLinearLayout setLinearLayout(LinearLayout linearLayout) {
+    public MoWrapperLinearLayout setLinearLayout(LinearLayout linearLayout) {
         this.linearLayout = linearLayout;
         return this;
     }
@@ -46,7 +56,7 @@ public class MoLinearLayout extends MoWrapper {
         return context;
     }
 
-    public MoLinearLayout setContext(Context context) {
+    public MoWrapperLinearLayout setContext(Context context) {
         this.context = context;
         return this;
     }

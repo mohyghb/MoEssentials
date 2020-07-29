@@ -35,6 +35,24 @@ public class MoCardRecyclerView extends MoConstraint {
     }
 
 
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    public MoCardRecyclerView setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
+        return this;
+    }
+
+    public MaterialCardView getCardView() {
+        return cardView;
+    }
+
+    public MoCardRecyclerView setCardView(MaterialCardView cardView) {
+        this.cardView = cardView;
+        return this;
+    }
+
     public MoCardRecyclerView makeCardRound(){
         cardView.setRadius(getContext().getResources().getDimension(R.dimen.mo_style_card_corner));
         return this;

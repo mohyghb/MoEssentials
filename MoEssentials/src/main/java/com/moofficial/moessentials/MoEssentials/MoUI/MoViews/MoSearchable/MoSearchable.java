@@ -27,10 +27,10 @@ public class MoSearchable extends MoListViews {
     private Activity activity;
     private TextView searchTextView;
     private MoSearchableList searchableList;
-    private MoOnSearchFinished onSearchFinished;
-    private MoOnSearchCanceled onSearchCanceled;
-    private MoOnSearchListener onSearchListener;
-    private MoOnScrollToPosition onScrollToPosition;
+    private MoOnSearchFinished onSearchFinished = foundItems -> {};
+    private MoOnSearchCanceled onSearchCanceled = () -> {};
+    private MoOnSearchListener onSearchListener = search -> {};
+    private MoOnScrollToPosition onScrollToPosition = position -> {};
     private ImageButton searchButton,cancelSearch,clearSearch;
     private LinearLayout searchLayout;
     private AppBarLayout appBarLayout;
@@ -64,7 +64,6 @@ public class MoSearchable extends MoListViews {
         this.searchTextView = parentView.findViewById(s);
         addTextWatcherToSearchText();
         this.searchTextView.setOnEditorActionListener((textView, actionId, event) -> {
-
             if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
                     (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE
                     || actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -413,17 +412,13 @@ public class MoSearchable extends MoListViews {
      */
     @Override
     public void onCancel() {
-        if(onSearchCanceled!=null){
-            // they do what they want on finish
-            onSearchCanceled.onSearchCanceled();
-        }else{
-            deactivateSpecialMode();
-            MoSearchableUtils.cancelSearch(searchableList.getSearchableItems());
-            searchableList.notifyDataSetChanged();
-            clearSearchText();
-            MoKeyboardUtils.hideSoftKeyboard(searchTextView);
-        }
-
+        // they do what they want on finish
+        onSearchCanceled.onSearchCanceled();
+        deactivateSpecialMode();
+        MoSearchableUtils.cancelSearch(searchableList.getSearchableItems());
+        searchableList.notifyDataSetChanged();
+        clearSearchText();
+        MoKeyboardUtils.hideSoftKeyboard(searchTextView);
     }
 
     public void clearSearchText() {
@@ -444,10 +439,10 @@ public class MoSearchable extends MoListViews {
 
 
 
+
     private void performSearch(TextView textView){
-        if(onSearchListener!=null){
-            onSearchListener.onSearchListener(textView.getText().toString());
-        }else if(this.searchableList!=null){
+        onSearchListener.onSearchListener(textView.getText().toString());
+        if(this.searchableList!=null){
             // search key word (always lower case)
             if(runOnAnotherThread){
                 new Thread(){
@@ -489,7 +484,7 @@ public class MoSearchable extends MoListViews {
         // when search is not null
         // call on search finished with a
         // list of found items
-        if (onSearchFinished != null) {
+        //if (onSearchFinished != null) {
             if(search.isEmpty()){
                 if(this.showNothingWhenSearchEmpty){
                     // show empty because search is empty
@@ -505,7 +500,7 @@ public class MoSearchable extends MoListViews {
                         this.searchableList.getSearchableItems(),this.searchedIndices
                 ));
             }
-        }
+        //}
     }
 
     /**
