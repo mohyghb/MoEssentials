@@ -17,11 +17,11 @@ public class MoViewUtils {
      * @param visibility
      * @param animation
      */
-    static void apply(View[] views, int visibility, int animation){
+    public static void apply(View[] views, int visibility, int animation){
         apply(Arrays.asList(views),visibility,animation);
     }
 
-    static void apply(List<View> views, int visibility, int animation){
+    public static void apply(List<View> views, int visibility, int animation){
         if(views==null)
             return;
 
@@ -34,7 +34,7 @@ public class MoViewUtils {
      * closes the views that are performing an action
      * @param views
      */
-    static void closeActions(MoListViews[] views){
+    public static void closeActions(MoListViews[] views){
         if(views == null)
             return;
         for(MoListViews moListViews: views){
@@ -44,7 +44,7 @@ public class MoViewUtils {
         }
     }
 
-    static void closeActions(List<MoListViews> views){
+    public static void closeActions(List<MoListViews> views){
         if(views == null)
             return;
         for(MoListViews moListViews: views){
@@ -54,7 +54,7 @@ public class MoViewUtils {
         }
     }
 
-    static int firstAction(MoListViews[] views){
+    public static int firstAction(MoListViews[] views){
         for(int i = 0;i < views.length; i++ ){
             if(views[i].hasAction()){
                 return i;
@@ -65,7 +65,7 @@ public class MoViewUtils {
 
 
 
-    static void sync(MoListViews ... views){
+    public static void sync(MoListViews ... views){
         for(int i = 0;i < views.length; i++){
             MoListViews v = views[i];
             for(int j = 0; j < views.length; j++){

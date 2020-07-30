@@ -1,9 +1,8 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 

@@ -158,11 +158,17 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setSearchButton(ImageButton searchButton) {
         this.searchButton = searchButton;
+        this.searchButton.setOnClickListener(view -> {
+            collapseAppbarIfNotNull();
+            MoKeyboardUtils.showKeyboard(this.searchTextView,this.context);
+            activateSpecialMode();
+        });
         return this;
     }
 
     public MoSearchable setCancelSearch(ImageButton cancelSearch) {
         this.cancelSearch = cancelSearch;
+        this.cancelSearch.setOnClickListener(view -> onCancel());
         return this;
     }
 
@@ -341,9 +347,7 @@ public class MoSearchable extends MoListViews {
 
     @Override
     public MoSearchable setCancelButton(int cancelButton) {
-        this.cancelSearch = parentView.findViewById(cancelButton);
-        this.cancelSearch.setOnClickListener(view -> onCancel());
-        return this;
+        return setCancelSearch(parentView.findViewById(cancelButton));
     }
 
     public MoSearchable setClearSearch(int c) {
@@ -383,13 +387,7 @@ public class MoSearchable extends MoListViews {
     }
 
     public MoSearchable setSearchButton(int searchButton) {
-        this.searchButton = parentView.findViewById(searchButton);
-        this.searchButton.setOnClickListener(view -> {
-            collapseAppbarIfNotNull();
-            MoKeyboardUtils.showKeyboard(this.searchTextView,this.context);
-            activateSpecialMode();
-        });
-        return this;
+        return setSearchButton(parentView.findViewById(searchButton));
     }
 
     public void collapseAppbarIfNotNull() {

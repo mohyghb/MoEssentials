@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoImageButtonBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
 
@@ -128,6 +129,40 @@ public class MoToolBar extends MoConstraint {
     public ImageButton getRightButton() {
         return rightButton;
     }
+
+
+
+    public MoToolBar setLeftOnClickListener(View.OnClickListener l){
+        leftButton.setOnClickListener(l);
+        return this;
+    }
+
+    public MoToolBar setMiddleOnClickListener(View.OnClickListener l){
+        middleButton.setOnClickListener(l);
+        return this;
+    }
+
+    public MoToolBar setRightOnClickListener(View.OnClickListener l){
+        rightButton.setOnClickListener(l);
+        return this;
+    }
+
+
+    public MoToolBar setLeftIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.leftButton);
+        return this;
+    }
+
+    public MoToolBar setMiddleIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.middleButton);
+        return this;
+    }
+
+    public MoToolBar setRightIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.rightButton);
+        return this;
+    }
+
 
     @Override
     public int getLayoutId() {

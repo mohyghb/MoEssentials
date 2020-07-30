@@ -34,7 +34,7 @@ public abstract class MoListViews extends MoContext {
     protected Button confirmButton;
     protected boolean showOneActionAtTime = true;
     private int visible = View.VISIBLE;
-    private int invisible = View.INVISIBLE;
+    private int invisible = View.GONE;
     private int visibleAnimation = MoAnimation.FADE_IN;
     private int goneAnimation = MoAnimation.FADE_OUT;
     protected boolean isInActionMode = false;

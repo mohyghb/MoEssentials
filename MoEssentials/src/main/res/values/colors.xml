@@ -20,7 +20,7 @@
     <color name="MoWhite_v3">#DCDCDC</color>
     <color name="MoGrey">#F28E8E8E</color>
     <color name="MoBackground">@color/MoWhite</color>
-
+    <color name="MoInverseColor">@color/MoBlack</color>
 
 
 

@@ -20,28 +20,34 @@ public class MoWrapperFloatingActionButton extends MoWrapper {
         this.fab = f;
     }
 
-    public void setOnClickListener(View.OnClickListener listenerFAB){
+    public MoWrapperFloatingActionButton setOnClickListener(View.OnClickListener listenerFAB){
         fab.setOnClickListener(listenerFAB);
+        return this;
     }
 
-    public void setIcon(int iconDrawable){
+    public MoWrapperFloatingActionButton setIcon(int iconDrawable){
         fab.setImageResource(iconDrawable);
+        return this;
     }
 
-    public void setRippleColor(int rippleColorId){
+    public MoWrapperFloatingActionButton setRippleColor(int rippleColorId){
         fab.setRippleColor(getColor(rippleColorId));
+        return this;
     }
 
-    public void setBackgroundColor(int res){
+    public MoWrapperFloatingActionButton setBackgroundColor(int res){
         fab.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(context, res)));
+        return this;
     }
 
-    public void hide(){
+    public MoWrapperFloatingActionButton hide(){
         fab.setVisibility(View.GONE);
+        return this;
     }
-    public void show() {
+    public MoWrapperFloatingActionButton show() {
         fab.setVisibility(View.VISIBLE);
+        return this;
     }
 
     @Override
