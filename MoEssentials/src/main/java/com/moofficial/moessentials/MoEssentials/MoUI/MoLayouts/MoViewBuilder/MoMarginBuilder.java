@@ -103,7 +103,14 @@ public class MoMarginBuilder extends MoPaddingBuilder{
     }
 
 
-
+    /**
+     *
+     * @param l left margin
+     * @param t top margin
+     * @param r right margin
+     * @param b bottom margin
+     * @return
+     */
     public static LinearLayout.LayoutParams getLinearParams(int l,int t,int r,int b){
         return MoMarginBuilder.getLinearParams(
                 new MoMarginBuilder().setTop(t)
@@ -112,5 +119,15 @@ public class MoMarginBuilder extends MoPaddingBuilder{
                                      .setBottom(b)
                                      .convertValuesToDp());
     }
+
+    /**
+     * all of them the same value
+     * @param m
+     * @return
+     */
+    public static LinearLayout.LayoutParams getLinearParams(int m){
+        return getLinearParams(m,m,m,m);
+    }
+
 
 }

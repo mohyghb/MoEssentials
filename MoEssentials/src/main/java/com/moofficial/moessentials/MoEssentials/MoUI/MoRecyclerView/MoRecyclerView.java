@@ -2,6 +2,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.view.View;
 
@@ -9,8 +10,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 
-public class MoRecyclerView {
+
+public class MoRecyclerView extends MoContext {
 
 
     public static final int VERTICAL = LinearLayoutManager.VERTICAL;
@@ -27,36 +30,32 @@ public class MoRecyclerView {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
-    private Activity activity;
-    private int recyclerViewResources;
     private int orientation = LinearLayoutManager.VERTICAL;
     private int gridCount = DEFAULT_GRID_COUNT;
     private boolean reverseLayout = DEFAULT_REVERSE_LAYOUT;
     private RecyclerView.LayoutManager layoutManager;
     private View.OnLayoutChangeListener onLayoutChangeListener;
+    private boolean built = false;
 
 
     @SuppressWarnings("rawtypes")
-    @SuppressLint("WrongConstant")
-    public MoRecyclerView(Activity a, int recyclerViewResources, RecyclerView.Adapter adapter){
-        this.activity = a;
-        this.recyclerViewResources = recyclerViewResources;
-        this.mAdapter = adapter;
-        this.recyclerView = activity.findViewById(recyclerViewResources);
-        layoutManager= new LinearLayoutManager(activity,orientation, false);
+    public MoRecyclerView(Context c,View view, int recyclerViewResources, RecyclerView.Adapter adapter){
+        this(c,view.findViewById(recyclerViewResources),adapter);
     }
 
+
     @SuppressWarnings("rawtypes")
-    public MoRecyclerView(RecyclerView r, RecyclerView.Adapter adapter){
+    public MoRecyclerView(Context c,RecyclerView r, RecyclerView.Adapter adapter){
+        super(c);
         this.recyclerView = r;
         this.mAdapter = adapter;
     }
 
-    @SuppressWarnings("rawtypes")
-    public MoRecyclerView(Activity a, RecyclerView rv, RecyclerView.Adapter adapter){
-        this.activity = a;
-        this.mAdapter = adapter;
-        this.recyclerView = rv;
+    @SuppressLint("WrongConstant")
+    public MoRecyclerView build(){
+        this.layoutManager= new LinearLayoutManager(context,orientation, reverseLayout);
+        this.built = true;
+        return this;
     }
 
 
@@ -75,9 +74,12 @@ public class MoRecyclerView {
         return this;
     }
 
-    public void setReverseLayout(boolean b){
+    public MoRecyclerView setReverseLayout(boolean b){
         this.reverseLayout = b;
-        ((LinearLayoutManager) this.layoutManager).setReverseLayout(this.reverseLayout);
+        if(this.layoutManager!=null){
+            ((LinearLayoutManager) this.layoutManager).setReverseLayout(this.reverseLayout);
+        }
+        return this;
     }
 
 
@@ -87,16 +89,28 @@ public class MoRecyclerView {
     }
 
 
+
     /**
      * shows the recycler view by setting the layout manager and
      * adapter and makes sure that this view is visible
+     * it also builds the recycler view if it is not built
      */
     public void show() {
+        buildIfNotBuilt();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
         if(this.onLayoutChangeListener!=null)
             recyclerView.addOnLayoutChangeListener(this.onLayoutChangeListener);
         applyVisibilityVisible();
+    }
+
+    /**
+     * builds the class if it is not built already
+     */
+    private void buildIfNotBuilt() {
+        if(!built){
+            build();
+        }
     }
 
     /**
@@ -168,10 +182,10 @@ public class MoRecyclerView {
     public void switchViewMode(boolean showInGrid, RecyclerView.Adapter adapter){
         if(showInGrid){
             // we want grid view
-            layoutManager = new GridLayoutManager(activity, gridCount);
+            layoutManager = new GridLayoutManager(context, gridCount);
         }else{
             // we want list view
-            layoutManager = new LinearLayoutManager(activity,orientation, reverseLayout);
+            layoutManager = new LinearLayoutManager(context,orientation, reverseLayout);
         }
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = adapter;

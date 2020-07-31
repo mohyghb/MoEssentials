@@ -96,6 +96,26 @@ public class MoAcceptDenyLayout extends MoConstraint {
     }
 
 
+    public MoAcceptDenyLayout hideDeny(){
+        denyButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoAcceptDenyLayout hideAccept(){
+        acceptButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoAcceptDenyLayout showDeny(){
+        denyButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoAcceptDenyLayout showAccept(){
+        acceptButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.mo_accept_deny_button_layout;

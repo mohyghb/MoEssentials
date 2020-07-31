@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 
+import android.animation.LayoutTransition;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperFloatingActionButton;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperLinearLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperToolbar;
@@ -47,7 +49,8 @@ public abstract class MoBasicActivity extends MoActivity {
         linearBottom = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_bottom_layout));
         linearTop = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_top_layout));
         appBarLayout = findViewById(R.id.basic_activity_appbar);
-        toolbar = new MoWrapperToolbar(this,findViewById(R.id.basic_activity_toolbar));
+        toolbar = new MoWrapperToolbar(this,findViewById(R.id.basic_activity_toolbar)
+                ,findViewById(R.id.basic_activity_toolbar_linear_layout));
         coordinatorLayout = findViewById(R.id.basic_activity_coordinator_layout);
         collapsingToolbarLayout = findViewById(R.id.basic_activity_collapsing_toolbar);
         rootView = findViewById(R.id.basic_activity_root);
@@ -119,7 +122,11 @@ public abstract class MoBasicActivity extends MoActivity {
     }
 
 
-
+    /**
+     * syncs the title between app bar layout
+     * and the text views that are passed
+     * @param tv
+     */
     public void syncTitle(TextView ... tv){
         MoAppbarUtils.sync(appBarLayout,
                 collapsingToolbarLayout,
@@ -127,6 +134,22 @@ public abstract class MoBasicActivity extends MoActivity {
                 tv);
     }
 
+    /**
+     *
+     */
+    public void noToolbarNeeded(){
+        MoAppbarUtils.noToolbar(this.collapsingToolbarLayout);
+    }
+
+    /**
+     * enables the linear layout to change accordingly with
+     * animation
+     */
+    public void enableAnimations(){
+        MoLinearLayoutUtils.enableChangingAnimation(this.linearNested.getLinearLayout());
+        MoLinearLayoutUtils.enableChangingAnimation(this.linearBottom.getLinearLayout());
+        MoLinearLayoutUtils.enableChangingAnimation(this.toolbar.getLinearLayout().getLinearLayout());
+    }
 
 
 

@@ -211,14 +211,14 @@ public abstract class MoListViews extends MoContext {
         // sync with others
         MoViewUtils.closeActions(this.syncActions);
         isInActionMode = true;
-        MoViewUtils.apply(unNormalViews,visible,visibleAnimation);
-        MoViewUtils.apply(normalViews,invisible,goneAnimation);
+        MoViewUtils.apply(this.parentView,unNormalViews,visible,visibleAnimation);
+        MoViewUtils.apply(this.parentView,normalViews,invisible,goneAnimation);
     }
 
     public void deactivateSpecialMode(){
         isInActionMode = false;
-        MoViewUtils.apply(unNormalViews,invisible,goneAnimation);
-        MoViewUtils.apply(normalViews,visible,visibleAnimation);
+        MoViewUtils.apply(this.parentView,unNormalViews,invisible,goneAnimation);
+        MoViewUtils.apply(this.parentView,normalViews,visible,visibleAnimation);
     }
 
 

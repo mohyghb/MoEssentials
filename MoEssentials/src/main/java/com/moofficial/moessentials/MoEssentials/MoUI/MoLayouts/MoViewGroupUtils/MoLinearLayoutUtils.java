@@ -1,5 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils;
 
+import android.animation.LayoutTransition;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,6 +21,11 @@ public class MoLinearLayoutUtils {
         }else {
             linearLayout.addView(v);
         }
+    }
+
+    public static void enableChangingAnimation(LinearLayout l){
+        LayoutTransition layoutTransition = l.getLayoutTransition();
+        layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
     }
 
 }

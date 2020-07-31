@@ -158,12 +158,19 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setSearchButton(ImageButton searchButton) {
         this.searchButton = searchButton;
-        this.searchButton.setOnClickListener(view -> {
-            collapseAppbarIfNotNull();
-            MoKeyboardUtils.showKeyboard(this.searchTextView,this.context);
-            activateSpecialMode();
-        });
+        this.searchButton.setOnClickListener(view -> activateSearch());
         return this;
+    }
+
+    /**
+     * this can be used to manually slide up the app bar
+     * and bring up the keyboard for the user to enter
+     * their search
+     */
+    public void activateSearch() {
+        collapseAppbarIfNotNull();
+        MoKeyboardUtils.showKeyboard(this.searchTextView,this.context);
+        activateSpecialMode();
     }
 
     public MoSearchable setCancelSearch(ImageButton cancelSearch) {

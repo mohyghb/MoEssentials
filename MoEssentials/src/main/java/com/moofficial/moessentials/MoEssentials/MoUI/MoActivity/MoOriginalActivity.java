@@ -4,6 +4,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoC
 import com.moofficial.moessentials.R;
 
 // round transparent background for cards
+// enabled animations
 public abstract class MoOriginalActivity extends MoBasicActivity {
 
     @Override
@@ -11,6 +12,7 @@ public abstract class MoOriginalActivity extends MoBasicActivity {
         super.onCreate();
         makeActivityRound();
         customizeCards(new MoCardBuilder(this).setBackgroundColorId(R.color.transparent));
+        enableAnimations();
     }
 
 

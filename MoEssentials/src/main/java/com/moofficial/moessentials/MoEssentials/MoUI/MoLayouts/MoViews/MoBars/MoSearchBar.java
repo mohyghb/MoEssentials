@@ -82,6 +82,18 @@ public class MoSearchBar extends MoConstraint {
         return this;
     }
 
+
+
+    public MoSearchBar setSearchHint(String s){
+        this.editText.setHint(s);
+        return this;
+    }
+
+    public MoSearchBar setSearchHint(int s){
+        this.editText.setHint(s);
+        return this;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.mo_search_bar;
