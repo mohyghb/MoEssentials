@@ -10,11 +10,12 @@ import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoImageButtonBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoToolBar extends MoConstraint {
 
-    private CardView cardView;
+    private MoCardWrapper cardView;
     private TextView title;
     private ImageButton leftButton, middleButton, rightButton;
 
@@ -81,11 +82,11 @@ public class MoToolBar extends MoConstraint {
         return this;
     }
 
-    public CardView getCardView() {
+    public MoCardWrapper getCardView() {
         return cardView;
     }
 
-    public MoToolBar setCardView(CardView cardView) {
+    public MoToolBar setCardView(MoCardWrapper cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -175,7 +176,7 @@ public class MoToolBar extends MoConstraint {
         leftButton = findViewById(R.id.menu_app_bar_back_button);
         middleButton = findViewById(R.id.menu_app_bar_search_button);
         rightButton = findViewById(R.id.menu_app_bar_more_button);
-        cardView = findViewById(R.id.menu_app_bar_card_view);
+        cardView = new MoCardWrapper(findViewById(R.id.menu_app_bar_card_view));
     }
 
     @Override

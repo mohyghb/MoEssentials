@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoInputBar extends MoConstraint {
@@ -16,7 +17,7 @@ public class MoInputBar extends MoConstraint {
 
     private TextView title;
     private EditText editText;
-    private CardView cardView;
+    private MoCardWrapper cardView;
 
 
     public MoInputBar(Context context) {
@@ -105,11 +106,11 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
-    public CardView getCardView() {
+    public MoCardWrapper getCardView() {
         return cardView;
     }
 
-    public MoInputBar setCardView(CardView cardView) {
+    public MoInputBar setCardView(MoCardWrapper cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -122,7 +123,7 @@ public class MoInputBar extends MoConstraint {
     @Override
     public void initViews() {
         editText = findViewById(R.id.input_bar_edit_text);
-        cardView = findViewById(R.id.input_bar_card_view);
+        cardView = new MoCardWrapper(findViewById(R.id.input_bar_card_view));
         title = findViewById(R.id.input_bar_title);
     }
 

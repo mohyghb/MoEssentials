@@ -8,13 +8,14 @@ import android.widget.ImageButton;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoSearchBar extends MoConstraint {
 
     private EditText editText;
     private ImageButton leftButton, rightButton;
-    private CardView materialCardView;
+    private MoCardWrapper materialCardView;
 
     public MoSearchBar(Context context) {super(context);}
 
@@ -73,16 +74,14 @@ public class MoSearchBar extends MoConstraint {
         return this;
     }
 
-    public CardView getMaterialCardView() {
+    public MoCardWrapper getMaterialCardView() {
         return materialCardView;
     }
 
-    public MoSearchBar setMaterialCardView(CardView materialCardView) {
+    public MoSearchBar setMaterialCardView(MoCardWrapper materialCardView) {
         this.materialCardView = materialCardView;
         return this;
     }
-
-
 
     public MoSearchBar setSearchHint(String s){
         this.editText.setHint(s);
@@ -104,7 +103,7 @@ public class MoSearchBar extends MoConstraint {
         editText = findViewById(R.id.search_edit_text);
         leftButton = findViewById(R.id.close_search_bar);
         rightButton = findViewById(R.id.clear_search_bar);
-        materialCardView = findViewById(R.id.search_card_view);
+        materialCardView = new MoCardWrapper(findViewById(R.id.search_card_view));
     }
 
     @Override

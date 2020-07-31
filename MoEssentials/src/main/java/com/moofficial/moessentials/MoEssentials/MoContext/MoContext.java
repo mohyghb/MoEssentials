@@ -1,6 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoContext;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
 public class MoContext {
@@ -22,6 +23,10 @@ public class MoContext {
 
     protected int getColor(int id){
         return context.getColor(id);
+    }
+
+    protected Resources getResources(){
+        return context.getResources();
     }
 
 }

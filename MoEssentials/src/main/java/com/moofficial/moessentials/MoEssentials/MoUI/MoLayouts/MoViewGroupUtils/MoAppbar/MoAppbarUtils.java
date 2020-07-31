@@ -131,6 +131,9 @@ public class MoAppbarUtils {
         params.setScrollFlags(flags);
     }
 
+    public static void snapWithToolbar(CollapsingToolbarLayout t){
+        setFlags(t,SCROLL_FLAG_EXIT_UNTIL_COLLAPSED | SCROLL_FLAG_SNAP | SCROLL_FLAG_SNAP_MARGINS);
+    }
 
     public static void snapNoToolbar(CollapsingToolbarLayout t){
         setFlags(t,SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED | SCROLL_FLAG_SNAP | SCROLL_FLAG_SNAP_MARGINS);

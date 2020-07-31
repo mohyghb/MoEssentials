@@ -8,11 +8,12 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoLoadingCard extends MoConstraint {
 
-    CardView cardView;
+    MoCardWrapper cardView;
     TextView title,description;
     ProgressBar progressBar;
 
@@ -69,11 +70,11 @@ public class MoLoadingCard extends MoConstraint {
         return progressBar.getId();
     }
 
-    public CardView getCardView() {
+    public MoCardWrapper getCardView() {
         return cardView;
     }
 
-    public MoLoadingCard setCardView(CardView cardView) {
+    public MoLoadingCard setCardView(MoCardWrapper cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -112,7 +113,7 @@ public class MoLoadingCard extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = findViewById(R.id.loading_card_card_view);
+        cardView = new MoCardWrapper(findViewById(R.id.loading_card_card_view));
         title = findViewById(R.id.loading_card_title);
         description = findViewById(R.id.loading_card_description);
         progressBar = findViewById(R.id.loading_card_progressBar);

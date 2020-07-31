@@ -7,13 +7,14 @@ import android.widget.ImageButton;
 
 import com.google.android.material.card.MaterialCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoAddBar extends MoConstraint {
 
     private EditText editText;
     private ImageButton leftButton, rightButton;
-    private MaterialCardView materialCardView;
+    private MoCardWrapper materialCardView;
 
 
     public MoAddBar(Context context) {
@@ -76,16 +77,14 @@ public class MoAddBar extends MoConstraint {
         return this;
     }
 
-    public MaterialCardView getMaterialCardView() {
+    public MoCardWrapper getMaterialCardView() {
         return materialCardView;
     }
 
-    public MoAddBar setMaterialCardView(MaterialCardView materialCardView) {
+    public MoAddBar setMaterialCardView(MoCardWrapper materialCardView) {
         this.materialCardView = materialCardView;
         return this;
     }
-
-
 
     @Override
     public int getLayoutId() {
@@ -97,7 +96,7 @@ public class MoAddBar extends MoConstraint {
         editText = findViewById(R.id.add_bar_edit_text);
         rightButton = findViewById(R.id.add_add_bar);
         leftButton = findViewById(R.id.close_add_bar);
-        materialCardView = findViewById(R.id.add_card_view);
+        materialCardView = new MoCardWrapper(findViewById(R.id.add_card_view));
     }
 
     @Override

@@ -9,11 +9,12 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoButton extends MoConstraint {
 
-    CardView cardView;
+    MoCardWrapper cardView;
     TextView title,description;
     ImageView icon;
 
@@ -30,12 +31,12 @@ public class MoButton extends MoConstraint {
     }
 
     public MoButton setOnButtonClickListener(View.OnClickListener l){
-        cardView.setOnClickListener(l);
+        cardView.setOnCardClickListener(l);
         return this;
     }
 
     public MoButton setOnButtonLongClickListener(View.OnLongClickListener l){
-        cardView.setOnLongClickListener(l);
+        cardView.setOnCardLongClickListener(l);
         return this;
     }
 
@@ -89,7 +90,7 @@ public class MoButton extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = findViewById(R.id.mo_button_card_view);
+        cardView = new MoCardWrapper(findViewById(R.id.mo_button_card_view));
         title = findViewById(R.id.mo_button_title);
         description = findViewById(R.id.mo_button_description);
         icon = findViewById(R.id.mo_button_icon);
