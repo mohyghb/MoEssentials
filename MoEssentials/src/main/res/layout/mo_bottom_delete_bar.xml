@@ -9,12 +9,13 @@
         android:id="@+id/bottom_delete_bar_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:backgroundTint="@color/transparent"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/transparent"
-        android:backgroundTint="@color/transparent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/bottom_delete_bar_linear_layout"
@@ -52,8 +53,7 @@
                 android:visibility="gone"
                 app:cornerRadius="@dimen/mo_style_card_corner"
                 app:iconGravity="textStart"
-                app:iconPadding="4dp"
-                app:rippleColor="@color/error_color" />
+                app:iconPadding="4dp" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

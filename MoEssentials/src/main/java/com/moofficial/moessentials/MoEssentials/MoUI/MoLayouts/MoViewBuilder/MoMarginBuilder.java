@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
@@ -128,6 +129,44 @@ public class MoMarginBuilder extends MoPaddingBuilder{
     public static LinearLayout.LayoutParams getLinearParams(int m){
         return getLinearParams(m,m,m,m);
     }
+
+
+    /**
+     * returns a linear layout params based on the builder
+     * that is passed as the param
+     * @param builder
+     * @return
+     */
+    public static CardView.LayoutParams getCardLayoutParams(MoPaddingBuilder builder){
+        CardView.LayoutParams lp = new CardView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(builder.left,builder.top,builder.right,builder.bottom);
+        return lp;
+    }
+
+    /**
+     *
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     * @return
+     */
+    public static CardView.LayoutParams getCardLayoutParams(int left,int top,int right,int bottom){
+        return getCardLayoutParams(new MoMarginBuilder().setLeft(left).setTop(top)
+                .setRight(right).setBottom(bottom).convertValuesToDp());
+    }
+
+    /**
+     *
+     * @param m
+     * @return
+     */
+    public static CardView.LayoutParams getCardLayoutParams(int m){
+        return getCardLayoutParams(m,m,m,m);
+    }
+
+
 
 
 }

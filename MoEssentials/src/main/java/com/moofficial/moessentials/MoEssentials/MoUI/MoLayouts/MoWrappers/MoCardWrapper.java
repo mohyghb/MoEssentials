@@ -79,4 +79,10 @@ public class MoCardWrapper extends MoWrapper{
     public View getView() {
         return cardView;
     }
+
+
+
+
+
+
 }

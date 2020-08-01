@@ -11,7 +11,7 @@ public abstract class MoOriginalActivity extends MoBasicActivity {
     protected void onCreate() {
         super.onCreate();
         makeActivityRound();
-        customizeCards(new MoCardBuilder(this).setBackgroundColorId(R.color.transparent));
+        makeCardViewsTransparent();
         enableAnimations();
     }
 

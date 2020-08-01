@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
@@ -18,6 +19,7 @@ public class MoInputBar extends MoConstraint {
     private TextView title;
     private EditText editText;
     private MoCardWrapper cardView;
+    private ConstraintLayout constraintLayout;
 
 
     public MoInputBar(Context context) {
@@ -79,6 +81,17 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
+    public ConstraintLayout getConstraintLayout() {
+        return constraintLayout;
+    }
+
+    public MoInputBar setConstraintLayout(ConstraintLayout constraintLayout) {
+        this.constraintLayout = constraintLayout;
+        return this;
+    }
+
+
+
     /**
      * returns the text of the edit text
      * @return
@@ -125,6 +138,7 @@ public class MoInputBar extends MoConstraint {
         editText = findViewById(R.id.input_bar_edit_text);
         cardView = new MoCardWrapper(findViewById(R.id.input_bar_card_view));
         title = findViewById(R.id.input_bar_title);
+        constraintLayout = findViewById(R.id.input_bar_constraint_layout);
     }
 
     @Override

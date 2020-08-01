@@ -132,11 +132,11 @@ public class MoAppbarUtils {
     }
 
     public static void snapWithToolbar(CollapsingToolbarLayout t){
-        setFlags(t,SCROLL_FLAG_EXIT_UNTIL_COLLAPSED | SCROLL_FLAG_SNAP | SCROLL_FLAG_SNAP_MARGINS);
+        setFlags(t,SCROLL_FLAG_EXIT_UNTIL_COLLAPSED | SCROLL_FLAG_SNAP | SCROLL_FLAG_SNAP_MARGINS | SCROLL_FLAG_SCROLL);
     }
 
     public static void snapNoToolbar(CollapsingToolbarLayout t){
-        setFlags(t,SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED | SCROLL_FLAG_SNAP | SCROLL_FLAG_SNAP_MARGINS);
+        setFlags(t,SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED | SCROLL_FLAG_SNAP | SCROLL_FLAG_SNAP_MARGINS | SCROLL_FLAG_SCROLL);
     }
 
     public static void noToolbar(CollapsingToolbarLayout t){

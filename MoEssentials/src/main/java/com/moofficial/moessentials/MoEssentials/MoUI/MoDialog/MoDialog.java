@@ -23,13 +23,86 @@ public class MoDialog extends MoContext {
     private Drawable icon;
     private ListAdapter listAdapter;
     private DialogInterface.OnClickListener onClickListener;
+    private MoOnDialogButtonClickedListener onDialogButtonClickedListener;
 
     public MoDialog(Context c,View parentView){
         super(c);
         this.parentView = parentView;
     }
 
-    public MoDialog addViews(int key,int id){
+    public View getParentView() {
+        return parentView;
+    }
+
+    public MoDialog setParentView(View parentView) {
+        this.parentView = parentView;
+        return this;
+    }
+
+    public AlertDialog getAlertDialog() {
+        return alertDialog;
+    }
+
+    public MoDialog setAlertDialog(AlertDialog alertDialog) {
+        this.alertDialog = alertDialog;
+        return this;
+    }
+
+    public HashMap<Integer, View> getViewHashMap() {
+        return viewHashMap;
+    }
+
+    public MoDialog setViewHashMap(HashMap<Integer, View> viewHashMap) {
+        this.viewHashMap = viewHashMap;
+        return this;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public MoDialog setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public MoDialog setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public Drawable getIcon() {
+        return icon;
+    }
+
+    public MoDialog setIcon(Drawable icon) {
+        this.icon = icon;
+        return this;
+    }
+
+    public ListAdapter getListAdapter() {
+        return listAdapter;
+    }
+
+    public MoDialog setListAdapter(ListAdapter listAdapter) {
+        this.listAdapter = listAdapter;
+        return this;
+    }
+
+    public DialogInterface.OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public MoDialog setOnClickListener(DialogInterface.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+        return this;
+    }
+
+    public MoDialog addViews(int key, int id){
         viewHashMap.put(key,parentView.findViewById(id));
         return this;
     }

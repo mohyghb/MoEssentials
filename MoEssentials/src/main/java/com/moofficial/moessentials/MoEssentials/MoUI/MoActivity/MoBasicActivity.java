@@ -1,11 +1,9 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 
-import android.animation.LayoutTransition;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,6 +13,9 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoOnAddToLayoutListener;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoSwitchers.MoSwitchViews;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperFloatingActionButton;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperLinearLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperToolbar;
@@ -32,7 +33,7 @@ public abstract class MoBasicActivity extends MoActivity {
     protected CollapsingToolbarLayout collapsingToolbarLayout;
     protected CoordinatorLayout coordinatorLayout;
     protected ConstraintLayout rootView;
-    protected CardView cardView,innerCardView;
+    protected MoCardWrapper cardView,innerCardView;
     protected MoWrapperFloatingActionButton floatingActionButton;
     protected NestedScrollView nestedScrollView;
 
@@ -54,8 +55,8 @@ public abstract class MoBasicActivity extends MoActivity {
         coordinatorLayout = findViewById(R.id.basic_activity_coordinator_layout);
         collapsingToolbarLayout = findViewById(R.id.basic_activity_collapsing_toolbar);
         rootView = findViewById(R.id.basic_activity_root);
-        cardView = findViewById(R.id.basic_activity_card_view);
-        innerCardView = findViewById(R.id.basic_activity_inner_card_view);
+        cardView = new MoCardWrapper(findViewById(R.id.basic_activity_card_view));
+        innerCardView = new MoCardWrapper(findViewById(R.id.basic_activity_inner_card_view));
         nestedScrollView = findViewById(R.id.basic_activity_nested_scroll_view);
         floatingActionButton = new MoWrapperFloatingActionButton(this,
                 findViewById(R.id.basic_activity_floating_action_button));
@@ -76,13 +77,13 @@ public abstract class MoBasicActivity extends MoActivity {
     }
 
     public void makeActivityRound(){
-        cardView.setRadius((float)getResources().getDimension(R.dimen.mo_style_card_corner));
-        innerCardView.setRadius((float)getResources().getDimension(R.dimen.mo_style_card_corner));
+        cardView.makeCardRound();
+        innerCardView.makeCardRound();
     }
 
     public void makeActivityRectangular(){
-        cardView.setRadius(0f);
-        innerCardView.setRadius(0f);
+        cardView.makeCardRectangular();
+        innerCardView.makeCardRectangular();
     }
 
     public void customizeCards(MoCardBuilder c){
@@ -91,13 +92,21 @@ public abstract class MoBasicActivity extends MoActivity {
     }
 
     public void customizeInnerCard(MoCardBuilder c){
-        c.build(innerCardView);
+        c.build(innerCardView.getCardView());
     }
 
     public void customizeOuterCard(MoCardBuilder c){
-        c.build(cardView);
+        c.build(cardView.getCardView());
     }
 
+    public void makeCardViewsTransparent(){
+        cardView.makeTransparent();
+        innerCardView.makeTransparent();
+    }
+
+    public void makeNestedScrollTransparent(){
+        nestedScrollView.setBackgroundColor(getColor(R.color.transparent));
+    }
 
 
 
@@ -135,7 +144,7 @@ public abstract class MoBasicActivity extends MoActivity {
     }
 
     /**
-     *
+     * removes the toolbar from activity
      */
     public void noToolbarNeeded(){
         MoAppbarUtils.noToolbar(this.collapsingToolbarLayout);
@@ -151,7 +160,36 @@ public abstract class MoBasicActivity extends MoActivity {
         MoLinearLayoutUtils.enableChangingAnimation(this.toolbar.getLinearLayout().getLinearLayout());
     }
 
+    /**
+     * disables the toolbar animation
+     * this was created due to the fact that
+     * the toolbar showed jerking animations
+     * if it wasn't properly set up
+     */
+    public void disableToolbarAnimation(){
+        toolbar.getLinearLayout().getLinearLayout().setLayoutTransition(null);
+        toolbar.getToolbar().setLayoutTransition(null);
+    }
 
+
+    /**
+     * snaps the app bar
+     */
+    public void snapAppbar(){
+        MoAppbarUtils.snapWithToolbar(collapsingToolbarLayout);
+    }
+
+
+    /**
+     * adds multiple toolbars to the main toolbar
+     * and only turns the active one on
+     * and the rest are GONE
+     * @param active
+     * @param views
+     */
+    public void setupMultipleToolbars(View active,View ... views){
+        new MoSwitchViews().addViews(views).setActiveView(active).build(v -> toolbar.addToolbar(v));
+    }
 
 
 

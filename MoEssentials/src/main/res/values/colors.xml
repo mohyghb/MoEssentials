@@ -21,6 +21,7 @@
     <color name="MoGrey">#F28E8E8E</color>
     <color name="MoBackground">@color/MoWhite</color>
     <color name="MoInverseColor">@color/MoBlack</color>
+    <color name="MoCardColor">@color/MoWhite_v2</color>
 
 
 

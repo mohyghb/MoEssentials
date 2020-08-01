@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
@@ -20,6 +21,7 @@ public class MoListSelectable extends MoListViews {
     protected TextView counterTextView;
     protected String counterMessage;
     protected boolean loadTitleAfter;
+    private ImageButton confirmImageButton;
     private MoOnCanceledListener canceledListener = () -> {};
     private MoOnSelectFinishedListener selectFinishedListener = pickedItems -> {};
     private boolean updateTitleAfter = true;
@@ -94,7 +96,19 @@ public class MoListSelectable extends MoListViews {
         return this;
     }
 
+    public ImageButton getConfirmImageButton() {
+        return confirmImageButton;
+    }
 
+    public MoListSelectable setConfirmImageButton(ImageButton confirmImageButton) {
+        this.confirmImageButton = confirmImageButton;
+        this.confirmImageButton.setOnClickListener(view -> onConfirm());
+        return this;
+    }
+
+    public MoListSelectable setConfirmImageButton(int confirmImageButton) {
+        return setConfirmImageButton(parentView.findViewById(confirmImageButton));
+    }
 
     @Override
     public MoListSelectable setCancelButton(int cancelButton) {

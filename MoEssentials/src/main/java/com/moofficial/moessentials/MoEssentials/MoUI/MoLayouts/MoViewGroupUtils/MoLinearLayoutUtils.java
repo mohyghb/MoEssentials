@@ -23,9 +23,15 @@ public class MoLinearLayoutUtils {
         }
     }
 
+    /**
+     * enables changing animation
+     * @param l
+     */
     public static void enableChangingAnimation(LinearLayout l){
         LayoutTransition layoutTransition = l.getLayoutTransition();
-        layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
+        if(layoutTransition!=null){
+            layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
+        }
     }
 
 }
