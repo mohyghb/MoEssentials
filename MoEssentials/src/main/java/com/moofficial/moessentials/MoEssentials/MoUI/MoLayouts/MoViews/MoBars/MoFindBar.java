@@ -2,10 +2,14 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoImageButtonBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoFindBar extends MoConstraint {
@@ -80,6 +84,78 @@ public class MoFindBar extends MoConstraint {
 
     public MoFindBar setEditText(EditText editText) {
         this.editText = editText;
+        return this;
+    }
+
+
+    public MoFindBar hideRight(){
+        rightButton.setVisibility(View.GONE);
+        return this;
+    }
+
+
+
+    public MoFindBar hideMiddle(){
+        middleButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoFindBar hideLeft(){
+        leftButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoFindBar onlyTitleAndLeftButtonVisible(){
+        hideMiddle();
+        hideRight();
+        return this;
+    }
+
+
+    public MoFindBar setHint(String h){
+        this.editText.setHint(h);
+        return this;
+    }
+
+    public MoFindBar setHint(int h){
+        this.editText.setHint(h);
+        return this;
+    }
+
+
+
+
+
+
+
+    public MoFindBar setLeftOnClickListener(View.OnClickListener l){
+        leftButton.setOnClickListener(l);
+        return this;
+    }
+
+    public MoFindBar setMiddleOnClickListener(View.OnClickListener l){
+        middleButton.setOnClickListener(l);
+        return this;
+    }
+
+    public MoFindBar setRightOnClickListener(View.OnClickListener l){
+        rightButton.setOnClickListener(l);
+        return this;
+    }
+
+
+    public MoFindBar setLeftIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.leftButton);
+        return this;
+    }
+
+    public MoFindBar setMiddleIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.middleButton);
+        return this;
+    }
+
+    public MoFindBar setRightIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.rightButton);
         return this;
     }
 

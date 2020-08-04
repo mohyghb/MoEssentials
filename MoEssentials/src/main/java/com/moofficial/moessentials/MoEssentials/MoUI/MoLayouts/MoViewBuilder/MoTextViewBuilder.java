@@ -8,23 +8,8 @@ import android.widget.TextView;
 
 public class MoTextViewBuilder extends MoViewBuilder {
 
-    private String hint = "",text = "";
-    private TextWatcher watcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    };
+    private String hint,text;
+    private TextWatcher watcher;
 
     public MoTextViewBuilder(Context c) {
         super(c);
@@ -100,9 +85,9 @@ public class MoTextViewBuilder extends MoViewBuilder {
     @Override
     protected <T extends View> void buildItem(T v) {
         TextView t = (TextView) v;
-        t.setHint(hint);
-        t.setText(text);
-        t.addTextChangedListener(watcher);
+        setIfNotNull(hint,()->t.setHint(hint));
+        setIfNotNull(text,()->t.setText(text));
+        setIfNotNull(watcher,()->t.addTextChangedListener(watcher));
     }
 
 

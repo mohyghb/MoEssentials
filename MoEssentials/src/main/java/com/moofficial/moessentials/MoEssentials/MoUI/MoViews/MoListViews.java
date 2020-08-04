@@ -21,7 +21,7 @@ public abstract class MoListViews extends MoContext {
     // synced with others
     // so we don't show multiple
     // views that are in common
-    private List<MoListViews> syncActions = new ArrayList<>();
+    private MoListViewSync listViewSync;
     // un-normal views that are only shown when the
     // a mode is on
     private List<View> unNormalViews = new ArrayList<>();
@@ -38,6 +38,7 @@ public abstract class MoListViews extends MoContext {
     private int visibleAnimation = MoAnimation.FADE_IN;
     private int goneAnimation = MoAnimation.FADE_OUT;
     protected boolean isInActionMode = false;
+    protected boolean isOnHold = false;
 
 
 
@@ -47,6 +48,19 @@ public abstract class MoListViews extends MoContext {
         this.parentView = parentView;
     }
 
+    public MoListViewSync getListViewSync() {
+        return listViewSync;
+    }
+
+    public MoListViews setListViewSync(MoListViewSync listViewSync) {
+        this.listViewSync = listViewSync;
+        return this;
+    }
+
+    public MoListViews setOnHold(boolean onHold) {
+        isOnHold = onHold;
+        return this;
+    }
 
     public MoListViews addUnNormalViews(int ... views){
         for (int value : views) {
@@ -86,10 +100,7 @@ public abstract class MoListViews extends MoContext {
     }
 
 
-    public MoListViews setSyncActions(MoListViews ... syncActions) {
-        this.syncActions = Arrays.asList(syncActions);
-        return this;
-    }
+
 
     public MoListViews setCancelButton(int cancelButton){
         this.cancelButton = parentView.findViewById(cancelButton);
@@ -104,10 +115,6 @@ public abstract class MoListViews extends MoContext {
     }
 
 
-    public MoListViews setSyncActions(List<MoListViews> syncActions) {
-        this.syncActions = syncActions;
-        return this;
-    }
 
     public Context getContext() {
         return context;
@@ -127,9 +134,7 @@ public abstract class MoListViews extends MoContext {
         return this;
     }
 
-    public List<MoListViews> getSyncActions() {
-        return syncActions;
-    }
+
 
     public List<View> getUnNormalViews() {
         return unNormalViews;
@@ -209,14 +214,19 @@ public abstract class MoListViews extends MoContext {
 
     public void activateSpecialMode(){
         // sync with others
-        MoViewUtils.closeActions(this.syncActions);
-        isInActionMode = true;
+        if(!isInActionMode){
+            listViewSync.goingToActivate(this);
+            isInActionMode = true;
+        }
         MoViewUtils.apply(this.parentView,unNormalViews,visible,visibleAnimation);
         MoViewUtils.apply(this.parentView,normalViews,invisible,goneAnimation);
     }
 
     public void deactivateSpecialMode(){
-        isInActionMode = false;
+        if(isInActionMode){
+            listViewSync.goingToDeactivate();
+            isInActionMode = false;
+        }
         MoViewUtils.apply(this.parentView,unNormalViews,invisible,goneAnimation);
         MoViewUtils.apply(this.parentView,normalViews,visible,visibleAnimation);
     }
@@ -233,16 +243,40 @@ public abstract class MoListViews extends MoContext {
         return this.isInActionMode;
     }
 
+    public boolean isOnHold(){
+        return this.isOnHold;
+    }
 
+    /**
+     * calls on cancel and sets in action
+     * mode to false
+     */
     public void removeAction(){
-        this.onCancel();
         this.isInActionMode = false;
+        this.onCancel();
+
+    }
+
+    /**
+     * makes the operation to be on hold
+     * and be activated later on
+     */
+    public void goOnHold(){
+        if(!isOnHold){
+            this.isOnHold = true;
+            this.deactivateSpecialMode();
+        }
+    }
+
+    public void releaseOnHold(){
+        if(isOnHold){
+            this.isOnHold = false;
+            this.activateSpecialMode();
+        }
     }
 
 
-    public void addSyncAction(MoListViews s){
-        this.syncActions.add(s);
-    }
+
 
 
     /**

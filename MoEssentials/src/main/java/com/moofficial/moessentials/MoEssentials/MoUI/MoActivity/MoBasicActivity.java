@@ -5,6 +5,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 
@@ -13,6 +14,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoViewGroupUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoOnAddToLayoutListener;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoSwitchers.MoSwitchViews;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
@@ -189,6 +191,22 @@ public abstract class MoBasicActivity extends MoActivity {
      */
     public void setupMultipleToolbars(View active,View ... views){
         new MoSwitchViews().addViews(views).setActiveView(active).build(v -> toolbar.addToolbar(v));
+    }
+
+
+    /**
+     * changes the app bar layout by considering
+     * the heights of other view groups as well
+     * now has the ability to
+     * change the app bar layout as we continue to add
+     * or remove things from toolbar
+     * @param considerTheseHeights
+     */
+    public void onAppbarLayoutHeightChanged(ViewGroup... considerTheseHeights){
+        float heightDp = (float) getResources().getDisplayMetrics().heightPixels / activityDimensions.getAppbarRatio();
+        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appBarLayout.getLayoutParams();
+        lp.height = (int)heightDp + MoViewGroupUtils.getMeasuredHeight(considerTheseHeights);
+        appBarLayout.setLayoutParams(lp);
     }
 
 

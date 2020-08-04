@@ -10,34 +10,36 @@ import android.widget.TextView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
 
 
-public class MoListSelectable extends MoListViews {
+// T is the dynamic type that we are dealing with
+public class MoListSelectable<T extends MoSelectableItem> extends MoListViews {
 
-    private MoSelectableList selectableList;
+    private MoSelectableList<T> selectableList;
     // select all button
     protected CheckBox selectAllCheckBox;
 
     // shows the total items selected
     protected int selectedSize;
     protected TextView counterTextView;
-    protected String counterMessage;
-    protected boolean loadTitleAfter;
+    protected String counterMessage = " Selected";
     private ImageButton confirmImageButton;
     private MoOnCanceledListener canceledListener = () -> {};
-    private MoOnSelectFinishedListener selectFinishedListener = pickedItems -> {};
+    private MoOnSelectFinishedListener<T> selectFinishedListener = pickedItems -> {};
+    private MoOnSelectListener<T> onSelectListener = selectableItem -> {};
     private boolean updateTitleAfter = true;
     private String savedTitle = "";
 
 
-    public MoListSelectable(Context c, View parent, MoSelectableList selectableList) {
+    public MoListSelectable(Context c, View parent, MoSelectableList<T> selectableList) {
         super(c,parent);
         this.selectableList = selectableList;
+        this.selectableList.setListSelectable(this);
     }
 
-    public MoSelectableList getSelectableList() {
+    public MoSelectableList<T> getSelectableList() {
         return selectableList;
     }
 
-    public MoListSelectable setSelectableList(MoSelectableList selectableList) {
+    public MoListSelectable<T> setSelectableList(MoSelectableList<T> selectableList) {
         this.selectableList = selectableList;
         return this;
     }
@@ -46,7 +48,7 @@ public class MoListSelectable extends MoListViews {
         return selectAllCheckBox;
     }
 
-    public MoListSelectable setSelectAllCheckBox(CheckBox selectAllCheckBox) {
+    public MoListSelectable<T> setSelectAllCheckBox(CheckBox selectAllCheckBox) {
         this.selectAllCheckBox = selectAllCheckBox;
         return this;
     }
@@ -55,7 +57,7 @@ public class MoListSelectable extends MoListViews {
         return counterTextView;
     }
 
-    public MoListSelectable setCounterTextView(TextView counterTextView) {
+    public MoListSelectable<T> setCounterTextView(TextView counterTextView) {
         this.counterTextView = counterTextView;
         return this;
     }
@@ -64,34 +66,27 @@ public class MoListSelectable extends MoListViews {
         return counterMessage;
     }
 
-    public MoListSelectable setCounterMessage(String counterMessage) {
+    public MoListSelectable<T> setCounterMessage(String counterMessage) {
         this.counterMessage = counterMessage;
         return this;
     }
 
-    public boolean isLoadTitleAfter() {
-        return loadTitleAfter;
-    }
 
-    public MoListSelectable setLoadTitleAfter(boolean loadTitleAfter) {
-        this.loadTitleAfter = loadTitleAfter;
-        return this;
-    }
 
     public MoOnCanceledListener getCanceledListener() {
         return canceledListener;
     }
 
-    public MoListSelectable setCanceledListener(MoOnCanceledListener canceledListener) {
+    public MoListSelectable<T> setCanceledListener(MoOnCanceledListener canceledListener) {
         this.canceledListener = canceledListener;
         return this;
     }
 
-    public MoOnSelectFinishedListener getSelectFinishedListener() {
+    public MoOnSelectFinishedListener<T> getSelectFinishedListener() {
         return selectFinishedListener;
     }
 
-    public MoListSelectable setSelectFinishedListener(MoOnSelectFinishedListener selectFinishedListener) {
+    public MoListSelectable<T> setSelectFinishedListener(MoOnSelectFinishedListener<T> selectFinishedListener) {
         this.selectFinishedListener = selectFinishedListener;
         return this;
     }
@@ -100,39 +95,39 @@ public class MoListSelectable extends MoListViews {
         return confirmImageButton;
     }
 
-    public MoListSelectable setConfirmImageButton(ImageButton confirmImageButton) {
+    public MoListSelectable<T>  setConfirmImageButton(ImageButton confirmImageButton) {
         this.confirmImageButton = confirmImageButton;
         this.confirmImageButton.setOnClickListener(view -> onConfirm());
         return this;
     }
 
-    public MoListSelectable setConfirmImageButton(int confirmImageButton) {
+    public MoListSelectable<T>  setConfirmImageButton(int confirmImageButton) {
         return setConfirmImageButton(parentView.findViewById(confirmImageButton));
     }
 
     @Override
-    public MoListSelectable setCancelButton(int cancelButton) {
+    public MoListSelectable<T>  setCancelButton(int cancelButton) {
         super.setCancelButton(cancelButton);
         return this;
     }
 
     @Override
-    public MoListSelectable setConfirmButton(int confirmButton) {
+    public MoListSelectable<T>  setConfirmButton(int confirmButton) {
         super.setConfirmButton(confirmButton);
         return this;
     }
 
-    public MoListSelectable setOnCanceledListener(MoOnCanceledListener canceledListener) {
+    public MoListSelectable<T>  setOnCanceledListener(MoOnCanceledListener canceledListener) {
         this.canceledListener = canceledListener;
         return this;
     }
 
-    public MoListSelectable setOnSelectFinishedListener(MoOnSelectFinishedListener selectFinishedListener) {
+    public MoListSelectable<T>  setOnSelectFinishedListener(MoOnSelectFinishedListener<T> selectFinishedListener) {
         this.selectFinishedListener = selectFinishedListener;
         return this;
     }
 
-    public MoListSelectable setSelectAllCheckBox(int selectAll){
+    public MoListSelectable<T>  setSelectAllCheckBox(int selectAll){
         this.selectAllCheckBox = parentView.findViewById(selectAll);
         this.selectAllCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if(!compoundButton.isPressed()){
@@ -150,46 +145,59 @@ public class MoListSelectable extends MoListViews {
         return this;
     }
 
+    public MoListSelectable<T>  setCounterView(int ctv){
+        return setCounterView(parentView.findViewById(ctv));
+    }
+
+    public MoListSelectable<T>  setCounterView(TextView ctv){
+        return setCounterView(ctv,null);
+    }
+
     // set counter of items
-    public MoListSelectable setCounterView(int ctv, String message){
-        this.counterTextView = parentView.findViewById(ctv);
-        this.counterMessage = message;
+    public MoListSelectable<T>  setCounterView(int ctv, String message){
+        return setCounterView(parentView.findViewById(ctv),message);
+    }
+
+    public MoListSelectable<T>  setCounterView(TextView ctv, String message){
+        this.counterTextView = ctv;
+        if(message!=null){
+            this.counterMessage = message;
+        }
         this.savedTitle = this.counterTextView.getText().toString();
         return this;
     }
 
-
     @Override
-    public MoListSelectable addUnNormalViews(int... views) {
+    public MoListSelectable<T>  addUnNormalViews(int... views) {
         super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListSelectable addUnNormalViews(View... views) {
+    public MoListSelectable<T>  addUnNormalViews(View... views) {
         super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListSelectable addNormalViews(int... views) {
+    public MoListSelectable<T>  addNormalViews(int... views) {
         super.addNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListSelectable addNormalViews(View... views) {
+    public MoListSelectable<T>  addNormalViews(View... views) {
         super.addNormalViews(views);
         return this;
     }
 
-    public MoListSelectable setUpdateTitleAfter(boolean updateTitleAfter) {
+    public MoListSelectable<T>  setUpdateTitleAfter(boolean updateTitleAfter) {
         this.updateTitleAfter = updateTitleAfter;
         return this;
     }
 
     @Override
-    public MoListSelectable setShowOneActionAtTime(boolean showOneActionAtTime) {
+    public MoListSelectable<T>  setShowOneActionAtTime(boolean showOneActionAtTime) {
         super.setShowOneActionAtTime(showOneActionAtTime);
         return this;
     }
@@ -198,7 +206,7 @@ public class MoListSelectable extends MoListViews {
         return updateTitleAfter;
     }
 
-    public MoListSelectable updateTitleAfter(boolean updateTitleAfter) {
+    public MoListSelectable<T> updateTitle(boolean updateTitleAfter) {
         this.updateTitleAfter = updateTitleAfter;
         return this;
     }
@@ -207,13 +215,14 @@ public class MoListSelectable extends MoListViews {
         return savedTitle;
     }
 
-    public MoListSelectable setSavedTitle(String savedTitle) {
+    public MoListSelectable<T>  setSavedTitle(String savedTitle) {
         this.savedTitle = savedTitle;
         return this;
     }
 
     public void update() {
         updateActions();
+        updateCounter();
     }
 
     /**
@@ -221,7 +230,16 @@ public class MoListSelectable extends MoListViews {
      */
     @Override
     public void onCancel() {
+        selectableList.deselectAllElements();
+        deactivateSpecialMode();
+        updateTitle(updateTitleAfter && counterTextView!=null, savedTitle);
         this.canceledListener.onCanceled();
+    }
+
+    public void updateTitle(boolean condition, String savedTitle) {
+        if (condition) {
+            counterTextView.setText(savedTitle);
+        }
     }
 
     /**
@@ -257,9 +275,7 @@ public class MoListSelectable extends MoListViews {
      */
     @SuppressLint("SetTextI18n")
     protected void updateCounter(){
-        if(this.counterTextView!=null){
-            this.counterTextView.setText(this.selectedSize + this.counterMessage);
-        }
+        updateTitle(this.counterTextView!=null, this.selectedSize + this.counterMessage);
     }
 
 
@@ -298,6 +314,22 @@ public class MoListSelectable extends MoListViews {
             this.selectedSize--;
         }
         update();
+    }
+
+    /**
+     * when the user calls on select (selects an item to deselect or select)
+     * @param si
+     */
+    public void onSelect(T si){
+        if(si.onSelect()){
+            // if it is selected, add it to the selected list
+            selectableList.getSelectedItems().add(si);
+        }else{
+            // else remove it from the list
+            selectableList.getSelectedItems().remove(si);
+        }
+        notifySizeChange(si.isSelected());
+        onSelectListener.onSelect(si);
     }
 
 

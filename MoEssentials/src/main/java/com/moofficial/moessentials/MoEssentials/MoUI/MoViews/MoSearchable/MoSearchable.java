@@ -11,7 +11,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.appbar.AppBarLayout;
+import com.moofficial.moessentials.MoEssentials.MoIO.MoSavable;
 import com.moofficial.moessentials.MoEssentials.MoKeyboardUtils.MoKeyboardUtils;
 import com.moofficial.moessentials.MoEssentials.MoState.MoOnScrollToPosition;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
@@ -26,7 +29,22 @@ public class MoSearchable extends MoListViews {
     // and then we can call run on ui thread using the activity
     private Activity activity;
     private TextView searchTextView;
-    private MoSearchableList searchableList;
+    private MoSearchableList searchableList = new MoSearchableList() {
+        @Override
+        public List<? extends MoSearchableItem> getSearchableItems() {
+            return new ArrayList<>();
+        }
+
+        @Override
+        public void notifyItemChanged(int position) {
+
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+
+        }
+    };
     private MoOnSearchFinished onSearchFinished = foundItems -> {};
     private MoOnSearchCanceled onSearchCanceled = () -> {};
     private MoOnSearchListener onSearchListener = search -> {};
@@ -46,40 +64,25 @@ public class MoSearchable extends MoListViews {
     private boolean clearSearchTextAfterDone = true;
 
 
-    // change it so that searchable list is not mandatory
 
-    public MoSearchable(Context c,View parent, MoSearchableList searchableList) {
+    public MoSearchable(Context c,View parent, @NonNull MoSearchableList searchableList) {
         super(c,parent);
         this.searchableList = searchableList;
     }
 
-
-    @Override
-    public MoSearchable setSyncActions(MoListViews ... syncActions) {
-        super.setSyncActions(syncActions);
-        return this;
+    public MoSearchable(Context c,View parent) {
+        super(c,parent);
     }
 
-    public MoSearchable setSearchTextView(int s) {
-        this.searchTextView = parentView.findViewById(s);
-        addTextWatcherToSearchText();
-        this.searchTextView.setOnEditorActionListener((textView, actionId, event) -> {
-            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
-                    (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE
-                    || actionId == EditorInfo.IME_ACTION_SEARCH) {
-                // hide keyboard
-                MoKeyboardUtils.hideSoftKeyboard(textView);
-                // we should search the char sequence here
-                performSearch(textView);
-            }
-            return false;
-        });
 
-        return this;
+
+
+    public MoSearchable setSearchTextView(int s) {
+       return setSearchTextView(parentView.findViewById(s));
     }
 
     private void addTextWatcherToSearchText() {
-        if(this.searchOnTextChanged){
+        if(this.searchOnTextChanged && searchTextView!=null){
             this.searchTextView.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -109,26 +112,16 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setSearchOnTextChanged(boolean searchOnTextChanged) {
         this.searchOnTextChanged = searchOnTextChanged;
-        if(searchTextView!=null){
-            addTextWatcherToSearchText();
-        }
+        addTextWatcherToSearchText();
         return this;
     }
 
     public MoSearchable setUpFind(int upFind) {
-        this.upFind = parentView.findViewById(upFind);
-        this.upFind.setOnClickListener(view -> {
-            onUpFindPressed();
-        });
-        return this;
+        return setUpFind(parentView.findViewById(upFind));
     }
 
     public MoSearchable setDownFind(int downFind) {
-        this.downFind = parentView.findViewById(downFind);
-        this.downFind.setOnClickListener(view -> {
-            onDownFindPressed();
-        });
-        return this;
+        return setDownFind(parentView.findViewById(downFind));
     }
 
     public MoSearchable setOnSearchCanceled(MoOnSearchCanceled onSearchCanceled) {
@@ -148,6 +141,18 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setSearchTextView(TextView searchTextView) {
         this.searchTextView = searchTextView;
+        addTextWatcherToSearchText();
+        this.searchTextView.setOnEditorActionListener((textView, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) ||
+                    (actionId == EditorInfo.IME_ACTION_GO) || actionId == EditorInfo.IME_ACTION_DONE
+                    || actionId == EditorInfo.IME_ACTION_SEARCH) {
+                // hide keyboard
+                MoKeyboardUtils.hideSoftKeyboard(textView);
+                // we should search the char sequence here
+                performSearch(textView);
+            }
+            return false;
+        });
         return this;
     }
 
@@ -201,11 +206,17 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setUpFind(ImageButton upFind) {
         this.upFind = upFind;
+        this.upFind.setOnClickListener(view -> {
+            onUpFindPressed();
+        });
         return this;
     }
 
     public MoSearchable setDownFind(ImageButton downFind) {
         this.downFind = downFind;
+        this.downFind.setOnClickListener(view -> {
+            onDownFindPressed();
+        });
         return this;
     }
 

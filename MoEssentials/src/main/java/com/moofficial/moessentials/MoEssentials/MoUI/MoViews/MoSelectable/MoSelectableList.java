@@ -2,13 +2,19 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
 
 import java.util.List;
 
-public interface MoSelectableList {
+public interface MoSelectableList<T extends MoSelectableItem> {
 
 //    /**
 //     * an array list to store the selected items in
 //     */
 //    List<MoSelectableItem> selectedItems = new ArrayList<>();
 
+
+    /**
+     * setting up a mutual relationship
+     * @param s
+     */
+    void setListSelectable(MoListSelectable<T> s);
 
     /**
      * if we want all the elements to be selected
@@ -32,7 +38,7 @@ public interface MoSelectableList {
      *
      * @return the list of the selected items
      */
-    List<? extends MoSelectableItem> getSelectedItems();
+    List<T> getSelectedItems();
 
 
 

@@ -2,9 +2,9 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
 
 import java.util.List;
 
-public interface MoOnSelectFinishedListener {
+public interface MoOnSelectFinishedListener<T extends MoSelectableItem> {
 
 
-    void onSelectFinished(List<? extends MoSelectableItem> pickedItems);
+    void onSelectFinished(List<T> pickedItems);
 
 }

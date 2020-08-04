@@ -10,11 +10,12 @@ import androidx.annotation.NonNull;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable.MoListSelectable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable.MoSelectableItem;
 
 
 // this class is used to make a recycler view or a list view's items deletable
 // uses MoAnimation
-public class MoListDelete extends MoListSelectable {
+public class MoListDelete<T extends MoSelectableItem> extends MoListSelectable<T> {
 
 
     private static final String DELETE_VIEW_FAILED = "Sorry, you can not delete right now";
@@ -27,14 +28,14 @@ public class MoListDelete extends MoListSelectable {
     private MoOnDeleteFinished onDeleteFinished = ()->{};
     private MoOnDeleteChanged onDeleteChanged = isInDeleteMode -> {};
     // mutual class
-    private MoListDeletable listAdapter;
+    private MoListDeletable<T> listAdapter;
 
 
     private String deleteMessage = DELETE_SUCCESSFUL;
 
 
 
-    public MoListDelete(Context c, View parent, @NonNull MoListDeletable listDeletable){
+    public MoListDelete(Context c, View parent, @NonNull MoListDeletable<T> listDeletable){
         super(c,parent,listDeletable);
         this.listAdapter = listDeletable;
         this.listAdapter.setMoDelete(this);
@@ -42,85 +43,81 @@ public class MoListDelete extends MoListSelectable {
 
 
 
-    @Override
-    public MoListDelete setSyncActions(MoListViews... syncActions) {
-        super.setSyncActions(syncActions);
-        return this;
-    }
+
 
     @Override
-    public MoListDelete addUnNormalViews(int... views) {
+    public MoListDelete<T> addUnNormalViews(int... views) {
         super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListDelete addUnNormalViews(View... views) {
+    public MoListDelete<T> addUnNormalViews(View... views) {
         super.addUnNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListDelete addNormalViews(int... views) {
+    public MoListDelete<T> addNormalViews(int... views) {
         super.addNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListDelete addNormalViews(View... views) {
+    public MoListDelete<T> addNormalViews(View... views) {
         super.addNormalViews(views);
         return this;
     }
 
     @Override
-    public MoListDelete setVisibleAnimation(int a) {
+    public MoListDelete<T> setVisibleAnimation(int a) {
         super.setVisibleAnimation(a);
         return this;
     }
 
     @Override
-    public MoListDelete setGoneAnimation(int a) {
+    public MoListDelete<T> setGoneAnimation(int a) {
         super.setGoneAnimation(a);
         return this;
     }
 
     @Override
-    public MoListDelete setCounterView(int ctv, String message) {
+    public MoListDelete<T> setCounterView(int ctv, String message) {
         super.setCounterView(ctv, message);
         return this;
     }
 
 
     @Override
-    public MoListDelete setCancelButton(int cancelButton) {
+    public MoListDelete<T> setCancelButton(int cancelButton) {
         super.setCancelButton(cancelButton);
         return this;
     }
 
     @Override
-    public MoListDelete setConfirmButton(int deleteButton) {
+    public MoListDelete<T> setConfirmButton(int deleteButton) {
         super.setConfirmButton(deleteButton);
         return this;
     }
 
     @Override
-    public MoListDelete setSelectAllCheckBox(int selectAll) {
+    public MoListDelete<T> setSelectAllCheckBox(int selectAll) {
         super.setSelectAllCheckBox(selectAll);
         return this;
     }
 
-    public MoListDelete setProgressBar(int progressBar){
+    public MoListDelete<T> setProgressBar(int progressBar){
         this.progressBar = parentView.findViewById(progressBar);
         this.progressBar.setIndeterminate(false);
         return this;
     }
 
-    public MoListDelete setOnDeletePressed(MoOnDeletePressed r){
+    public MoListDelete<T> setOnDeletePressed(MoOnDeletePressed r){
         this.onDeletePressed = r;
         return this;
     }
 
-    public MoListDelete showOnlyOneActionAtTime(boolean b){
+    public MoListDelete<T> showOnlyOneActionAtTime(boolean b){
         this.showOneActionAtTime = b;
         return this;
     }
@@ -139,11 +136,11 @@ public class MoListDelete extends MoListSelectable {
         return onDeletePressed;
     }
 
-    public MoListDeletable getListAdapter() {
+    public MoListDeletable<T> getListAdapter() {
         return listAdapter;
     }
 
-    public MoListDelete setListAdapter(MoListDeletable listAdapter) {
+    public MoListDelete<T> setListAdapter(MoListDeletable<T> listAdapter) {
         this.listAdapter = listAdapter;
         return this;
     }
@@ -152,7 +149,7 @@ public class MoListDelete extends MoListSelectable {
         return deleteMessage;
     }
 
-    public MoListDelete setDeleteMessage(String deleteMessage) {
+    public MoListDelete<T> setDeleteMessage(String deleteMessage) {
         this.deleteMessage = deleteMessage;
         return this;
     }
@@ -161,7 +158,7 @@ public class MoListDelete extends MoListSelectable {
         return onDeleteFinished;
     }
 
-    public MoListDelete setOnDeleteFinished(MoOnDeleteFinished onDeleteFinished) {
+    public MoListDelete<T> setOnDeleteFinished(MoOnDeleteFinished onDeleteFinished) {
         this.onDeleteFinished = onDeleteFinished;
         return this;
     }
@@ -170,14 +167,14 @@ public class MoListDelete extends MoListSelectable {
         return onDeleteChanged;
     }
 
-    public MoListDelete setOnDeleteChanged(MoOnDeleteChanged onDeleteChanged) {
+    public MoListDelete<T> setOnDeleteChanged(MoOnDeleteChanged onDeleteChanged) {
         this.onDeleteChanged = onDeleteChanged;
         return this;
     }
 
     @Override
-    public MoListDelete updateTitleAfter(boolean updateTitleAfter) {
-        super.updateTitleAfter(updateTitleAfter);
+    public MoListDelete<T> updateTitle(boolean updateTitleAfter) {
+        super.updateTitle(updateTitleAfter);
         return this;
     }
 
@@ -272,7 +269,6 @@ public class MoListDelete extends MoListSelectable {
     @Override
     public void onCancel() {
         setDeleteMode(false);
-
     }
 
     /**
@@ -302,7 +298,7 @@ public class MoListDelete extends MoListSelectable {
      * (this is used if the counter is your title of app bar)
      */
     private void updateTitle(){
-        if(this.counterTextView!=null){
+        if(this.counterTextView!=null && isUpdateTitleAfter()){
             counterTextView.setText(getSavedTitle());
         }
     }

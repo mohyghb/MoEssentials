@@ -11,9 +11,9 @@ import com.moofficial.moessentials.R;
 
 public class MoCardBuilder extends MoViewBuilder {
 
-    float cornerRadius,elevation;
+    Float cornerRadius,elevation;
 
-    int backgroundColorId = -1;
+    Integer backgroundColorId;
 
     public MoCardBuilder(Context c) {
         super(c);
@@ -98,13 +98,10 @@ public class MoCardBuilder extends MoViewBuilder {
     @Override
     protected <T extends View> void buildItem(T v) {
         CardView cardView = (CardView)v;
-        if(backgroundColorId!=-1){
-            cardView.setBackgroundTintList(ColorStateList.valueOf(
-                    ContextCompat.getColor(context, backgroundColorId)));
-            //cardView.setCardBackgroundColor(cardView.getContext().getColor(backgroundColorId));
-        }
-        cardView.setElevation(elevation);
-        cardView.setRadius(cornerRadius);
+        setIfNotNull(this.backgroundColorId, () -> cardView.setBackgroundTintList(ColorStateList.valueOf(
+                ContextCompat.getColor(context, backgroundColorId))));
+        setIfNotNull(elevation,()->cardView.setElevation(elevation));
+        setIfNotNull(cornerRadius,()->cardView.setRadius(cornerRadius));
     }
 
 }

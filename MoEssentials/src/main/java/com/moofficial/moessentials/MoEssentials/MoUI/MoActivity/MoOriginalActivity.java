@@ -5,6 +5,8 @@ import com.moofficial.moessentials.R;
 
 // round transparent background for cards
 // enabled animations
+// provides the universal activity dimension as well
+// so you don't need to provid it that
 public abstract class MoOriginalActivity extends MoBasicActivity {
 
     @Override
@@ -15,6 +17,8 @@ public abstract class MoOriginalActivity extends MoBasicActivity {
         enableAnimations();
     }
 
-
-
+    @Override
+    protected MoActivityDimensions getActivityDimensions() {
+        return MoActivityDimensions.UD;
+    }
 }

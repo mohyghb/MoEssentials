@@ -77,18 +77,10 @@ public abstract class MoViewBuilder extends MoContext {
 
     public <T extends View> void build(T ... vs){
         for(T v: vs){
-            if(longClickListener!=null){
-                v.setOnLongClickListener(longClickListener);
-            }
-            if(clickListener!=null){
-                v.setOnClickListener(clickListener);
-            }
-            if(contentPadding!=null){
-                contentPadding.apply(v);
-            }
-            if(marginBuilder!=null){
-                marginBuilder.apply(v);
-            }
+            setIfNotNull(longClickListener,()->v.setOnLongClickListener(longClickListener));
+            setIfNotNull(clickListener,()->v.setOnClickListener(clickListener));
+            setIfNotNull(contentPadding,()->  contentPadding.apply(v));
+            setIfNotNull(marginBuilder,()-> marginBuilder.apply(v));
             v.setMinimumWidth(minWidth);
             v.setMinimumHeight(minHeight);
             buildItem(v);
@@ -96,4 +88,16 @@ public abstract class MoViewBuilder extends MoContext {
     }
 
     protected abstract <T extends View> void buildItem(T v);
+
+    /**
+     * if the object is not null, we run the runnable
+     * @param o
+     * @param r
+     */
+    public void setIfNotNull(Object o,Runnable r){
+        if(o!=null){
+            r.run();
+        }
+    }
+
 }

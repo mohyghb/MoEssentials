@@ -71,7 +71,8 @@ public class MoImageButtonBuilder extends MoViewBuilder{
 
     @Override
     protected <T extends View> void buildItem(T v) {
-        ((ImageButton)v).setImageResource(icon);
+        ImageButton ib = (ImageButton)v;
+        setIfNotNull(ib,()->ib.setImageResource(icon));
     }
 
 }

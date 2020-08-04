@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// search is done by multi-threading and merging the results
 public class MoSearchableUtils {
 
     // we put 20 items in each thread to perform search async
@@ -64,6 +65,9 @@ public class MoSearchableUtils {
 
 
     public static void cancelSearch(List<? extends MoSearchableItem> list){
+        if(list == null)
+            return;
+
         for(MoSearchableItem item: list){
             item.setSearchable(false);
         }
@@ -71,6 +75,9 @@ public class MoSearchableUtils {
 
     public static List<? extends MoSearchableItem>
         getSearchableItems(List<? extends MoSearchableItem> list, List<Integer> indexes){
+        if(list == null)
+            return new ArrayList<>();
+
         List<MoSearchableItem> picked = new ArrayList<>();
         for(Integer i: indexes){
             picked.add(list.get(i));
