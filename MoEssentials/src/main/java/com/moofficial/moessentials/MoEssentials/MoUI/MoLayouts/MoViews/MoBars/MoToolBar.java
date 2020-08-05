@@ -3,10 +3,13 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.TintableCompoundButton;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoImageButtonBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
@@ -17,7 +20,8 @@ public class MoToolBar extends MoConstraint {
 
     private MoCardWrapper cardView;
     private TextView title;
-    private ImageButton leftButton, middleButton, rightButton;
+    private ImageButton leftButton, middleButton, rightButton,extraButton;
+    private CheckBox checkBox;
 
     public MoToolBar(Context context) {
         super(context);
@@ -55,6 +59,14 @@ public class MoToolBar extends MoConstraint {
         return cardView.getId();
     }
 
+    public int EXId(){
+        return extraButton.getId();
+    }
+
+    public int CBOXId(){
+        return this.checkBox.getId();
+    }
+
 
     public MoToolBar hideRight(){
         rightButton.setVisibility(View.GONE);
@@ -76,9 +88,53 @@ public class MoToolBar extends MoConstraint {
         return this;
     }
 
+    public MoToolBar hideCheckBox(){
+        checkBox.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoToolBar hideExtraButton(){
+        extraButton.setVisibility(View.GONE);
+        return this;
+    }
+
+
+    public MoToolBar showRight(){
+        rightButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoToolBar showTitle(){
+        title.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoToolBar showMiddle(){
+        middleButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoToolBar showLeft(){
+        leftButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoToolBar showCheckBox(){
+        checkBox.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoToolBar showExtraButton(){
+        extraButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+
     public MoToolBar onlyTitleAndLeftButtonVisible(){
         hideMiddle();
         hideRight();
+        hideCheckBox();
+        hideExtraButton();
         return this;
     }
 
@@ -131,7 +187,23 @@ public class MoToolBar extends MoConstraint {
         return rightButton;
     }
 
+    public ImageButton getExtraButton() {
+        return extraButton;
+    }
 
+    public MoToolBar setExtraButton(ImageButton extraButton) {
+        this.extraButton = extraButton;
+        return this;
+    }
+
+    public CheckBox getCheckBox() {
+        return checkBox;
+    }
+
+    public MoToolBar setCheckBox(CheckBox checkBox) {
+        this.checkBox = checkBox;
+        return this;
+    }
 
     public MoToolBar setLeftOnClickListener(View.OnClickListener l){
         leftButton.setOnClickListener(l);
@@ -145,6 +217,11 @@ public class MoToolBar extends MoConstraint {
 
     public MoToolBar setRightOnClickListener(View.OnClickListener l){
         rightButton.setOnClickListener(l);
+        return this;
+    }
+
+    public MoToolBar setExtraOnClickListener(View.OnClickListener l){
+        extraButton.setOnClickListener(l);
         return this;
     }
 
@@ -164,6 +241,18 @@ public class MoToolBar extends MoConstraint {
         return this;
     }
 
+    public MoToolBar setExtraIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.extraButton);
+        return this;
+    }
+
+
+
+    public MoToolBar setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener l){
+        this.checkBox.setOnCheckedChangeListener(l);
+        return this;
+    }
+
 
     @Override
     public int getLayoutId() {
@@ -177,6 +266,8 @@ public class MoToolBar extends MoConstraint {
         middleButton = findViewById(R.id.menu_app_bar_search_button);
         rightButton = findViewById(R.id.menu_app_bar_more_button);
         cardView = new MoCardWrapper(findViewById(R.id.menu_app_bar_card_view));
+        extraButton = findViewById(R.id.menu_app_bar_extra_button);
+        checkBox = findViewById(R.id.menu_app_bar_checkBox);
     }
 
     @Override

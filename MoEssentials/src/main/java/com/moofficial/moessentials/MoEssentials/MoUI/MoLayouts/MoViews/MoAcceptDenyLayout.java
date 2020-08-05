@@ -8,11 +8,12 @@ import android.widget.Button;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoAcceptDenyLayout extends MoConstraint {
 
-    CardView cardView;
+    MoCardWrapper cardView;
     Button denyButton,acceptButton;
 
     public MoAcceptDenyLayout(Context context) {
@@ -27,11 +28,11 @@ public class MoAcceptDenyLayout extends MoConstraint {
         super(context, attrs, defStyleAttr);
     }
 
-    public CardView getCardView() {
+    public MoCardWrapper getCardView() {
         return cardView;
     }
 
-    public MoAcceptDenyLayout setCardView(CardView cardView) {
+    public MoAcceptDenyLayout setCardView(MoCardWrapper cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -123,7 +124,7 @@ public class MoAcceptDenyLayout extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = findViewById(R.id.accept_deny_card_view);
+        cardView = new MoCardWrapper(findViewById(R.id.accept_deny_card_view));
         denyButton = findViewById(R.id.accept_deny_deny_button);
         acceptButton = findViewById(R.id.accept_deny_accept_button);
     }

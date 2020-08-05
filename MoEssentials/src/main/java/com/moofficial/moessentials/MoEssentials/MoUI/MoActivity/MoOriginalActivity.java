@@ -1,12 +1,11 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
-import com.moofficial.moessentials.R;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoActivitySettings.MoActivitySettings;
 
 // round transparent background for cards
 // enabled animations
 // provides the universal activity dimension as well
-// so you don't need to provid it that
+// sets the app bar height to height of screen / activitySettings.appbarRatio
 public abstract class MoOriginalActivity extends MoBasicActivity {
 
     @Override
@@ -18,7 +17,7 @@ public abstract class MoOriginalActivity extends MoBasicActivity {
     }
 
     @Override
-    protected MoActivityDimensions getActivityDimensions() {
-        return MoActivityDimensions.UD;
+    protected MoActivitySettings getActivitySettings() {
+        return MoActivitySettings.UD;
     }
 }

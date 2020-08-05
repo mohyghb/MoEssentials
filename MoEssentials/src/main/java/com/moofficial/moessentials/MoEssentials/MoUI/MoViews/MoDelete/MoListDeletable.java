@@ -19,12 +19,7 @@ public interface MoListDeletable<T extends MoSelectableItem> extends MoSelectabl
     void setMoDelete(MoListDelete<T> d);
 
 
-    /**
-     * notifies the data set changed
-     * either used when we are transitioning to
-     * delete mode or out of it
-     */
-    void notifySituationChanged();
+
 
     /**
      * traverses through the list

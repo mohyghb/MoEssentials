@@ -231,6 +231,7 @@ public class MoListSelectable<T extends MoSelectableItem> extends MoListViews {
     @Override
     public void onCancel() {
         selectableList.deselectAllElements();
+        selectableList.notifySituationChanged();
         deactivateSpecialMode();
         updateTitle(updateTitleAfter && counterTextView!=null, savedTitle);
         this.canceledListener.onCanceled();

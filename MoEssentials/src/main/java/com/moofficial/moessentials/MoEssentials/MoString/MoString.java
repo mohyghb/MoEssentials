@@ -1,5 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoString;
 
+import android.widget.TextView;
+
 public class MoString {
 
     /**
@@ -58,7 +60,7 @@ public class MoString {
      * @return
      */
     public static String getLimitedCount(String text,int count){
-        return getLimitedCount(text,"...",count);
+        return getLimitedCount(text,"…",count);
     }
 
     /**
@@ -84,6 +86,34 @@ public class MoString {
      */
     public static boolean isValid(String text){
         return text!=null && !text.isEmpty();
+    }
+
+
+    /**
+     * intelligently adjusts the font
+     * size of the text view based on the amount of
+     * chars that the newText has, and based on the current
+     * font size value of the tv
+     * @param tv adjust the font of this text view
+     * @param base base font size of the tv
+     * @param decPerCharUnit how many sizes should we decrease each time the text exceeds charUnit
+     * @param charUnit the threshold that activates the decPerCharUnit
+     */
+    public static void adjustFontSize(TextView tv,float base,float minSize,float decPerCharUnit,int charUnit){
+        tv.setTextSize(getFontSize(tv, base,minSize, decPerCharUnit, charUnit));
+    }
+
+    /**
+     * returns the font size based on the base
+     * decPerCharUnit and charUnits
+     * @param tv
+     * @param base
+     * @param decPerCharUnit
+     * @param charUnit
+     * @return
+     */
+    public static float getFontSize(TextView tv, float base, float minSize,float decPerCharUnit, int charUnit) {
+        return Math.max(base - ((float)tv.getText().toString().length()/charUnit * decPerCharUnit),minSize);
     }
 
 }

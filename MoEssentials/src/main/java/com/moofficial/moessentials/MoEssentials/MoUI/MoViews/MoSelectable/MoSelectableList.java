@@ -35,6 +35,13 @@ public interface MoSelectableList<T extends MoSelectableItem> {
 
 
     /**
+     * notifies the data set changed
+     * either used when we are transitioning to
+     * delete mode or out of it
+     */
+    void notifySituationChanged();
+
+    /**
      *
      * @return the list of the selected items
      */

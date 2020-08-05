@@ -215,16 +215,21 @@ public abstract class MoListViews extends MoContext {
     public void activateSpecialMode(){
         // sync with others
         if(!isInActionMode){
-            listViewSync.goingToActivate(this);
+            goingToActivateIfNotNull();
             isInActionMode = true;
         }
         MoViewUtils.apply(this.parentView,unNormalViews,visible,visibleAnimation);
         MoViewUtils.apply(this.parentView,normalViews,invisible,goneAnimation);
     }
 
+    public void goingToActivateIfNotNull() {
+        if(listViewSync!=null){
+            listViewSync.goingToActivate(this);
+        }
+    }
+
     public void deactivateSpecialMode(){
-        if(isInActionMode){
-            listViewSync.goingToDeactivate();
+        if(!isOnHold){
             isInActionMode = false;
         }
         MoViewUtils.apply(this.parentView,unNormalViews,invisible,goneAnimation);
@@ -268,6 +273,10 @@ public abstract class MoListViews extends MoContext {
         }
     }
 
+    /**
+     * makes it so that this view
+     * is not on hold anymore
+     */
     public void releaseOnHold(){
         if(isOnHold){
             this.isOnHold = false;

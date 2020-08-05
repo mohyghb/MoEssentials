@@ -2,17 +2,16 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoActivitySettings.MoActivitySettings;
 
 public abstract class MoActivity extends AppCompatActivity {
 
 
     protected Bundle savedInstanceState;
-    protected MoActivityDimensions activityDimensions;
+    protected MoActivitySettings activitySettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +19,8 @@ public abstract class MoActivity extends AppCompatActivity {
         this.savedInstanceState = savedInstanceState;
         setContentView(getLayoutResId());
 
-        // set activity dimensions
-        activityDimensions = getActivityDimensions();
+        // set activity settings
+        activitySettings = getActivitySettings();
         // call the on create inside the activity
         onCreate();
         // init other things that you want
@@ -59,7 +58,7 @@ public abstract class MoActivity extends AppCompatActivity {
      * used to init certain parts of the app using the
      * dimension that is provided
      */
-    protected abstract MoActivityDimensions getActivityDimensions();
+    protected abstract MoActivitySettings getActivitySettings();
 
 
 

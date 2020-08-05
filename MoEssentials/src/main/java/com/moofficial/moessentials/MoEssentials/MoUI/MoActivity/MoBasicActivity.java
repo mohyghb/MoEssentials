@@ -11,11 +11,12 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.moofficial.moessentials.MoEssentials.MoString.MoString;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoViewGroupUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoOnAddToLayoutListener;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoSwitchers.MoSwitchViews;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperFloatingActionButton;
@@ -110,17 +111,39 @@ public abstract class MoBasicActivity extends MoActivity {
         nestedScrollView.setBackgroundColor(getColor(R.color.transparent));
     }
 
+    public void showNestedScrollBackground(){
+        nestedScrollView.setBackground(getDrawable(R.drawable.mo_rounded_background));
+    }
+
 
 
     // set title text
 
     public void setTitle(int rid){
-        this.title.setText(getString(rid));
+        setTitle(getString(rid));
     }
 
     public void setTitle(String t){
-        this.title.setText(t);
+        title.setText(t);
     }
+
+    public void setTitleSize(float size){
+        this.title.setTextSize(size);
+    }
+
+    public void makeTitleFadingEdge(){
+        this.title.setSingleLine(true);
+        this.title.setFadingEdgeLength(MoDynamicUnit.convertDpToPixels(80f));
+        this.title.setHorizontalFadingEdgeEnabled(true);
+    }
+
+    public MoBasicActivity setTitleSingleLine(boolean b){
+        this.title.setSingleLine(b);
+        return this;
+    }
+
+
+
 
     // set subtitle text
 
@@ -129,7 +152,16 @@ public abstract class MoBasicActivity extends MoActivity {
     }
 
     public void setSubTitle(String t){
-        this.subtitle.setText(t);
+        subtitle.setText(t);
+    }
+
+    public void setSubTitleSize(float size){
+        this.subtitle.setTextSize(size);
+    }
+
+    public MoBasicActivity setSubTitleSingleLine(boolean b){
+        this.subtitle.setSingleLine(b);
+        return this;
     }
 
 
@@ -203,7 +235,7 @@ public abstract class MoBasicActivity extends MoActivity {
      * @param considerTheseHeights
      */
     public void onAppbarLayoutHeightChanged(ViewGroup... considerTheseHeights){
-        float heightDp = (float) getResources().getDisplayMetrics().heightPixels / activityDimensions.getAppbarRatio();
+        float heightDp = (float) getResources().getDisplayMetrics().heightPixels / activitySettings.getAppbarRatio();
         CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appBarLayout.getLayoutParams();
         lp.height = (int)heightDp + MoViewGroupUtils.getMeasuredHeight(considerTheseHeights);
         appBarLayout.setLayoutParams(lp);
