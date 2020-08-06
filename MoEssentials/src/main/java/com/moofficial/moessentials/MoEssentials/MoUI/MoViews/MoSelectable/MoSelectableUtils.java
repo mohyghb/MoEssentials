@@ -1,39 +1,34 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
 
+import java.util.Collection;
+import java.util.List;
+
 public class MoSelectableUtils {
 
-    /**
-     * selects all the items of the iterable
-     * @param items iterable of selectable items
-     */
-    public static void selectAllItems(Iterable<? extends MoSelectableItem> items){
-        turnAllItems(true,items);
-    }
 
     /**
      * selects all the items
      * @param items
      * @param selectable
      */
-    public static void selectAllItems(Iterable<? extends MoSelectableItem> items,MoListSelectable selectable){
+    public static <T extends MoSelectableItem> void selectAllItems(Collection<T> items, MoListSelectable<T> selectable){
         selectable.setSelectedSize(turnAllItems(true,items));
+        List<T> list = selectable.getSelectableList().getSelectedItems();
+        // clearing all the selected items from before
+        list.clear();
+        // and adding all the items to selected
+        list.addAll(items);
     }
 
-    /**
-     * deselects all the items of the iterable
-     * @param items iterable of selectable items
-     */
-    public static void deselectAllItems(Iterable<? extends MoSelectableItem> items){
-        turnAllItems(false,items);
-    }
 
     /**
      * sets the selected size to 0 as well
-     * @param items
      * @param selectable
      */
-    public static void deselectAllItems(Iterable<? extends MoSelectableItem> items,MoListSelectable selectable){
-        deselectAllItems(items);
+    public static <T extends MoSelectableItem> void deselectAllItems(MoListSelectable<T> selectable){
+        List<T> list = selectable.getSelectableList().getSelectedItems();
+        turnAllItems(false,list);
+        list.clear();
         selectable.setSelectedSize(0);
     }
 

@@ -1,6 +1,8 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
@@ -78,6 +80,21 @@ public class MoInputBar extends MoConstraint {
 
     public MoInputBar setText(int h){
         this.editText.setText(h);
+        return this;
+    }
+
+    public MoInputBar addTextWatcher(TextWatcher tw){
+        this.editText.addTextChangedListener(tw);
+        return this;
+    }
+
+    public MoInputBar setError(String message, int drawable){
+        this.editText.setError(message,getContext().getDrawable(drawable));
+        return this;
+    }
+
+    public MoInputBar setError(String message){
+        this.editText.setError(message);
         return this;
     }
 

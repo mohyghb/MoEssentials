@@ -72,6 +72,14 @@ public class MoListSelectable<T extends MoSelectableItem> extends MoListViews {
     }
 
 
+    public MoOnSelectListener<T> getOnSelectListener() {
+        return onSelectListener;
+    }
+
+    public MoListSelectable<T> setOnSelectListener(MoOnSelectListener<T> onSelectListener) {
+        this.onSelectListener = onSelectListener;
+        return this;
+    }
 
     public MoOnCanceledListener getCanceledListener() {
         return canceledListener;

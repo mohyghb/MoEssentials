@@ -40,7 +40,12 @@ public class MoCardWrapper extends MoWrapper{
     }
 
     public MoCardWrapper makeCardRound(){
-        cardView.setRadius(getResources().getDimension(R.dimen.mo_style_card_corner));
+        cardView.setRadius(getDimension(R.dimen.mo_style_card_corner));
+        return this;
+    }
+
+    public MoCardWrapper makeCardRecRound(){
+        cardView.setRadius(getDimension(R.dimen.mo_style_card_corner_small));
         return this;
     }
 

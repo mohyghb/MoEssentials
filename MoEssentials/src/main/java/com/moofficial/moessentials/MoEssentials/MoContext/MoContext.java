@@ -29,4 +29,9 @@ public class MoContext {
         return context.getResources();
     }
 
+    protected float getDimension(int id){
+        return context.getResources().getDimension(id);
+    }
+
+
 }
