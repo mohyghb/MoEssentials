@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable;
 
 import android.view.View;
 

@@ -5,7 +5,7 @@ import android.view.View;
 import androidx.core.util.Pair;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoViewUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoViewUtils;
 
 import java.util.HashMap;
 

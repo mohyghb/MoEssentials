@@ -4,6 +4,7 @@
     <string name="cancel">cancel</string>
     <string name="delete">delete</string>
     <string name="done">done</string>
+    <string name="yes">Yes</string>
 
     <string name="find_hint">Find…</string>
     <string name="search_hint">Search…</string>

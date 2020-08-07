@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface;
 
 public interface MoOnSelectListener<T extends MoSelectableItem> {
 

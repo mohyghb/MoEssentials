@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSearchable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,10 +14,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.moofficial.moessentials.MoEssentials.MoIO.MoSavable;
 import com.moofficial.moessentials.MoEssentials.MoKeyboardUtils.MoKeyboardUtils;
 import com.moofficial.moessentials.MoEssentials.MoState.MoOnScrollToPosition;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoListViews;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViews;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchCanceled;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchFinished;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchListener;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableItem;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableList;
 
 import java.util.ArrayList;
 import java.util.List;

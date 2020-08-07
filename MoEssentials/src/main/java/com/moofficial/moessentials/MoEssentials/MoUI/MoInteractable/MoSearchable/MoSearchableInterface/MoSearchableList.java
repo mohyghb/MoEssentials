@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSearchable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface;
 
 
 import com.moofficial.moessentials.MoEssentials.MoState.MoStateChange;

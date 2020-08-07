@@ -1,4 +1,6 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSearchable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableItem;
 
 import java.util.ArrayList;
 import java.util.List;

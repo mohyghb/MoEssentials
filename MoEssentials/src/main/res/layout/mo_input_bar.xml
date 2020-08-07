@@ -25,11 +25,25 @@
 
             <TextView
                 android:id="@+id/input_bar_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Title"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/input_bar_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Description"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_bar_title"
+                android:visibility="gone"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_bar_edit_text"
@@ -45,7 +59,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_bar_title" />
+                app:layout_constraintTop_toBottomOf="@id/input_bar_description" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

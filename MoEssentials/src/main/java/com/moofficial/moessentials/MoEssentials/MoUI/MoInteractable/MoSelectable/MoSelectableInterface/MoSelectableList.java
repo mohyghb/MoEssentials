@@ -1,4 +1,6 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
 
 import java.util.List;
 
@@ -14,17 +16,7 @@ public interface MoSelectableList<T extends MoSelectableItem> {
      * setting up a mutual relationship
      * @param s
      */
-    void setListSelectable(MoListSelectable<T> s);
-
-    /**
-     * if we want all the elements to be selected
-     */
-    void selectAllElements();
-
-    /**
-     * if we want to deselect all the elements
-     */
-    void deselectAllElements();
+    void setListSelectable(MoSelectable<T> s);
 
 
     /**
@@ -39,13 +31,28 @@ public interface MoSelectableList<T extends MoSelectableItem> {
      * either used when we are transitioning to
      * delete mode or out of it
      */
-    void notifySituationChanged();
+    void notifyDataSetChanged();
+
+    /**
+     * notifies the item at position
+     * that something has changed
+     * so we need to render it again
+     * @param position
+     */
+    void notifyItemChanged(int position);
 
     /**
      *
      * @return the list of the selected items
      */
     List<T> getSelectedItems();
+
+
+    /**
+     *
+     * @return the data set that we are dealing with
+     */
+    List<T> getDataSet();
 
 
 

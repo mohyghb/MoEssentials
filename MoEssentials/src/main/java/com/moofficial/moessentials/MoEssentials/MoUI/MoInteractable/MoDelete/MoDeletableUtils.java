@@ -1,13 +1,14 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoDelete;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete;
 
 import android.content.Context;
 import android.view.View;
 
 import com.moofficial.moessentials.MoEssentials.MoRunnable.MoRunnableUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoViews.MoSelectable.MoSelectableItem;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete.MoDeletableInterface.MoListDeletable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.R;
 
-public class MoDeleteUtils {
+public class MoDeletableUtils {
 
     /**
      *
@@ -51,8 +52,8 @@ public class MoDeleteUtils {
      * @param position of the item in the array
      * @param elseOption other option if we do not activate the delete mode
      */
-    public static void longPressDeleteActivation(View longPressView,MoListDelete deleteManager,
-                                                 MoListDeletable listDeletable,int position,Runnable elseOption){
+    public static void longPressDeleteActivation(View longPressView, MoDeletable deleteManager,
+                                                 MoListDeletable listDeletable, int position, Runnable elseOption){
         longPressView.setOnLongClickListener(view -> {
             if(!deleteManager.isInActionMode()){
                 deleteManager.setDeleteMode(true);

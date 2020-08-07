@@ -18,7 +18,7 @@ import com.moofficial.moessentials.R;
 public class MoInputBar extends MoConstraint {
 
 
-    private TextView title;
+    private TextView title,description;
     private EditText editText;
     private MoCardWrapper cardView;
     private ConstraintLayout constraintLayout;
@@ -48,6 +48,10 @@ public class MoInputBar extends MoConstraint {
         return title.getId();
     }
 
+    public int DId(){
+        return this.description.getId();
+    }
+
     public MoInputBar setTitle(String s){
         title.setText(s);
         return this;
@@ -58,8 +62,23 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
+    public MoInputBar setDescription(String s){
+        description.setText(s);
+        return this;
+    }
+
+    public MoInputBar setDescription(int s){
+        description.setText(s);
+        return this;
+    }
+
     public MoInputBar hideTitle(){
         title.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoInputBar hideDescription(){
+        description.setVisibility(View.GONE);
         return this;
     }
 
@@ -156,6 +175,7 @@ public class MoInputBar extends MoConstraint {
         cardView = new MoCardWrapper(findViewById(R.id.input_bar_card_view));
         title = findViewById(R.id.input_bar_title);
         constraintLayout = findViewById(R.id.input_bar_constraint_layout);
+        description = findViewById(R.id.input_bar_description);
     }
 
     @Override

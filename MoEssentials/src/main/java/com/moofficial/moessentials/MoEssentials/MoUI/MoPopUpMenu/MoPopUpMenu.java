@@ -7,18 +7,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class MoPopUpMenu {
+public class MoPopUpMenu extends MoContext {
 
-    private Context context;
+
     private List<Pair<String, MenuItem.OnMenuItemClickListener>> menuItems = new ArrayList<>();
 
     public MoPopUpMenu(Context c){
-        this.context = c;
+        super(c);
     }
 
     @SafeVarargs
