@@ -3,6 +3,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectabl
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     private String savedTitle = "";
 
 
-    public MoSelectable(Context c, View parent, MoSelectableList<T> selectableList) {
+    public MoSelectable(Context c, ViewGroup parent, MoSelectableList<T> selectableList) {
         super(c,parent);
         this.wrapper = new MoSelectableListWrapper<T>(selectableList);
         this.wrapper.sync(this);
@@ -86,10 +87,7 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
         return counterTextView;
     }
 
-    public MoSelectable<T> setCounterTextView(TextView counterTextView) {
-        this.counterTextView = counterTextView;
-        return this;
-    }
+
 
     public String getCounterMessage() {
         return counterMessage;
@@ -341,13 +339,14 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     }
 
 
-    // notifies that the the selected size has been changed
-    // b is whether the newly touched element was selected
-    // or deselcted
+    //
     /**
-     * increments the selected size if b is true (which means
+     *  notifies that the the selected size has been changed
+     *  b is whether the newly touched element was selected
+     *  or deselcted
+     *  increments the selected size if b is true (which means
      *  the element was selected)
-     * or decrements it if it is false
+     *  or decrements it if it is false
      * @param b
      */
     public void notifySizeChange(boolean b){
@@ -365,7 +364,21 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
      * when the user calls on select (selects an item to deselect or select)
      * @param si
      */
-    public void onSelect(T si){
+    public void onSelect(T si,int position){
+        addOrRemoveItem(si);
+        notifySizeChange(si.isSelected());
+        wrapper.notifyItemChanged(position);
+        onSelectListener.onSelect(si);
+    }
+
+    /**
+     * adds it if si is selected
+     * after we call si.onSelect
+     * or removes it if it is not
+     * selected anymore
+     * @param si
+     */
+    public void addOrRemoveItem(T si) {
         if(si.onSelect()){
             // if it is selected, add it to the selected list
             wrapper.add(si);
@@ -373,8 +386,6 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
             // else remove it from the list
             wrapper.remove(si);
         }
-        notifySizeChange(si.isSelected());
-        onSelectListener.onSelect(si);
     }
 
 

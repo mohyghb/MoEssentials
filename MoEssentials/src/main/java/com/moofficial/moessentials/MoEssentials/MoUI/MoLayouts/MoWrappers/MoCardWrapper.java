@@ -79,6 +79,13 @@ public class MoCardWrapper extends MoWrapper{
         return this;
     }
 
+    public MoCardWrapper setElevation(float e){
+        this.cardView.setCardElevation(e);
+        return this;
+    }
+
+
+
 
     @Override
     public View getView() {

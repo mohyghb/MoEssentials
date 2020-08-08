@@ -24,14 +24,14 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
         this.list.getSelectedItems().clear();
         this.list.getSelectedItems().addAll(list.getDataSet());
         this.selectable.setSelectedSize(this.list.getDataSet().size(),update);
-        list.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public void deselectAll(boolean update){
         MoSelectableUtils.turnAllItems(false,this.list.getSelectedItems());
         this.list.getSelectedItems().clear();
         this.selectable.setSelectedSize(0,update);
-        list.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
 
@@ -53,6 +53,14 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
 
     public List<T> getSelectedItems(){
         return this.list.getSelectedItems();
+    }
+
+    public void notifyItemChanged(int position){
+        list.notifyItemChanged(position);
+    }
+
+    public void notifyDataSetChanged(){
+        list.notifyDataSetChanged();
     }
 
 }

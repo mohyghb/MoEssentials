@@ -1,6 +1,9 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable;
 
+import android.transition.ChangeBounds;
+import android.transition.Transition;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
 
@@ -13,6 +16,7 @@ public class MoListViewSync {
 
     public static final int NO_ACTION = -1;
 
+    private ViewGroup parentView;
     private List<MoListViews> views;
     // shared views that are turned on or off by all of the MoListViews
     private List<View> sharedElements = new ArrayList<>();
@@ -20,12 +24,42 @@ public class MoListViewSync {
     // the item on top of the stack is the one active
     private Stack<MoListViews> onHolds = new Stack<>();
     private MoOnEmptyOnHoldsListener onEmptyOnHoldsListener = ()->{};
+    private Transition transitionIn = new ChangeBounds();
+    private Transition transitionOut = new ChangeBounds();
     private boolean putOnHold = false;
 
 
-    public MoListViewSync(MoListViews ... v){
+    public MoListViewSync(ViewGroup parentView,MoListViews ... v){
+        this.parentView = parentView;
         this.views = Arrays.asList(v);
         MoViewUtils.sync(this,this.views);
+    }
+
+    public ViewGroup getParentView() {
+        return parentView;
+    }
+
+    public MoListViewSync setParentView(ViewGroup parentView) {
+        this.parentView = parentView;
+        return this;
+    }
+
+    public Transition getTransitionIn() {
+        return transitionIn;
+    }
+
+    public MoListViewSync setTransitionIn(Transition transitionIn) {
+        this.transitionIn = transitionIn;
+        return this;
+    }
+
+    public Transition getTransitionOut() {
+        return transitionOut;
+    }
+
+    public MoListViewSync setTransitionOut(Transition transitionOut) {
+        this.transitionOut = transitionOut;
+        return this;
     }
 
     public MoOnEmptyOnHoldsListener getOnEmptyOnHoldsListener() {
@@ -47,8 +81,7 @@ public class MoListViewSync {
     }
 
     public MoListViewSync setSharedElements(View ... v){
-        sharedElements.addAll(Arrays.asList(v));
-        return this;
+        return setSharedElements(Arrays.asList(v));
     }
 
     public List<MoListViews> getViews() {
@@ -153,21 +186,26 @@ public class MoListViewSync {
 
     public void goingToDeactivate(MoListViews v){
         if(this.putOnHold){
+            onHolds.pop();
             // release the next one
-
+            releaseNextOnHold();
+            showSharedElementsIf(onHolds.isEmpty());
+        }else{
+            inActions.pop();
+            showSharedElementsIf(inActions.isEmpty());
         }
     }
 
 
     private void hideSharedElementsIf(boolean condition){
         if(condition){
-            MoViewUtils.apply(null,this.sharedElements,View.GONE,MoAnimation.FADE_OUT);
+            MoViewUtils.apply(parentView,this.sharedElements,View.GONE,transitionOut);
         }
     }
 
     private void showSharedElementsIf(boolean condition){
         if(condition){
-            MoViewUtils.apply(null,this.sharedElements,View.VISIBLE,MoAnimation.FADE_IN);
+            MoViewUtils.apply(parentView,this.sharedElements,View.VISIBLE,transitionIn);
         }
     }
 

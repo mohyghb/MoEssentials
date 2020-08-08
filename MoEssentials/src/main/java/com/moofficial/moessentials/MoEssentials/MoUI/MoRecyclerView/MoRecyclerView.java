@@ -95,13 +95,14 @@ public class MoRecyclerView extends MoContext {
      * adapter and makes sure that this view is visible
      * it also builds the recycler view if it is not built
      */
-    public void show() {
+    public MoRecyclerView show() {
         buildIfNotBuilt();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
         if(this.onLayoutChangeListener!=null)
             recyclerView.addOnLayoutChangeListener(this.onLayoutChangeListener);
         applyVisibilityVisible();
+        return this;
     }
 
     /**

@@ -1,6 +1,10 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable;
 
+import android.transition.ChangeBounds;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.View;
+import android.view.ViewGroup;
 
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
@@ -15,19 +19,25 @@ public class MoViewUtils {
      * view
      * @param views
      * @param visibility
-     * @param animation
      */
-    public static void apply(View parent,View[] views, int visibility, int animation){
-        apply(parent,Arrays.asList(views),visibility,animation);
+    public static void apply(View parent,View[] views, int visibility,Transition transition){
+        apply(parent,Arrays.asList(views),visibility,transition);
     }
 
-    public static void apply(View parent,List<View> views, int visibility, int animation){
+    /**
+     * applies the visibility to all of the views
+     * and performs a delayed transition with changing bound
+     * attribute
+     * @param parent
+     * @param views
+     * @param visibility
+     */
+    public static void apply(View parent,List<View> views, int visibility,Transition transition){
         if(views==null)
             return;
-
+        TransitionManager.beginDelayedTransition((ViewGroup) parent,transition);
         for(View v: views){
-            //MoTransitionsUtils.fade((ViewGroup)parent,v,visibility);
-            MoAnimation.animateNoTag(v,visibility,animation);
+            v.setVisibility(visibility);
         }
     }
 
@@ -88,39 +98,6 @@ public class MoViewUtils {
             item.setListViewSync(listSync);
         }
     }
-
-
-//    public static int firstAction(MoListViews[] views){
-//        for(int i = 0;i < views.length; i++ ){
-//            if(views[i].hasAction()){
-//                return i;
-//            }
-//        }
-//        return MoListViewSync.NO_ACTION;
-//    }
-
-
-
-//    public static void sync(MoListViews ... views){
-//        for(int i = 0;i < views.length; i++){
-//            MoListViews v = views[i];
-//            for(int j = 0; j < views.length; j++){
-//                if(i!=j){
-//                    // then we should sync these views together
-//                    v.addSyncAction(views[j]);
-//                }
-//            }
-//        }
-//    }
-//
-//    /**
-//     * syncs the view with other v
-//     * @param view
-//     * @param v
-//     */
-//    public static void sync(MoListViews view, MoListViews ... v){
-//        view.setSyncActions(v);
-//    }
 
 
 }

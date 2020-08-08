@@ -17,9 +17,9 @@ public class MoActivitySettings {
     private float appbarRatio = MO_GOLDEN_RATIO;
 
     // every 8 char, we reduce the base font size by 5, and the char limit is 16
-    private MoTextSettings titleSettings = new MoTextSettings(20,50,5,8,25);
+    private MoTextSettings titleSettings = new MoTextSettings(20,55,3,10,25);
     // every 25 chars, we reduce the base font by 4. and char limit is 50
-    private MoTextSettings subTitleSettings = new MoTextSettings(50,18,4,25,8);
+    private MoTextSettings subTitleSettings = new MoTextSettings(100,18,2,25,8);
 
 
     public float getAppbarRatio() {

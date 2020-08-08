@@ -3,7 +3,9 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete;
 import android.content.Context;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,7 +40,7 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
 
 
 
-    public MoDeletable(Context c, View parent, @NonNull MoListDeletable<T> listDeletable){
+    public MoDeletable(Context c, @NonNull ViewGroup parent, @NonNull MoListDeletable<T> listDeletable){
         super(c,parent,listDeletable);
         this.listAdapter = listDeletable;
         this.listAdapter.setMoDelete(this);
@@ -72,15 +74,17 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         return this;
     }
 
+
+
     @Override
-    public MoDeletable<T> setVisibleAnimation(int a) {
-        super.setVisibleAnimation(a);
+    public MoDeletable<T> setCounterView(int ctv) {
+        super.setCounterView(ctv);
         return this;
     }
 
     @Override
-    public MoDeletable<T> setGoneAnimation(int a) {
-        super.setGoneAnimation(a);
+    public MoDeletable<T> setCounterView(TextView ctv) {
+        super.setCounterView(ctv);
         return this;
     }
 
@@ -90,6 +94,11 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         return this;
     }
 
+    @Override
+    public MoDeletable<T> setCounterView(TextView ctv, String message) {
+        super.setCounterView(ctv, message);
+        return this;
+    }
 
     @Override
     public MoDeletable<T> setCancelButton(int cancelButton) {

@@ -2,6 +2,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +47,13 @@ public abstract class MoActivity extends AppCompatActivity {
      */
     protected abstract View getRootView();
 
+    /**
+     *
+     * @return the group root view of this activity
+     */
+    protected ViewGroup getGroupRootView(){
+        return (ViewGroup) getRootView();
+    }
 
     /**
      * this is called when the activity was successfully created and ready to go

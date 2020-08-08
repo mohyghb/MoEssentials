@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,8 +21,9 @@ public class MoInputBar extends MoConstraint {
 
     private TextView title,description;
     private EditText editText;
-    private MoCardWrapper cardView;
+    private MoCardWrapper cardView,textCardView;
     private ConstraintLayout constraintLayout;
+    private Button positiveButton;
 
 
     public MoInputBar(Context context) {
@@ -52,6 +54,14 @@ public class MoInputBar extends MoConstraint {
         return this.description.getId();
     }
 
+    public int PId(){
+        return this.positiveButton.getId();
+    }
+
+    public int TCVId(){
+        return this.textCardView.getId();
+    }
+
     public MoInputBar setTitle(String s){
         title.setText(s);
         return this;
@@ -79,6 +89,11 @@ public class MoInputBar extends MoConstraint {
 
     public MoInputBar hideDescription(){
         description.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoInputBar showDescription(){
+        description.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -164,6 +179,64 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
+    public TextView getDescription() {
+        return description;
+    }
+
+    public MoInputBar setDescription(TextView description) {
+        this.description = description;
+        return this;
+    }
+
+    public MoInputBar showPositiveButton(){
+        this.positiveButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoInputBar hidePositiveButton(){
+        this.positiveButton.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoInputBar setPositiveButtonText(String t){
+        this.positiveButton.setText(t);
+        return this;
+    }
+
+    public MoInputBar setPositiveButtonText(int t){
+        this.positiveButton.setText(t);
+        return this;
+    }
+
+    public MoInputBar setPositiveClickListener(View.OnClickListener l){
+        this.positiveButton.setOnClickListener(l);
+        return this;
+    }
+
+
+    public Button getPositiveButton() {
+        return positiveButton;
+    }
+
+    public MoInputBar setPositiveButton(Button positiveButton) {
+        this.positiveButton = positiveButton;
+        return this;
+    }
+
+    public MoCardWrapper getTextCardView() {
+        return textCardView;
+    }
+
+    public MoInputBar setTextCardView(MoCardWrapper textCardView) {
+        this.textCardView = textCardView;
+        return this;
+    }
+
+    public MoInputBar clearText(){
+        this.editText.setText("");
+        return this;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.mo_input_bar;
@@ -176,6 +249,8 @@ public class MoInputBar extends MoConstraint {
         title = findViewById(R.id.input_bar_title);
         constraintLayout = findViewById(R.id.input_bar_constraint_layout);
         description = findViewById(R.id.input_bar_description);
+        positiveButton = findViewById(R.id.input_bar_positive_button);
+        textCardView = new MoCardWrapper(findViewById(R.id.input_bar_text_card_view));
     }
 
     @Override

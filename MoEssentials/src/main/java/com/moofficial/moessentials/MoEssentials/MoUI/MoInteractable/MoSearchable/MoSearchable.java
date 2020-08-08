@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -69,12 +70,12 @@ public class MoSearchable extends MoListViews {
 
 
 
-    public MoSearchable(Context c,View parent, @NonNull MoSearchableList searchableList) {
+    public MoSearchable(Context c, ViewGroup parent, @NonNull MoSearchableList searchableList) {
         super(c,parent);
         this.searchableList = searchableList;
     }
 
-    public MoSearchable(Context c,View parent) {
+    public MoSearchable(Context c,ViewGroup parent) {
         super(c,parent);
     }
 

@@ -5,6 +5,7 @@
     <dimen name="mo_app_bar_height">300dp</dimen>
     <dimen name="mo_tool_bar_height">56dp</dimen>
     <item name="mo_fade_init_value" format="float" type="dimen">0.3</item>
+    <dimen name="mo_fade_edge_text_view">100dp</dimen>
 
     <dimen name="card_elevation_search_bar">4dp</dimen>
 

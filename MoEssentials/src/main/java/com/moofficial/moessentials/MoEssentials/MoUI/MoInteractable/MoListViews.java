@@ -1,9 +1,14 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable;
 
 import android.content.Context;
+import android.transition.ChangeBounds;
+import android.transition.Transition;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+
+import androidx.annotation.NonNull;
 
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
@@ -16,7 +21,7 @@ public abstract class MoListViews extends MoContext {
 
 
 
-    protected View parentView;
+    protected ViewGroup parentView;
     // this mo list view action is
     // synced with others
     // so we don't show multiple
@@ -33,19 +38,37 @@ public abstract class MoListViews extends MoContext {
     // performing the actual delete
     protected Button confirmButton;
     protected boolean showOneActionAtTime = true;
+    private Transition transitionIn = new ChangeBounds();
+    private Transition transitionOut = new ChangeBounds();
     private int visible = View.VISIBLE;
     private int invisible = View.GONE;
-    private int visibleAnimation = MoAnimation.FADE_IN;
-    private int goneAnimation = MoAnimation.FADE_OUT;
     protected boolean isInActionMode = false;
     protected boolean isOnHold = false;
 
 
 
 
-    public MoListViews(Context context, View parentView){
+    public MoListViews(Context context, @NonNull ViewGroup parentView){
         super(context);
         this.parentView = parentView;
+    }
+
+    public Transition getTransitionIn() {
+        return transitionIn;
+    }
+
+    public MoListViews setTransitionIn(Transition transitionIn) {
+        this.transitionIn = transitionIn;
+        return this;
+    }
+
+    public Transition getTransitionOut() {
+        return transitionOut;
+    }
+
+    public MoListViews setTransitionOut(Transition transitionOut) {
+        this.transitionOut = transitionOut;
+        return this;
     }
 
     public MoListViewSync getListViewSync() {
@@ -89,29 +112,15 @@ public abstract class MoListViews extends MoContext {
     }
 
 
-    public MoListViews setVisibleAnimation(int a){
-        this.visibleAnimation = a;
-        return this;
-    }
-
-    public MoListViews setGoneAnimation(int a){
-        this.goneAnimation = a;
-        return this;
-    }
-
 
 
 
     public MoListViews setCancelButton(int cancelButton){
-        this.cancelButton = parentView.findViewById(cancelButton);
-        this.cancelButton.setOnClickListener(view -> onCancel());
-        return this;
+        return setCancelButton(parentView.findViewById(cancelButton));
     }
 
     public MoListViews setConfirmButton(int deleteButton){
-        this.confirmButton = parentView.findViewById(deleteButton);
-        this.confirmButton.setOnClickListener(view -> this.onConfirm());
-        return this;
+        return setConfirmButton(parentView.findViewById(deleteButton));
     }
 
 
@@ -129,7 +138,7 @@ public abstract class MoListViews extends MoContext {
         return parentView;
     }
 
-    public MoListViews setParentView(View parentView) {
+    public MoListViews setParentView(ViewGroup parentView) {
         this.parentView = parentView;
         return this;
     }
@@ -148,13 +157,6 @@ public abstract class MoListViews extends MoContext {
         return invisible;
     }
 
-    public int getVisibleAnimation() {
-        return visibleAnimation;
-    }
-
-    public int getGoneAnimation() {
-        return goneAnimation;
-    }
 
     public MoListViews setUnNormalViews(List<View> unNormalViews) {
         this.unNormalViews = unNormalViews;
@@ -184,11 +186,13 @@ public abstract class MoListViews extends MoContext {
 
     public MoListViews setCancelButton(Button cancelButton) {
         this.cancelButton = cancelButton;
+        this.cancelButton.setOnClickListener(view -> onCancel());
         return this;
     }
 
     public MoListViews setConfirmButton(Button confirmButton) {
         this.confirmButton = confirmButton;
+        this.confirmButton.setOnClickListener(view -> this.onConfirm());
         return this;
     }
 
@@ -218,22 +222,34 @@ public abstract class MoListViews extends MoContext {
             goingToActivateIfNotNull();
             isInActionMode = true;
         }
-        MoViewUtils.apply(this.parentView,unNormalViews,visible,visibleAnimation);
-        MoViewUtils.apply(this.parentView,normalViews,invisible,goneAnimation);
+        MoViewUtils.apply(this.parentView,unNormalViews,visible,transitionIn);
+        MoViewUtils.apply(this.parentView,normalViews,invisible,transitionOut);
     }
 
     public void goingToActivateIfNotNull() {
-        if(listViewSync!=null){
+        if(listViewSync!=null && !isInActionMode){
             listViewSync.goingToActivate(this);
         }
     }
 
     public void deactivateSpecialMode(){
         if(!isOnHold){
+            goingToDeactivateIfNotNull();
             isInActionMode = false;
         }
-        MoViewUtils.apply(this.parentView,unNormalViews,invisible,goneAnimation);
-        MoViewUtils.apply(this.parentView,normalViews,visible,visibleAnimation);
+        MoViewUtils.apply(this.parentView,unNormalViews,invisible,transitionOut);
+        MoViewUtils.apply(this.parentView,normalViews,visible,transitionIn);
+    }
+
+    /**
+     * it calls going to deactivate to the list view
+     * sync in case the deactivation was called inside the
+     * on cancel method
+     */
+    public void goingToDeactivateIfNotNull() {
+        if(listViewSync!=null && isInActionMode){
+            listViewSync.goingToDeactivate(this);
+        }
     }
 
 

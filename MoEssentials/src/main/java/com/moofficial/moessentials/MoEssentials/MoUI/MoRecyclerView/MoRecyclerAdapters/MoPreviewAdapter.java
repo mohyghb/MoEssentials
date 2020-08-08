@@ -10,7 +10,7 @@ import java.util.List;
 // the data set
 // IMPORTANT: you need to remove getItemCount and onBindViewHolder methods from your adapters
 //            we can handle it inside this class
-public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> extends RecyclerView.Adapter<T> {
+public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> extends MoRecyclerAdapter<T,I> {
 
     public static final int NORMAL_PREVIEW_SIZE = 10;
 
@@ -18,11 +18,11 @@ public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> exte
     protected boolean canPreview;
     protected boolean previewFromEnd = true;
     protected int previewSize;
-    protected List<I> dataSet;
+
 
 
     public MoPreviewAdapter(List<I> dataSet){
-        this.dataSet = dataSet;
+        super(dataSet);
     }
 
     /**

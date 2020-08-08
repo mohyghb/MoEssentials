@@ -189,9 +189,9 @@ public abstract class MoBasicActivity extends MoActivity {
      * animation
      */
     public void enableAnimations(){
-        MoLinearLayoutUtils.enableChangingAnimation(this.linearNested.getLinearLayout());
-        MoLinearLayoutUtils.enableChangingAnimation(this.linearBottom.getLinearLayout());
-        MoLinearLayoutUtils.enableChangingAnimation(this.toolbar.getLinearLayout().getLinearLayout());
+//        MoLinearLayoutUtils.enableChangingAnimation(this.linearNested.getLinearLayout());
+//        MoLinearLayoutUtils.enableChangingAnimation(this.linearBottom.getLinearLayout());
+//        MoLinearLayoutUtils.enableChangingAnimation(this.toolbar.getLinearLayout().getLinearLayout());
     }
 
     /**
@@ -201,8 +201,8 @@ public abstract class MoBasicActivity extends MoActivity {
      * if it wasn't properly set up
      */
     public void disableToolbarAnimation(){
-        toolbar.getLinearLayout().getLinearLayout().setLayoutTransition(null);
-        toolbar.getToolbar().setLayoutTransition(null);
+//        toolbar.getLinearLayout().getLinearLayout().setLayoutTransition(null);
+//        toolbar.getToolbar().setLayoutTransition(null);
     }
 
 
