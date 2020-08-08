@@ -53,6 +53,7 @@
                 android:requiresFadingEdge="horizontal"
                 android:singleLine="true"
                 android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/menu_app_bar_extra_button"

@@ -19,7 +19,7 @@
             android:id="@+id/input_bar_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="12dp"
+            android:layout_margin="16dp"
             android:orientation="horizontal">
 
 
@@ -28,6 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,21 +40,31 @@
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="14sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/input_bar_title" />
 
-            <androidx.cardview.widget.CardView
+            <View
+                android:id="@+id/input_bar_divider"
+                android:layout_width="@dimen/mo_horizontal_divider_width"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/mo_horizontal_divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_bar_description" />
+
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/input_bar_text_card_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                app:cardCornerRadius="@dimen/mo_style_card_corner"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_bar_description">
+                app:layout_constraintTop_toBottomOf="@id/input_bar_divider">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_bar_edit_text"
@@ -69,14 +80,23 @@
                     android:paddingBottom="8dp"
                     android:singleLine="true" />
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/input_bar_positive_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:insetLeft="6dp"
+                android:insetTop="6dp"
+                android:insetRight="6dp"
+                android:insetBottom="6dp"
+                android:padding="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
                 android:text="@string/done"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"

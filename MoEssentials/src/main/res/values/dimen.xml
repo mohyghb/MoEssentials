@@ -6,12 +6,9 @@
     <dimen name="mo_tool_bar_height">56dp</dimen>
     <item name="mo_fade_init_value" format="float" type="dimen">0.3</item>
     <dimen name="mo_fade_edge_text_view">100dp</dimen>
-
+    <dimen name="mo_horizontal_divider_width">20dp</dimen>
     <dimen name="card_elevation_search_bar">4dp</dimen>
-
-
     <dimen name="first_letter_radius">50dp</dimen>
-
 
 
 
