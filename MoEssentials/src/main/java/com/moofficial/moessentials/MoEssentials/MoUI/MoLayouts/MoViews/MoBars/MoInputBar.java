@@ -1,18 +1,18 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoMarginBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoPaddingBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoEditText.MoEditText;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
@@ -20,10 +20,11 @@ public class MoInputBar extends MoConstraint {
 
 
     private TextView title,description;
-    private EditText editText;
-    private MoCardWrapper cardView,textCardView;
+    private MoEditText editText;
+    private MoCardWrapper cardView;
     private ConstraintLayout constraintLayout;
     private Button positiveButton;
+    private View divider;
 
 
     public MoInputBar(Context context) {
@@ -58,9 +59,8 @@ public class MoInputBar extends MoConstraint {
         return this.positiveButton.getId();
     }
 
-    public int TCVId(){
-        return this.textCardView.getId();
-    }
+
+
 
     public MoInputBar setTitle(String s){
         title.setText(s);
@@ -97,14 +97,33 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
+    public MoInputBar hideDivider(){
+        divider.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoInputBar showDivider(){
+        divider.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    /** this is when we need the 8dp top padding to
+     *  separate the description and edit text
+     *  but we don't want to show a line divider
+     * @return this
+     */
+    public MoInputBar showDividerInvisible(){
+        divider.setVisibility(View.INVISIBLE);
+        return this;
+    }
+
     public MoInputBar setHint(String h){
         this.editText.setHint(h);
         return this;
     }
 
     public MoInputBar setHint(int h){
-        this.editText.setHint(h);
-        return this;
+        return setHint(getContext().getString(h));
     }
 
     public MoInputBar setText(String h){
@@ -122,15 +141,11 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
-    public MoInputBar setError(String message, int drawable){
-        this.editText.setError(message,getContext().getDrawable(drawable));
+    public MoInputBar setError(String message){
+        editText.setError(message);
         return this;
     }
 
-    public MoInputBar setError(String message){
-        this.editText.setError(message);
-        return this;
-    }
 
     public ConstraintLayout getConstraintLayout() {
         return constraintLayout;
@@ -141,14 +156,26 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
+    public MoInputBar setEditText(MoEditText editText) {
+        this.editText = editText;
+        return this;
+    }
 
+    public View getDivider() {
+        return divider;
+    }
+
+    public MoInputBar setDivider(View divider) {
+        this.divider = divider;
+        return this;
+    }
 
     /**
      * returns the text of the edit text
      * @return
      */
     public String getInputText(){
-        return editText.getText().toString();
+        return this.editText.getInputText();
     }
 
 
@@ -161,13 +188,8 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
-    public EditText getEditText() {
+    public MoEditText getEditText() {
         return editText;
-    }
-
-    public MoInputBar setEditText(EditText editText) {
-        this.editText = editText;
-        return this;
     }
 
     public MoCardWrapper getCardView() {
@@ -223,17 +245,10 @@ public class MoInputBar extends MoConstraint {
         return this;
     }
 
-    public MoCardWrapper getTextCardView() {
-        return textCardView;
-    }
 
-    public MoInputBar setTextCardView(MoCardWrapper textCardView) {
-        this.textCardView = textCardView;
-        return this;
-    }
 
     public MoInputBar clearText(){
-        this.editText.setText("");
+        this.editText.clearText();
         return this;
     }
 
@@ -250,11 +265,40 @@ public class MoInputBar extends MoConstraint {
         constraintLayout = findViewById(R.id.input_bar_constraint_layout);
         description = findViewById(R.id.input_bar_description);
         positiveButton = findViewById(R.id.input_bar_positive_button);
-        textCardView = new MoCardWrapper(findViewById(R.id.input_bar_text_card_view));
+        divider = findViewById(R.id.input_bar_divider);
     }
 
     @Override
     public int[] getAttrs() {
         return new int[0];
     }
+
+
+
+
+    // special methods
+
+    /**
+     * this is the special style for when you need an input
+     * bar with no title or description (you can also use MoEdit text for
+     * that use case as well)
+     * @param inputBar
+     */
+    public static void defaultDialogStyleNoTitleDescription(MoInputBar inputBar){
+        // making the card view rec round
+        inputBar.getCardView().makeCardRecRound();
+        // making the edit text background transparent
+        inputBar.getEditText().transparentTextBackground();
+        // making sure there is no margin between
+        inputBar.getConstraintLayout().setLayoutParams(MoMarginBuilder.
+                getCardLayoutParams(0));
+        new MoPaddingBuilder(16)
+                .convertValuesToDp()
+                .apply(inputBar);
+    }
+
+
+
+
+
 }

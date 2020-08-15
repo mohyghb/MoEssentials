@@ -10,6 +10,9 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Objects;
 
+@Deprecated
+// now you should use MoFileManager
+// it is more complete, and gives you more flexibility
 public class MoReadWrite {
 
     private static final HashMap<String,String> files = new HashMap<>();
@@ -20,6 +23,7 @@ public class MoReadWrite {
      * @param text
      * @param context
      */
+    @Deprecated
     public static void saveFile(String file, String text, Context context) {
         try{
             FileOutputStream fos = context.openFileOutput(file, Context.MODE_PRIVATE);
@@ -42,6 +46,7 @@ public class MoReadWrite {
      * @param update whether or not just update the file if the text is different
      *               than it's previous version
      */
+    @Deprecated
     public static void saveFile(String file, String text, Context context,boolean update) {
         if(update){
             if(isDifferent(file,text)){
@@ -52,6 +57,7 @@ public class MoReadWrite {
         }
     }
 
+    @Deprecated
     public static String readFile(String filename, Context context) {
         String text = "";
         try{
@@ -70,6 +76,7 @@ public class MoReadWrite {
         return text;
     }
 
+    @Deprecated
     public static boolean fileExist(String fileName, Context context){
         File file = context.getFileStreamPath(fileName);
         return file.exists();

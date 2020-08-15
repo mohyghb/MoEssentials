@@ -22,12 +22,4 @@ public interface MoSelectableItem {
     boolean isSelected();
 
 
-    /**
-     *
-     * @return that specific item
-     * then it can be casted to other classes
-     */
-    Object getItem();
-
-
 }

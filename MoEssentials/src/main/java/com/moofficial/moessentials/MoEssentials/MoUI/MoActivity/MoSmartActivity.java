@@ -16,13 +16,13 @@ public abstract class MoSmartActivity extends MoOriginalActivity {
     @Override
     public void setTitle(String t) {
         super.setTitle(t);
-      //  activitySettings.getTitleSettings().adjust(title);
+        activitySettings.getTitleSettings().adjustFontSize(title);
     }
 
     @Override
     public void setSubTitle(String t) {
         super.setSubTitle(t);
-        //activitySettings.getSubTitleSettings().adjust(subtitle);
+        activitySettings.getSubTitleSettings().adjustFontSize(subtitle);
     }
 
 

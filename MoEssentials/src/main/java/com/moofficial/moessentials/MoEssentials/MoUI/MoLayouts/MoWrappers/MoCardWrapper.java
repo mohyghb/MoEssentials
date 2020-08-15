@@ -11,26 +11,25 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardRecyclerView;
 import com.moofficial.moessentials.R;
 
-public class MoCardWrapper extends MoWrapper{
+public class MoCardWrapper extends MoWrapper<CardView>{
 
-    private CardView cardView;
+
 
     public MoCardWrapper(CardView c) {
-        super(c.getContext());
-        cardView = c;
+        super(c.getContext(),c);
     }
 
     public CardView getCardView() {
-        return cardView;
+        return wrappedElement;
     }
 
     public MoCardWrapper setCardView(CardView cardView) {
-        this.cardView = cardView;
+        this.wrappedElement = cardView;
         return this;
     }
 
     public MoCardWrapper setBackground(int res){
-        cardView.setBackgroundTintList(ColorStateList.valueOf(
+        wrappedElement.setBackgroundTintList(ColorStateList.valueOf(
                 ContextCompat.getColor(context, res)));
         return this;
     }
@@ -40,47 +39,47 @@ public class MoCardWrapper extends MoWrapper{
     }
 
     public MoCardWrapper makeCardRound(){
-        cardView.setRadius(getDimension(R.dimen.mo_style_card_corner));
+        wrappedElement.setRadius(getDimension(R.dimen.mo_style_card_corner));
         return this;
     }
 
     public MoCardWrapper makeCardRecRound(){
-        cardView.setRadius(getDimension(R.dimen.mo_style_card_corner_small));
+        wrappedElement.setRadius(getDimension(R.dimen.mo_style_card_corner_small));
         return this;
     }
 
     public MoCardWrapper makeCardRectangular(){
-        cardView.setRadius(0f);
+        wrappedElement.setRadius(0f);
         return this;
     }
 
     public MoCardWrapper setRadius(float r){
-        cardView.setRadius(r);
+        wrappedElement.setRadius(r);
         return this;
     }
 
     public MoCardWrapper show(){
-        cardView.setVisibility(View.VISIBLE);
+        wrappedElement.setVisibility(View.VISIBLE);
         return this;
     }
 
     public MoCardWrapper hide(){
-        cardView.setVisibility(View.GONE);
+        wrappedElement.setVisibility(View.GONE);
         return this;
     }
 
     public MoCardWrapper setOnCardClickListener(View.OnClickListener l){
-        cardView.setOnClickListener(l);
+        wrappedElement.setOnClickListener(l);
         return this;
     }
 
     public MoCardWrapper setOnCardLongClickListener(View.OnLongClickListener l){
-        cardView.setOnLongClickListener(l);
+        wrappedElement.setOnLongClickListener(l);
         return this;
     }
 
     public MoCardWrapper setElevation(float e){
-        this.cardView.setCardElevation(e);
+        this.wrappedElement.setCardElevation(e);
         return this;
     }
 
@@ -88,8 +87,8 @@ public class MoCardWrapper extends MoWrapper{
 
 
     @Override
-    public View getView() {
-        return cardView;
+    public CardView getView() {
+        return wrappedElement;
     }
 
 

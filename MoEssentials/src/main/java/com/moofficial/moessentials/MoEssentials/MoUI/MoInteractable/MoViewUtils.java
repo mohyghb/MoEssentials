@@ -35,7 +35,9 @@ public class MoViewUtils {
     public static void apply(View parent,List<View> views, int visibility,Transition transition){
         if(views==null)
             return;
-        TransitionManager.beginDelayedTransition((ViewGroup) parent,transition);
+        if(transition!=null && parent!=null){
+            TransitionManager.beginDelayedTransition((ViewGroup) parent,transition);
+        }
         for(View v: views){
             v.setVisibility(visibility);
         }

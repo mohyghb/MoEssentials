@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoIO;
+package com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO;
 
 public interface MoSwitchSavable extends MoSavable {
 

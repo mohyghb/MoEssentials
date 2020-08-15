@@ -8,14 +8,13 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterVi
 
 import static com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils.addToLinearLayout;
 
-public class MoWrapperLinearLayout extends MoWrapper {
+public class MoWrapperLinearLayout extends MoWrapper<LinearLayout> {
 
-    private LinearLayout linearLayout;
+
 
 
     public MoWrapperLinearLayout(Context c, LinearLayout l){
-        super(c);
-        this.linearLayout = l;
+        super(c,l);
     }
 
 
@@ -39,16 +38,16 @@ public class MoWrapperLinearLayout extends MoWrapper {
     }
 
     public View addView(View v,LinearLayout.LayoutParams lp){
-        addToLinearLayout(linearLayout,v,lp);
+        addToLinearLayout(wrappedElement,v,lp);
         return v;
     }
 
     public LinearLayout getLinearLayout() {
-        return linearLayout;
+        return wrappedElement;
     }
 
     public MoWrapperLinearLayout setLinearLayout(LinearLayout linearLayout) {
-        this.linearLayout = linearLayout;
+        this.wrappedElement = linearLayout;
         return this;
     }
 
@@ -62,7 +61,7 @@ public class MoWrapperLinearLayout extends MoWrapper {
     }
 
     @Override
-    public View getView() {
-        return linearLayout;
+    public LinearLayout getView() {
+        return wrappedElement;
     }
 }

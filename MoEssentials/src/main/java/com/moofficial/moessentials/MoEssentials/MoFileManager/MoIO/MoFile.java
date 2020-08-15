@@ -1,11 +1,14 @@
-package com.moofficial.moessentials.MoEssentials.MoIO;
+package com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO;
+
+import android.animation.ObjectAnimator;
+import android.content.Context;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 
 public class MoFile {
@@ -81,6 +84,11 @@ public class MoFile {
         return true;
     }
 
+    /**
+     *
+     * @param jsonObject
+     * @param length
+     */
     private static void addLengthToJson(JSONObject jsonObject, int length) {
         // saving the length for later on
         // if the length of the json object is greater than zero
@@ -93,6 +101,11 @@ public class MoFile {
         }
     }
 
+    /**
+     *
+     * @param list
+     * @return
+     */
     private static String getData(MoSavable ... list){
         return getData(new ArrayList<>(Arrays.asList(list)));
     }
@@ -124,19 +137,25 @@ public class MoFile {
     }
 
 
-
-
-//    /**
-//     * combination of iterable and objects
-//     * when trying to save a list and couple more objects
-//     * this makes it easier to get the correct data that we want
-//     * @param set
-//     * @param objects
-//     * @return
-//     */
-//    private static String getData(Iterable<?> set, Object ... objects){
-//        return getData(getData(set),getData(objects));
-//    }
+    /**
+     * A helper function designed to load
+     * back classes who were stored as a list
+     * @param context of the app
+     * @param data the data that this list exists in
+     *             (the direct data meaning that only the collection
+     *             should exist inside it and nothing more)
+     * @param collection collection to add all the items
+     * @param listener required to make a new object and load it in
+     *                 inside the developer side and add it to the collection
+     * @param <T> the dynamic type extending MoLoadable
+     */
+    public static <T extends MoLoadable> void setData(Context context,String data,
+                                                      Collection<T> collection,MoOnLoadingBackListener<T> listener){
+        String[] com = loadable(data);
+        for(String d:com){
+            collection.add(listener.getObject(context,d));
+        }
+    }
 
 
     /**

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.moofficial.moessentials.MoEssentials.MoKeyboardUtils.MoKeyboardUtils;
+import com.moofficial.moessentials.MoEssentials.MoUtils.MoKeyboardUtils.MoKeyboardUtils;
 import com.moofficial.moessentials.MoEssentials.MoState.MoOnScrollToPosition;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViews;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchCanceled;

@@ -38,8 +38,39 @@ public class MoSectionViewManager {
         return this;
     }
 
+    public HashMap<Integer, View[]> getMapOfView() {
+        return mapOfView;
+    }
 
+    public MoSectionViewManager setMapOfView(HashMap<Integer, View[]> mapOfView) {
+        this.mapOfView = mapOfView;
+        return this;
+    }
 
+    public Pair<Integer, View[]> getActiveSection() {
+        return activeSection;
+    }
 
+    public MoSectionViewManager setActiveSection(Pair<Integer, View[]> activeSection) {
+        this.activeSection = activeSection;
+        return this;
+    }
 
+    public Transition getTransitionIn() {
+        return transitionIn;
+    }
+
+    public MoSectionViewManager setTransitionIn(Transition transitionIn) {
+        this.transitionIn = transitionIn;
+        return this;
+    }
+
+    public Transition getTransitionOut() {
+        return transitionOut;
+    }
+
+    public MoSectionViewManager setTransitionOut(Transition transitionOut) {
+        this.transitionOut = transitionOut;
+        return this;
+    }
 }

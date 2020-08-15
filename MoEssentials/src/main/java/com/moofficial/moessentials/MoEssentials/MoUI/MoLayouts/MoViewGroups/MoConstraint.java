@@ -13,19 +13,23 @@ import com.moofficial.moessentials.R;
 public abstract class MoConstraint extends ConstraintLayout implements MoViewInterface {
 
     protected TypedArray typedArray;
+    protected Context context;
 
     public MoConstraint(Context context) {
         super(context);
+        this.context = context;
         init(null);
     }
 
     public MoConstraint(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init(attrs);
     }
 
     public MoConstraint(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         init(attrs);
     }
 

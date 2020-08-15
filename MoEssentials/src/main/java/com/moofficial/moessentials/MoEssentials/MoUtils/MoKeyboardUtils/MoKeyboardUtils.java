@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoKeyboardUtils;
+package com.moofficial.moessentials.MoEssentials.MoUtils.MoKeyboardUtils;
 
 import android.app.Activity;
 import android.content.Context;

@@ -10,25 +10,16 @@ import androidx.appcompat.widget.Toolbar;
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
-public class MoWrapperToolbar extends MoWrapper {
+public class MoWrapperToolbar extends MoWrapper<Toolbar> {
 
-    private Toolbar toolbar;
     private MoWrapperLinearLayout linearLayout;
 
     public MoWrapperToolbar(Context c, Toolbar t,LinearLayout linearLayout) {
-        super(c);
-        this.toolbar = t;
+        super(c,t);
         this.linearLayout = new MoWrapperLinearLayout(this.context,linearLayout);
     }
 
-    public Toolbar getToolbar() {
-        return toolbar;
-    }
 
-    public MoWrapperToolbar setToolbar(Toolbar toolbar) {
-        this.toolbar = toolbar;
-        return this;
-    }
 
     public MoWrapperLinearLayout getLinearLayout() {
         return linearLayout;
@@ -54,7 +45,7 @@ public class MoWrapperToolbar extends MoWrapper {
     }
 
     @Override
-    public View getView() {
-        return toolbar;
+    public Toolbar getView() {
+        return wrappedElement;
     }
 }
