@@ -37,6 +37,55 @@ public class MoDate implements MoSavable, MoLoadable {
         return calendar;
     }
 
+    /**
+     * returns the date of this class as a key
+     * to be used inside hash maps or sets
+     * @param separator separating text between the year month and date
+     *                  for example 2020,02,02 the separator is ',' in this
+     *                  case
+     * @return a key generated from the Calendar of this class
+     *  ** NOTE: this key does not consider the HOUR or MINUTE of this
+     *  calendar, so you might have problems if you want those to be considered
+     *  in as well. Use generateKey method for that purpose**
+     */
+    public String getDateAsKey(String separator){
+        return generateKey(separator,Calendar.YEAR,Calendar.MONTH,Calendar.DATE);
+    }
+
+    /**
+     * generates a key for hash map purposes
+     * based on the fields that are passed in
+     * for example passing Calendar.YEAR,Calendar.MONTH,Calendar.HOUR with
+     * separator ',' returns 2020,02,16 if the year is 2020, month is march
+     * and hour is 16 (4 p.m.)
+     * @param separator separator of this key
+     * @param fields fields to be used in creating the key
+     * @return a key based on the fields passed in
+     */
+    public String generateKey(String separator,int ... fields){
+        StringBuilder sb = new StringBuilder();
+        int len = fields.length;
+        for(int i = 0; i < len; i++){
+            int field = fields[i];
+            sb.append(calendar.get(field));
+            if(i != len-1){
+                // if we are not on the last
+                // field, then we want to add in the
+                // separator
+                sb.append(separator);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @return calendar time in milliseconds
+     * passed after 1970
+     */
+    public long getTimeInMillis(){
+        return this.calendar.getTimeInMillis();
+    }
+
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
     }

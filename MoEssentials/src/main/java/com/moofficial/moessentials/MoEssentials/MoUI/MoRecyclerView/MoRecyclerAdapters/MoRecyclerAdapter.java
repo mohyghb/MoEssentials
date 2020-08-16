@@ -23,6 +23,11 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
         return this;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     public RecyclerView.LayoutParams getMatchWrapParams(){
         return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);

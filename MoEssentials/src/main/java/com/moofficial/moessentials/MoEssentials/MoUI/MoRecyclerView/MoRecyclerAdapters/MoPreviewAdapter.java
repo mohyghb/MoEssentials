@@ -89,17 +89,26 @@ public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> exte
 
     @Override
     public void onBindViewHolder(@NonNull T holder, int position) {
-        onBindViewHolderDifferentVersion(holder,getCorrectPosition(position));
+        onBindViewHolderDifferentVersion(holder,getCorrectPosition(position),position);
     }
 
 
     /**
      * same method as onBindViewHolder but we pass the correct position to this
      * method
+     * position in dataSet is used to tell the user
+     * which item inside their data set should they be populating
+     * the view holder with
+     * and the recycler view position is used
+     * when the user wants to call any kind of
+     * notifyItemChanged or any notify methods, they need
+     * the index that is inside the recycler view
+     * not the index that is inside the data set
      * @param holder
-     * @param position
+     * @param positionInDataSet is the position where the data should be
+     * @param recyclerViewPosition where all the notify things happen at
      */
-    protected abstract void onBindViewHolderDifferentVersion(@NonNull T holder, int position);
+    protected abstract void onBindViewHolderDifferentVersion(@NonNull T holder, int positionInDataSet,int recyclerViewPosition);
 
 
     /**
