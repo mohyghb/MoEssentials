@@ -31,9 +31,11 @@ public class MoTime implements MoSavable, MoLoadable {
     private int hour;
     private int minute;
     private int second;
+    private long timeInMillis;
     private HashMap<String,Integer> values = new HashMap<>();
 
-    public MoTime(int year, int month, int day, int hour, int minute, int second) {
+    public MoTime(long timeInMillis,int year, int month, int day, int hour, int minute, int second) {
+        this.timeInMillis = timeInMillis;
         this.year = year;
         this.month = month;
         this.day = day;
@@ -54,6 +56,15 @@ public class MoTime implements MoSavable, MoLoadable {
         values.put(HOUR,this.hour);
         values.put(MINUTE,this.minute);
         values.put(SECOND,this.second);
+    }
+
+    public long getTimeInMillis() {
+        return timeInMillis;
+    }
+
+    public MoTime setTimeInMillis(long timeInMillis) {
+        this.timeInMillis = timeInMillis;
+        return this;
     }
 
     public int getYear() {

@@ -21,5 +21,16 @@ public interface MoSelectableItem {
      */
     boolean isSelected();
 
+    /**
+     * not all the items inside a list
+     * are selectable, on default we assume that
+     * they are selectable, but the developer
+     * can change it based on their need
+     * @return true if the item is selectable
+     */
+    default boolean isSelectable(){
+        return true;
+    }
+
 
 }

@@ -102,7 +102,7 @@ public class MoTimeUtils {
         int days = (int) ((milliseconds/MILLI_IN_DAY)) % 30;
         int month = (int) ((milliseconds/MILLI_IN_MONTH)) % 12;
         int year  = (int) ((milliseconds/MILLI_IN_YEAR));
-        return new MoTime(year,month,days,hours,minutes,seconds);
+        return new MoTime(milliseconds,year,month,days,hours,minutes,seconds);
     }
 
 
@@ -135,8 +135,45 @@ public class MoTimeUtils {
      * @return
      */
     public static MoTime getDifference(Calendar c,Calendar c1){
-        return convertMilliToYMDHM(Math.abs(c.getTimeInMillis() - c1.getTimeInMillis()));
+        return convertMilliToYMDHM(getDifferenceInMillis(c, c1));
     }
 
+    public static long getDifferenceInMillis(Calendar c, Calendar c1) {
+        return Math.abs(c.getTimeInMillis() - c1.getTimeInMillis());
+    }
+
+    /**
+     * returns the absolute difference between c and c1
+     * @param c
+     * @param c1
+     * @return
+     */
+    public static MoTime getDifference(MoDate c,MoDate c1){
+        return getDifference(c.getCalendar(),c1.getCalendar());
+    }
+
+    /**
+     * returns the difference in milliseconds
+     * for two instances of mo date
+     * @param d first date
+     * @param d1 second date
+     * @return
+     */
+    public static long getDifferenceInMillis(MoDate d,MoDate d1){
+        return getDifferenceInMillis(d.getCalendar() ,d1.getCalendar());
+    }
+
+    /**
+     * v
+     * @param limit in milliseconds
+     * @param d first date
+     * @param d1 second date
+     * @return true if the difference between the
+     *         two mo date objects is higher than the
+     *         limit in long
+     */
+    public static boolean isDifferenceMoreThanLimit(long limit,MoDate d,MoDate d1){
+        return getDifferenceInMillis(d,d1)>limit;
+    }
 
 }

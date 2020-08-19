@@ -34,13 +34,13 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     private MoOnSelectListener<T> onSelectListener = selectableItem -> {};
     private MoOnEmptySelectionListener onEmptySelectionListener = ()->{};
     private boolean updateTitleAfter = true;
+    private boolean allItemsAreSelectable = true;
     private String savedTitle = "";
 
 
     public MoSelectable(Context c, ViewGroup parent, MoSelectableList<T> selectableList) {
         super(c,parent);
-        this.wrapper = new MoSelectableListWrapper<T>(selectableList);
-        this.wrapper.sync(this);
+        this.wrapper = new MoSelectableListWrapper<>(selectableList).sync(this);
     }
 
     public MoOnEmptySelectionListener getOnEmptySelectionListener() {
@@ -223,6 +223,16 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
         return this;
     }
 
+    public boolean isAllItemsAreSelectable() {
+        return allItemsAreSelectable;
+    }
+
+    public MoSelectable<T> setAllItemsAreSelectable(boolean allItemsAreSelectable) {
+        this.allItemsAreSelectable = allItemsAreSelectable;
+        wrapper.setAllItemsAreSelectable(allItemsAreSelectable);
+        return this;
+    }
+
     public boolean isUpdateTitleAfter() {
         return updateTitleAfter;
     }
@@ -272,6 +282,11 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     @Override
     public void onConfirm() {
         this.selectFinishedListener.onSelectFinished(wrapper.getSelectedItems());
+    }
+
+    @Override
+    public void onActivateSpecialMode() {
+        wrapper.init();
     }
 
 

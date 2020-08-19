@@ -188,6 +188,7 @@ public abstract class MoBasicActivity extends MoActivity {
      * enables the linear layout to change accordingly with
      * animation
      */
+    @Deprecated
     public void enableAnimations(){
 //        MoLinearLayoutUtils.enableChangingAnimation(this.linearNested.getLinearLayout());
 //        MoLinearLayoutUtils.enableChangingAnimation(this.linearBottom.getLinearLayout());
@@ -200,6 +201,7 @@ public abstract class MoBasicActivity extends MoActivity {
      * the toolbar showed jerking animations
      * if it wasn't properly set up
      */
+    @Deprecated
     public void disableToolbarAnimation(){
 //        toolbar.getLinearLayout().getLinearLayout().setLayoutTransition(null);
 //        toolbar.getToolbar().setLayoutTransition(null);

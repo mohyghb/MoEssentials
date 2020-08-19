@@ -70,9 +70,23 @@ public abstract class MoActivity extends AppCompatActivity {
 
 
 
+    /**
+     *
+     * @return height of the screen in current mode
+     *         in pixels
+     */
+    public int getHeightPixels(){
+        return getResources().getDisplayMetrics().heightPixels;
+    }
 
-    // window soft input changes
-
+    /**
+     *
+     * @return width of the screen in current mode
+     *         in pixels
+     */
+    public int getWidthPixels(){
+        return getResources().getDisplayMetrics().widthPixels;
+    }
 
 
 

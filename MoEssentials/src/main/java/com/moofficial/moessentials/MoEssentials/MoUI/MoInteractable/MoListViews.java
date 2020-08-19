@@ -224,6 +224,7 @@ public abstract class MoListViews extends MoContext {
         }
         MoViewUtils.apply(this.parentView,unNormalViews,visible,transitionIn);
         MoViewUtils.apply(this.parentView,normalViews,invisible,transitionOut);
+        onActivateSpecialMode();
     }
 
     public void goingToActivateIfNotNull() {
@@ -314,6 +315,13 @@ public abstract class MoListViews extends MoContext {
      * an operation that required one
      */
     public abstract void onConfirm();
+
+
+    /**
+     * this is triggered when the user
+     * activates this special mode
+     */
+    public abstract void onActivateSpecialMode();
 
 
 

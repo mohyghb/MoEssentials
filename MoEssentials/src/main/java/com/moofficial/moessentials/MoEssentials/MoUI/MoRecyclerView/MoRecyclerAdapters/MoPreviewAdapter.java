@@ -119,7 +119,7 @@ public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> exte
      */
     @Override
     public long getItemId(int position) {
-        return position;
+        return getCorrectPosition(position);
     }
 
     /**
@@ -130,7 +130,7 @@ public abstract class MoPreviewAdapter<T extends RecyclerView.ViewHolder,I> exte
      */
     @Override
     public int getItemViewType(int position) {
-        return position;
+        return getCorrectPosition(position);
     }
 
 

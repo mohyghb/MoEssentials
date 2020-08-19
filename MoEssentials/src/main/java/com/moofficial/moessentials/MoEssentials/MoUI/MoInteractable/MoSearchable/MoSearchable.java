@@ -458,7 +458,10 @@ public class MoSearchable extends MoListViews {
 
     }
 
+    @Override
+    public void onActivateSpecialMode() {
 
+    }
 
 
     private void performSearch(TextView textView){
