@@ -1,9 +1,11 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
 
@@ -29,6 +31,26 @@ public class MoImageTextLogo extends MoConstraint {
 
     public int TVId(){
         return tv.getId();
+    }
+
+    public MoImageTextLogo filledCircle() {
+        tv.setBackground(MoDrawableUtils.filledCircle(getContext()));
+        return this;
+    }
+
+    public MoImageTextLogo filledRec() {
+        tv.setBackground(MoDrawableUtils.filledRec(getContext()));
+        return this;
+    }
+
+    public MoImageTextLogo filledRoundRec() {
+        tv.setBackground(MoDrawableUtils.filledRoundRec(getContext()));
+        return this;
+    }
+
+    public MoImageTextLogo setLogoDrawable(Drawable d){
+        tv.setBackground(d);
+        return this;
     }
 
     @Override
