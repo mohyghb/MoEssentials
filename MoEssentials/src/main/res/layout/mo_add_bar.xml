@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView
         android:id="@+id/add_card_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/mo_bar_height_default"
         app:cardCornerRadius="@dimen/mo_style_card_corner"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,5 +63,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

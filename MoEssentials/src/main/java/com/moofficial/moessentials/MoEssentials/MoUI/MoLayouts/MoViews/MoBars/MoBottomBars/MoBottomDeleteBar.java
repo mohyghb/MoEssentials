@@ -8,12 +8,13 @@ import android.widget.LinearLayout;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoBottomDeleteBar extends MoConstraint {
 
-    private MoCardWrapper cardView;
+    private MoCardView cardView;
     private LinearLayout linearLayout;
     private Button cancel,delete;
 
@@ -45,11 +46,11 @@ public class MoBottomDeleteBar extends MoConstraint {
         return cardView.getId();
     }
 
-    public MoCardWrapper getCardView() {
+    public MoCardView getCardView() {
         return cardView;
     }
 
-    public MoBottomDeleteBar setCardView(MoCardWrapper cardView) {
+    public MoBottomDeleteBar setCardView(MoCardView cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -91,7 +92,7 @@ public class MoBottomDeleteBar extends MoConstraint {
         cancel = findViewById(R.id.bottom_delete_bar_cancel);
         delete = findViewById(R.id.bottom_delete_bar_delete);
         linearLayout = findViewById(R.id.bottom_delete_bar_linear_layout);
-        cardView = new MoCardWrapper(findViewById(R.id.bottom_delete_bar_card_view));
+        cardView = findViewById(R.id.bottom_delete_bar_card_view);
     }
 
     @Override

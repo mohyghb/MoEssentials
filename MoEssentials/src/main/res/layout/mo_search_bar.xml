@@ -5,17 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView
         android:id="@+id/search_card_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/mo_bar_height_default"
         app:cardCornerRadius="@dimen/mo_style_card_corner"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/search_constraint_layout"
@@ -31,7 +30,7 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="4dp"
-                android:src="@drawable/ic_chevron_left_black_30dp"
+                android:src="@drawable/ic_baseline_chevron_left_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,5 +65,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

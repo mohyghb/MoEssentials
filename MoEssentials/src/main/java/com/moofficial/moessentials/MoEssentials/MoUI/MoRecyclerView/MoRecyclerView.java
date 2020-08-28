@@ -1,20 +1,42 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoGLMBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoLLMBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoSGLMBuilder;
+
+// expands the abilities of the original recycler view
+// to unlock new experiences
+public class MoRecyclerView extends RecyclerView {
 
 
-public class MoRecyclerView extends MoContext {
+    public static final int NO_MAX_VALUE = -3;
 
+    /**
+     * showing different layout managers
+     * based on the type that the developer
+     * chooses
+     * LinearLayoutManager,GridLayoutManager,StaggeredLayoutManager
+     */
+    @IntDef({LINEAR_LAYOUT_MANAGER,GRID_LAYOUT_MANAGER,STAGGERED_GRID_LAYOUT_MANAGER})
+    public @interface LayoutManagerType {}
+
+    public static final int LINEAR_LAYOUT_MANAGER = 0;
+    public static final int GRID_LAYOUT_MANAGER = 1;
+    public static final int STAGGERED_GRID_LAYOUT_MANAGER = 2;
 
     public static final int VERTICAL = LinearLayoutManager.VERTICAL;
     public static final int HORIZONTAL = LinearLayoutManager.HORIZONTAL;
@@ -25,220 +47,269 @@ public class MoRecyclerView extends MoContext {
 
     public static final int DEFAULT_GRID_COUNT = 2;
     public static final boolean DEFAULT_REVERSE_LAYOUT = false;
+    public static final boolean DEFAULT_HAS_FIXED_SIZE = false;
+    public static final boolean DEFAULT_STACK_FROM_END = false;
 
 
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private int orientation = LinearLayoutManager.VERTICAL;
-    private int gridCount = DEFAULT_GRID_COUNT;
+
+
+    private int maxHeight = NO_MAX_VALUE;
+    private int maxWidth = NO_MAX_VALUE;
+    @Orientation private int orientation = RecyclerView.VERTICAL;
+    private int spanCount = DEFAULT_GRID_COUNT;
     private boolean reverseLayout = DEFAULT_REVERSE_LAYOUT;
-    private RecyclerView.LayoutManager layoutManager;
-    private View.OnLayoutChangeListener onLayoutChangeListener;
-    private boolean built = false;
+    private boolean stackFromEnd = DEFAULT_STACK_FROM_END;
+    @LayoutManagerType private int layoutManagerType = LINEAR_LAYOUT_MANAGER;
 
 
-    @SuppressWarnings("rawtypes")
-    public MoRecyclerView(Context c,View view, int recyclerViewResources, RecyclerView.Adapter adapter){
-        this(c,view.findViewById(recyclerViewResources),adapter);
+    public MoRecyclerView(@NonNull Context context) {
+        super(context);
     }
 
-
-    @SuppressWarnings("rawtypes")
-    public MoRecyclerView(Context c,RecyclerView r, RecyclerView.Adapter adapter){
-        super(c);
-        this.recyclerView = r;
-        this.mAdapter = adapter;
+    public MoRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    @SuppressLint("WrongConstant")
-    public MoRecyclerView build(){
-        this.layoutManager= new LinearLayoutManager(context,orientation, reverseLayout);
-        this.built = true;
+    public MoRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    public MoRecyclerView setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
+        return this;
+    }
+
+    public int getMaxWidth() {
+        return maxWidth;
+    }
+
+    public MoRecyclerView setMaxWidth(int maxWidth) {
+        this.maxWidth = maxWidth;
+        return this;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public MoRecyclerView setOrientation(int orientation) {
+        this.orientation = orientation;
+        return this;
+    }
+
+    public int getSpanCount() {
+        return spanCount;
+    }
+
+    public MoRecyclerView setSpanCount(int spanCount) {
+        this.spanCount = spanCount;
+        return this;
+    }
+
+    public boolean isReverseLayout() {
+        return reverseLayout;
+    }
+
+    public MoRecyclerView setReverseLayout(boolean reverseLayout) {
+        this.reverseLayout = reverseLayout;
         return this;
     }
 
 
-    public MoRecyclerView setOrientation(int or){
-        this.orientation = or;
+    public int getLayoutManagerType() {
+        return layoutManagerType;
+    }
+
+    public MoRecyclerView setLayoutManagerType(int layoutManagerType) {
+        this.layoutManagerType = layoutManagerType;
         return this;
     }
 
-    public MoRecyclerView setLayoutManager(RecyclerView.LayoutManager layoutManager){
-        this.layoutManager = layoutManager;
+    public boolean isStackFromEnd() {
+        return stackFromEnd;
+    }
+
+    public MoRecyclerView setStackFromEnd(boolean stackFromEnd) {
+        this.stackFromEnd = stackFromEnd;
         return this;
     }
 
-    public MoRecyclerView setGridCount(int gc){
-        this.gridCount = gc;
-        return this;
-    }
-
-    public MoRecyclerView setReverseLayout(boolean b){
-        this.reverseLayout = b;
-        if(this.layoutManager!=null){
-            ((LinearLayoutManager) this.layoutManager).setReverseLayout(this.reverseLayout);
+    @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        if(hasMax(maxHeight)){
+            heightSpec = MeasureSpec.makeMeasureSpec(maxHeight, MeasureSpec.AT_MOST);
         }
-        return this;
+        if(hasMax(maxWidth)){
+            widthSpec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST);
+        }
+        super.onMeasure(widthSpec, heightSpec);
     }
 
-
-    public MoRecyclerView setOnLayoutChangeListener(View.OnLayoutChangeListener l){
-        this.onLayoutChangeListener = l;
-        return this;
+    /**
+     * returns true if the value passed
+     * has a maximum inside our class
+     * @param val dimension to be considered to have max value
+     * @return true if there is a max value for that respective dimension
+     */
+    private boolean hasMax(int val) {
+        return val != NO_MAX_VALUE;
     }
-
 
 
     /**
-     * shows the recycler view by setting the layout manager and
-     * adapter and makes sure that this view is visible
-     * it also builds the recycler view if it is not built
+     * init the layout manager based
+     * on the specifications that were
+     * either provided or set by default
+     * @return this
      */
     public MoRecyclerView show() {
-        buildIfNotBuilt();
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
-        if(this.onLayoutChangeListener!=null)
-            recyclerView.addOnLayoutChangeListener(this.onLayoutChangeListener);
-        applyVisibilityVisible();
+        initLayoutManager();
         return this;
     }
 
     /**
-     * builds the class if it is not built already
+     * sets the layout manager
+     * based on the specifications that are provided
+     * and the type of layout manager
      */
-    private void buildIfNotBuilt() {
-        if(!built){
-            build();
+    @SuppressLint("SwitchIntDef")
+    private void initLayoutManager() {
+        LayoutManager layoutManager;
+        switch (this.layoutManagerType) {
+            case STAGGERED_GRID_LAYOUT_MANAGER:
+                layoutManager = new MoSGLMBuilder(getContext())
+                        .setOrientation(orientation)
+                        .setSpanCount(spanCount)
+                        .build();
+                break;
+            case GRID_LAYOUT_MANAGER:
+                layoutManager = new MoGLMBuilder(getContext())
+                        .setSpanCount(spanCount)
+                        .build();
+                break;
+            default:
+                layoutManager = new MoLLMBuilder(getContext())
+                        .setOrientation(orientation)
+                        .setReverseLayout(reverseLayout)
+                        .setStackFromEnd(stackFromEnd)
+                        .build();
+                break;
         }
+        setLayoutManager(layoutManager);
     }
 
     /**
-     * scroll to the position if position is less than
-     * the size of the array adapter data set
-     * @param position
+     * changes the type of layout manager
+     * and init the layout manager
+     * and sets it to the parent recycler view
+     * @param type type of layout manager
      */
-    public void scrollTo(int position){
-        if(position < mAdapter.getItemCount()) {
-            recyclerView.scrollToPosition(position);
+    public void switchLayoutManager(@LayoutManagerType int type){
+        setLayoutManagerType(type);
+        initLayoutManager();
+    }
+
+
+//    public Bundle saveState(String key,Bundle inState){
+//        Parcelable p = getLayoutManager().onSaveInstanceState();
+//        inState.putParcelable(key,p);
+//        return inState;
+//    }
+//
+//    public void loadState(String key,Bundle inState){
+//        if(getLayoutManager()==null){
+//            initLayoutManager();
+//        }
+//        getLayoutManager().onRestoreInstanceState(inState.getParcelable(key));
+//
+//    }
+
+    @SuppressWarnings("rawtypes")
+    public static class Builder extends MoContext {
+
+        private RecyclerView.Adapter adapter;
+        @Orientation
+        private int orientation = RecyclerView.VERTICAL;
+        private int gridCount = DEFAULT_GRID_COUNT;
+        private boolean reverseLayout = DEFAULT_REVERSE_LAYOUT;
+        private boolean hasFixedSize = DEFAULT_HAS_FIXED_SIZE;
+        private RecyclerView.LayoutManager layoutManager;
+        private View.OnLayoutChangeListener onLayoutChangeListener;
+        private int maxHeight = NO_MAX_VALUE,maxWidth = NO_MAX_VALUE;
+        private int layoutManagerType = LINEAR_LAYOUT_MANAGER;
+
+        public Builder(Context c){
+            super(c);
         }
-    }
 
-
-    // we only smooth scroll if the position is less than the size of
-    // the array adapter
-    public void smoothScrollTo(int position){
-        if(position < mAdapter.getItemCount()){
-            Handler handler = new Handler();
-            handler.postDelayed(() -> recyclerView.smoothScrollToPosition(position),100);
+        public Builder setAdapter(Adapter mAdapter) {
+            this.adapter = mAdapter;
+            return this;
         }
-    }
 
-    /**
-     *
-     */
-    public void scrollToLastItem(){
-        recyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
-    }
-
-    /**
-     * only notifies item added at last
-     * position if the length is higher than 0
-     */
-    public void notifyItemAddedLastPosition(){
-        if(mAdapter.getItemCount()>0){
-            mAdapter.notifyItemInserted(bottomPosition());
+        public Builder setOrientation(@Orientation int orientation) {
+            this.orientation = orientation;
+            return this;
         }
-    }
 
-
-    public RecyclerView getRecyclerView(){
-        return this.recyclerView;
-    }
-
-    public int bottomPosition(){
-        return mAdapter.getItemCount()-1;
-    }
-
-
-
-
-    public void notifyDataSetChanged() {
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void notifyLastItemChanged(){
-        if(mAdapter.getItemCount()>0)
-            mAdapter.notifyItemChanged(bottomPosition());
-    }
-
-    public void setAdapter(RecyclerView.Adapter adapter){
-        this.mAdapter = adapter;
-    }
-
-
-
-    @SuppressLint("WrongConstant")
-    public void switchViewMode(boolean showInGrid, RecyclerView.Adapter adapter){
-        if(showInGrid){
-            // we want grid view
-            layoutManager = new GridLayoutManager(context, gridCount);
-        }else{
-            // we want list view
-            layoutManager = new LinearLayoutManager(context,orientation, reverseLayout);
+        public Builder setGridCount(int gridCount) {
+            this.gridCount = gridCount;
+            return this;
         }
-        recyclerView.setLayoutManager(layoutManager);
-        mAdapter = adapter;
-        recyclerView.setAdapter(mAdapter);
-    }
 
-
-
-    /**
-     * notifies that an item was added
-     */
-    public void notifyLastItemInserted(){
-        if(mAdapter.getItemCount()>0){
-            mAdapter.notifyItemInserted(bottomPosition());
+        public Builder setReverseLayout(boolean reverseLayout) {
+            this.reverseLayout = reverseLayout;
+            return this;
         }
+
+        public Builder setHasFixedSize(boolean hasFixedSize) {
+            this.hasFixedSize = hasFixedSize;
+            return this;
+        }
+
+        public Builder setLayoutManager(LayoutManager layoutManager) {
+            this.layoutManager = layoutManager;
+            return this;
+        }
+
+        public Builder setOnLayoutChangeListener(OnLayoutChangeListener onLayoutChangeListener) {
+            this.onLayoutChangeListener = onLayoutChangeListener;
+            return this;
+        }
+
+        public Builder setMaxHeight(int maxHeight) {
+            this.maxHeight = maxHeight;
+            return this;
+        }
+
+        public Builder setMaxWidth(int maxWidth) {
+            this.maxWidth = maxWidth;
+            return this;
+        }
+
+        public MoRecyclerView build(){
+            MoRecyclerView r = new MoRecyclerView(this.context);
+            r.setAdapter(adapter);
+           // r.setLayoutManager();
+            return r;
+        }
+
+        /**
+         * applies all the fields inside here to
+         * the mo recycler view that is passed to us
+         * @param r recycler view to apply the fields to
+         * @return mo recycler view with the changes applied
+         */
+        public MoRecyclerView apply(MoRecyclerView r){
+            r.setAdapter(this.adapter);
+            return r;
+        }
+
     }
-
-
-    /**
-     * makes the recycler view gone
-     */
-    public void applyVisibilityGone(){
-        changeVisibility(View.GONE);
-    }
-
-    /**
-     * makes the recycler view visible
-     */
-    public void applyVisibilityVisible(){
-        changeVisibility(View.VISIBLE);
-    }
-
-    /**
-     * applies visibility v to the recycler view
-     * @param v
-     */
-    private void changeVisibility(int v){
-        this.recyclerView.setVisibility(v);
-    }
-
-
-    /**
-     *
-     * @param direction * -1 = up
-     *                     0 = up or down
-     *                     1 = down
-     * @return true if the recycler view can scroll in [direction]
-     */
-    public boolean canScrollVertically(int direction){
-        return this.recyclerView.canScrollVertically(direction);
-    }
-
-
 
 }

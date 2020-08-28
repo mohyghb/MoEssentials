@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView
         android:id="@+id/input_bar_card_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -81,5 +81,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

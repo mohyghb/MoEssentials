@@ -3,8 +3,6 @@ package com.moofficial.moessentials.MoEssentials.MoFileManager;
 import android.content.Context;
 import android.util.Log;
 
-import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
-
 import java.io.File;
 
 // a class to handle all the directory stuff
@@ -25,14 +23,24 @@ public class MoDir {
      */
     public static File getInternalDir(Context context,String dirName){
         File directory = context.getDir(dirName, Context.MODE_PRIVATE);
+        return mkDir(directory);
+    }
+
+    /**
+     * creates the directory if
+     * it does not exist or prompts an error
+     * log that the directory could not be made
+     * @param directory directory to be made
+     */
+    public static File mkDir(File directory) {
         if(!directory.exists() && !directory.mkdirs()){
-            Log.e("MoDir","directory "+  dirName + "could not be made");
+            Log.e("MoDir","directory "+  directory.getName() + "could not be made");
         }
         return directory;
     }
 
     /**
-     * @param dirName directory name
+     * @param dirName directory name if null we use the base dir
      * @param fileName file name
      * @param context of the app
      * @return the file that is in directory dirName
@@ -40,5 +48,25 @@ public class MoDir {
     public static File getInternalFile(Context context,String dirName,String fileName){
         return new File(getInternalDir(context,dirName == null?BASE_DIR:dirName),fileName);
     }
+
+    /**
+     * returns the cache directory of the app
+     * @param context of the app
+     * @return the cache dir file
+     */
+    public static File getCacheDir(Context context){
+        return context.getCacheDir();
+    }
+
+    /**
+     * returns the cache directory of the app
+     * @param context of the app
+     * @return the cache dir file
+     */
+    public static File getCacheDir(Context context,String dirName){
+        return mkDir(new File(getCacheDir(context),dirName));
+    }
+
+
 
 }

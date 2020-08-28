@@ -9,12 +9,13 @@ import android.widget.LinearLayout;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoOneButtonLayout extends MoConstraint {
 
-    MoCardWrapper cardView;
+    MoCardView cardView;
     Button button;
 
 
@@ -40,11 +41,11 @@ public class MoOneButtonLayout extends MoConstraint {
         return this;
     }
 
-    public MoCardWrapper getCardView() {
+    public MoCardView getCardView() {
         return cardView;
     }
 
-    public MoOneButtonLayout setCardView(MoCardWrapper cardView) {
+    public MoOneButtonLayout setCardView(MoCardView cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -65,7 +66,7 @@ public class MoOneButtonLayout extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = new MoCardWrapper(findViewById(R.id.one_button_card_view));
+        cardView = findViewById(R.id.one_button_card_view);
         button = findViewById(R.id.one_button_button);
     }
 

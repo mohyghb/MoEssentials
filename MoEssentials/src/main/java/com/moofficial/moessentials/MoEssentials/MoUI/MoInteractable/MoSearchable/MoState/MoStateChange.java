@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoState;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState;
 
 public interface MoStateChange {
 
@@ -7,7 +7,7 @@ public interface MoStateChange {
      * that it has been changed
      * @param position of the item that was changed
      */
-    void notifyItemChanged(int position);
+    void notifyItemChanged(int position,Object payload);
 
 
     void notifyDataSetChanged();

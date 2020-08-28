@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import androidx.cardview.widget.CardView;
+
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
 
 import java.util.Arrays;
@@ -98,6 +100,21 @@ public class MoViewUtils {
     public static void sync(MoListViewSync listSync, List<MoListViews> listViews){
         for(MoListViews item: listViews){
             item.setListViewSync(listSync);
+        }
+    }
+
+    /**
+     * applies the color to the view
+     * based on what type of view v is,
+     * we use different methods
+     * @param v view to apply the color to
+     * @param color background color to apply to v
+     */
+    public static void applyColor(View v, int color) {
+        if(v instanceof CardView){
+            ((CardView) v).setCardBackgroundColor(color);
+        }else{
+            v.setBackgroundColor(color);
         }
     }
 

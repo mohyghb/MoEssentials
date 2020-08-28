@@ -3,9 +3,12 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectabl
 import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.ColorRes;
+import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoViewUtils;
 import com.moofficial.moessentials.R;
 
 import java.util.ArrayList;
@@ -66,32 +69,81 @@ public class MoSelectableUtils {
 //    }
 
     /**
-     *
-     * @param c
-     * @param v
-     * @param selectableItem
+     * sets the background of v
+     * to 100 alpha of color accent if it is selected
+     * or to transparent if it is not selected
+     * @param c context
+     * @param v cover view to show the selected background
+     * @param selectableItem selectable item
      */
     public static void applySelectedColor(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem, R.color.colorAccent,R.color.transparent);
+        applySelectedColor(c,v,selectableItem,R.color.colorAccent,100,R.color.transparent,0);
     }
 
     /**
+     * sets the background of v
+     * to 100 alpha of color primary if it is selected
+     * or to transparent if it is not selected
+     * @param c context
+     * @param v cover view to show the selected background
+     * @param selectableItem selectable item
+     */
+    public static void applySelectedColorUsePrimary(Context c, View v, MoSelectableItem selectableItem){
+        applySelectedColor(c,v,selectableItem,R.color.colorPrimary,100,R.color.transparent,0);
+    }
+
+
+    /**
+     * sets the background of v
+     * to 100 alpha of color primary dark if it is selected
+     * or to transparent if it is not selected
+     * @param c context
+     * @param v cover view to show the selected background
+     * @param selectableItem selectable item
+     */
+    public static void applySelectedColorUseDarkPrimary(Context c, View v, MoSelectableItem selectableItem){
+        applySelectedColor(c,v,selectableItem,R.color.colorPrimaryDark,100,R.color.transparent,0);
+    }
+
+
+    /**
+     * @param c context of app
+     * @param v view to apply the color to
+     * @param item selectable item
+     * @param s selected color's id
+     * @param a selected color's alpha
+     * @param ns not selected color id
+     * @param na not selected color's alpha
      * applies the selected color to a view
      * indicating that the view is selected
      * to be deleted or applies non-selected color
      * to that view if the selectable item is not
      * selected
-     * @param c
-     * @param v
-     * @param selectableItem
-     * @param selectedColorId
-     * @param notSelectedColorId
      */
-    public static void applySelectedColor(Context c,View v, MoSelectableItem selectableItem,int selectedColorId,int notSelectedColorId){
-        if(selectableItem.isSelected()){
-            v.setBackgroundColor(c.getColor(selectedColorId));
+    public static void applySelectedColor(Context c, View v, MoSelectableItem item,
+                                          @ColorRes int s, int a, @ColorRes int ns, int na){
+        applySelectedColor(v,item,c.getColor(s),a,c.getColor(ns),na);
+    }
+
+    /**
+     * @param v view to apply the color to
+     * @param item selectable item
+     * @param s selected color's id
+     * @param a selected color's alpha
+     * @param ns not selected color id
+     * @param na not selected color's alpha
+     * applies the selected color to a view
+     * indicating that the view is selected
+     * to be deleted or applies non-selected color
+     * to that view if the selectable item is not
+     * selected
+     */
+    public static void applySelectedColor(View v, MoSelectableItem item,
+                                          int s, int a, int ns, int na){
+        if(item.isSelected()) {
+            MoViewUtils.applyColor(v,ColorUtils.setAlphaComponent(s,a));
         }else{
-            v.setBackgroundColor(c.getColor(notSelectedColorId));
+            MoViewUtils.applyColor(v,ColorUtils.setAlphaComponent(ns,na));
         }
     }
 

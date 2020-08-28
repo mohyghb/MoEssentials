@@ -14,7 +14,7 @@ import com.moofficial.moessentials.R;
 
 public class MoButton extends MoConstraint {
 
-    MoCardWrapper cardView;
+    MoCardView cardView;
     TextView title,description;
     ImageView icon;
 
@@ -31,12 +31,12 @@ public class MoButton extends MoConstraint {
     }
 
     public MoButton setOnButtonClickListener(View.OnClickListener l){
-        cardView.setOnCardClickListener(l);
+        cardView.setOnClickListener(l);
         return this;
     }
 
     public MoButton setOnButtonLongClickListener(View.OnLongClickListener l){
-        cardView.setOnCardLongClickListener(l);
+        cardView.setOnLongClickListener(l);
         return this;
     }
 
@@ -83,6 +83,42 @@ public class MoButton extends MoConstraint {
         return this;
     }
 
+    public MoCardView getCardView() {
+        return cardView;
+    }
+
+    public MoButton setCardView(MoCardView cardView) {
+        this.cardView = cardView;
+        return this;
+    }
+
+    public TextView getTitle() {
+        return title;
+    }
+
+    public MoButton setTitle(TextView title) {
+        this.title = title;
+        return this;
+    }
+
+    public TextView getDescription() {
+        return description;
+    }
+
+    public MoButton setDescription(TextView description) {
+        this.description = description;
+        return this;
+    }
+
+    public ImageView getIcon() {
+        return icon;
+    }
+
+    public MoButton setIcon(ImageView icon) {
+        this.icon = icon;
+        return this;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.mo_button;
@@ -90,7 +126,7 @@ public class MoButton extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = new MoCardWrapper(findViewById(R.id.mo_button_card_view));
+        cardView = findViewById(R.id.mo_button_card_view);
         title = findViewById(R.id.mo_button_title);
         description = findViewById(R.id.mo_button_description);
         icon = findViewById(R.id.mo_button_icon);

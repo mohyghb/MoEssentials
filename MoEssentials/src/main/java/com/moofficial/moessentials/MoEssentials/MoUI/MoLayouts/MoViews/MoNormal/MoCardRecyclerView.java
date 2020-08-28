@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
 import com.moofficial.moessentials.R;
 
 public class MoCardRecyclerView extends MoConstraint {
 
-    private RecyclerView recyclerView;
-    private MoCardWrapper cardView;
+    private MoRecyclerView recyclerView;
+    private MoCardView cardView;
 
     public MoCardRecyclerView(Context context) {
         super(context);
@@ -36,20 +37,20 @@ public class MoCardRecyclerView extends MoConstraint {
     }
 
 
-    public RecyclerView getRecyclerView() {
+    public MoRecyclerView getRecyclerView() {
         return recyclerView;
     }
 
-    public MoCardRecyclerView setRecyclerView(RecyclerView recyclerView) {
+    public MoCardRecyclerView setRecyclerView(MoRecyclerView recyclerView) {
         this.recyclerView = recyclerView;
         return this;
     }
 
-    public MoCardWrapper getCardView() {
+    public MoCardView getCardView() {
         return cardView;
     }
 
-    public MoCardRecyclerView setCardView(MoCardWrapper cardView) {
+    public MoCardRecyclerView setCardView(MoCardView cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -77,7 +78,7 @@ public class MoCardRecyclerView extends MoConstraint {
     @Override
     public void initViews() {
         recyclerView = findViewById(R.id.mo_card_recyclerview_recycler);
-        cardView = new MoCardWrapper(findViewById(R.id.mo_card_recyclerview_card));
+        cardView = findViewById(R.id.mo_card_recyclerview_card);
         makeCardRound();
     }
 

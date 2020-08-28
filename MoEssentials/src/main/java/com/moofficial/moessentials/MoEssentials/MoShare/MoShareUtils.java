@@ -1,10 +1,11 @@
-package com.moofficial.moessentials.MoEssentials.MoConnections;
+package com.moofficial.moessentials.MoEssentials.MoShare;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MoShareUtils {
 
@@ -62,6 +63,37 @@ public class MoShareUtils {
         sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uri);
         sendIntent.setType(type);
         createChooserActivity(c,sendIntent,shareMessage);
+    }
+
+    /**
+     *
+     * @param c context
+     * @param list to be shared
+     * @param haveLineBreaks whether we add line break for every item inside
+     *                       the list or not
+     */
+    public static void share(Context c, List<? extends MoTextShareable> list,boolean haveLineBreaks) {
+        // share it
+        new MoShare().setText(appendShareableList(list, haveLineBreaks)).shareText(c);
+    }
+
+    /**
+     * returns a string of combining all the
+     * mo shareable items inside the list
+     * @param list of mo shareable item
+     * @param haveLineBreaks whether we add line break for every item inside
+     *                       the list or not
+     * @return all of the shareable text inside a string
+     */
+    public static String appendShareableList(List<? extends MoTextShareable> list, boolean haveLineBreaks) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(MoTextShareable ts : list){
+            stringBuilder.append(ts.getTextToShare());
+            if(haveLineBreaks){
+                stringBuilder.append("\n");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     /**

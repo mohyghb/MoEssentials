@@ -13,7 +13,7 @@ import com.moofficial.moessentials.R;
 
 public class MoLoadingCard extends MoConstraint {
 
-    MoCardWrapper cardView;
+    MoCardView cardView;
     TextView title,description;
     ProgressBar progressBar;
 
@@ -70,11 +70,11 @@ public class MoLoadingCard extends MoConstraint {
         return progressBar.getId();
     }
 
-    public MoCardWrapper getCardView() {
+    public MoCardView getCardView() {
         return cardView;
     }
 
-    public MoLoadingCard setCardView(MoCardWrapper cardView) {
+    public MoLoadingCard setCardView(MoCardView cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -113,7 +113,7 @@ public class MoLoadingCard extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = new MoCardWrapper(findViewById(R.id.loading_card_card_view));
+        cardView = findViewById(R.id.loading_card_card_view);
         title = findViewById(R.id.loading_card_title);
         description = findViewById(R.id.loading_card_description);
         progressBar = findViewById(R.id.loading_card_progressBar);

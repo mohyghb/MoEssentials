@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import androidx.cardview.widget.CardView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
@@ -15,7 +16,7 @@ public class MoSearchBar extends MoConstraint {
 
     private EditText editText;
     private ImageButton leftButton, rightButton;
-    private MoCardWrapper materialCardView;
+    private MoCardView cardView;
 
     public MoSearchBar(Context context) {super(context);}
 
@@ -44,7 +45,7 @@ public class MoSearchBar extends MoConstraint {
 
     // card view id
     public int CVId(){
-        return materialCardView.getId();
+        return cardView.getId();
     }
 
     public EditText getEditText() {
@@ -74,15 +75,6 @@ public class MoSearchBar extends MoConstraint {
         return this;
     }
 
-    public MoCardWrapper getMaterialCardView() {
-        return materialCardView;
-    }
-
-    public MoSearchBar setMaterialCardView(MoCardWrapper materialCardView) {
-        this.materialCardView = materialCardView;
-        return this;
-    }
-
     public MoSearchBar setSearchHint(String s){
         this.editText.setHint(s);
         return this;
@@ -90,6 +82,15 @@ public class MoSearchBar extends MoConstraint {
 
     public MoSearchBar setSearchHint(int s){
         this.editText.setHint(s);
+        return this;
+    }
+
+    public MoCardView getCardView() {
+        return cardView;
+    }
+
+    public MoSearchBar setCardView(MoCardView cardView) {
+        this.cardView = cardView;
         return this;
     }
 
@@ -103,7 +104,7 @@ public class MoSearchBar extends MoConstraint {
         editText = findViewById(R.id.search_edit_text);
         leftButton = findViewById(R.id.close_search_bar);
         rightButton = findViewById(R.id.clear_search_bar);
-        materialCardView = new MoCardWrapper(findViewById(R.id.search_card_view));
+        cardView = findViewById(R.id.search_card_view);
     }
 
     @Override

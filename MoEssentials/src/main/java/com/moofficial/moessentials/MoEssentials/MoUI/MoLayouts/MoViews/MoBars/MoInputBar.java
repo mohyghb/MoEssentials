@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoMarginBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoPaddingBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoEditText.MoEditText;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
@@ -21,7 +22,7 @@ public class MoInputBar extends MoConstraint {
 
     private TextView title,description;
     private MoEditText editText;
-    private MoCardWrapper cardView;
+    private MoCardView cardView;
     private ConstraintLayout constraintLayout;
     private Button positiveButton;
     private View divider;
@@ -192,11 +193,11 @@ public class MoInputBar extends MoConstraint {
         return editText;
     }
 
-    public MoCardWrapper getCardView() {
+    public MoCardView getCardView() {
         return cardView;
     }
 
-    public MoInputBar setCardView(MoCardWrapper cardView) {
+    public MoInputBar setCardView(MoCardView cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -260,7 +261,7 @@ public class MoInputBar extends MoConstraint {
     @Override
     public void initViews() {
         editText = findViewById(R.id.input_bar_edit_text);
-        cardView = new MoCardWrapper(findViewById(R.id.input_bar_card_view));
+        cardView = findViewById(R.id.input_bar_card_view);
         title = findViewById(R.id.input_bar_title);
         constraintLayout = findViewById(R.id.input_bar_constraint_layout);
         description = findViewById(R.id.input_bar_description);

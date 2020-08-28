@@ -17,5 +17,4 @@ public class MoOutlineEditText extends MoEditText {
     }
 
 
-
 }

@@ -89,8 +89,11 @@ public class MoSearchableUtils {
 
 
     /**
-     *
-     *
+     * @param criteria to consider when trying to judge whether
+     *                 the item should be considered inside the search
+     *                 or not
+     * @param whenEmptyOrNull what to return is the
+     *                        search criteria is empty or null
      * @param listOf fields that we are checking
      * @return true if any of the items inside the [listOf]
      *         contains the search text

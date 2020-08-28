@@ -1,12 +1,12 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface;
 
 
-import com.moofficial.moessentials.MoEssentials.MoState.MoStateChange;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState.MoStateChange;
 
 import java.util.List;
 
 // a dynamic interface to make a list searchable
-public interface MoSearchableList extends MoStateChange {
+public interface MoSearchableList {
 
 //    /**
 //     *

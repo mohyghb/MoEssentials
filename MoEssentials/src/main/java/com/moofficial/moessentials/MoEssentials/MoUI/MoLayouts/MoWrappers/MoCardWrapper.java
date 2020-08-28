@@ -11,6 +11,8 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardRecyclerView;
 import com.moofficial.moessentials.R;
 
+@Deprecated
+// should use MoCardView from now on
 public class MoCardWrapper extends MoWrapper<CardView>{
 
 

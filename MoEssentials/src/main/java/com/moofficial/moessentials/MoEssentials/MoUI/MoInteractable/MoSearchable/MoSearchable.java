@@ -12,11 +12,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState.MoStateChange;
 import com.moofficial.moessentials.MoEssentials.MoUtils.MoKeyboardUtils.MoKeyboardUtils;
-import com.moofficial.moessentials.MoEssentials.MoState.MoOnScrollToPosition;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState.MoOnScrollToPosition;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViews;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchCanceled;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchFinished;
@@ -29,19 +32,20 @@ import java.util.List;
 
 public class MoSearchable extends MoListViews {
 
+    public static final String PAYLOAD_FIND_ITEM = "payload_find_item";
 
     // activity is needed for multi-threading computation
     // and then we can call run on ui thread using the activity
     private Activity activity;
     private TextView searchTextView;
-    private MoSearchableList searchableList = new MoSearchableList() {
+    private MoSearchableList searchableList = ArrayList::new;
+    private MoOnSearchFinished onSearchFinished = foundItems -> {};
+    private MoOnSearchCanceled onSearchCanceled = () -> {};
+    private MoOnSearchListener onSearchListener = search -> {};
+    private MoOnScrollToPosition onScrollToPosition = position -> {};
+    @NonNull private MoStateChange stateChange = new MoStateChange() {
         @Override
-        public List<? extends MoSearchableItem> getSearchableItems() {
-            return new ArrayList<>();
-        }
-
-        @Override
-        public void notifyItemChanged(int position) {
+        public void notifyItemChanged(int position, Object payload) {
 
         }
 
@@ -50,10 +54,6 @@ public class MoSearchable extends MoListViews {
 
         }
     };
-    private MoOnSearchFinished onSearchFinished = foundItems -> {};
-    private MoOnSearchCanceled onSearchCanceled = () -> {};
-    private MoOnSearchListener onSearchListener = search -> {};
-    private MoOnScrollToPosition onScrollToPosition = position -> {};
     private ImageButton searchButton,cancelSearch,clearSearch;
     private LinearLayout searchLayout;
     private AppBarLayout appBarLayout;
@@ -98,12 +98,7 @@ public class MoSearchable extends MoListViews {
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     // we should search the char sequence here
                     if(searchTextView.hasFocus()){
-                        new Thread(){
-                            @Override
-                            public void run() {
-                                performSearch(searchTextView);
-                            }
-                        }.start();
+                        performSearchOnNewThread();
                     }
                 }
 
@@ -113,6 +108,15 @@ public class MoSearchable extends MoListViews {
                 }
             });
         }
+    }
+
+    public void performSearchOnNewThread() {
+        new Thread(){
+            @Override
+            public void run() {
+                performSearch(searchTextView);
+            }
+        }.start();
     }
 
     public MoSearchable setSearchOnTextChanged(boolean searchOnTextChanged) {
@@ -189,16 +193,6 @@ public class MoSearchable extends MoListViews {
         return this;
     }
 
-    public MoSearchable setClearSearch(ImageButton clearSearch) {
-        this.clearSearch = clearSearch;
-        return this;
-    }
-
-    public MoSearchable setSearchLayout(LinearLayout searchLayout) {
-        this.searchLayout = searchLayout;
-        return this;
-    }
-
     public MoSearchable setSearchedIndices(List<Integer> searchedIndices) {
         this.searchedIndices = searchedIndices;
         return this;
@@ -264,6 +258,16 @@ public class MoSearchable extends MoListViews {
 
     public MoSearchable setOnScrollToPosition(MoOnScrollToPosition onScrollToPosition) {
         this.onScrollToPosition = onScrollToPosition;
+        return this;
+    }
+
+    @NonNull
+    public MoStateChange getStateChange() {
+        return stateChange;
+    }
+
+    public MoSearchable setStateChange(@NonNull MoStateChange stateChange) {
+        this.stateChange = stateChange;
         return this;
     }
 
@@ -373,10 +377,14 @@ public class MoSearchable extends MoListViews {
         return setCancelSearch(parentView.findViewById(cancelButton));
     }
 
-    public MoSearchable setClearSearch(int c) {
-        this.clearSearch = parentView.findViewById(c);
+    public MoSearchable setClearSearch(ImageButton s){
+        this.clearSearch = s;
         this.clearSearch.setOnClickListener(view -> clearSearch());
         return this;
+    }
+
+    public MoSearchable setClearSearch(@IdRes int res) {
+        return this.setClearSearch(parentView.findViewById(res));
     }
 
     public MoSearchable setClearSearch(int c, int drawable, View.OnClickListener onClearClickListener) {
@@ -407,6 +415,11 @@ public class MoSearchable extends MoListViews {
      */
     public void clearSearch(){
         searchTextView.setText("");
+        if(!searchTextView.hasFocus()){
+            // if it does not have focus, that means
+            // we have to do a search our self
+            performSearchOnNewThread();
+        }
     }
 
     public MoSearchable setSearchButton(int searchButton) {
@@ -437,7 +450,7 @@ public class MoSearchable extends MoListViews {
         onSearchCanceled.onSearchCanceled();
         deactivateSpecialMode();
         MoSearchableUtils.cancelSearch(searchableList.getSearchableItems());
-        searchableList.notifyDataSetChanged();
+        stateChange.notifyDataSetChanged();
         clearSearchText();
         MoKeyboardUtils.hideSoftKeyboard(searchTextView);
     }
@@ -569,7 +582,7 @@ public class MoSearchable extends MoListViews {
         if(activity!=null){
             activity.runOnUiThread(() -> {
                 // notify that this item is searchable and change its view
-                searchableList.notifyItemChanged(getFindPosition());
+                stateChange.notifyItemChanged(getFindPosition(),PAYLOAD_FIND_ITEM);
                 // then scroll to the position on the item list
                 onScrollToPosition.scrollTo(getFindPosition());
             });

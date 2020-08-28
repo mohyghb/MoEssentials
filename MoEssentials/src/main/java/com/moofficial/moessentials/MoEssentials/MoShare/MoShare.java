@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoConnections;
+package com.moofficial.moessentials.MoEssentials.MoShare;
 
 import android.content.Context;
 import android.content.Intent;

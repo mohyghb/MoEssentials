@@ -11,6 +11,7 @@ import androidx.annotation.StringRes;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
@@ -18,7 +19,7 @@ import java.util.Objects;
 
 public class MoEditText extends MoConstraint {
 
-    private MoCardWrapper cardWrapper;
+    private MoCardView cardView;
     private TextInputEditText textInputEditText;
     private TextInputLayout textInputLayout;
 
@@ -34,12 +35,12 @@ public class MoEditText extends MoConstraint {
         super(context, attrs, defStyleAttr);
     }
 
-    public MoCardWrapper getCardWrapper() {
-        return cardWrapper;
+    public MoCardView getCardView() {
+        return cardView;
     }
 
-    public MoEditText setCardWrapper(MoCardWrapper cardWrapper) {
-        this.cardWrapper = cardWrapper;
+    public MoEditText setCardView(MoCardView cardView) {
+        this.cardView = cardView;
         return this;
     }
 
@@ -146,7 +147,7 @@ public class MoEditText extends MoConstraint {
     }
 
     public MoEditText transparentCardBackground(){
-        this.cardWrapper.makeTransparent();
+        this.cardView.makeTransparent();
         return this;
     }
 
@@ -180,7 +181,7 @@ public class MoEditText extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardWrapper = new MoCardWrapper(findViewById(R.id.mo_edit_text_card_view));
+        cardView = findViewById(R.id.mo_edit_text_card_view);
         textInputEditText = findViewById(R.id.mo_edit_text_text_input);
         textInputLayout = findViewById(R.id.mo_edit_text_text_layout);
     }

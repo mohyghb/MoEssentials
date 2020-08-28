@@ -13,12 +13,13 @@ import androidx.core.widget.TintableCompoundButton;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoImageButtonBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
 import com.moofficial.moessentials.R;
 
 public class MoToolBar extends MoConstraint {
 
-    private MoCardWrapper cardView;
+    private MoCardView cardView;
     private TextView title;
     private ImageButton leftButton, middleButton, rightButton,extraButton;
     private CheckBox checkBox;
@@ -138,11 +139,11 @@ public class MoToolBar extends MoConstraint {
         return this;
     }
 
-    public MoCardWrapper getCardView() {
+    public MoCardView getCardView() {
         return cardView;
     }
 
-    public MoToolBar setCardView(MoCardWrapper cardView) {
+    public MoToolBar setCardView(MoCardView cardView) {
         this.cardView = cardView;
         return this;
     }
@@ -265,7 +266,7 @@ public class MoToolBar extends MoConstraint {
         leftButton = findViewById(R.id.menu_app_bar_back_button);
         middleButton = findViewById(R.id.menu_app_bar_search_button);
         rightButton = findViewById(R.id.menu_app_bar_more_button);
-        cardView = new MoCardWrapper(findViewById(R.id.menu_app_bar_card_view));
+        cardView = findViewById(R.id.menu_app_bar_card_view);
         extraButton = findViewById(R.id.menu_app_bar_extra_button);
         checkBox = findViewById(R.id.menu_app_bar_checkBox);
     }

@@ -13,25 +13,29 @@ public class MoContext {
     }
 
 
-    protected String getString(int id){
+    public String getString(int id){
         return context.getString(id);
     }
 
-    protected Drawable getDrawable(int id){
+    public Drawable getDrawable(int id){
         return context.getDrawable(id);
     }
 
-    protected int getColor(int id){
+    public int getColor(int id){
         return context.getColor(id);
     }
 
-    protected Resources getResources(){
+    public Resources getResources(){
         return context.getResources();
     }
 
-    protected float getDimension(int id){
+    public float getDimension(int id){
         return context.getResources().getDimension(id);
     }
 
+
+    public Context getContext(){
+        return this.context;
+    }
 
 }

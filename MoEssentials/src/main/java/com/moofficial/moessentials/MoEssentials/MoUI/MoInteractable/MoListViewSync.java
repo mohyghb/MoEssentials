@@ -151,6 +151,15 @@ public class MoListViewSync {
     }
 
     /**
+     * removes all the actions available
+     */
+    public void removeAllActions() {
+        while(hasAction()){
+            removeAction();
+        }
+    }
+
+    /**
      * releases the next on hold item
      * or calls empty on hold if there is no
      * more of them

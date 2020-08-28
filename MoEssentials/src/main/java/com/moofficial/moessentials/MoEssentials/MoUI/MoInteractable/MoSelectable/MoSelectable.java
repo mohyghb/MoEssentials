@@ -20,11 +20,13 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable
 // T is the dynamic type that we are dealing with
 public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
 
-    private MoSelectableListWrapper<T> wrapper;
-    // select all button
-    protected CheckBox selectAllCheckBox;
+    // used when we are notifying item changed
+    // to let the adapter know that we are only changing the item
+    // selected property
+    public static final String PAYLOAD_SELECTED_ITEM = "selected_payload";
 
-    // shows the total items selected
+    private MoSelectableListWrapper<T> wrapper;
+    protected CheckBox selectAllCheckBox;
     protected int selectedSize;
     protected TextView counterTextView;
     protected String counterMessage = " Selected";
@@ -382,7 +384,7 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     public void onSelect(T si,int position){
         addOrRemoveItem(si);
         notifySizeChange(si.isSelected());
-        wrapper.notifyItemChanged(position);
+        wrapper.notifyItemChanged(position,PAYLOAD_SELECTED_ITEM);
         onSelectListener.onSelect(si);
     }
 

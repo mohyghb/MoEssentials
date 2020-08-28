@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoState;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState;
 
 public interface MoOnScrollToPosition {
 

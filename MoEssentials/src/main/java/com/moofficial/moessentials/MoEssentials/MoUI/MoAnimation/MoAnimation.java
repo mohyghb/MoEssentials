@@ -1,6 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.animation.Animation;
@@ -70,9 +71,15 @@ public class MoAnimation {
     }
 
 
-    public static void initAllAnimations(Activity a){
-        for(int id: ANIMATION_LIST){
-            animations.append(id,AnimationUtils.loadAnimation(a, id));
+    /**
+     * init all the animations of the
+     * activity to be used later for animation
+     * purposes
+     * @param c context
+     */
+    public static void initAllAnimations(Context c){
+        for (int id: ANIMATION_LIST) {
+            animations.append(id,AnimationUtils.loadAnimation(c, id));
         }
     }
 

@@ -37,9 +37,13 @@ public interface MoSelectableList<T extends MoSelectableItem> {
      * notifies the item at position
      * that something has changed
      * so we need to render it again
-     * @param position
+     * @param position position of the item that has changed (either
+     *                 selected or unselected)
+     * @param payload to tell the adapter that we are only updating one
+     *                part of the view holder, no need to update the whole
+     *                thing again
      */
-    void notifyItemChanged(int position);
+    void notifyItemChanged(int position,Object payload);
 
     /**
      *

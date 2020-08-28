@@ -84,8 +84,8 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
         return this.list.getSelectedItems();
     }
 
-    public void notifyItemChanged(int position){
-        list.notifyItemChanged(position);
+    public void notifyItemChanged(int position,Object payload){
+        list.notifyItemChanged(position,payload);
     }
 
     public void notifyDataSetChanged(){

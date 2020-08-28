@@ -1,12 +1,12 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation;
 
-import androidx.transition.Fade;
+import android.transition.Fade;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.transition.Slide;
-import androidx.transition.Transition;
-import androidx.transition.TransitionManager;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoTransitions.MoCircularTransition;
 import com.moofficial.moessentials.R;

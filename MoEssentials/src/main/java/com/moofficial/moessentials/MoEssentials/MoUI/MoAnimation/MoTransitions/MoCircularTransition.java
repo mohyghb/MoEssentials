@@ -4,14 +4,27 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoTransitions;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 
-import androidx.transition.TransitionValues;
-import androidx.transition.Visibility;
+import android.transition.TransitionValues;
+import android.transition.Visibility;
 
+// a circular transition that can be used to
+// transition views as well as activities
 public class MoCircularTransition extends Visibility {
+
+    // this is used to track the touch position of the
+    // transition, if we turn on this feature, the
+    // transition happens at the point that we are touching the views
+    private float x,y;
+
+    public void onTouch(MotionEvent e){
+        this.x = e.getX();
+    }
+
     @Override
     public Animator onAppear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
         int startRadius = 0;
