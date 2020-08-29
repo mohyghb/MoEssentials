@@ -5,10 +5,9 @@ import android.view.View;
 
 import androidx.annotation.ColorRes;
 import androidx.core.graphics.ColorUtils;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoViewUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViewUtils;
 import com.moofficial.moessentials.R;
 
 import java.util.ArrayList;
@@ -141,9 +140,9 @@ public class MoSelectableUtils {
     public static void applySelectedColor(View v, MoSelectableItem item,
                                           int s, int a, int ns, int na){
         if(item.isSelected()) {
-            MoViewUtils.applyColor(v,ColorUtils.setAlphaComponent(s,a));
+            MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(s,a));
         }else{
-            MoViewUtils.applyColor(v,ColorUtils.setAlphaComponent(ns,na));
+            MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(ns,na));
         }
     }
 

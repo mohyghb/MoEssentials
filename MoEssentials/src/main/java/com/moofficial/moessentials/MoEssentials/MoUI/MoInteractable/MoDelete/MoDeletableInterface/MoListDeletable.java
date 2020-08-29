@@ -8,16 +8,16 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable
 
 public interface MoListDeletable<T extends MoSelectableItem> extends MoSelectableList<T> {
 
-    // we don't need to set list selectable inside a mo list delete
-    // so we define it as a default function
-    @Override
-    default void setListSelectable(MoSelectable<T> s){}
-
-    /**
-     * when we want to set a mo delete for that adapter
-     * @param d
-     */
-    void setMoDelete(MoDeletable<T> d);
+//    // we don't need to set list selectable inside a mo list delete
+//    // so we define it as a default function
+//    @Override
+//    default void setListSelectable(MoSelectable<T> s){}
+//
+//    /**
+//     * when we want to set a mo delete for that adapter
+//     * @param d
+//     */
+//    void setMoDelete(MoDeletable<T> d);
 
 
 
@@ -27,10 +27,10 @@ public interface MoListDeletable<T extends MoSelectableItem> extends MoSelectabl
      */
     void deleteSelected();
 
-    /**
-     *
-     * @returns the size of list
-     */
-    int size();
+//    /**
+//     *
+//     * @returns the size of list
+//     */
+//    int size();
 
 }

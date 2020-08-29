@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoAsyncTask;
+package com.moofficial.moessentials.MoEssentials.MoMultiThread.MoAsyncTask;
 
 import android.os.AsyncTask;
 
@@ -11,28 +11,35 @@ public class MoAsyncTask extends AsyncTask<Object,Object,Object> {
     private MoAsyncProgressUpdate asyncProgressUpdate = objects->{};
 
 
-    public MoAsyncTask setAsyncDoInBackground(MoAsyncDoInBackground asyncDoInBackground) {
+    // what to do in background
+    public MoAsyncTask doBackground(MoAsyncDoInBackground asyncDoInBackground) {
         this.asyncDoInBackground = asyncDoInBackground;
         return this;
     }
 
-    public MoAsyncTask setAsyncOnTaskFinished(MoAsyncOnTaskFinished asyncOnTaskFinished) {
+    public MoAsyncTask finished(MoAsyncOnTaskFinished asyncOnTaskFinished) {
         this.asyncOnTaskFinished = asyncOnTaskFinished;
         return this;
     }
 
-    public MoAsyncTask setAsyncPreTaskExecute(MoAsyncPreTaskExecute asyncPreTaskExecute) {
+    public MoAsyncTask pre(MoAsyncPreTaskExecute asyncPreTaskExecute) {
         this.asyncPreTaskExecute = asyncPreTaskExecute;
         return this;
     }
 
-    public MoAsyncTask setAsyncOnTaskCancelled(MoAsyncOnTaskCancelled asyncOnTaskCancelled) {
+    public MoAsyncTask cancelled(MoAsyncOnTaskCancelled asyncOnTaskCancelled) {
         this.asyncOnTaskCancelled = asyncOnTaskCancelled;
         return this;
     }
 
-    public MoAsyncTask setAsyncProgressUpdate(MoAsyncProgressUpdate asyncProgressUpdate) {
+    public MoAsyncTask update(MoAsyncProgressUpdate asyncProgressUpdate) {
         this.asyncProgressUpdate = asyncProgressUpdate;
+        return this;
+    }
+
+    // starts the async task in background
+    public MoAsyncTask start(Object ... params){
+        execute(params);
         return this;
     }
 

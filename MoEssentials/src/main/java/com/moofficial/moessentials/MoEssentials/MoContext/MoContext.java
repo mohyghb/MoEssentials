@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
+import androidx.core.content.ContextCompat;
+
 public class MoContext {
 
     protected Context context;
@@ -13,12 +15,12 @@ public class MoContext {
     }
 
 
-    public String getString(int id){
+    public String getString(int id) {
         return context.getString(id);
     }
 
-    public Drawable getDrawable(int id){
-        return context.getDrawable(id);
+    public Drawable getDrawable(int id) {
+        return ContextCompat.getDrawable(context,id);
     }
 
     public int getColor(int id){

@@ -11,7 +11,6 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -222,8 +221,8 @@ public abstract class MoListViews extends MoContext {
             goingToActivateIfNotNull();
             isInActionMode = true;
         }
-        MoViewUtils.apply(this.parentView,unNormalViews,visible,transitionIn);
-        MoViewUtils.apply(this.parentView,normalViews,invisible,transitionOut);
+        MoListViewUtils.apply(this.parentView,unNormalViews,visible,transitionIn);
+        MoListViewUtils.apply(this.parentView,normalViews,invisible,transitionOut);
         onActivateSpecialMode();
     }
 
@@ -238,8 +237,8 @@ public abstract class MoListViews extends MoContext {
             goingToDeactivateIfNotNull();
             isInActionMode = false;
         }
-        MoViewUtils.apply(this.parentView,unNormalViews,invisible,transitionOut);
-        MoViewUtils.apply(this.parentView,normalViews,visible,transitionIn);
+        MoListViewUtils.apply(this.parentView,unNormalViews,invisible,transitionOut);
+        MoListViewUtils.apply(this.parentView,normalViews,visible,transitionIn);
     }
 
     /**

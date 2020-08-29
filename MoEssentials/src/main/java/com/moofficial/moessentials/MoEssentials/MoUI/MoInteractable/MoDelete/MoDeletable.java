@@ -14,8 +14,11 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete.MoD
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete.MoDeletableInterface.MoOnDeleteChanged;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete.MoDeletableInterface.MoOnDeleteFinished;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete.MoDeletableInterface.MoOnDeletePressed;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoDelete.MoDeletableInterface.MoOnDeleteSelected;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
+
+import java.util.List;
 
 
 // this class is used to make a recycler view or a list view's items deletable
@@ -32,8 +35,7 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
     private MoOnDeletePressed onDeletePressed = ()->{};
     private MoOnDeleteFinished onDeleteFinished = ()->{};
     private MoOnDeleteChanged onDeleteChanged = isInDeleteMode -> {};
-    // mutual class
-    private MoListDeletable<T> listAdapter;
+    private MoOnDeleteSelected<T> onDeleteSelected = selected -> {};
 
 
     private String deleteMessage = DELETE_SUCCESSFUL;
@@ -42,8 +44,6 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
 
     public MoDeletable(Context c, @NonNull ViewGroup parent, @NonNull MoListDeletable<T> listDeletable){
         super(c,parent,listDeletable);
-        this.listAdapter = listDeletable;
-        this.listAdapter.setMoDelete(this);
     }
 
 
@@ -124,6 +124,11 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         return this;
     }
 
+    public MoDeletable<T> setOnDeleteSelected(MoOnDeleteSelected<T> onDeleteSelected) {
+        this.onDeleteSelected = onDeleteSelected;
+        return this;
+    }
+
     public MoDeletable<T> setOnDeletePressed(MoOnDeletePressed r){
         this.onDeletePressed = r;
         return this;
@@ -139,7 +144,7 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         return progressBar;
     }
 
-    public MoDeletable setProgressBar(ProgressBar progressBar) {
+    public MoDeletable<T> setProgressBar(ProgressBar progressBar) {
         this.progressBar = progressBar;
         return this;
     }
@@ -148,14 +153,7 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         return onDeletePressed;
     }
 
-    public MoListDeletable<T> getListAdapter() {
-        return listAdapter;
-    }
 
-    public MoDeletable<T> setListAdapter(MoListDeletable<T> listAdapter) {
-        this.listAdapter = listAdapter;
-        return this;
-    }
 
     public String getDeleteMessage() {
         return deleteMessage;
@@ -226,8 +224,7 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         }else{
             deactivateDeleteMode();
         }
-        // let the list know what to do when you are done
-        this.listAdapter.notifyDataSetChanged();
+        getWrapper().notifyDataSetChanged();
     }
 
 
@@ -256,16 +253,6 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
 
 
 
-    /**
-     * updates all the aspects of the delete mode
-     */
-    @Override
-    public void update(){
-        super.update();
-        updateCounter();
-        updateSelectAll();
-        listAdapter.notifyDataSetChanged();
-    }
 
     /**
      * when user is not trying to do this anymore
@@ -286,12 +273,11 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
         // delete
         Handler h = new Handler();
         h.postDelayed(() -> {
-            listAdapter.deleteSelected();
-            onDeleteFinished.onDeleteFinished();
+            onDeleteSelected.delete(getSelectedItems());
             deactivateProgressBar();
             onCancel();
-
             Toast.makeText(context, deleteMessage, Toast.LENGTH_SHORT).show();
+            onDeleteFinished.onDeleteFinished();
         },100);
     }
 
@@ -320,17 +306,17 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
     }
 
 
-    // for select all button
-    private void updateSelectAll(){
-        if(this.selectAllCheckBox!=null){
-            if(this.selectedSize == listAdapter.size()){
-                // then it should be turned on
-                this.selectAllCheckBox.setChecked(true);
-            }else{
-                this.selectAllCheckBox.setChecked(false);
-            }
-        }
-    }
+//    // for select all button
+//    private void updateSelectAll(){
+//        if(this.selectAllCheckBox!=null){
+//            if(this.selectedSize == s){
+//                // then it should be turned on
+//                this.selectAllCheckBox.setChecked(true);
+//            }else{
+//                this.selectAllCheckBox.setChecked(false);
+//            }
+//        }
+//    }
 
 
     public static void deleteIsNotSpecifiedInThisContext(Context context){

@@ -1,4 +1,4 @@
-package com.moofficial.moessentials.MoEssentials.MoAsyncTask;
+package com.moofficial.moessentials.MoEssentials.MoMultiThread.MoAsyncTask;
 
 public interface MoAsyncProgressUpdate {
 

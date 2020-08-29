@@ -6,8 +6,7 @@ import android.view.View;
 
 import androidx.core.util.Pair;
 
-import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoViewUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViewUtils;
 
 import java.util.HashMap;
 
@@ -24,17 +23,17 @@ public class MoSectionViewManager {
     }
 
     public MoSectionViewManager addSection(Integer key,View ... viewsInSection){
-        MoViewUtils.apply(root,viewsInSection,View.GONE,transitionOut);
+        MoListViewUtils.apply(root,viewsInSection,View.GONE,transitionOut);
         mapOfView.put(key,viewsInSection);
         return this;
     }
 
     public MoSectionViewManager setActiveSection(int key){
         if(activeSection!=null){
-            MoViewUtils.apply(root,activeSection.second,View.GONE,transitionOut);
+            MoListViewUtils.apply(root,activeSection.second,View.GONE,transitionOut);
         }
         this.activeSection = new Pair<>(key,mapOfView.get(key));
-        MoViewUtils.apply(root,activeSection.second,View.VISIBLE,transitionIn);
+        MoListViewUtils.apply(root,activeSection.second,View.VISIBLE,transitionIn);
         return this;
     }
 

@@ -5,8 +5,6 @@ import android.transition.Transition;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +30,7 @@ public class MoListViewSync {
     public MoListViewSync(ViewGroup parentView,MoListViews ... v){
         this.parentView = parentView;
         this.views = Arrays.asList(v);
-        MoViewUtils.sync(this,this.views);
+        MoListViewUtils.sync(this,this.views);
     }
 
     public ViewGroup getParentView() {
@@ -181,12 +179,12 @@ public class MoListViewSync {
     public void goingToActivate(MoListViews v){
         if(putOnHold){
             // put all the items inside the on hold stack on hold
-            MoViewUtils.goOnHold(onHolds);
+            MoListViewUtils.goOnHold(onHolds);
             hideSharedElementsIf(onHolds.isEmpty());
             onHolds.push(v);
         }else{
             // call remove action on all the items inside
-            MoViewUtils.closeActions(this.inActions);
+            MoListViewUtils.closeActions(this.inActions);
             hideSharedElementsIf(inActions.isEmpty());
             inActions.clear();
             inActions.push(v);
@@ -208,13 +206,13 @@ public class MoListViewSync {
 
     private void hideSharedElementsIf(boolean condition){
         if(condition){
-            MoViewUtils.apply(parentView,this.sharedElements,View.GONE,transitionOut);
+            MoListViewUtils.apply(parentView,this.sharedElements,View.GONE,transitionOut);
         }
     }
 
     private void showSharedElementsIf(boolean condition){
         if(condition){
-            MoViewUtils.apply(parentView,this.sharedElements,View.VISIBLE,transitionIn);
+            MoListViewUtils.apply(parentView,this.sharedElements,View.VISIBLE,transitionIn);
         }
     }
 

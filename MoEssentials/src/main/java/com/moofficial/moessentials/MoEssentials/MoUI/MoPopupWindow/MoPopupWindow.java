@@ -59,41 +59,8 @@ public class MoPopupWindow extends MoContext {
         return this;
     }
 
-    public PopupWindow getPopupWindow() {
-        return popupWindow;
-    }
 
-    public MoPopupWindow setPopupWindow(PopupWindow popupWindow) {
-        this.popupWindow = popupWindow;
-        return this;
-    }
 
-    public Dialog getDialog() {
-        return dialog;
-    }
-
-    public MoPopupWindow setDialog(Dialog dialog) {
-        this.dialog = dialog;
-        return this;
-    }
-
-    public View getRootView() {
-        return rootView;
-    }
-
-    public MoPopupWindow setRootView(View rootView) {
-        this.rootView = rootView;
-        return this;
-    }
-
-    public LinearLayout getRootLinearLayout() {
-        return rootLinearLayout;
-    }
-
-    public MoPopupWindow setRootLinearLayout(LinearLayout rootLinearLayout) {
-        this.rootLinearLayout = rootLinearLayout;
-        return this;
-    }
 
     public Context getContext() {
         return context;
@@ -311,6 +278,9 @@ public class MoPopupWindow extends MoContext {
     public void dismiss(){
         this.popupWindow.dismiss();
     }
+
+
+
 
 
 

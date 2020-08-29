@@ -1,5 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
 
 import java.util.List;

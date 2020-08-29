@@ -14,7 +14,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoAnimation.MoAnimation;
 import java.util.Arrays;
 import java.util.List;
 
-public class MoViewUtils {
+public class MoListViewUtils {
 
     /**
      * applies the visibility and animation to each

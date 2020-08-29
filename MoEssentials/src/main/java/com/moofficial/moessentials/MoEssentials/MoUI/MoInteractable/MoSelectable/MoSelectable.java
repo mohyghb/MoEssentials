@@ -16,6 +16,8 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableList;
 
+import java.util.List;
+
 
 // T is the dynamic type that we are dealing with
 public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
@@ -428,5 +430,12 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     public boolean isEmpty(){
         return selectedSize == 0;
     }
+
+
+    public List<T> getSelectedItems() {
+        return this.wrapper.getSelectedItems();
+    }
+
+
 
 }

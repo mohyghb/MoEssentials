@@ -3,6 +3,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal
 import android.content.Context;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -103,8 +104,15 @@ public class MoEditText extends MoConstraint {
         return Objects.requireNonNull(this.textInputEditText.getText()).toString();
     }
 
-    public void clearText(){
+    public MoEditText clearText() {
         this.setText("");
+        return this;
+    }
+
+    // clears focus and text
+    public MoEditText clearFocusAndText(){
+        clearFocus();
+        return clearText();
     }
 
 
@@ -170,6 +178,42 @@ public class MoEditText extends MoConstraint {
      */
     public MoEditText setBoxBackgroundColorFromColor(@ColorInt int color){
         this.textInputLayout.setBoxBackgroundColor(color);
+        return this;
+    }
+
+    // EditorInfo.IME_ACTION_DONE
+    public MoEditText actionDone(){
+        this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        return this;
+    }
+
+    // EditorInfo.IME_ACTION_SEARCH
+    public MoEditText actionSearch(){
+        this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        return this;
+    }
+
+    // EditorInfo.IME_ACTION_SEND
+    public MoEditText actionSend(){
+        this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        return this;
+    }
+
+    // EditorInfo.IME_ACTION_GO
+    public MoEditText actionGo(){
+        this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_GO);
+        return this;
+    }
+
+    /**
+     * the ime option's name is called [action]
+     * with id of id
+     * @param action name of the ime option
+     * @param id the id that will be invoked when user presses that
+     * @return this
+     */
+    public MoEditText withAction(String action,int id){
+        this.textInputEditText.setImeActionLabel(action,id);
         return this;
     }
 

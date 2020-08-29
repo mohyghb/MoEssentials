@@ -2,6 +2,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView;
 
 import android.view.View;
 
+@Deprecated
 public interface MoViewDisplayable {
 
 
