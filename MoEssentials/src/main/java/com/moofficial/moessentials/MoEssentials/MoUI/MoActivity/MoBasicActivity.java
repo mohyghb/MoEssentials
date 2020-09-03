@@ -11,17 +11,16 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.moofficial.moessentials.MoEssentials.MoString.MoString;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewBuilder.MoCardBuilder;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoLinearLayoutUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViewGroupUtils.MoViewGroupUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoSwitchers.MoSwitchViews;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoCardWrapper;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperFloatingActionButton;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperLinearLayout;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoWrappers.MoWrapperToolbar;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder.MoCardBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoViewGroupUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoSwitchers.MoSwitchViews;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperFloatingActionButton;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperLinearLayout;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperToolbar;
 import com.moofficial.moessentials.R;
 
 
@@ -36,32 +35,32 @@ public abstract class MoBasicActivity extends MoActivity {
     protected CollapsingToolbarLayout collapsingToolbarLayout;
     protected CoordinatorLayout coordinatorLayout;
     protected ConstraintLayout rootView;
-    protected MoCardWrapper cardView,innerCardView;
+    protected MoCardView cardView,innerCardView;
     protected MoWrapperFloatingActionButton floatingActionButton;
     protected NestedScrollView nestedScrollView;
 
     @Override
-    protected int getLayoutResId() {
-        return R.layout.activity_mo_basic;
+    public int getLayoutResId() {
+        return R.layout.mo_basic_layout;
     }
 
     @Override
-    protected void onCreate() {
+    protected void initLayout() {
         title = findViewById(R.id.mo_lib_title);
         subtitle = findViewById(R.id.mo_lib_subtitle);
-        linearNested = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_nested_layout));
-        linearBottom = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_bottom_layout));
-        linearTop = new MoWrapperLinearLayout(this,findViewById(R.id.basic_activity_linear_top_layout));
+        linearNested = new MoWrapperLinearLayout(findViewById(R.id.basic_activity_linear_nested_layout));
+        linearBottom = new MoWrapperLinearLayout(findViewById(R.id.basic_activity_linear_bottom_layout));
+        linearTop = new MoWrapperLinearLayout(findViewById(R.id.basic_activity_linear_top_layout));
         appBarLayout = findViewById(R.id.basic_activity_appbar);
-        toolbar = new MoWrapperToolbar(this,findViewById(R.id.basic_activity_toolbar)
+        toolbar = new MoWrapperToolbar(findViewById(R.id.basic_activity_toolbar)
                 ,findViewById(R.id.basic_activity_toolbar_linear_layout));
         coordinatorLayout = findViewById(R.id.basic_activity_coordinator_layout);
         collapsingToolbarLayout = findViewById(R.id.basic_activity_collapsing_toolbar);
         rootView = findViewById(R.id.basic_activity_root);
-        cardView = new MoCardWrapper(findViewById(R.id.basic_activity_card_view));
-        innerCardView = new MoCardWrapper(findViewById(R.id.basic_activity_inner_card_view));
+        cardView = findViewById(R.id.basic_activity_card_view);
+        innerCardView = findViewById(R.id.basic_activity_inner_card_view);
         nestedScrollView = findViewById(R.id.basic_activity_nested_scroll_view);
-        floatingActionButton = new MoWrapperFloatingActionButton(this,
+        floatingActionButton = new MoWrapperFloatingActionButton(
                 findViewById(R.id.basic_activity_floating_action_button));
         floatingActionButton.hide();
     }
@@ -95,11 +94,11 @@ public abstract class MoBasicActivity extends MoActivity {
     }
 
     public void customizeInnerCard(MoCardBuilder c){
-        c.build(innerCardView.getCardView());
+        c.build(innerCardView);
     }
 
     public void customizeOuterCard(MoCardBuilder c){
-        c.build(cardView.getCardView());
+        c.build(cardView);
     }
 
     public void makeCardViewsTransparent(){
@@ -223,8 +222,8 @@ public abstract class MoBasicActivity extends MoActivity {
      * @param active
      * @param views
      */
-    public void setupMultipleToolbars(View active,View ... views){
-        new MoSwitchViews().addViews(views).setActiveView(active).build(v -> toolbar.addToolbar(v));
+    public void setupMultipleToolbars(View active,View ... views) {
+        toolbar.setupMultipleToolbars(active,views);
     }
 
 

@@ -1,6 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoContext;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
@@ -14,6 +15,9 @@ public class MoContext {
         this.context = c;
     }
 
+    public void update(Context c){
+        this.context = c;
+    }
 
     public String getString(int id) {
         return context.getString(id);
@@ -38,6 +42,28 @@ public class MoContext {
 
     public Context getContext(){
         return this.context;
+    }
+
+    /**
+     *
+     * @return height of the screen in current mode
+     *         in pixels
+     */
+    public int getHeightPixels(){
+        return getResources().getDisplayMetrics().heightPixels;
+    }
+
+    /**
+     *
+     * @return width of the screen in current mode
+     *         in pixels
+     */
+    public int getWidthPixels(){
+        return getResources().getDisplayMetrics().widthPixels;
+    }
+
+    public void startActivity(Intent i){
+        context.startActivity(i);
     }
 
 }

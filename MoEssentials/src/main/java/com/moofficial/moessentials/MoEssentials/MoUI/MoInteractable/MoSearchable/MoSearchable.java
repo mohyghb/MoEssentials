@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
-import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -24,7 +23,6 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViews;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchCanceled;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchFinished;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoOnSearchListener;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableList;
 
 import java.util.ArrayList;
@@ -60,7 +58,8 @@ public class MoSearchable extends MoListViews {
     // for finding a searchable item
     private List<Integer> searchedIndices = new ArrayList<>();
     private int findIndex;
-    private ImageButton upFind,downFind;
+    private View upFind;
+    private View downFind;
     private boolean searchOnTextChanged = false;
     private boolean showNothingWhenSearchEmpty = false;
     private boolean runOnAnotherThread = false;
@@ -323,11 +322,11 @@ public class MoSearchable extends MoListViews {
         return findIndex;
     }
 
-    public ImageButton getUpFind() {
+    public View getUpFind() {
         return upFind;
     }
 
-    public ImageButton getDownFind() {
+    public View getDownFind() {
         return downFind;
     }
 

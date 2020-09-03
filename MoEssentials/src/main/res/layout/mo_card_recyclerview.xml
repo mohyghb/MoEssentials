@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView
         android:id="@+id/mo_card_recyclerview_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,5 +21,5 @@
             android:layout_height="wrap_content"
             app:layout_constrainedHeight="false" />
 
-    </com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView>
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

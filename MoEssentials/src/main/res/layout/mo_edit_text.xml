@@ -6,7 +6,7 @@
 <!--    android:layout_height="wrap_content">-->
 
 
-    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -35,7 +35,7 @@
                 android:padding="16dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-    </com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView>
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView>
 
 
 <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

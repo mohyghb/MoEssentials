@@ -9,11 +9,10 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoActivitySettin
 public abstract class MoOriginalActivity extends MoBasicActivity {
 
     @Override
-    protected void onCreate() {
-        super.onCreate();
+    protected void initLayout() {
+        super.initLayout();
         makeActivityRound();
         makeCardViewsTransparent();
-        enableAnimations();
     }
 
     @Override

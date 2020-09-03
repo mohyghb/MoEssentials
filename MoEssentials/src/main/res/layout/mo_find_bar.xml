@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView
         android:id="@+id/search_card_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/mo_bar_height_default"
@@ -30,7 +30,7 @@
                 android:hint="@string/find_hint"
                 android:imeOptions="actionSearch"
                 android:inputType="textWebEditText"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:singleLine="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/close_find_bar"
@@ -78,5 +78,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardView>
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

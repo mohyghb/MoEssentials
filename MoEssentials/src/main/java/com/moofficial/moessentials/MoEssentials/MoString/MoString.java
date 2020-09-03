@@ -4,37 +4,77 @@ import android.widget.TextView;
 
 public class MoString {
 
+//    /**
+//     * returns the similarity of string a to string b
+//     * for example if a = "abcd" and b = "abcde"
+//     * a is 80 percent or 0.8 similar to b
+//     * @param a
+//     * @param b
+//     */
+//    public static float getSimilarity(String a, String b){
+//        double biggerSize = Math.max(a.length(), b.length());
+//        double similarChars = 0;
+//        // if either is empty return 0 percent similarity
+//        if(a.isEmpty() || b.isEmpty()){
+//            return 0f;
+//        }else if(a.equals(b)) {
+//            // they are the same
+//            return 1f;
+//        }
+//        char[] ac = a.toCharArray();
+//        char[] bc = b.toCharArray();
+//        int min = Math.min(a.length(),b.length());
+//        for(int i = 0; i < min; i++){
+//            if(ac[i] == bc[i]){
+//                // this character in a is same as b
+//                similarChars++;
+//            }else{
+//                // we met the first char where a and b are not similar
+//                break;
+//            }
+//        }
+//        return (float)(similarChars/biggerSize);
+//    }
+
     /**
-     * returns the similarity of string a to string b
-     * for example if a = "abcd" and b = "abcde"
-     * a is 80 percent or 0.8 similar to b
-     * @param a
-     * @param b
+     * how similar string b is to a
+     * if they are completly different
+     * we return 0
+     * @param a string (bigger one)
+     * @param b string (smaller one)
+     * @return percentage of similarity of b to a
      */
-    public static float getSimilarity(String a, String b){
-        double biggerSize = Math.max(a.length(), b.length());
-        double similarChars = 0;
-        // if either is empty return 0 percent similarity
-        if(a.isEmpty() || b.isEmpty()){
+    public static float getSimilarity(String a,String b){
+        if(a.contains(b)) {
+            // then b is inside a
+            return ((float)b.length()/(float)a.length());
+        }else{
+            // a does not have any b in it
             return 0f;
-        }else if(a.equals(b)) {
-            // they are the same
-            return 1f;
         }
-        char[] ac = a.toCharArray();
-        char[] bc = b.toCharArray();
-        int min = Math.min(a.length(),b.length());
-        for(int i = 0; i < min; i++){
-            if(ac[i] == bc[i]){
-                // this character in a is same as b
-                similarChars++;
-            }else{
-                // we met the first char where a and b are not similar
-                break;
-            }
-        }
-        return (float)(similarChars/biggerSize);
     }
+
+    /**
+     * how similar string b is to a
+     * if they are completely different
+     * we return 0
+     * @param a string (bigger one)
+     * @param b string (smaller one)
+     * @param sameStandards whether or not we provide the
+     *                      same standards for both strings like making
+     *                      both of them lower case so that similarity is not
+     *                      case sensitive
+     * @return percentage of similarity of b to a
+     */
+    public static float getSimilarity(String a,String b,boolean sameStandards){
+        if(sameStandards) {
+            // not case sensitive
+            return getSimilarity(a.toLowerCase(),b.toLowerCase());
+        }else {
+            return getSimilarity(a,b);
+        }
+    }
+
 
 
     /**

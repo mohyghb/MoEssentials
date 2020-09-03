@@ -22,6 +22,8 @@ public class MoListViewSync {
     // the item on top of the stack is the one active
     private Stack<MoListViews> onHolds = new Stack<>();
     private MoOnEmptyOnHoldsListener onEmptyOnHoldsListener = ()->{};
+    private Runnable onShowSharedElements = ()->{};
+    private Runnable onHideSharedElements = ()->{};
     private Transition transitionIn = new ChangeBounds();
     private Transition transitionOut = new ChangeBounds();
     private boolean putOnHold = false;
@@ -80,6 +82,16 @@ public class MoListViewSync {
 
     public MoListViewSync setSharedElements(View ... v){
         return setSharedElements(Arrays.asList(v));
+    }
+
+    public MoListViewSync setOnShowSharedElements(Runnable onShowSharedElements) {
+        this.onShowSharedElements = onShowSharedElements;
+        return this;
+    }
+
+    public MoListViewSync setOnHideSharedElements(Runnable onHideSharedElements) {
+        this.onHideSharedElements = onHideSharedElements;
+        return this;
     }
 
     public List<MoListViews> getViews() {
@@ -205,14 +217,16 @@ public class MoListViewSync {
 
 
     private void hideSharedElementsIf(boolean condition){
-        if(condition){
+        if(condition) {
             MoListViewUtils.apply(parentView,this.sharedElements,View.GONE,transitionOut);
+            onHideSharedElements.run();
         }
     }
 
     private void showSharedElementsIf(boolean condition){
         if(condition){
             MoListViewUtils.apply(parentView,this.sharedElements,View.VISIBLE,transitionIn);
+            onShowSharedElements.run();
         }
     }
 

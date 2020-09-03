@@ -8,8 +8,8 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 public abstract class MoSmartCoordinatorActivity extends MoSmartActivity {
 
     @Override
-    protected void onCreate() {
-        super.onCreate();
+    protected void initLayout() {
+        super.initLayout();
         coordinatorLayout.removeView(nestedScrollView);
         nestedScrollView = null;
         linearNested = null;

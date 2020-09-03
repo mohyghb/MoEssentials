@@ -1,13 +1,5 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoWindow.MoSoftInputBuilder;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoBars.MoSearchBar;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoViews.MoNormal.MoCardRecyclerView;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
-import com.moofficial.moessentials.R;
-
 @Deprecated
 public abstract class MoSearchActivity extends MoOriginalActivity {
 

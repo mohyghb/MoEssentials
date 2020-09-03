@@ -7,8 +7,8 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 public abstract class MoSmartActivity extends MoOriginalActivity {
 
     @Override
-    protected void onCreate() {
-        super.onCreate();
+    protected void initLayout() {
+        super.initLayout();
         onAppbarLayoutHeightChanged();
         makeTitleFadingEdge();
     }

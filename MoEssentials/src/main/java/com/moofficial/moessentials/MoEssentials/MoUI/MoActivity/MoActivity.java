@@ -1,5 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,34 +9,38 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoActivitySettings.MoActivitySettings;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoLayoutId;
+import com.moofficial.moessentials.R;
 
-public abstract class MoActivity extends AppCompatActivity {
+public abstract class MoActivity extends AppCompatActivity implements MoLayoutId {
 
 
     protected Bundle savedInstanceState;
     protected MoActivitySettings activitySettings;
+    protected View contentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
-        setContentView(getLayoutResId());
-
+        this.contentView = MoInflaterView.inflate(getLayoutResId(),this);
+        setContentView(this.contentView);
         // set activity settings
         activitySettings = getActivitySettings();
         // call the on create inside the activity
-        onCreate();
+        initLayout();
         // init other things that you want
         init();
     }
 
-    /**
-     *
-     * this is used to set the content
-     * view inside the onCreate method
-     * @return the resource id of the layout
-     */
-    protected abstract int getLayoutResId();
+//    /**
+//     *
+//     * this is used to set the content
+//     * view inside the onCreate method
+//     * @return the resource id of the layout
+//     */
+//    protected abstract int getLayoutResId();
 
     /**
      * init the class variables and fields
@@ -58,7 +64,7 @@ public abstract class MoActivity extends AppCompatActivity {
     /**
      * this is called when the activity was successfully created and ready to go
      */
-    protected abstract void onCreate();
+    protected abstract void initLayout();
 
 
     /**
@@ -91,6 +97,13 @@ public abstract class MoActivity extends AppCompatActivity {
 
 
 
+    public Activity getActivity() {
+        return this;
+    }
+
+    public Context getContext() {
+        return this;
+    }
 
 
 

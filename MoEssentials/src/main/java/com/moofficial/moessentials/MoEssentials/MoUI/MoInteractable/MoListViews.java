@@ -33,9 +33,9 @@ public abstract class MoListViews extends MoContext {
     // it is not in delete mode
     private List<View> normalViews = new ArrayList<>();
     // canceling the delete mode
-    protected Button cancelButton;
+    protected View cancelButton;
     // performing the actual delete
-    protected Button confirmButton;
+    protected View confirmButton;
     protected boolean showOneActionAtTime = true;
     private Transition transitionIn = new ChangeBounds();
     private Transition transitionOut = new ChangeBounds();
@@ -171,25 +171,19 @@ public abstract class MoListViews extends MoContext {
         return this;
     }
 
-    public Button getCancelButton() {
-        return cancelButton;
-    }
 
-    public Button getConfirmButton() {
-        return confirmButton;
-    }
 
     public boolean isShowOneActionAtTime() {
         return showOneActionAtTime;
     }
 
-    public MoListViews setCancelButton(Button cancelButton) {
+    public MoListViews setCancelButton(View cancelButton) {
         this.cancelButton = cancelButton;
         this.cancelButton.setOnClickListener(view -> onCancel());
         return this;
     }
 
-    public MoListViews setConfirmButton(Button confirmButton) {
+    public MoListViews setConfirmButton(View confirmButton) {
         this.confirmButton = confirmButton;
         this.confirmButton.setOnClickListener(view -> this.onConfirm());
         return this;

@@ -50,6 +50,10 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
                 ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
+    public  RecyclerView.LayoutParams getWrapWrapParam() {
+        return getRecyclerParams(RecyclerView.LayoutParams.WRAP_CONTENT,RecyclerView.LayoutParams.WRAP_CONTENT);
+    }
+
     /**
      * @param height of the recycler view item
      * @param width of the recycler view item
