@@ -42,7 +42,8 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     private String savedTitle = "";
 
 
-    public MoSelectable(Context c, ViewGroup parent, MoSelectableList<T> selectableList) {
+    @SafeVarargs
+    public MoSelectable(Context c, ViewGroup parent, MoSelectableList<T> ... selectableList) {
         super(c,parent);
         this.wrapper = new MoSelectableListWrapper<>(selectableList).sync(this);
     }

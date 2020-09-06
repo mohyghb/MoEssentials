@@ -43,8 +43,6 @@ public class MoBasicLayout extends MoConstraint {
     public CollapsingToolbarLayout collapsingToolbarLayout;
     public CoordinatorLayout coordinatorLayout;
     public ConstraintLayout rootView;
-    public MoCardView cardView;
-    public MoCardView innerCardView;
     public MoWrapperFloatingActionButton floatingActionButton;
     public NestedScrollView nestedScrollView;
 
@@ -79,8 +77,6 @@ public class MoBasicLayout extends MoConstraint {
         coordinatorLayout = findViewById(R.id.basic_activity_coordinator_layout);
         collapsingToolbarLayout = findViewById(R.id.basic_activity_collapsing_toolbar);
         rootView = findViewById(R.id.basic_activity_root);
-        cardView = findViewById(R.id.basic_activity_card_view);
-        innerCardView = findViewById(R.id.basic_activity_inner_card_view);
         nestedScrollView = findViewById(R.id.basic_activity_nested_scroll_view);
         floatingActionButton = new MoWrapperFloatingActionButton(findViewById(R.id.basic_activity_floating_action_button));
         floatingActionButton.hide();
@@ -93,46 +89,15 @@ public class MoBasicLayout extends MoConstraint {
 
     // mo helper methods
 
-    // card view
-    public MoBasicLayout setRadius(float r){
-        cardView.setRadius(r);
-        innerCardView.setRadius(r);
-        return this;
+
+    public ViewGroup getRootGroupView() {
+        return rootView;
     }
 
-    public MoBasicLayout makeActivityRound(){
-        cardView.makeCardRound();
-        innerCardView.makeCardRound();
-        return this;
+    public View getRootView() {
+        return rootView;
     }
 
-    public MoBasicLayout makeActivityRectangular(){
-        cardView.makeCardRectangular();
-        innerCardView.makeCardRectangular();
-        return this;
-    }
-
-    public MoBasicLayout customizeCards(MoCardBuilder c){
-        customizeOuterCard(c);
-        customizeInnerCard(c);
-        return this;
-    }
-
-    public MoBasicLayout customizeInnerCard(MoCardBuilder c){
-        c.build(innerCardView);
-        return this;
-    }
-
-    public MoBasicLayout customizeOuterCard(MoCardBuilder c){
-        c.build(cardView);
-        return this;
-    }
-
-    public MoBasicLayout makeCardViewsTransparent(){
-        cardView.makeTransparent();
-        innerCardView.makeTransparent();
-        return this;
-    }
 
     public MoBasicLayout makeNestedScrollTransparent(){
         nestedScrollView.setBackgroundColor(getContext().getColor(R.color.transparent));
@@ -147,7 +112,6 @@ public class MoBasicLayout extends MoConstraint {
 
 
     // set title text
-
     public MoBasicLayout setTitle(int rid){
         setTitle(getContext().getString(rid));
         return this;
@@ -252,11 +216,10 @@ public class MoBasicLayout extends MoConstraint {
      * the nested scroll view
      * @return this (builder)
      */
-    public MoBasicLayout removeNestedScrollView(){
+    public MoBasicLayout removeNestedScrollView() {
         coordinatorLayout.removeView(nestedScrollView);
         nestedScrollView = null;
         linearNested = null;
-        innerCardView = null;
         return this;
     }
 

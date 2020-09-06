@@ -2,28 +2,41 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Parcelable;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoGLMBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoLLMBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoSGLMBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewInterfaces.MoOnConfigurationChanged;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewInterfaces.MoOnSizeChanged;
+
+import java.util.Objects;
 
 // expands the abilities of the original recycler view
 // to unlock new experiences
 public class MoRecyclerView extends RecyclerView {
 
 
+
     public static final int NO_MAX_VALUE = -3;
+    private static final int SWIPE_MIN_DISTANCE = 5;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 300;
 
     /**
      * showing different layout managers
@@ -61,7 +74,10 @@ public class MoRecyclerView extends RecyclerView {
     private boolean reverseLayout = DEFAULT_REVERSE_LAYOUT;
     private boolean stackFromEnd = DEFAULT_STACK_FROM_END;
     @LayoutManagerType private int layoutManagerType = LINEAR_LAYOUT_MANAGER;
-
+    @NonNull private MoOnConfigurationChanged onConfigurationChanged = newConfig -> {};
+    @NonNull private MoOnSizeChanged onSizeChanged = (w, h, oldw, oldh) -> {};
+    private GestureDetector gestureDetector;
+    private int activeFeature = 0;
 
     public MoRecyclerView(@NonNull Context context) {
         super(context);
@@ -136,6 +152,16 @@ public class MoRecyclerView extends RecyclerView {
 
     public MoRecyclerView setStackFromEnd(boolean stackFromEnd) {
         this.stackFromEnd = stackFromEnd;
+        return this;
+    }
+
+    public MoRecyclerView setOnConfigurationChanged(@NonNull MoOnConfigurationChanged onConfigurationChanged) {
+        this.onConfigurationChanged = onConfigurationChanged;
+        return this;
+    }
+
+    public MoRecyclerView setOnSizeChanged(@NonNull MoOnSizeChanged onSizeChanged) {
+        this.onSizeChanged = onSizeChanged;
         return this;
     }
 
@@ -214,8 +240,19 @@ public class MoRecyclerView extends RecyclerView {
         initLayoutManager();
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        onSizeChanged.onSizeChanged(w, h, oldw, oldh);
+    }
 
-//    public Bundle saveState(String key,Bundle inState){
+    @Override
+    protected void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        onConfigurationChanged.onConfigurationChanged(newConfig);
+    }
+
+    //    public Bundle saveState(String key,Bundle inState){
 //        Parcelable p = getLayoutManager().onSaveInstanceState();
 //        inState.putParcelable(key,p);
 //        return inState;
@@ -228,6 +265,120 @@ public class MoRecyclerView extends RecyclerView {
 //        getLayoutManager().onRestoreInstanceState(inState.getParcelable(key));
 //
 //    }
+
+
+    /**
+     * makes the recycler view so that
+     * it snaps to the nearest item linearly when possible
+     * @return this
+     */
+    public MoRecyclerView enableLinearSnap() {
+        new LinearSnapHelper().attachToRecyclerView(this);
+        return this;
+    }
+
+    /**
+     * makes the recycler view so that
+     * it snaps to the nearest item like a pager
+     * when possible
+     * @return this
+     */
+    public MoRecyclerView enablePagerSnap() {
+        new PagerSnapHelper().attachToRecyclerView(this);
+        return this;
+    }
+
+    /**
+     * casts linear layout manager
+     * to the layout manager and returns it
+     * @return linear layout manager if exist or throw
+     * runtime exception
+     */
+    public LinearLayoutManager getLinearLayoutManager() {
+        return (LinearLayoutManager)getLayoutManager();
+    }
+
+    /**
+     * this only works with all the
+     * layout managers that are a subclass of
+     * LinearLayoutManager
+     * @return position of the first completely visible item
+     */
+    public int findFirstCompletelyVisibleItemPosition() {
+        return getLinearLayoutManager().findFirstCompletelyVisibleItemPosition();
+    }
+
+    /**
+     * this only works with all the
+     * layout managers that are a subclass of
+     * LinearLayoutManager
+     * @return position of the first visible item
+     */
+    public int findFirstVisibleItemPosition() {
+        return getLinearLayoutManager().findFirstVisibleItemPosition();
+    }
+
+    /**
+     * this only works with all the
+     * layout managers that are a subclass of
+     * LinearLayoutManager
+     * @return findLastCompletelyVisibleItemPosition
+     */
+    public int findLastCompletelyVisibleItemPosition() {
+        return getLinearLayoutManager().findLastCompletelyVisibleItemPosition();
+    }
+
+    /**
+     * this only works with all the
+     * layout managers that are a subclass of
+     * LinearLayoutManager
+     * @return findLastVisibleItemPosition
+     */
+    public int findLastVisibleItemPosition() {
+        return getLinearLayoutManager().findLastVisibleItemPosition();
+    }
+
+    /**
+     *
+     * @return true if the recycler view is
+     * on the last completely visible item
+     */
+    public boolean isOnLastCompletelyVisibleItem() {
+        return findLastCompletelyVisibleItemPosition() == Objects.requireNonNull(getAdapter()).getItemCount() - 1;
+    }
+
+    /**
+     *
+     * @return true if the recycler view is
+     * on the last visible item (notice that
+     * the last item does not have to be completely visible)
+     */
+    public boolean isOnLastVisibleItem() {
+        return findLastVisibleItemPosition() == Objects.requireNonNull(getAdapter()).getItemCount() - 1;
+    }
+
+
+    /**
+     *
+     * @return true if the recycler view is
+     * on the first completely visible item
+     */
+    public boolean isOnFirstCompletelyVisibleItem() {
+        return findFirstCompletelyVisibleItemPosition() == Objects.requireNonNull(getAdapter()).getItemCount() - 1;
+    }
+
+
+    /**
+     *
+     * @return true if the recycler view is
+     * on the first visible item (notice that
+     * the first item does not have to be completely visible)
+     */
+    public boolean isOnFirstVisibleItem() {
+        return findLastVisibleItemPosition() == Objects.requireNonNull(getAdapter()).getItemCount() - 1;
+    }
+
+
 
     @SuppressWarnings("rawtypes")
     public static class Builder extends MoContext {

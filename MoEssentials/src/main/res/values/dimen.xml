@@ -11,9 +11,7 @@
     <dimen name="first_letter_radius">50dp</dimen>
 
 
-    <dimen name="mo_bar_height_default">56dp</dimen>
-    <dimen name="mo_bar_height_landscape">48dp</dimen>
-    <dimen name="mo_bar_height_tablet">64dp</dimen>
+
 
 
 

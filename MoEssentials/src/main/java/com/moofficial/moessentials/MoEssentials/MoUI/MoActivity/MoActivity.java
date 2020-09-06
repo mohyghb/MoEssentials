@@ -9,41 +9,33 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoActivitySettings.MoActivitySettings;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoLayoutId;
-import com.moofficial.moessentials.R;
 
-public abstract class MoActivity extends AppCompatActivity implements MoLayoutId {
+public abstract class MoActivity extends AppCompatActivity {
 
 
-    protected Bundle savedInstanceState;
+
     protected MoActivitySettings activitySettings;
-    protected View contentView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.savedInstanceState = savedInstanceState;
-        this.contentView = MoInflaterView.inflate(getLayoutResId(),this);
-        setContentView(this.contentView);
+        // set the content view of the activity
+        setTheContentView();
         // set activity settings
         activitySettings = getActivitySettings();
         // call the on create inside the activity
-        initLayout();
+        initViews();
         // init other things that you want
         init();
     }
 
-//    /**
-//     *
-//     * this is used to set the content
-//     * view inside the onCreate method
-//     * @return the resource id of the layout
-//     */
-//    protected abstract int getLayoutResId();
 
     /**
      * init the class variables and fields
+     * this is called from the on create of the activity
+     * method
+     * you should be creating anything you want here
      */
     protected abstract void init();
 
@@ -62,10 +54,19 @@ public abstract class MoActivity extends AppCompatActivity implements MoLayoutId
     }
 
     /**
-     * this is called when the activity was successfully created and ready to go
+     * this is called when the activity should init its
+     * views, anything like findViewById should go inside
+     * here
      */
-    protected abstract void initLayout();
+    protected abstract void initViews();
 
+
+    /**
+     * set the layout that you will be using inside this activity
+     * just call setContentView and pass in the
+     * layout id or view that you want to use
+     */
+    protected abstract void setTheContentView();
 
     /**
      * returns a MoActivity dimensions which is

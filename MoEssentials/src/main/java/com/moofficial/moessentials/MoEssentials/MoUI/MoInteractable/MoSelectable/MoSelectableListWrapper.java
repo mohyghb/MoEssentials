@@ -3,22 +3,36 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectabl
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableList;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MoSelectableListWrapper<T extends MoSelectableItem> {
 
-    private MoSelectableList<T> list;
+    private interface MoOnAction<T extends MoSelectableItem> {
+            void perform(MoSelectableList<T> l);
+    }
+
+    private MoSelectableList<T> [] list;
     private MoSelectable<T> selectable;
     private boolean allItemsAreSelectable = true;
     private int countSelectableItems = 0;
 
-    public MoSelectableListWrapper(MoSelectableList<T> l){
+    @SafeVarargs
+    public MoSelectableListWrapper(MoSelectableList<T> ... l){
         this.list = l;
+    }
+
+
+    private void performForAll(MoOnAction<T> action) {
+        for(MoSelectableList<T> l:list){
+            action.perform(l);
+        }
     }
 
     public MoSelectableListWrapper<T> sync(MoSelectable<T> s){
         this.selectable = s;
-        this.list.setListSelectable(s);
+        performForAll(l -> l.setListSelectable(selectable));
         return this;
     }
 
@@ -44,27 +58,38 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
         // because all the items might not be affect, so we need
         // to keep track of which items are selectable, and only
         // add those to the selected list
-        List<T> affectedItems = MoSelectableUtils.turnAllItems(true,list.getDataSet());
-        this.list.getSelectedItems().clear();
-        this.list.getSelectedItems().addAll(affectedItems);
+        performForAll(l -> {
+            List<T> affectedItems = MoSelectableUtils.turnAllItems(true,l.getDataSet());
+            l.getSelectedItems().clear();
+            l.getSelectedItems().addAll(affectedItems);
+        });
         this.selectable.setSelectedSize(dataSetSize(),update);
         notifyDataSetChanged();
     }
 
-    public void deselectAll(boolean update){
-        MoSelectableUtils.turnAllItems(false,this.list.getSelectedItems());
-        this.list.getSelectedItems().clear();
+    public void deselectAll(boolean update) {
+        performForAll(l -> {
+            MoSelectableUtils.turnAllItems(false,l.getSelectedItems());
+            l.getSelectedItems().clear();
+        });
         this.selectable.setSelectedSize(0,update);
         notifyDataSetChanged();
     }
 
 
-    public void add(T item){
-        list.getSelectedItems().add(item);
+    public void add(T item) {
+        performForAll(l -> l.getSelectedItems().add(item));
     }
 
-    public void remove(T item){
-        list.getSelectedItems().remove(item);
+    public void remove(T item) {
+        performForAll(l -> l.getSelectedItems().remove(item));
+    }
+
+
+    public List<T> getSelectedItems(){
+        List<T> items = new ArrayList<>();
+        performForAll(l -> items.addAll(l.getSelectedItems()));
+        return items;
     }
 
     /**
@@ -73,23 +98,28 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
      * @return
      */
     public int dataSetSize(){
-        return allItemsAreSelectable?list.getDataSet().size():countSelectableItems;
+        return allItemsAreSelectable?allDataSetSize():countSelectableItems;
     }
 
-    public int selectedSize(){
-        return list.getSelectedItems().size();
+    public int allDataSetSize() {
+        AtomicInteger size = new AtomicInteger();
+        performForAll(l -> size.addAndGet(l.getDataSet().size()));
+        return size.get();
     }
 
-    public List<T> getSelectedItems(){
-        return this.list.getSelectedItems();
+    public int selectedSize() {
+        AtomicInteger size = new AtomicInteger();
+        performForAll(l -> size.addAndGet(l.getSelectedItems().size()));
+        return size.get();
     }
+
 
     public void notifyItemChanged(int position,Object payload){
-        list.notifyItemChanged(position,payload);
+        performForAll(l->l.notifyItemChanged(position,payload));
     }
 
-    public void notifyDataSetChanged(){
-        list.notifyDataSetChanged();
+    public void notifyDataSetChanged() {
+        performForAll(MoSelectableList::notifyDataSetChanged);
     }
 
 
@@ -103,11 +133,15 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
      */
     public void measureSelectableItemsInList(){
         this.countSelectableItems = 0;
-        for(T t: list.getDataSet()){
-            if(t.isSelectable()){
-                countSelectableItems++;
+        performForAll(l -> {
+            for(T t: l.getDataSet()) {
+                if(t.isSelectable()){
+                    countSelectableItems++;
+                }
             }
-        }
+        });
+
     }
+
 
 }

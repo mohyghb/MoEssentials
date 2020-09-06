@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoLLMBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewInterfaces.MoOnConfigurationChanged;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewInterfaces.MoOnSizeChanged;
 
 @SuppressWarnings("rawtypes")
 public class MoRecyclerUtils {
@@ -69,6 +71,44 @@ public class MoRecyclerUtils {
         r.setAdapter(adapter);
         return r;
     }
+
+
+
+    /**
+     * sends a payload to all the items inside the
+     * adapter, that are within [0,item count]
+     * then inside the adapter on bind listener
+     * we should do something with the payload
+     * @param adapter to notify its items
+     * @param payload the data we wanna pass
+     */
+    public static void sendPayloadToAll(RecyclerView.Adapter adapter,Object payload){
+        adapter.notifyItemRangeChanged(0,adapter.getItemCount(), payload);
+    }
+
+    /**
+     * sends the MoOnSizeChanged.ON_SIZE_CHANGED
+     * payload to all the elements inside the adapter
+     * so they know that they need to change their sizes
+     * @param adapter to notify its items
+     */
+    public static void sendSizeChangedPayloadToAll(RecyclerView.Adapter adapter){
+        sendPayloadToAll(adapter, MoOnSizeChanged.ON_SIZE_CHANGED);
+    }
+
+
+    /**
+     * sends the MoOnConfigurationChanged.ON_CONFIG_CHANGED
+     * payload to all the elements inside the adapter
+     * so they know that they need to change their sizes
+     * @param adapter to notify its items
+     */
+    public static void sendNewConfigPayloadToAll(RecyclerView.Adapter adapter){
+        sendPayloadToAll(adapter, MoOnConfigurationChanged.ON_CONFIG_CHANGED);
+    }
+
+
+
 
 
 
