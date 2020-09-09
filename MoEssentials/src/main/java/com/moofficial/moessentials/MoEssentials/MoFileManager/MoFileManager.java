@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MoFileManager {
 
@@ -213,10 +215,57 @@ public class MoFileManager {
         File[] files = directory.listFiles();
         if(files==null)
             return;
-        for(int i  =0; i < files.length;i++){
+        for(int i  =0; i < files.length;i++) {
             listener.onRead(readFile(files[i]),i);
         }
     }
+
+
+    /**
+     * same as read all dir files
+     * but now everything happens async
+     * that means that each file will approximately have its
+     * own thread, so the order of file reader listener
+     * might be messed up
+     * @param context of app
+     * @param dirName directory name
+     * @param listener provides the position and data obtained from there
+     */
+    public static void readAllDirFilesAsync(Context context,String dirName,MoOnFileReadListener listener,int nThreads) {
+        File directory = MoDir.getInternalDir(context,dirName);
+        File[] files = directory.listFiles();
+        ExecutorService e = Executors.newFixedThreadPool(nThreads);
+        if(files==null)
+            return;
+        for(int i  =0; i < files.length;i++) {
+            int finalI = i;
+            e.execute(() -> {
+                try {
+                    listener.onRead(readFile(files[finalI]), finalI);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+        }
+        e.shutdown();
+        while(!e.isTerminated()){}
+    }
+
+
+    /**
+     * same as read all dir files
+     * but now everything happens async
+     * that means that each file will approximately have its
+     * own thread, so the order of file reader listener
+     * might be messed up
+     * @param context of app
+     * @param dirName directory name
+     * @param listener provides the position and data obtained from there
+     */
+    public static void readAllDirFilesAsync(Context context,String dirName,MoOnFileReadListener listener) {
+        readAllDirFilesAsync(context, dirName, listener,20);
+    }
+
 
 
     /**

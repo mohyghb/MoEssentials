@@ -77,12 +77,12 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
     }
 
 
-    public void add(T item) {
-        performForAll(l -> l.getSelectedItems().add(item));
+    public void add(MoSelectableList<T> list,T item) {
+        list.getSelectedItems().add(item);
     }
 
-    public void remove(T item) {
-        performForAll(l -> l.getSelectedItems().remove(item));
+    public void remove(MoSelectableList<T> list,T item) {
+        list.getSelectedItems().remove(item);
     }
 
 
@@ -114,8 +114,9 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
     }
 
 
-    public void notifyItemChanged(int position,Object payload){
-        performForAll(l->l.notifyItemChanged(position,payload));
+    public void notifyItemChanged(MoSelectableList<T> list,int position,Object payload) {
+        list.notifyItemChanged(position,payload);
+//        performForAll(l->l.notifyItemChanged(position,payload));
     }
 
     public void notifyDataSetChanged() {

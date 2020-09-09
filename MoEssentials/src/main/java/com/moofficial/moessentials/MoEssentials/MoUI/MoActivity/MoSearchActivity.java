@@ -1,9 +1,17 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoWindow.MoSoftInputBuilder;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoSearchBar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
+import com.moofficial.moessentials.R;
+
 @Deprecated
-public abstract class MoSearchActivity extends MoOriginalActivity {
+public abstract class MoSearchActivity extends MoSmartActivity {
 
-
+//
 //    private MoSearchBar searchBar;
 //    private MoCardRecyclerView searchCardRecycler;
 //    private MoRecyclerView searchRecyclerView;
@@ -11,8 +19,8 @@ public abstract class MoSearchActivity extends MoOriginalActivity {
 //
 //
 //    @Override
-//    protected void onCreate() {
-//        super.onCreate();
+//    protected void initViews() {
+//        super.initViews();
 //        setTitle(R.string.search);
 //        setSearchHint(R.string.search_hint);
 //        this.searchAdapter = getAdapter();
@@ -21,7 +29,6 @@ public abstract class MoSearchActivity extends MoOriginalActivity {
 //
 //        // soft input mode
 //        bringKeyboardAndFocus();
-//
 //    }
 //
 //    /**
@@ -34,9 +41,9 @@ public abstract class MoSearchActivity extends MoOriginalActivity {
 //    }
 //
 //    private void initSearchRecycler() {
-//        searchCardRecycler = new MoCardRecyclerView(this);
-//        searchRecyclerView = new MoRecyclerView(this, searchCardRecycler.getRecyclerView(),this.searchAdapter);
-//        searchRecyclerView.show();
+////        searchCardRecycler = new MoCardRecyclerView(this);
+////        searchRecyclerView = new MoRecyclerView(this, searchCardRecycler.getRecyclerView(),this.searchAdapter);
+////        searchRecyclerView.show();
 //    }
 //
 //    private void initSearchBar(){

@@ -41,7 +41,7 @@ public abstract class MoSelectableAdapter<T extends RecyclerView.ViewHolder,I ex
 
     @Override
     public void onSelect(int i) {
-        selectable.onSelect(dataSet.get(i),i);
+        selectable.onSelect(this,dataSet.get(i),i);
     }
 
     /**

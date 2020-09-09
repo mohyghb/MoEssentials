@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
+import java.util.Objects;
 
 // a class to handle all the directory stuff
 public class MoDir {
@@ -67,6 +68,16 @@ public class MoDir {
         return mkDir(new File(getCacheDir(context),dirName));
     }
 
-
+    /**
+     * returns the number of files + directories inside
+     * the directory with dirName
+     * @param context of the app
+     * @param dirName directory name
+     * @return number of files + directories in dirName dir
+     */
+    public static int getFilesSizeDir(Context context,String dirName) {
+        File directory = MoDir.getInternalDir(context,dirName);
+         return Objects.requireNonNull(directory.listFiles()).length;
+    }
 
 }

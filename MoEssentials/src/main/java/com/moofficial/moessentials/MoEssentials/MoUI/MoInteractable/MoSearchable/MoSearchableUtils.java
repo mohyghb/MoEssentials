@@ -1,6 +1,9 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable;
 
+import androidx.annotation.NonNull;
+
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableItem;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoSearchableInterface.MoSearchableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,9 @@ public class MoSearchableUtils {
     // we put 20 items in each thread to perform search async
     private static final int ITEMS_PER_SEARCH_THREAD = 20;
     private static final int NUMBER_OF_THREADS = 30;
+
+
+
 
     /**
      *
@@ -66,6 +72,17 @@ public class MoSearchableUtils {
 
 
 
+//    public static void cancelSearch(@NonNull MoSearchableList[] lists){
+//        for(MoSearchableList l: lists) {
+//            cancelSearch(l.getSearchableItems());
+//        }
+//    }
+//    /**
+//     * cancels the search on many adapters
+//     * or only one (depending on how many were
+//     * init at the beginning )
+//     * @param lists
+//     */
     public static void cancelSearch(List<? extends MoSearchableItem> list){
         if(list == null)
             return;

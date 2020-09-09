@@ -384,10 +384,10 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
      * when the user calls on select (selects an item to deselect or select)
      * @param si
      */
-    public void onSelect(T si,int position){
-        addOrRemoveItem(si);
+    public void onSelect(MoSelectableList<T> list,T si,int position){
+        addOrRemoveItem(list,si);
         notifySizeChange(si.isSelected());
-        wrapper.notifyItemChanged(position,PAYLOAD_SELECTED_ITEM);
+        wrapper.notifyItemChanged(list,position,PAYLOAD_SELECTED_ITEM);
         onSelectListener.onSelect(si);
     }
 
@@ -398,13 +398,13 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
      * selected anymore
      * @param si
      */
-    public void addOrRemoveItem(T si) {
+    public void addOrRemoveItem(MoSelectableList<T> list,T si) {
         if(si.onSelect()){
             // if it is selected, add it to the selected list
-            wrapper.add(si);
+            wrapper.add(list,si);
         }else{
             // else remove it from the list
-            wrapper.remove(si);
+            wrapper.remove(list,si);
         }
     }
 

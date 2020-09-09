@@ -118,6 +118,8 @@ public class MoSearchable extends MoListViews {
         }.start();
     }
 
+
+
     public MoSearchable setSearchOnTextChanged(boolean searchOnTextChanged) {
         this.searchOnTextChanged = searchOnTextChanged;
         addTextWatcherToSearchText();
