@@ -17,7 +17,7 @@ public class MoToolBar extends MoConstraint {
 
     private MoCardView cardView;
     private TextView title;
-    private ImageButton leftButton, middleButton, rightButton,extraButton;
+    private ImageButton leftButton, middleButton, rightButton,extraButton,forthButton;
     private CheckBox checkBox;
 
     public MoToolBar(Context context) {
@@ -60,41 +60,49 @@ public class MoToolBar extends MoConstraint {
         return extraButton.getId();
     }
 
+    public int FId(){
+        return forthButton.getId();
+    }
+
     public int CBOXId(){
         return this.checkBox.getId();
     }
 
 
-    public MoToolBar hideRight(){
+    public MoToolBar hideRight() {
         rightButton.setVisibility(View.GONE);
         return this;
     }
 
-    public MoToolBar hideTitle(){
+    public MoToolBar hideTitle() {
         title.setVisibility(View.GONE);
         return this;
     }
 
-    public MoToolBar hideMiddle(){
+    public MoToolBar hideMiddle() {
         middleButton.setVisibility(View.GONE);
         return this;
     }
 
-    public MoToolBar hideLeft(){
+    public MoToolBar hideLeft() {
         leftButton.setVisibility(View.GONE);
         return this;
     }
 
-    public MoToolBar hideCheckBox(){
+    public MoToolBar hideCheckBox() {
         checkBox.setVisibility(View.GONE);
         return this;
     }
 
-    public MoToolBar hideExtraButton(){
+    public MoToolBar hideExtraButton() {
         extraButton.setVisibility(View.GONE);
         return this;
     }
 
+    public MoToolBar hideForthButton() {
+        forthButton.setVisibility(View.GONE);
+        return this;
+    }
 
     public MoToolBar showRight(){
         rightButton.setVisibility(View.VISIBLE);
@@ -123,6 +131,11 @@ public class MoToolBar extends MoConstraint {
 
     public MoToolBar showExtraButton(){
         extraButton.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoToolBar showForthButton() {
+        forthButton.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -222,6 +235,11 @@ public class MoToolBar extends MoConstraint {
         return this;
     }
 
+    public MoToolBar setForthOnClickListener(View.OnClickListener l){
+        forthButton.setOnClickListener(l);
+        return this;
+    }
+
 
     public MoToolBar setLeftIcon(int res){
         new MoImageButtonBuilder(getContext()).setIcon(res).build(this.leftButton);
@@ -240,6 +258,13 @@ public class MoToolBar extends MoConstraint {
 
     public MoToolBar setExtraIcon(int res){
         new MoImageButtonBuilder(getContext()).setIcon(res).build(this.extraButton);
+        showExtraButton();
+        return this;
+    }
+
+    public MoToolBar setForthIcon(int res){
+        new MoImageButtonBuilder(getContext()).setIcon(res).build(this.forthButton);
+        showForthButton();
         return this;
     }
 
@@ -265,6 +290,7 @@ public class MoToolBar extends MoConstraint {
         cardView = findViewById(R.id.menu_app_bar_card_view);
         extraButton = findViewById(R.id.menu_app_bar_extra_button);
         checkBox = findViewById(R.id.menu_app_bar_checkBox);
+        forthButton = findViewById(R.id.menu_app_bar_forth_button);
     }
 
     @Override

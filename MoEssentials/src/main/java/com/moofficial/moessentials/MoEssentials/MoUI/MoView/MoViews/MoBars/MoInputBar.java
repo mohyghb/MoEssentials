@@ -278,24 +278,21 @@ public class MoInputBar extends MoConstraint {
 
     // special methods
 
-    /**
-     * this is the special style for when you need an input
-     * bar with no title or description (you can also use MoEdit text for
-     * that use case as well)
-     * @param inputBar
-     */
-    public static void defaultDialogStyleNoTitleDescription(MoInputBar inputBar){
-        // making the card view rec round
-        inputBar.getCardView().makeCardRecRound();
-        // making the edit text background transparent
-        inputBar.getEditText().transparentTextBackground();
-        // making sure there is no margin between
-        inputBar.getConstraintLayout().setLayoutParams(MoMarginBuilder.
-                getCardLayoutParams(0));
-        new MoPaddingBuilder(16)
-                .convertValuesToDp()
-                .apply(inputBar);
-    }
+//    /**
+//     * this is the special style for when you need an input
+//     * bar with no title or description (you can also use MoEdit text for
+//     * that use case as well)
+//     * @param inputBar
+//     */
+//    public static void defaultDialogStyleNoTitleDescription(MoInputBar inputBar){
+//        // making the card view rec round
+//        // making sure there is no margin between
+//        inputBar.getConstraintLayout().setLayoutParams(MoMarginBuilder.
+//                getCardLayoutParams(0));
+//        new MoPaddingBuilder(16)
+//                .convertValuesToDp()
+//                .apply(inputBar);
+//    }
 
 
 

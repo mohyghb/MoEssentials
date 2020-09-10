@@ -1,9 +1,12 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoEditText;
 
 import android.content.Context;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -19,7 +22,6 @@ import java.util.Objects;
 
 public class MoEditText extends MoConstraint {
 
-    private MoCardView cardView;
     private TextInputEditText textInputEditText;
     private TextInputLayout textInputLayout;
 
@@ -33,15 +35,6 @@ public class MoEditText extends MoConstraint {
 
     public MoEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    public MoCardView getCardView() {
-        return cardView;
-    }
-
-    public MoEditText setCardView(MoCardView cardView) {
-        this.cardView = cardView;
-        return this;
     }
 
     public TextInputEditText getTextInputEditText() {
@@ -148,15 +141,6 @@ public class MoEditText extends MoConstraint {
     }
 
 
-    public MoEditText transparentTextBackground(){
-        this.setBoxBackgroundColor(R.color.transparent);
-        return this;
-    }
-
-    public MoEditText transparentCardBackground(){
-        this.cardView.makeTransparent();
-        return this;
-    }
 
     /**
      * sets the box background color based on the
@@ -181,8 +165,10 @@ public class MoEditText extends MoConstraint {
     }
 
     // EditorInfo.IME_ACTION_DONE
-    public MoEditText actionDone(){
+    public MoEditText actionDone() {
         this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        singleLine();
+        inputTypeText();
         return this;
     }
 
@@ -216,6 +202,37 @@ public class MoEditText extends MoConstraint {
         return this;
     }
 
+    /**
+     * makes the edit text to be single line
+     * @return this for nested calling
+     */
+    public MoEditText singleLine() {
+        textInputEditText.setMaxLines(1);
+        return this;
+    }
+
+    /**
+     * makes the input type of edit text be
+     * just simple text
+     * @return this for nested calling
+     */
+    public MoEditText inputTypeText() {
+        textInputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        return this;
+    }
+
+
+    /**
+     *
+     * @param l listener for editor action
+     * @return this for nested calling
+     */
+    public MoEditText setOnEditorActionListener(TextView.OnEditorActionListener l){
+        textInputEditText.setOnEditorActionListener(l);
+        return this;
+    }
+
+
 
     @Override
     public int getLayoutId() {
@@ -224,7 +241,6 @@ public class MoEditText extends MoConstraint {
 
     @Override
     public void initViews() {
-        cardView = findViewById(R.id.mo_edit_text_card_view);
         textInputEditText = findViewById(R.id.mo_edit_text_text_input);
         textInputLayout = findViewById(R.id.mo_edit_text_text_layout);
     }

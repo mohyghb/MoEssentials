@@ -90,4 +90,22 @@ public abstract class MoSelectableAdapter<T extends RecyclerView.ViewHolder,I ex
         selectedItems.clear();
     }
 
+    /**
+     *
+     * @return numbers of selected items
+     */
+    public int selectedSize() {
+        return selectedItems.size();
+    }
+
+    /**
+     * if the user has only selected one item,
+     * then return true else false
+     * @return true if the size of the selected
+     * list is equal to one
+     */
+    public boolean onlyOneIsSelected() {
+        return selectedSize() == 1;
+    }
+
 }

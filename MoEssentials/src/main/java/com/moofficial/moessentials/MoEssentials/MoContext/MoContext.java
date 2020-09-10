@@ -7,6 +7,10 @@ import android.graphics.drawable.Drawable;
 
 import androidx.core.content.ContextCompat;
 
+// this class used as a helper class
+// in case you want to extend this class,
+// you will automatically gain access to most features of the
+// context and it makes everything easier for you
 public class MoContext {
 
     protected Context context;
