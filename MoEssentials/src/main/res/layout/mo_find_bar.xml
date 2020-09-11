@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/search_card_view"
     android:layout_width="match_parent"
-    android:layout_height="?android:actionBarSize"
-    app:cardCornerRadius="@dimen/mo_style_card_corner">
+    android:layout_height="?android:actionBarSize">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout2"

@@ -189,7 +189,6 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
         if(message!=null){
             this.counterMessage = message;
         }
-        this.savedTitle = this.counterTextView.getText().toString();
         return this;
     }
 
@@ -292,6 +291,8 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     @Override
     public void onActivateSpecialMode() {
         wrapper.init();
+        // saving the title, in case they want to restore it later on
+        this.savedTitle = this.counterTextView.getText().toString();
     }
 
 

@@ -5,7 +5,7 @@
     android:id="@+id/basic_activity_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground"
+    android:background="@color/transparent"
     android:animateLayoutChanges="false">
 
 
@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
+        android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +25,7 @@
         android:id="@+id/basic_activity_coordinator_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/transparent"
         app:layout_constraintBottom_toTopOf="@id/basic_activity_linear_bottom_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/mo_app_bar_height"
             android:animateLayoutChanges="false"
-            android:background="?android:colorBackground"
+            android:background="@color/transparent"
             android:elevation="0dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -75,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:animateLayoutChanges="false"
-                    android:background="?android:colorBackground"
+                    android:background="@color/transparent"
                     android:clickable="false"
                     android:elevation="0dp"
                     android:focusable="false"
@@ -88,6 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:animateLayoutChanges="false"
+                        android:background="@color/transparent"
                         android:orientation="vertical" />
                 </androidx.appcompat.widget.Toolbar>
 
@@ -102,13 +104,14 @@
             android:animateLayoutChanges="false"
             android:clipToPadding="false"
             android:fillViewport="false"
-            android:paddingBottom="?attr/actionBarSize"
+            android:background="@color/transparent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:id="@+id/basic_activity_linear_nested_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="?attr/actionBarSize"
                 android:animateLayoutChanges="false"
                 android:orientation="vertical" />
         </androidx.core.widget.NestedScrollView>
@@ -124,6 +127,7 @@
         android:layout_height="wrap_content"
         android:animateLayoutChanges="false"
         android:orientation="vertical"
+        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
