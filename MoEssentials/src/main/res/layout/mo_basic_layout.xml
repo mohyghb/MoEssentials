@@ -5,7 +5,6 @@
     android:id="@+id/basic_activity_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
     android:animateLayoutChanges="false">
 
 
@@ -14,7 +13,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +23,6 @@
         android:id="@+id/basic_activity_coordinator_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/transparent"
         app:layout_constraintBottom_toTopOf="@id/basic_activity_linear_bottom_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="0dp"
-                app:contentScrim="@color/transparent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleEnabled="false"
                 app:toolbarId="@id/basic_activity_toolbar">
@@ -71,14 +67,14 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/basic_activity_toolbar"
-                    style="@style/Widget.AppCompat.Toolbar"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:animateLayoutChanges="false"
-                    android:background="@color/transparent"
+                    android:background="?android:colorBackground"
                     android:clickable="false"
-                    android:elevation="0dp"
+                    app:elevation="0dp"
                     android:focusable="false"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp"
@@ -88,8 +84,8 @@
                         android:id="@+id/basic_activity_toolbar_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:elevation = "0dp"
                         android:animateLayoutChanges="false"
-                        android:background="@color/transparent"
                         android:orientation="vertical" />
                 </androidx.appcompat.widget.Toolbar>
 

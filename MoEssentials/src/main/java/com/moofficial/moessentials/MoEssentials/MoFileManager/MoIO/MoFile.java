@@ -158,14 +158,15 @@ public class MoFile {
     }
 
 
+
     /**
      * returns a list of sub-data based on the data
      * that is given to us
      * @param data should be a JSON string
      * @return
      */
-    public static String[] loadable(String data){
-        if(data == null || data.isEmpty()){
+    public static String[] loadable(String data) {
+        if(data == null || data.isEmpty()) {
             return new String[]{};
         }
         try {

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search_card_view"
     android:layout_width="match_parent"
-    android:layout_height="?android:actionBarSize">
+    android:layout_height="?android:actionBarSize"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_constraint_layout"
@@ -20,10 +22,10 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/mo_image_button_padding"
-            android:src="@drawable/ic_baseline_chevron_left_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_chevron_left_24" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_edit_text"
@@ -47,10 +49,10 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/mo_image_button_padding"
-            android:src="@drawable/ic_close_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_close_black_24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
