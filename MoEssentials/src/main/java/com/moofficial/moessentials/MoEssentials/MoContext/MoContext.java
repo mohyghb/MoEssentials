@@ -31,8 +31,8 @@ public class MoContext {
         return ContextCompat.getDrawable(context,id);
     }
 
-    public int getColor(int id){
-        return context.getColor(id);
+    public int getColor(int id) {
+        return ContextCompat.getColor(context,id);
     }
 
     public Resources getResources(){

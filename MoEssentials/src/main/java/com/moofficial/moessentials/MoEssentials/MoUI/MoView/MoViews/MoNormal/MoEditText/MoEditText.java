@@ -56,7 +56,7 @@ public class MoEditText extends MoConstraint {
     }
 
     public MoEditText setHint(@StringRes int id){
-        return this.setHint(context.getString(id));
+        return this.setHint(getString(id));
 
     }
 
@@ -66,7 +66,7 @@ public class MoEditText extends MoConstraint {
     }
 
     public MoEditText setText(@StringRes int id){
-        return this.setText(context.getString(id));
+        return this.setText(getString(id));
     }
 
     public MoEditText setText(String h){
@@ -149,7 +149,7 @@ public class MoEditText extends MoConstraint {
      * @return
      */
     public MoEditText setBoxBackgroundColor(@ColorRes int colorId){
-        this.textInputLayout.setBoxBackgroundColor(context.getColor(colorId));
+        this.textInputLayout.setBoxBackgroundColor(getColor(colorId));
         return this;
     }
 

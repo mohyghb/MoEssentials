@@ -1,34 +1,37 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.ColorRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder.MoViewBuilder;
 
 public abstract class MoConstraint extends ConstraintLayout implements MoViewInterface {
 
     protected TypedArray typedArray;
-    protected Context context;
 
     public MoConstraint(Context context) {
         super(context);
-        this.context = context;
+        //this.context = context;
         init(null);
     }
 
     public MoConstraint(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
+       // this.context = context;
         init(attrs);
     }
 
     public MoConstraint(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context = context;
+       // this.context = context;
         init(attrs);
     }
 
@@ -43,19 +46,58 @@ public abstract class MoConstraint extends ConstraintLayout implements MoViewInt
         return this;
     }
 
-    public MoConstraint goInvisible(){
+    public MoConstraint invisible() {
         setVisibility(View.INVISIBLE);
         return this;
     }
 
-    public MoConstraint goVisible(){
+    public MoConstraint visible() {
         setVisibility(View.VISIBLE);
         return this;
     }
 
-    public  MoConstraint goGone(){
+    public  MoConstraint gone() {
         setVisibility(View.GONE);
         return this;
+    }
+
+    public String getString(int id) {
+        return getContext().getString(id);
+    }
+
+    public Drawable getDrawable(int id) {
+        return ContextCompat.getDrawable(getContext(),id);
+    }
+
+    public int getColor(int id) {
+        return ContextCompat.getColor(getContext(),id);
+    }
+
+    public Resources getResources(){
+        return getContext().getResources();
+    }
+
+    public float getDimension(int id){
+        return getContext().getResources().getDimension(id);
+    }
+
+
+    /**
+     *
+     * @return height of the screen in current mode
+     *         in pixels
+     */
+    public int getHeightPixels(){
+        return getResources().getDisplayMetrics().heightPixels;
+    }
+
+    /**
+     *
+     * @return width of the screen in current mode
+     *         in pixels
+     */
+    public int getWidthPixels(){
+        return getResources().getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -70,6 +112,7 @@ public abstract class MoConstraint extends ConstraintLayout implements MoViewInt
         }
         initViews();
     }
+
 
 
 
