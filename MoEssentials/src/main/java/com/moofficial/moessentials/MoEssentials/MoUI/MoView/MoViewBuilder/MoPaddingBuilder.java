@@ -18,6 +18,10 @@ public class MoPaddingBuilder{
         right = p;
     }
 
+    public MoPaddingBuilder(int left,int top,int right,int bottom) {
+        setLeft(left).setTop(top).setRight(right).setBottom(bottom);
+    }
+
     public int getTop() {
         return top;
     }

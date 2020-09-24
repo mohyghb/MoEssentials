@@ -8,6 +8,9 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterVi
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoLinearLayoutUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoSwitchers.MoSwitchViews;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoLinearLayoutUtils.addToLinearLayout;
 
 public class MoWrapperLinearLayout extends MoWrapper<LinearLayout> {
@@ -23,23 +26,45 @@ public class MoWrapperLinearLayout extends MoWrapper<LinearLayout> {
 
 
 
-    public View addView(View v){
+    public MoWrapperLinearLayout addView(View v){
         return addView(v,null);
     }
 
-    public void addViews(View ... views){
-        addViews(null,views);
+    /**
+     * adds all the views to the linear layout
+     * and puts null as their layout param
+     * @param views views to be added
+     */
+    public MoWrapperLinearLayout addViews(View ... views){
+        return addViews(null,views);
     }
 
-    public void addViews(LinearLayout.LayoutParams lp,View ... views){
-        for(View v:views){
+    /**
+     * adds all the views to the linear layout
+     * and puts p as their layout param
+     * @param lp layout param
+     * @param views views to be added
+     */
+    public MoWrapperLinearLayout addViews(LinearLayout.LayoutParams lp,View ... views){
+        return this.addViews(lp, Arrays.asList(views));
+    }
+
+    /**
+     * adds all the views to the linear layout
+     * and puts p as their layout param
+     * @param lp layout param
+     * @param views views to be added
+     */
+    public MoWrapperLinearLayout addViews(LinearLayout.LayoutParams lp, List<View> views){
+        for(View v:views) {
             addView(v,lp);
         }
+        return this;
     }
 
-    public View addView(View v,LinearLayout.LayoutParams lp){
+    public MoWrapperLinearLayout addView(View v,LinearLayout.LayoutParams lp){
         MoLinearLayoutUtils.addToLinearLayout(wrappedElement,v,lp);
-        return v;
+        return this;
     }
 
     public LinearLayout getLinearLayout() {
@@ -52,6 +77,8 @@ public class MoWrapperLinearLayout extends MoWrapper<LinearLayout> {
     }
 
     /**
+     * this is a term we use to show only
+     * one bar inside the linear layout at a time
      * adds multiple toolbars to the main toolbar
      * and only turns the active one on
      * and the rest are GONE

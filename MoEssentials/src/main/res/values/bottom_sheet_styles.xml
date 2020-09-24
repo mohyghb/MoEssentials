@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mo_round_bottom_sheet_dialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/mo_round_bottom_sheet_style</item>
+    </style>
+
+    <style name="mo_round_bottom_sheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/mo_round_bottom_sheet_style</item>
+    </style>
+
+    <style name="mo_round_bottom_sheet_style" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/mo_rounded_background</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/mo_style_card_corner</item>
+        <item name="cornerSizeTopLeft">@dimen/mo_style_card_corner</item>
+        <item name="cornerSizeBottomRight">@dimen/mo_style_card_corner</item>
+        <item name="cornerSizeBottomLeft">@dimen/mo_style_card_corner</item>
+    </style>
+
+</resources>
