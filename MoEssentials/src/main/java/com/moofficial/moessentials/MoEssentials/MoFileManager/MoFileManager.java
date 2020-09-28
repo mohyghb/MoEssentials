@@ -4,11 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import androidx.core.content.ContextCompat;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -137,6 +140,25 @@ public class MoFileManager {
         fis.read(buffer);
         fis.close();
         return new String(buffer);
+    }
+
+    /**
+     * reads the file name from
+     * the asset folder of the android
+     * return the content of it in string
+     * format
+     * @param c context
+     * @param fileName of the file
+     * @return content of the file name
+     * @throws IOException
+     */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static String readAssetFile(Context c, String fileName) throws IOException {
+        InputStream f = c.getAssets().open(fileName);
+        byte[] b = new byte[f.available()];
+        f.read(b);
+        f.close();
+        return new String(b);
     }
 
     /**

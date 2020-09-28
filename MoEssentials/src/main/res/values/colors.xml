@@ -26,7 +26,7 @@
     <color name="mo_transparent_black">#E6000000</color>
 
     <color name="mo_card_color">@color/MoWhite_v2</color>
-    <color name="mo_bottom_sheet_color">@color/mo_transparent_white</color>
+    <color name="mo_bottom_sheet_color">@color/MoWhite</color>
 
 
 

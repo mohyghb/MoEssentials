@@ -6,6 +6,6 @@
     <color name="MoBackground">@color/MaterialGrey</color>
     <color name="MoInverseColor">@color/MoWhite</color>
     <color name="mo_card_color">@color/MaterialGrey</color>
-    <color name="mo_bottom_sheet_color">@color/mo_transparent_black</color>
+    <color name="mo_bottom_sheet_color">@color/MoBlack</color>
 
 </resources>
