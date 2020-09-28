@@ -57,7 +57,8 @@ public class MoViewUtils {
     public static void rippleOnClick(Context context,View v){
         TypedValue outValue = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-        v.setForeground(ContextCompat.getDrawable(context,outValue.resourceId));
+        //v.setForeground(ContextCompat.getDrawable(context,outValue.resourceId));
+        v.setBackgroundResource(outValue.resourceId);
         v.setClickable(true);
     }
 

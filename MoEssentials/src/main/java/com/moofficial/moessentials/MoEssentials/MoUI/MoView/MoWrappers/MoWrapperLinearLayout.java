@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.widget.LinearLayoutCompat;
+
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoLinearLayoutUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoSwitchers.MoSwitchViews;
@@ -30,12 +32,39 @@ public class MoWrapperLinearLayout extends MoWrapper<LinearLayout> {
         return addView(v,null);
     }
 
+
+    /**
+     * sets the orientation of the
+     * linear layout
+     * @param o orientation
+     * @return this for nested calling
+     */
+    public MoWrapperLinearLayout setOrientation(@LinearLayoutCompat.OrientationMode int o) {
+        wrappedElement.setOrientation(o);
+        return this;
+    }
+
+    public MoWrapperLinearLayout setWeightSum(float s) {
+        wrappedElement.setWeightSum(s);
+        return this;
+    }
+
+
     /**
      * adds all the views to the linear layout
      * and puts null as their layout param
      * @param views views to be added
      */
     public MoWrapperLinearLayout addViews(View ... views){
+        return addViews(Arrays.asList(views));
+    }
+
+    /**
+     * adds all the views to the linear layout
+     * and puts null as their layout param
+     * @param views views to be added
+     */
+    public MoWrapperLinearLayout addViews(List<View> views){
         return addViews(null,views);
     }
 

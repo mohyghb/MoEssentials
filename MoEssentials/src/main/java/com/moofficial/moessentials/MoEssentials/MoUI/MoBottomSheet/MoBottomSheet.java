@@ -1,22 +1,17 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoBottomSheet;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.shape.MaterialShapeDrawable;
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoBottomSheetLayout;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
 
 import java.util.ArrayList;
@@ -29,6 +24,9 @@ public class MoBottomSheet extends MoContext {
 
     private BottomSheetDialog bottomSheet;
     private MoBottomSheetLayout layout;
+    // duration that the bottom sheet should be shown
+    // before dismissing on its own
+    private long duration = 0;
     private boolean cancelable = true;
     private boolean canceledOnTouchOutside = true;
     private boolean dismissWithAnimation = true;
@@ -135,6 +133,72 @@ public class MoBottomSheet extends MoContext {
     }
 
     /**
+     * adds the view to the linear
+     * layout inside the nested scroll view
+     * @param v views to be added with the param
+     * @param p params of the view inside linear layout
+     * @return this for nested calling
+     */
+    public MoBottomSheet addTitle(LinearLayout.LayoutParams p,List<View> v) {
+        layout.wrapperTitle.addViews(p,v);
+        return this;
+    }
+
+
+
+    /**
+     * adds the view to the linear
+     * bottom bar layout at bottom of the
+     * bottom sheet (non scrollable)
+     * @param v view to be added
+     * @return this for nested calling
+     */
+    public MoBottomSheet addBottomBar(View v) {
+        layout.wrapperBottomBar.addView(v);
+        return this;
+    }
+
+    /**
+     * adds the view to the linear
+     * bottom bar layout at bottom of the
+     * bottom sheet (non scrollable)
+     * @param v view to be added
+     * @param p params of the view inside linear layout
+     * @return this for nested calling
+     */
+    public MoBottomSheet addBottomBar(View v, LinearLayout.LayoutParams p) {
+        layout.wrapperBottomBar.addView(v,p);
+        return this;
+    }
+
+    /**
+     * adds the view to the linear
+     * bottom bar layout at bottom of the
+     * bottom sheet (non scrollable)
+     * @param v view to be added
+     * @param p params of the view inside linear layout
+     * @return this for nested calling
+     */
+    public MoBottomSheet addBottomBar(LinearLayout.LayoutParams p,View ... v) {
+        layout.wrapperBottomBar.addViews(p,v);
+        return this;
+    }
+
+    /**
+     * adds the view to the linear
+     * bottom bar layout at bottom of the
+     * bottom sheet (non scrollable)
+     * @param v view to be added
+     * @param p params of the view inside linear layout
+     * @return this for nested calling
+     */
+    public MoBottomSheet addBottomBar(LinearLayout.LayoutParams p,List<View> v) {
+        layout.wrapperBottomBar.addViews(p,v);
+        return this;
+    }
+
+
+    /**
      * adds the callback to the
      * list of call backs
      * @param c callback to be added to the list
@@ -211,6 +275,34 @@ public class MoBottomSheet extends MoContext {
     }
 
     /**
+     * makes the state expanded
+     * @return this for nested calling
+     */
+    public MoBottomSheet expanded() {
+        return setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    /**
+     * makes the state half-expanded
+     * @return this for nested calling
+     */
+    public MoBottomSheet halfExpanded() {
+        return setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+    }
+
+    /**
+     * duration of the bottom sheet
+     * after duration (in milliseconds)
+     * the bottom sheet is dismissed automatically
+     * @param duration in milliseconds
+     * @return this for nested calling
+     */
+    public MoBottomSheet setDuration(long duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    /**
      * if the style used in making the bottom
      * sheet should be round
      */
@@ -241,7 +333,20 @@ public class MoBottomSheet extends MoContext {
         behavior.setHideable(hideable);
         addAllCallBacks(behavior);
         addUniversalCallback(behavior);
+        addDuration();
         return this;
+    }
+
+    /**
+     * if duration is not 0,
+     * we dismiss the bottom sheet after
+     * the specified duration in milliseconds
+     */
+    private void addDuration() {
+        if (duration!=0) {
+            Handler h = new Handler();
+            h.postDelayed(this::dismiss,duration);
+        }
     }
 
     /**
@@ -252,11 +357,11 @@ public class MoBottomSheet extends MoContext {
      * way.
      */
     private void initBottomSheetDialog() {
-//        if (round) {
+        if (round) {
             this.bottomSheet = new BottomSheetDialog(this.context, R.style.mo_round_bottom_sheet_dialog);
-//        } else {
-//            this.bottomSheet = new BottomSheetDialog(this.context);
-//        }
+        } else {
+            this.bottomSheet = new BottomSheetDialog(this.context);
+        }
     }
 
     /**
@@ -305,7 +410,8 @@ public class MoBottomSheet extends MoContext {
      * bottom sheet is not dismissed, so our solution fix
      * that problem automatically
      * - another problem is when the state is expanded or half-expanded,
-     * and fit content is set to true, we wouldn't get round behaviours
+     * and fit content is set to true, we wouldn't get round behaviours (
+     * this was fixed by overriding the theme inside styles )
      * @param behavior
      */
     private void addUniversalCallback(BottomSheetBehavior<FrameLayout> behavior) {
@@ -319,12 +425,6 @@ public class MoBottomSheet extends MoContext {
                     // removing the callback to avoid memory leaks
                     behavior.removeBottomSheetCallback(this);
                 }
-//                else if ( round && (newState == BottomSheetBehavior.STATE_EXPANDED ||
-//                        newState == BottomSheetBehavior.STATE_HALF_EXPANDED)) {
-//                    // In the EXPANDED STATE apply a new MaterialShapeDrawable with rounded cornes
-//                    MaterialShapeDrawable newMaterialShapeDrawable = MoBottomSheetUtils.getRoundBackground(bottomSheet);
-//                    ViewCompat.setBackground(bottomSheet, newMaterialShapeDrawable);
-//                }
             }
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {

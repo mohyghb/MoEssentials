@@ -1,18 +1,20 @@
-package com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts;
+package com.moofficial.moessentials.MoEssentials.MoUI.MoBottomSheet;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
 import androidx.core.widget.NestedScrollView;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoEmptyLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperLinearLayout;
 import com.moofficial.moessentials.R;
 
 public class MoBottomSheetLayout extends MoEmptyLayout {
 
-    public MoWrapperLinearLayout wrapperLinear;
-    public NestedScrollView nestedScrollView;
-    public MoWrapperLinearLayout wrapperTitle;
+    MoWrapperLinearLayout wrapperLinear;
+    NestedScrollView nestedScrollView;
+    MoWrapperLinearLayout wrapperTitle;
+    MoWrapperLinearLayout wrapperBottomBar;
 
     public MoBottomSheetLayout(Context context) {
         super(context);
@@ -36,6 +38,7 @@ public class MoBottomSheetLayout extends MoEmptyLayout {
         nestedScrollView = findViewById(R.id.mo_bottom_sheet_nested_scroll_view);
         wrapperLinear = new MoWrapperLinearLayout(findViewById(R.id.mo_bottom_sheet_linear_nested));
         wrapperTitle = new MoWrapperLinearLayout(findViewById(R.id.mo_bottom_sheet_linear_title));
+        wrapperBottomBar = new MoWrapperLinearLayout(findViewById(R.id.mo_bottom_sheet_linear_bottom_bar));
     }
 
     @Override

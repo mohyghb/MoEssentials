@@ -71,9 +71,43 @@ public class MoPaddingBuilder{
      * applies the padding to the view
      * @param v
      */
-    public MoPaddingBuilder apply(View v){
+    public MoPaddingBuilder apply(View v) {
+        if(v == null)
+            return this;
         v.setPadding(left,top,right,bottom);
         return this;
+    }
+
+    /**
+     * adds the padding to the current
+     * padding of the view instead of resetting
+     * it to the values of this class
+     * @param v view to add padding to
+     * @return this for nested calling
+     */
+    public MoPaddingBuilder applyToExisting(View v) {
+        if(v == null)
+            return this;
+        v.setPadding(left + v.getPaddingLeft(),
+                top + v.getPaddingTop(),
+                right + v.getPaddingRight(),
+                bottom + v.getPaddingBottom());
+        return this;
+    }
+
+
+    /**
+     * applies the padding to the view
+     * if the condition is true and padding builder
+     * is not null
+     * @param p padding builder
+     * @param v view
+     * @param condition if true we apply padding to the view
+     */
+    public static void applyToExisting(MoPaddingBuilder p, View v, boolean condition) {
+        if (p!=null && condition) {
+            p.applyToExisting(v);
+        }
     }
 
 }

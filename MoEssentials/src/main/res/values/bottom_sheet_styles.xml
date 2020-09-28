@@ -10,7 +10,7 @@
     </style>
 
     <style name="mo_round_bottom_sheet_style" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/mo_rounded_background</item>
+        <item name="android:background">@drawable/mo_bottom_sheet_background</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">@dimen/mo_style_card_corner</item>
         <item name="cornerSizeTopLeft">@dimen/mo_style_card_corner</item>
