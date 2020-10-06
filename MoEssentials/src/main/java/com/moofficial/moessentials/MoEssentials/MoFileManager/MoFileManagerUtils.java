@@ -3,7 +3,9 @@ package com.moofficial.moessentials.MoEssentials.MoFileManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFileSavable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
 import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 
 
@@ -37,6 +39,17 @@ public class MoFileManagerUtils {
                 object.getDirName(),
                 object.getFileName(),
                 object.getData());
+    }
+
+    /**
+     * writes all the list of savable
+     * into one file
+     * @param c context
+     * @param list of items to be saved
+     * @param <T>
+     */
+    public static <T extends MoSavable> void write(Context c, String fileName ,Iterable<T> list) throws IOException {
+        MoFileManager.writeInternalFile(c,fileName, MoFile.getData(list));
     }
 
     /**

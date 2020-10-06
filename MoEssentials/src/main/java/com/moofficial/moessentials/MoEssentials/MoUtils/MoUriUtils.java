@@ -35,5 +35,4 @@ public class MoUriUtils {
         }
         return true;
     }
-
 }

@@ -41,6 +41,7 @@ public class MoBottomSheet extends MoContext {
     private int peekHeight;
     @BottomSheetBehavior.State private int state = BottomSheetBehavior.STATE_COLLAPSED;
     private List<BottomSheetBehavior.BottomSheetCallback> callbacks = new ArrayList<>();
+    private Runnable onDismissedListener = () -> {};
 
     public MoBottomSheet(Context c) {
         super(c);
@@ -206,6 +207,16 @@ public class MoBottomSheet extends MoContext {
      */
     public MoBottomSheet addBottomSheetCallback(BottomSheetBehavior.BottomSheetCallback c) {
         callbacks.add(c);
+        return this;
+    }
+
+    /**
+     * called when the bottom sheet is dismissed
+     * @param onDismissedListener
+     * @return
+     */
+    public MoBottomSheet setOnDismissedListener(Runnable onDismissedListener) {
+        this.onDismissedListener = onDismissedListener;
         return this;
     }
 
@@ -380,6 +391,7 @@ public class MoBottomSheet extends MoContext {
      */
     public MoBottomSheet dismiss() {
         this.bottomSheet.dismiss();
+        this.onDismissedListener.run();
         return this;
     }
 

@@ -4,37 +4,6 @@ import android.widget.TextView;
 
 public class MoString {
 
-//    /**
-//     * returns the similarity of string a to string b
-//     * for example if a = "abcd" and b = "abcde"
-//     * a is 80 percent or 0.8 similar to b
-//     * @param a
-//     * @param b
-//     */
-//    public static float getSimilarity(String a, String b){
-//        double biggerSize = Math.max(a.length(), b.length());
-//        double similarChars = 0;
-//        // if either is empty return 0 percent similarity
-//        if(a.isEmpty() || b.isEmpty()){
-//            return 0f;
-//        }else if(a.equals(b)) {
-//            // they are the same
-//            return 1f;
-//        }
-//        char[] ac = a.toCharArray();
-//        char[] bc = b.toCharArray();
-//        int min = Math.min(a.length(),b.length());
-//        for(int i = 0; i < min; i++){
-//            if(ac[i] == bc[i]){
-//                // this character in a is same as b
-//                similarChars++;
-//            }else{
-//                // we met the first char where a and b are not similar
-//                break;
-//            }
-//        }
-//        return (float)(similarChars/biggerSize);
-//    }
 
     /**
      * how similar string b is to a
@@ -154,6 +123,20 @@ public class MoString {
      */
     public static float getFontSize(TextView tv, float base, float minSize,float decPerCharUnit, int charUnit) {
         return Math.max(base - ((float)tv.getText().toString().length()/charUnit * decPerCharUnit),minSize);
+    }
+
+    /**
+     *
+     * @param text to repeat
+     * @param n times to repeat the given text
+     * @return an string that is equal to the textToRepeat * n
+     */
+    public static String repeat(String text, int n) {
+        StringBuilder b = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            b.append(text);
+        }
+        return b.toString();
     }
 
 }

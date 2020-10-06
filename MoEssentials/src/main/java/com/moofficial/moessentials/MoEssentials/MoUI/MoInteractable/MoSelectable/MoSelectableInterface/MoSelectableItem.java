@@ -7,7 +7,10 @@ public interface MoSelectableItem {
      * user tries to select a selectable item
      * @return the select state after the change
      */
-    boolean onSelect();
+    default boolean onSelect() {
+        setSelected(!isSelected());
+        return isSelected();
+    }
 
     /**
      * setting the selected of selectable item
