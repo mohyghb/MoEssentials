@@ -387,11 +387,22 @@ public class MoBottomSheet extends MoContext {
 
     /**
      * dismisses the bottom sheet
+     * this also calls the on dismiss listener
      * @return this for nested calling
      */
     public MoBottomSheet dismiss() {
-        this.bottomSheet.dismiss();
+        dismissWithoutListener();
         this.onDismissedListener.run();
+        return this;
+    }
+
+    /**
+     * dismiss the bottom sheet without activating
+     * the on dismiss listener
+     * @return this for nested calling
+     */
+    public MoBottomSheet dismissWithoutListener() {
+        this.bottomSheet.dismiss();
         return this;
     }
 

@@ -1,20 +1,27 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViewUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoViewUtils;
 import com.moofficial.moessentials.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MoSelectableUtils {
 
+    public static final float ALPHA_SELECTED = 0.45f;
 
     /**
      * changes the selected state to the boolean given
@@ -33,39 +40,8 @@ public class MoSelectableUtils {
         return list;
     }
 
-//    /**
-//     * if the apply range change is true, we call
-//     * the adapter notifyItemRangeChanged
-//     * otherwise we call notifyItemChanged for every index
-//     * inside the indexes list
-//     * @param wrapper used to notify
-//     * @param indexes indexes to be notified
-//     * @param applyRangeChange whether we apply a range change or not
-//     */
-//    public static void notifyItemChanged(MoSelectableListWrapper<? extends MoSelectableItem> wrapper,
-//                                         List<Integer> indexes,boolean applyRangeChange){
-//        if(indexes == null || indexes.isEmpty()){
-//            return;
-//        }
-//
-//        if(applyRangeChange){
-//           // wrapper.notifyItemRangeChanged(indexes.get(0),indexes.size());
-//        }else{
-//            for(int i:indexes){
-//                wrapper.notifyItemChanged(i);
-//            }
-//        }
-//    }
-//
-//    /**
-//     * overloaded method from the above function
-//     * @param wrapper
-//     * @param indexes
-//     */
-//    public static void notifyItemChanged(MoSelectableListWrapper<? extends MoSelectableItem> wrapper,
-//                                         List<Integer> indexes) {
-//           notifyItemChanged(wrapper,indexes,false);
-//    }
+
+
 
     /**
      * sets the background of v
@@ -76,7 +52,7 @@ public class MoSelectableUtils {
      * @param selectableItem selectable item
      */
     public static void applySelectedColor(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem,R.color.colorAccent,100,R.color.transparent,0);
+        applySelectedColor(c,v,selectableItem,R.color.colorAccent,ALPHA_SELECTED);
     }
 
     /**
@@ -88,7 +64,7 @@ public class MoSelectableUtils {
      * @param selectableItem selectable item
      */
     public static void applySelectedColorUsePrimary(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem,R.color.colorPrimary,100,R.color.transparent,0);
+        applySelectedColor(c,v,selectableItem,R.color.colorPrimary,ALPHA_SELECTED);
     }
 
 
@@ -101,7 +77,7 @@ public class MoSelectableUtils {
      * @param selectableItem selectable item
      */
     public static void applySelectedColorUseDarkPrimary(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem,R.color.colorPrimaryDark,100,R.color.transparent,0);
+        applySelectedColor(c,v,selectableItem,R.color.colorPrimaryDark,ALPHA_SELECTED);
     }
 
 
@@ -111,8 +87,6 @@ public class MoSelectableUtils {
      * @param item selectable item
      * @param s selected color's id
      * @param a selected color's alpha
-     * @param ns not selected color id
-     * @param na not selected color's alpha
      * applies the selected color to a view
      * indicating that the view is selected
      * to be deleted or applies non-selected color
@@ -120,8 +94,8 @@ public class MoSelectableUtils {
      * selected
      */
     public static void applySelectedColor(Context c, View v, MoSelectableItem item,
-                                          @ColorRes int s, int a, @ColorRes int ns, int na){
-        applySelectedColor(v,item,c.getColor(s),a,c.getColor(ns),na);
+                                          @ColorRes int s, float a){
+        applySelectedColor(v, item, ContextCompat.getColor(c,s), a);
     }
 
     /**
@@ -129,8 +103,6 @@ public class MoSelectableUtils {
      * @param item selectable item
      * @param s selected color's id
      * @param a selected color's alpha
-     * @param ns not selected color id
-     * @param na not selected color's alpha
      * applies the selected color to a view
      * indicating that the view is selected
      * to be deleted or applies non-selected color
@@ -138,11 +110,12 @@ public class MoSelectableUtils {
      * selected
      */
     public static void applySelectedColor(View v, MoSelectableItem item,
-                                          int s, int a, int ns, int na){
+                                          @ColorInt int s, float a){
         if(item.isSelected()) {
-            MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(s,a));
-        }else{
-            MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(ns,na));
+            // remove any (same) overlay
+            MoViewUtils.colorOverlay(v, s, a);
+        } else {
+            MoViewUtils.clearOverlay(v);
         }
     }
 
