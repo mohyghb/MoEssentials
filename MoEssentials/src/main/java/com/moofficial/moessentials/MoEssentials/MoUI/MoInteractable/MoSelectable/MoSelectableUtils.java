@@ -1,27 +1,21 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable;
 
 import android.content.Context;
-import android.os.Build;
 import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViewUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoViewUtils;
 import com.moofficial.moessentials.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MoSelectableUtils {
 
-    public static final float ALPHA_SELECTED = 0.45f;
 
     /**
      * changes the selected state to the boolean given
@@ -40,9 +34,6 @@ public class MoSelectableUtils {
         return list;
     }
 
-
-
-
     /**
      * sets the background of v
      * to 100 alpha of color accent if it is selected
@@ -52,7 +43,7 @@ public class MoSelectableUtils {
      * @param selectableItem selectable item
      */
     public static void applySelectedColor(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem,R.color.colorAccent,ALPHA_SELECTED);
+        applySelectedColor(c,v,selectableItem,R.color.colorAccent,100,R.color.transparent,0);
     }
 
     /**
@@ -64,7 +55,7 @@ public class MoSelectableUtils {
      * @param selectableItem selectable item
      */
     public static void applySelectedColorUsePrimary(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem,R.color.colorPrimary,ALPHA_SELECTED);
+        applySelectedColor(c,v,selectableItem,R.color.colorPrimary,100,R.color.transparent,0);
     }
 
 
@@ -77,7 +68,7 @@ public class MoSelectableUtils {
      * @param selectableItem selectable item
      */
     public static void applySelectedColorUseDarkPrimary(Context c, View v, MoSelectableItem selectableItem){
-        applySelectedColor(c,v,selectableItem,R.color.colorPrimaryDark,ALPHA_SELECTED);
+        applySelectedColor(c,v,selectableItem,R.color.colorPrimaryDark,100,R.color.transparent,0);
     }
 
 
@@ -87,6 +78,8 @@ public class MoSelectableUtils {
      * @param item selectable item
      * @param s selected color's id
      * @param a selected color's alpha
+     * @param ns not selected color id
+     * @param na not selected color's alpha
      * applies the selected color to a view
      * indicating that the view is selected
      * to be deleted or applies non-selected color
@@ -94,8 +87,8 @@ public class MoSelectableUtils {
      * selected
      */
     public static void applySelectedColor(Context c, View v, MoSelectableItem item,
-                                          @ColorRes int s, float a){
-        applySelectedColor(v, item, ContextCompat.getColor(c,s), a);
+                                          @ColorRes int s, int a, @ColorRes int ns, int na){
+        applySelectedColor(v,item, ContextCompat.getColor(c,s),a,ContextCompat.getColor(c,ns),na);
     }
 
     /**
@@ -103,6 +96,8 @@ public class MoSelectableUtils {
      * @param item selectable item
      * @param s selected color's id
      * @param a selected color's alpha
+     * @param ns not selected color id
+     * @param na not selected color's alpha
      * applies the selected color to a view
      * indicating that the view is selected
      * to be deleted or applies non-selected color
@@ -110,21 +105,12 @@ public class MoSelectableUtils {
      * selected
      */
     public static void applySelectedColor(View v, MoSelectableItem item,
-                                          @ColorInt int s, float a){
+                                          int s, int a, int ns, int na){
         if(item.isSelected()) {
-            // remove any (same) overlay
-            MoViewUtils.colorOverlay(v, s, a);
-        } else {
-            MoViewUtils.clearOverlay(v);
+            MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(s,a));
+        }else{
+            MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(ns,na));
         }
     }
-
-
-
-
-
-
-
-
 
 }

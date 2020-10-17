@@ -34,6 +34,16 @@ public class MoShareUtils {
     public static final String TYPE_PDF_APPLICATION = "application/pdf";
 
 
+    /**
+     * share the text that is provided
+     * using the default set up
+     * @param c context
+     * @param textToShare to share with other apps
+     */
+    public static void share(Context c,String textToShare) {
+        new MoShare().setText(textToShare).shareText(c);
+    }
+
 
     /**
      * shares the textToShare with other apps
