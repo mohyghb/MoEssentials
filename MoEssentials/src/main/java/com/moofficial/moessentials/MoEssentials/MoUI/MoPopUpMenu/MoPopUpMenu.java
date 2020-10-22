@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
+import androidx.annotation.StringRes;
+
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 
 import java.util.ArrayList;

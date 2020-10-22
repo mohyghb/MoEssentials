@@ -7,9 +7,9 @@ import android.widget.Toast;
 
 public class MoClipboardUtils {
 
-    private static final String LABEL = "moclipboard";
+    private static final String LABEL = "mo_clipboard";
 
-    public static final String WAS_COPIED = "Copied to your clipboard";
+    public static final String WAS_COPIED = "Copied to your clipboard!";
 
 
     private static void addClipBoardText(ClipboardManager clipboardManager, String text,
