@@ -1,6 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoMultiThread.MoThread;
 
-// t is the result that we get when the thread finishes
+// T is the result that we get when the thread finishes
 public class MoThread<T> extends Thread {
 
     private MoAfterThreadFinished<T> afterThreadFinished = result -> {};

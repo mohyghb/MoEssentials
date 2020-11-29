@@ -15,7 +15,6 @@ public class MoShareUtils {
 
 
     // Types of sharing simple data
-
     public static final String TYPE_ALL_TEXT = "text/*";
     public static final String TYPE_PLAIN_TEXT = "text/plain";
     public static final String TYPE_RTF_TEXT = "text/rtf";
