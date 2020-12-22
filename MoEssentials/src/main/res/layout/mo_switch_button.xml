@@ -12,15 +12,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mo_check_button_text"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fadingEdgeLength="@dimen/mo_fade_edge_text_view"
+            android:gravity="center_vertical"
             android:requiresFadingEdge="horizontal"
             android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/mo_check_button_check"
             app:layout_constraintStart_toStartOf="parent"

@@ -69,6 +69,11 @@ public class MoCardView extends MaterialCardView {
         return this;
     }
 
+    public MoCardView setColor(@ColorRes int color) {
+        this.setCardBackgroundColor(ContextCompat.getColor(getContext(), color));
+        return this;
+    }
+
     public MoCardView makeCardRound(){
         setRadius(getContext().getResources().getDimension(R.dimen.mo_style_card_corner));
         return this;
@@ -92,6 +97,11 @@ public class MoCardView extends MaterialCardView {
 
     public MoCardView hide(){
         setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoCardView removeElevation() {
+        setCardElevation(0f);
         return this;
     }
 

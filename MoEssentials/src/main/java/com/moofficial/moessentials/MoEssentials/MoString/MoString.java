@@ -139,4 +139,22 @@ public class MoString {
         return b.toString();
     }
 
+    /**
+     * finds the smaller of the two and
+     * checks to see if the smaller string is
+     * inside the bigger string
+     * @param a an string
+     * @param b an string
+     * @return true or false depending on the case above
+     */
+    public static boolean containsSmaller(String a, String b) {
+        if(a == null ||  b == null) {
+            return false;
+        }
+        if(a.length() < b.length()) {
+            return b.contains(a);
+        }
+        return a.contains(b);
+    }
+
 }
