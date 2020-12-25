@@ -5,11 +5,20 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/mo_logo_outer_drawable"
+        android:layout_width="@dimen/first_letter_radius"
+        android:layout_height="@dimen/first_letter_radius"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/outline_circle" />
+
     <TextView
         android:id="@+id/mo_logo_text"
         android:layout_width="@dimen/first_letter_radius"
         android:layout_height="@dimen/first_letter_radius"
-        android:background="@drawable/outline_circle"
         android:fontFamily="sans-serif-thin"
         android:foregroundGravity="center"
         android:gravity="center"
@@ -23,8 +32,8 @@
 
     <ImageView
         android:id="@+id/mo_logo_image"
-        android:layout_width="@dimen/first_letter_radius"
-        android:layout_height="@dimen/first_letter_radius"
+        android:layout_width="@dimen/image_size_logo"
+        android:layout_height="@dimen/image_size_logo"
         android:adjustViewBounds="true"
         android:cropToPadding="true"
         android:scaleType="centerCrop"

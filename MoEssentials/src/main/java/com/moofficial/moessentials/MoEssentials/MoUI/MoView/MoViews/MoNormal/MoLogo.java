@@ -2,11 +2,15 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
@@ -17,8 +21,9 @@ import com.moofficial.moessentials.R;
 // with a universal set dimensions that can be changed
 public class MoLogo extends MoConstraint {
 
-    private TextView tv;
-    private ImageView imageView;
+    private TextView innerTextView;
+    private ImageView outer;
+    private ImageView innerLogo;
 
     public MoLogo(Context context) {
         super(context);
@@ -32,56 +37,87 @@ public class MoLogo extends MoConstraint {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setText(String t){
-        this.tv.setText(t);
+    public TextView getTextView() {
+        return this.innerTextView;
+    }
+
+//    public MoLogo boldText() {
+//        innerTextView.setTypeface(Typeface.DEFAULT_BOLD);
+//        return this;
+//    }
+//
+//    public MoLogo normalText() {
+//        innerTextView.setTypeface(Typeface.DEFAULT);
+//        return this;
+//    }
+
+    public MoLogo setText(String t){
+        this.innerTextView.setText(t);
+        return this;
+    }
+
+    public MoLogo setTextColor(@ColorRes int color) {
+        this.innerTextView.setTextColor(ContextCompat.getColor(getContext(),color));
+        return this;
     }
 
     public int TVId(){
-        return tv.getId();
+        return innerTextView.getId();
     }
 
     public MoLogo filledCircle() {
-        tv.setBackground(MoDrawableUtils.filledCircle(getContext()));
+        innerTextView.setBackground(MoDrawableUtils.filledCircle(getContext()));
         return this;
     }
 
     public MoLogo filledRec() {
-        tv.setBackground(MoDrawableUtils.filledRec(getContext()));
+        innerTextView.setBackground(MoDrawableUtils.filledRec(getContext()));
         return this;
     }
 
     public MoLogo filledRoundRec() {
-        tv.setBackground(MoDrawableUtils.filledRoundRec(getContext()));
+        innerTextView.setBackground(MoDrawableUtils.filledRoundRec(getContext()));
         return this;
     }
 
-    public MoLogo setLogoDrawable(Drawable d){
-        tv.setBackground(d);
+    public MoLogo setOuter(Drawable d){
+        this.outer.setImageDrawable(d);
         return this;
     }
 
-    public MoLogo setLogoImage(Bitmap b){
-        this.imageView.setImageBitmap(b);
+    public MoLogo setInner(Bitmap b){
+        this.innerLogo.setImageBitmap(b);
         return this;
     }
 
-    public MoLogo setLogoImage(Drawable b){
-        this.imageView.setImageDrawable(b);
+    public MoLogo setInner(Drawable b){
+        this.innerLogo.setImageDrawable(b);
         return this;
     }
 
-    public MoLogo showImage(){
-        this.imageView.setVisibility(View.VISIBLE);
+
+    public MoLogo showLogo() {
+        this.innerLogo.setVisibility(View.VISIBLE);
         return this;
     }
 
-    public MoLogo hideText(){
-        this.tv.setVisibility(View.GONE);
+    public MoLogo hideLogo() {
+        this.innerLogo.setVisibility(View.GONE);
         return this;
     }
 
-    public MoLogo showImageHideText(){
-        showImage();
+    public MoLogo showText() {
+        this.innerTextView.setVisibility(View.VISIBLE);
+        return this;
+    }
+
+    public MoLogo hideText() {
+        this.innerTextView.setVisibility(View.GONE);
+        return this;
+    }
+
+    public MoLogo showLogoHideText(){
+        showLogo();
         return hideText();
     }
 
@@ -92,8 +128,9 @@ public class MoLogo extends MoConstraint {
 
     @Override
     public void initViews() {
-        tv = findViewById(R.id.mo_logo_text);
-        imageView = findViewById(R.id.mo_logo_image);
+        innerTextView = findViewById(R.id.mo_logo_text);
+        outer = findViewById(R.id.mo_logo_outer_drawable);
+        innerLogo = findViewById(R.id.mo_logo_image);
     }
 
     @Override

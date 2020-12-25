@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
@@ -18,6 +19,7 @@ public class MoSwitchButton extends MoConstraint {
     private MoCardView cardView;
     private TextView text;
     private SwitchMaterial switchMaterial;
+    private ConstraintLayout layout;
     private View.OnClickListener clickListener = (v) -> {};
 
     public MoSwitchButton(Context context) {
@@ -30,6 +32,10 @@ public class MoSwitchButton extends MoConstraint {
 
     public MoSwitchButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public ConstraintLayout getLayout() {
+        return layout;
     }
 
     public MoCardView getCardView() {
@@ -81,6 +87,7 @@ public class MoSwitchButton extends MoConstraint {
         this.text = findViewById(R.id.mo_check_button_text);
         this.switchMaterial = findViewById(R.id.mo_check_button_check);
         this.cardView = findViewById(R.id.mo_check_button_card_view);
+        this.layout = findViewById(R.id.mo_switch_button_layout);
 //        this.switchMaterial.setOnCheckedChangeListener((buttonView, isChecked) -> {
 //            if (!buttonView.isPressed()) {
 //                return;

@@ -5,6 +5,8 @@ import android.widget.TextView;
 public class MoString {
 
 
+    public static final String EMPTY_SIGNATURE = "M";
+
     /**
      * how similar string b is to a
      * if they are completly different
@@ -82,10 +84,10 @@ public class MoString {
     public static String getSignature(String ... texts){
         for(String text: texts){
             if(isValid(text)){
-                return (text.charAt(0) + "").toUpperCase();
+                return (text.trim().charAt(0) + "").toUpperCase();
             }
         }
-        return "";
+        return EMPTY_SIGNATURE;
     }
 
     /**
@@ -94,7 +96,7 @@ public class MoString {
      * @return
      */
     public static boolean isValid(String text){
-        return text!=null && !text.isEmpty();
+        return text!=null && !text.trim().isEmpty();
     }
 
 
