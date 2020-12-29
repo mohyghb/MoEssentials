@@ -30,4 +30,17 @@
 
 
 
+    <color name="mo_red">#ff1744</color>
+    <color name="mo_pink">#f50057</color>
+    <color name="mo_purple">#d500f9</color>
+    <color name="mo_light_green">#76ff03</color>
+    <color name="mo_deep_orange">#ff3d00</color>
+<!--    <color name="mo_red">#ff1744</color>-->
+<!--    <color name="mo_red">#ff1744</color>-->
+<!--    <color name="mo_red">#ff1744</color>-->
+<!--    <color name="mo_red">#ff1744</color>-->
+<!--    <color name="mo_red">#ff1744</color>-->
+
+
+
 </resources>

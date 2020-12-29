@@ -2,8 +2,9 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,9 +12,14 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.moofficial.moessentials.MoEssentials.MoColor.MoColor;
+import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViewManager.MoViewManager;
 import com.moofficial.moessentials.R;
 
 // a class that can show a single letter inside a text view
@@ -21,9 +27,14 @@ import com.moofficial.moessentials.R;
 // with a universal set dimensions that can be changed
 public class MoLogo extends MoConstraint {
 
+
     private TextView innerTextView;
     private ImageView outer;
     private ImageView innerLogo;
+    private Drawable savedOuter;
+    private Drawable savedInner;
+    private MoViewManager manager = new MoViewManager();
+    private boolean selected = false;
 
     public MoLogo(Context context) {
         super(context);
@@ -41,28 +52,16 @@ public class MoLogo extends MoConstraint {
         return this.innerTextView;
     }
 
-//    public MoLogo boldText() {
-//        innerTextView.setTypeface(Typeface.DEFAULT_BOLD);
-//        return this;
-//    }
-//
-//    public MoLogo normalText() {
-//        innerTextView.setTypeface(Typeface.DEFAULT);
-//        return this;
-//    }
 
-    public MoLogo setText(String t){
+    public MoLogo setText(String t) {
         this.innerTextView.setText(t);
+        DrawableCompat.setTint(this.outer.getDrawable(), MoColor.colorInt(getContext(), t));
         return this;
     }
 
     public MoLogo setTextColor(@ColorRes int color) {
         this.innerTextView.setTextColor(ContextCompat.getColor(getContext(),color));
         return this;
-    }
-
-    public int TVId(){
-        return innerTextView.getId();
     }
 
     public MoLogo filledCircle() {
@@ -80,18 +79,20 @@ public class MoLogo extends MoConstraint {
         return this;
     }
 
-    public MoLogo setOuter(Drawable d){
+    public MoLogo setOuter(Drawable d) {
         this.outer.setImageDrawable(d);
+        this.savedOuter = d;
         return this;
     }
 
-    public MoLogo setInner(Bitmap b){
-        this.innerLogo.setImageBitmap(b);
-        return this;
-    }
+//    public MoLogo setInner(Bitmap b){
+//        this.innerLogo.setImageBitmap(b);
+//        return this;
+//    }
 
-    public MoLogo setInner(Drawable b){
+    public MoLogo setInner(Drawable b) {
         this.innerLogo.setImageDrawable(b);
+        this.savedInner = b;
         return this;
     }
 
@@ -119,6 +120,40 @@ public class MoLogo extends MoConstraint {
     public MoLogo showLogoHideText(){
         showLogo();
         return hideText();
+    }
+
+    public MoLogo select() {
+        return select(
+                this.outer.getDrawable(),
+                ContextCompat.getDrawable(getContext(), R.drawable.ic_baseline_check_24));
+    }
+
+
+
+    public MoLogo select(Drawable selectedDrawable, Drawable innerDrawable) {
+        if (selected) {
+            return this;
+        }
+        this.savedOuter = this.outer.getDrawable();
+        this.savedInner = this.innerLogo.getDrawable();
+        this.outer.setImageDrawable(selectedDrawable);
+        this.innerLogo.setImageDrawable(innerDrawable);
+        this.manager = new MoViewManager().saveVisibility(this.outer,this.innerLogo,this.innerTextView);
+        showLogoHideText();
+        this.selected = true;
+        return this;
+    }
+
+
+    public MoLogo unSelect() {
+        if (!selected) {
+            return this;
+        }
+        setOuter(savedOuter);
+        setInner(savedInner);
+        this.manager.deployVisibility(this.outer, this.innerLogo, this.innerTextView);
+        this.selected = false;
+        return this;
     }
 
     @Override

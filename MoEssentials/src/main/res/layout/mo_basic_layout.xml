@@ -23,7 +23,7 @@
         android:id="@+id/basic_activity_coordinator_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/basic_activity_linear_bottom_layout"
+        app:layout_constraintBottom_toTopOf="@id/basic_activity_bottom_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/basic_activity_linear_top_layout">
@@ -116,17 +116,26 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-
-    <LinearLayout
-        android:id="@+id/basic_activity_linear_bottom_layout"
+    <com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView
+        android:id="@+id/basic_activity_bottom_card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="false"
-        android:orientation="vertical"
-        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/transparent"
+        >
+        <LinearLayout
+            android:id="@+id/basic_activity_linear_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="false"
+            android:orientation="vertical"
+            android:background="@color/transparent"
+            />
+    </com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

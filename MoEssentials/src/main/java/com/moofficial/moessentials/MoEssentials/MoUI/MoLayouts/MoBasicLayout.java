@@ -38,6 +38,7 @@ public class MoBasicLayout extends MoConstraint {
     public MoWrapperLinearLayout linearNested;
     public MoWrapperLinearLayout linearBottom;
     public MoWrapperLinearLayout linearTop;
+    public MoCardView bottomCardView;
     public AppBarLayout appBarLayout;
     public MoWrapperToolbar toolbar;
     public CollapsingToolbarLayout collapsingToolbarLayout;
@@ -78,6 +79,8 @@ public class MoBasicLayout extends MoConstraint {
         collapsingToolbarLayout = findViewById(R.id.basic_activity_collapsing_toolbar);
         rootView = findViewById(R.id.basic_activity_root);
         nestedScrollView = findViewById(R.id.basic_activity_nested_scroll_view);
+        bottomCardView = findViewById(R.id.basic_activity_bottom_card);
+        bottomCardView.makeCardRectangular().makeTransparent();
         floatingActionButton = new MoWrapperFloatingActionButton(findViewById(R.id.basic_activity_floating_action_button));
         floatingActionButton.hide();
     }
@@ -100,7 +103,7 @@ public class MoBasicLayout extends MoConstraint {
 
 
     public MoBasicLayout makeNestedScrollTransparent(){
-        nestedScrollView.setBackgroundColor(getContext().getColor(R.color.transparent));
+        nestedScrollView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.transparent));
         return this;
     }
 

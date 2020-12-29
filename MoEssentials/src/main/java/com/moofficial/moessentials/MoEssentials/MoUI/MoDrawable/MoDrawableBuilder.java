@@ -37,7 +37,7 @@ public class MoDrawableBuilder extends MoContext{
         super(c);
     }
 
-    public MoDrawableBuilder shape(int shape) {
+    public MoDrawableBuilder shape(@DrawableShape int shape) {
         this.shape = shape;
         return this;
     }
