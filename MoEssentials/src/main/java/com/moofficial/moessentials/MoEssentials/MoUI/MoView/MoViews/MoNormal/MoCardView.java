@@ -79,6 +79,11 @@ public class MoCardView extends MaterialCardView {
         return this;
     }
 
+    public MoCardView makeCardMediumRound() {
+        setRadius(getContext().getResources().getDimension(R.dimen.mo_style_card_corner));
+        return this;
+    }
+
     public MoCardView makeCardRecRound(){
         setRadius(getContext().getResources().getDimension(R.dimen.mo_style_card_corner_small));
         return this;

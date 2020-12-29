@@ -30,16 +30,22 @@
 
 
 
-    <color name="mo_red">#ff1744</color>
-    <color name="mo_pink">#f50057</color>
-    <color name="mo_purple">#d500f9</color>
-    <color name="mo_light_green">#76ff03</color>
-    <color name="mo_deep_orange">#ff3d00</color>
-<!--    <color name="mo_red">#ff1744</color>-->
-<!--    <color name="mo_red">#ff1744</color>-->
-<!--    <color name="mo_red">#ff1744</color>-->
-<!--    <color name="mo_red">#ff1744</color>-->
-<!--    <color name="mo_red">#ff1744</color>-->
+    <color name="mo_red">#ef9a9a</color>
+    <color name="mo_pink">#F48FB1</color>
+    <color name="mo_purple">#CE93D8</color>
+    <color name="mo_deep_purple">#B39DDB</color>
+    <color name="mo_indigo">#9FA8DA</color>
+    <color name="mo_blue">#90CAF9</color>
+    <color name="mo_light_blue">#81D4FA</color>
+    <color name="mo_cyan">#80DEEA</color>
+    <color name="mo_teal">#80CBC4</color>
+    <color name="mo_green">#A5D6A7</color>
+    <color name="mo_light_green">#C5E1A5</color>
+    <color name="mo_lime">#E6EE9C</color>
+    <color name="mo_yellow">#FFF59D</color>
+    <color name="mo_amber">#FFE082</color>
+    <color name="mo_orange">#FFCC80</color>
+    <color name="mo_deep_orange">#FFAB91</color>
 
 
 

@@ -8,4 +8,41 @@
     <color name="mo_card_color">@color/MaterialGrey</color>
     <color name="mo_bottom_sheet_color">@color/MoBlack</color>
 
+
+
+<!--    <color name="mo_red">#B2EF5350</color>-->
+<!--    <color name="mo_pink">#B3EC407A</color>-->
+<!--    <color name="mo_purple">#B3AB47BC</color>-->
+<!--    <color name="mo_deep_purple">#B37E57C2</color>-->
+<!--    <color name="mo_indigo">#B35C6BC0</color>-->
+<!--    <color name="mo_blue">#B342A5F5</color>-->
+<!--    <color name="mo_light_blue">#B329B6F6</color>-->
+<!--    <color name="mo_cyan">#B326C6DA</color>-->
+<!--    <color name="mo_teal">#B326A69A</color>-->
+<!--    <color name="mo_green">#B366BB6A</color>-->
+<!--    <color name="mo_light_green">#B39CCC65</color>-->
+<!--    <color name="mo_lime">#B3D4E157</color>-->
+<!--    <color name="mo_yellow">#B3FFEE58</color>-->
+<!--    <color name="mo_amber">#B3FFCA28</color>-->
+<!--    <color name="mo_orange">#B3FFA726</color>-->
+<!--    <color name="mo_deep_orange">#B3FF7043</color>-->
+
+    <color name="mo_red">#B3EF9A9A</color>
+    <color name="mo_pink">#B3F48FB1</color>
+    <color name="mo_purple">#B3CE93D8</color>
+    <color name="mo_deep_purple">#B3B39DDB</color>
+    <color name="mo_indigo">#B39FA8DA</color>
+    <color name="mo_blue">#B390CAF9</color>
+    <color name="mo_light_blue">#B381D4FA</color>
+    <color name="mo_cyan">#B380DEEA</color>
+    <color name="mo_teal">#B380CBC4</color>
+    <color name="mo_green">#B3A5D6A7</color>
+    <color name="mo_light_green">#B3C5E1A5</color>
+    <color name="mo_lime">#B3E6EE9C</color>
+    <color name="mo_yellow">#B3FFF59D</color>
+    <color name="mo_amber">#B3FFE082</color>
+    <color name="mo_orange">#B3FFCC80</color>
+    <color name="mo_deep_orange">#B3FFAB91</color>
+
+
 </resources>

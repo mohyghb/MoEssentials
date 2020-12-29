@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="mo_style_card_corner">24dp</dimen>
+    <dimen name="mo_style_card_corner_medium">16dp</dimen>
     <dimen name="mo_style_card_corner_small">10dp</dimen>
     <dimen name="mo_app_bar_height">300dp</dimen>
 

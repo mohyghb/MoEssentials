@@ -14,7 +14,18 @@ public class MoColor {
             R.color.mo_red,
             R.color.mo_pink,
             R.color.mo_purple,
+            R.color.mo_deep_purple,
+            R.color.mo_indigo,
+            R.color.mo_blue,
+            R.color.mo_light_blue,
+            R.color.mo_cyan,
+            R.color.mo_teal,
+            R.color.mo_green,
             R.color.mo_light_green,
+            R.color.mo_lime,
+            R.color.mo_yellow,
+            R.color.mo_amber,
+            R.color.mo_orange,
             R.color.mo_deep_orange,
     };
 

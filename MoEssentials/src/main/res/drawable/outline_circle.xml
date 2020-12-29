@@ -2,12 +2,12 @@
     android:innerRadius="0dp"
     android:shape="oval"
     android:thicknessRatio="0"
-    android:thickness="1in"
+    android:thickness="0dp"
     android:useLevel="false" >
     <solid android:color="@android:color/transparent" />
 
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="@color/colorPrimary" />
 
 
