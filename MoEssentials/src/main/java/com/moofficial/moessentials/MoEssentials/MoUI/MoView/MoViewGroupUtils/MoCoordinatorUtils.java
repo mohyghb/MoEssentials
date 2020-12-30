@@ -3,6 +3,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder.MoPaddingBuilder;
 
 public class MoCoordinatorUtils {
 
@@ -13,8 +14,22 @@ public class MoCoordinatorUtils {
      * and layout behavior of app bar layout scrolling
      * view behavior
      */
+    public static CoordinatorLayout.LayoutParams getScrollingParams(MoPaddingBuilder p) {
+        return getScrollingParams(p,
+                CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                CoordinatorLayout.LayoutParams.MATCH_PARENT);
+    }
+
+
+    /**
+     *
+     * @return scrolling coordinator layout params
+     * with match parent width and height
+     * and layout behavior of app bar layout scrolling
+     * view behavior
+     */
     public static CoordinatorLayout.LayoutParams getScrollingParams(){
-        return getScrollingParams(CoordinatorLayout.LayoutParams.MATCH_PARENT,CoordinatorLayout.LayoutParams.MATCH_PARENT);
+        return getScrollingParams(new MoPaddingBuilder());
     }
 
     /**
@@ -26,9 +41,10 @@ public class MoCoordinatorUtils {
      * and layout behavior of app bar layout scrolling
      * view behavior
      */
-    public static CoordinatorLayout.LayoutParams getScrollingParams(int width,int height){
+    public static CoordinatorLayout.LayoutParams getScrollingParams(MoPaddingBuilder p, int width,int height){
         CoordinatorLayout.LayoutParams lp = new CoordinatorLayout.LayoutParams(width,height);
         lp.setBehavior(new AppBarLayout.ScrollingViewBehavior());
+        lp.setMargins(p.getLeft(), p.getTop(),p.getRight(),p.getBottom());
         return lp;
     }
 

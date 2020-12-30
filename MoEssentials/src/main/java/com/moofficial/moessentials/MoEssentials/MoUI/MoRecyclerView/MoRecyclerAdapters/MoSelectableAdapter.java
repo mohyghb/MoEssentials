@@ -50,7 +50,7 @@ public abstract class MoSelectableAdapter<T extends RecyclerView.ViewHolder,I ex
      *         selecting the items of this adapter
      */
     public boolean isSelecting() {
-        return this.selectable.isInActionMode();
+        return this.selectable != null && this.selectable.isInActionMode();
     }
 
     /**

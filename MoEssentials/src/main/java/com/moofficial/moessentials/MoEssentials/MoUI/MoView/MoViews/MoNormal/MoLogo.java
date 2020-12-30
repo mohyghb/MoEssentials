@@ -17,6 +17,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.moofficial.moessentials.MoEssentials.MoColor.MoColor;
 import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
+import com.moofficial.moessentials.MoEssentials.MoString.MoString;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
@@ -58,7 +59,7 @@ public class MoLogo extends MoConstraint {
 
 
     public MoLogo setText(String t) {
-        this.innerTextView.setText(t);
+        this.innerTextView.setText(MoString.getSignature(t).toUpperCase());
         this.color = MoColor.color(t);
         paintColor();
         return this;
