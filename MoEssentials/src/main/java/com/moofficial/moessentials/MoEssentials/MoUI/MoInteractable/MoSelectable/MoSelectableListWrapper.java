@@ -64,7 +64,7 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
             l.getSelectedItems().addAll(affectedItems);
         });
         this.selectable.setSelectedSize(dataSetSize(),update);
-        notifyDataSetChanged();
+        notifyAllRangeChanged();
     }
 
     public void deselectAll(boolean update) {
@@ -73,7 +73,7 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
             l.getSelectedItems().clear();
         });
         this.selectable.setSelectedSize(0,update);
-        notifyDataSetChanged();
+        notifyAllRangeChanged();
     }
 
 
@@ -121,6 +121,11 @@ public class MoSelectableListWrapper<T extends MoSelectableItem> {
 
     public void notifyDataSetChanged() {
         performForAll(MoSelectableList::notifyDataSetChanged);
+    }
+
+    public void notifyAllRangeChanged() {
+        performForAll(l -> l.notifyItemRangeChanged(0,l.getDataSet().size(),
+                MoSelectable.PAYLOAD_SELECTED_ITEM));
     }
 
 

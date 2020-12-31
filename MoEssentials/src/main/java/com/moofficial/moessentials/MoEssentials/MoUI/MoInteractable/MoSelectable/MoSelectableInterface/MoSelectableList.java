@@ -48,6 +48,16 @@ public interface MoSelectableList<T extends MoSelectableItem> {
     void notifyItemChanged(int position,Object payload);
 
     /**
+     * this will be used to notify all the items
+     * inside a selectable list, when for example, all
+     * of them are selected
+     * @param position to start
+     * @param count number of items we should consider
+     * @param payload to indicate what we need them to change
+     */
+    void notifyItemRangeChanged(int position, int count , Object payload);
+
+    /**
      *
      * @return the list of the selected items
      */
