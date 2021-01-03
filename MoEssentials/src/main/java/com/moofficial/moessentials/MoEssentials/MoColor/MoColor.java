@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.moofficial.moessentials.R;
 
@@ -32,6 +33,25 @@ public class MoColor {
     public static int NULL_COLOR = R.color.colorPrimary;
 
 
+    /**
+     * returns a color for any object
+     * based on using their string value
+     * @param o object
+     * @return color resource
+     */
+    public static @ColorRes int color(Object o) {
+        if (o == null) {
+            return NULL_COLOR;
+        }
+        return color(o.toString());
+    }
+
+    /**
+     * generates a color based on the
+     * first character of the text
+     * @param text to generate a color for
+     * @return color resource value
+     */
     public static @ColorRes int color(String text) {
         if (text == null || text.isEmpty()) {
             return NULL_COLOR;
@@ -39,6 +59,12 @@ public class MoColor {
         return color((int) text.charAt(0));
     }
 
+    /**
+     * returns a random color resource
+     * based on the value of int that is passed in
+     * @param value to find a color for
+     * @return color resource
+     */
     public static @ColorRes int color(int value) {
         return colors[value % colors.length];
     }

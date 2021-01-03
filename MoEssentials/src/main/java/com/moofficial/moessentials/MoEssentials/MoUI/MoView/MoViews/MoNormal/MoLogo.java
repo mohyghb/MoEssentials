@@ -74,6 +74,17 @@ public class MoLogo extends MoConstraint {
                 ContextCompat.getColor(getContext(),this.color));
     }
 
+    /**
+     * reset the color of this
+     * logo to null color, this could be used to reset
+     * the color of folder logos
+     * @return this for nested calling
+     */
+    public MoLogo nullColor() {
+        this.color = MoColor.NULL_COLOR;
+        return this;
+    }
+
     public MoLogo setTextColor(@ColorRes int color) {
         this.innerTextView.setTextColor(ContextCompat.getColor(getContext(),color));
         return this;
@@ -108,6 +119,8 @@ public class MoLogo extends MoConstraint {
     public MoLogo setInner(Drawable b) {
         this.innerLogo.setImageDrawable(b);
         this.savedInner = b;
+        this.color = MoColor.color(b);
+        paintColor();
         return this;
     }
 
