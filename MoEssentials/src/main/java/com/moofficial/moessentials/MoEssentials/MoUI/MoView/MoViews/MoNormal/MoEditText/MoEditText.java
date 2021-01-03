@@ -173,20 +173,26 @@ public class MoEditText extends MoConstraint {
     }
 
     // EditorInfo.IME_ACTION_SEARCH
-    public MoEditText actionSearch(){
+    public MoEditText actionSearch() {
         this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         return this;
     }
 
     // EditorInfo.IME_ACTION_SEND
-    public MoEditText actionSend(){
+    public MoEditText actionSend() {
         this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_SEND);
         return this;
     }
 
     // EditorInfo.IME_ACTION_GO
-    public MoEditText actionGo(){
+    public MoEditText actionGo() {
         this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_GO);
+        return this;
+    }
+
+    // EditorInfo.IME_ACTION_NEXT
+    public MoEditText actionNext() {
+        this.textInputEditText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         return this;
     }
 

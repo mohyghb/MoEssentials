@@ -524,10 +524,10 @@ public class MoSearchable extends MoListViews {
         // list of found items
         //if (onSearchFinished != null) {
             if(search.isEmpty()){
-                if(this.showNothingWhenSearchEmpty){
+                if(this.showNothingWhenSearchEmpty) {
                     // show empty because search is empty
                     this.onSearchFinished.onSearchFinished(new ArrayList<>());
-                }else{
+                } else {
                     // show all the items when search is empty
                     this.onSearchFinished.onSearchFinished(this.searchableList.getSearchableItems());
                 }

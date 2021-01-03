@@ -172,6 +172,10 @@ public class MoDrawableBuilder extends MoContext{
     }
 
     public Drawable build() {
+        return buildGradient();
+    }
+
+    public GradientDrawable buildGradient() {
         GradientDrawable d = buildDrawable();
         buildShape(d);
         buildRadius(d);

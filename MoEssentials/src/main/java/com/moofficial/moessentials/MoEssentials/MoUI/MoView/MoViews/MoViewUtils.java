@@ -21,19 +21,19 @@ public class MoViewUtils {
     /**
      * creates a dim/blur effect on the view
      * group that is passed in based on our standards
-     * @param parent view group to be dimmed
+     * @param parent view to be dimmed
      */
-    public static void dim(@NonNull ViewGroup parent){
+    public static void dim(@NonNull View parent){
         dim(parent,MO_DIM_VALUE);
     }
 
     /**
      * creates a dim/blur effect on the view
      * group that is passed in based on the dim amount
-     * @param parent view group to be dimmed
+     * @param parent view to be dimmed
      * @param dimAmount amount of dim ranges between 0 and 1
      */
-    public static void dim(@NonNull ViewGroup parent, float dimAmount){
+    public static void dim(@NonNull View parent, float dimAmount){
         colorOverlay(parent,Color.BLACK,dimAmount);
     }
 

@@ -23,6 +23,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoViewUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViewManager.MoViewManager;
 import com.moofficial.moessentials.R;
 
@@ -38,7 +39,6 @@ public class MoLogo extends MoConstraint {
     private Drawable savedOuter;
     private Drawable savedInner;
     private MoViewManager manager = new MoViewManager();
-    private boolean selected = false;
     private @ColorRes int color = MoColor.NULL_COLOR;
 
     public MoLogo(Context context) {
@@ -190,29 +190,25 @@ public class MoLogo extends MoConstraint {
 
 
     private MoLogo select(Drawable selectedDrawable, Drawable innerDrawable) {
-        if (selected) {
-            return this;
-        }
         this.savedOuter = this.outer.getDrawable();
         this.savedInner = this.innerLogo.getDrawable();
         this.outer.setImageDrawable(selectedDrawable);
         this.innerLogo.setImageDrawable(innerDrawable);
         this.manager = new MoViewManager().saveVisibility(this.outer,this.innerLogo,this.innerTextView);
         showLogoHideText();
-        this.selected = true;
         return this;
     }
 
 
     private MoLogo unSelect() {
-        if (!selected) {
-            return this;
-        }
         setOuter(savedOuter);
         setInner(savedInner);
         this.manager.deployVisibility(this.outer, this.innerLogo, this.innerTextView);
-        this.selected = false;
         return this;
+    }
+
+    public String signature() {
+        return this.innerTextView.getText().toString();
     }
 
     public @ColorInt int  getColor() {
