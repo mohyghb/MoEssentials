@@ -111,11 +111,14 @@ public class MoLogo extends MoConstraint {
         return this;
     }
 
-//    public MoLogo setInner(Bitmap b){
-//        this.innerLogo.setImageBitmap(b);
-//        return this;
-//    }
-
+    /**
+     * sets the inner drawable for the logo
+     * updates the color based on the drawable
+     * that is passed in
+     * and paints the color to the outer drawable
+     * @param b drawable to update the inner drawable to
+     * @return this for nested calling
+     */
     public MoLogo setInner(Drawable b) {
         this.innerLogo.setImageDrawable(b);
         this.savedInner = b;
@@ -214,8 +217,8 @@ public class MoLogo extends MoConstraint {
 
 
     private MoLogo unSelect() {
-        setOuter(savedOuter);
-        setInner(savedInner);
+        this.outer.setImageDrawable(this.savedOuter);
+        this.innerLogo.setImageDrawable(this.savedInner);
         this.manager.deployVisibility(this.outer, this.innerLogo, this.innerTextView);
         return this;
     }
