@@ -15,6 +15,22 @@
     <!--icon buttons-->
     <dimen name="mo_image_button_padding">8dp</dimen>
 
+    <!--mo logo dimensions-->
+    <dimen name="mo_logo_large">48dp</dimen>
+    <dimen name="mo_logo_large_font">32sp</dimen>
+    <dimen name="mo_logo_large_image">24dp</dimen>
+    <dimen name="mo_logo_medium">40dp</dimen>
+    <dimen name="mo_logo_medium_font">26sp</dimen>
+    <dimen name="mo_logo_medium_image">20dp</dimen>
+    <dimen name="mo_logo_small">32dp</dimen>
+    <dimen name="mo_logo_small_font">20sp</dimen>
+    <dimen name="mo_logo_small_image">16dp</dimen>
+
+
+    <!--mopopupmenu builder-->
+    <dimen name="mo_popup_item_padding">8dp</dimen>
+    <dimen name="mo_popup_icon_padding">8dp</dimen>
+
 
 
 </resources>

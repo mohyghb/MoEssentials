@@ -1,5 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder;
 
+import android.content.Context;
 import android.view.View;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
@@ -7,6 +8,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit
 public class MoPaddingBuilder{
 
     int top,left,bottom,right;
+    private boolean asDP = false;
 
 
     public MoPaddingBuilder(){}
@@ -59,11 +61,9 @@ public class MoPaddingBuilder{
     }
 
 
-    public MoPaddingBuilder convertValuesToDp(){
-        this.right = MoDynamicUnit.convertDpToPixels(this.right);
-        this.top = MoDynamicUnit.convertDpToPixels(this.top);
-        this.bottom = MoDynamicUnit.convertDpToPixels(this.bottom);
-        this.left = MoDynamicUnit.convertDpToPixels(this.left);
+
+    public MoPaddingBuilder asDp() {
+        this.asDP = true;
         return this;
     }
 
@@ -74,8 +74,24 @@ public class MoPaddingBuilder{
     public MoPaddingBuilder apply(View v) {
         if(v == null)
             return this;
+        applyConversion(v);
         v.setPadding(left,top,right,bottom);
         return this;
+    }
+
+    private void applyConversion(View v) {
+        if (asDP) {
+            changeConversionsToDp(v.getContext());
+            asDP = false;
+        }
+    }
+
+
+    private void changeConversionsToDp(Context c) {
+        this.right = MoDynamicUnit.convertDpToPixels(c,this.right);
+        this.top = MoDynamicUnit.convertDpToPixels(c,this.top);
+        this.bottom = MoDynamicUnit.convertDpToPixels(c,this.bottom);
+        this.left = MoDynamicUnit.convertDpToPixels(c,this.left);
     }
 
     /**
@@ -88,6 +104,7 @@ public class MoPaddingBuilder{
     public MoPaddingBuilder applyToExisting(View v) {
         if(v == null)
             return this;
+        applyConversion(v);
         v.setPadding(left + v.getPaddingLeft(),
                 top + v.getPaddingTop(),
                 right + v.getPaddingRight(),

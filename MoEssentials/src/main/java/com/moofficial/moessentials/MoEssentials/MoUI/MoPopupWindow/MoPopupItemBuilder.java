@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoViewUtils;
+import com.moofficial.moessentials.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +19,13 @@ import java.util.List;
 // uses our standards to build various views
 public class MoPopupItemBuilder extends MoContext {
 
-    public static final int MO_ITEM_PADDING = MoDynamicUnit.convertDpToPixels(18f);
-    public static final int MO_ICON_PADDING = MoDynamicUnit.convertDpToPixels(14f);
+
 
     private final int TYPE_TEXT_BUTTON = 0;
     private final int TYPE_IMAGE_BUTTON = 1;
 
 
     private ArrayList<View> views = new ArrayList<>();
-    private int textButtonPadding = MO_ITEM_PADDING;
-    private int imageButtonPadding = MO_ICON_PADDING;
     private MoPopupWindow popupWindow;
 
     public MoPopupItemBuilder(Context c){
@@ -57,23 +55,6 @@ public class MoPopupItemBuilder extends MoContext {
         return this;
     }
 
-    public int getTextButtonPadding() {
-        return textButtonPadding;
-    }
-
-    public MoPopupItemBuilder setTextButtonPadding(int textButtonPadding) {
-        this.textButtonPadding = textButtonPadding;
-        return this;
-    }
-
-    public int getImageButtonPadding() {
-        return imageButtonPadding;
-    }
-
-    public MoPopupItemBuilder setImageButtonPadding(int imageButtonPadding) {
-        this.imageButtonPadding = imageButtonPadding;
-        return this;
-    }
 
     /**
      *
@@ -177,10 +158,10 @@ public class MoPopupItemBuilder extends MoContext {
         int p = 0;
         switch (type){
             case TYPE_IMAGE_BUTTON:
-                p = MO_ICON_PADDING;
+                p = (int) this.context.getResources().getDimension(R.dimen.mo_popup_icon_padding);
                 break;
             case TYPE_TEXT_BUTTON:
-                p = MO_ITEM_PADDING;
+                p = (int) this.context.getResources().getDimension(R.dimen.mo_popup_item_padding);
                 break;
         }
         v.setPadding(p,p,p,p);

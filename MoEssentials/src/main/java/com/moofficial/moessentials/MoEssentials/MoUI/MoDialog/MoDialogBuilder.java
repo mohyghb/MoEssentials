@@ -14,8 +14,8 @@ import com.moofficial.moessentials.R;
 public class MoDialogBuilder extends MoContext {
 
 
-    public static final int MO_EDIT_TEXT_PADDING = MoDynamicUnit.convertDpToPixels(14f);
-    public static final int MO_ICON_PADDING = MoDynamicUnit.convertDpToPixels(16f);
+    public static final float MO_EDIT_TEXT_PADDING = 14f;
+    public static final float MO_ICON_PADDING =16f;
 
     public MoDialogBuilder(Context c) {
         super(c);

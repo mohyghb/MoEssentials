@@ -1,5 +1,6 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -111,13 +112,13 @@ public class MoMarginBuilder extends MoPaddingBuilder{
      * @param b bottom margin
      * @return
      */
-    public static LinearLayout.LayoutParams getLinearParams(int l,int t,int r,int b){
+    public static LinearLayout.LayoutParams getLinearParams(int l, int t, int r, int b){
         return getLinearParams(
                 new MoMarginBuilder().setTop(t)
                                      .setLeft(l)
                                      .setRight(r)
                                      .setBottom(b)
-                                     .convertValuesToDp());
+                                     .asDp());
     }
 
     /**
@@ -153,7 +154,7 @@ public class MoMarginBuilder extends MoPaddingBuilder{
      */
     public static CardView.LayoutParams getCardLayoutParams(int left,int top,int right,int bottom){
         return getCardLayoutParams(new MoMarginBuilder().setLeft(left).setTop(top)
-                .setRight(right).setBottom(bottom).convertValuesToDp());
+                .setRight(right).setBottom(bottom).asDp());
     }
 
     /**

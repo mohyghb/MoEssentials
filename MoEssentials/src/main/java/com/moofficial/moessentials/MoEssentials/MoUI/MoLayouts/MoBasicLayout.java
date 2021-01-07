@@ -37,7 +37,6 @@ public class MoBasicLayout extends MoConstraint {
     public TextView subtitle;
     public MoWrapperLinearLayout linearNested;
     public MoWrapperLinearLayout linearBottom;
-    public MoWrapperLinearLayout linearTop;
     public AppBarLayout appBarLayout;
     public MoWrapperToolbar toolbar;
     public CollapsingToolbarLayout collapsingToolbarLayout;
@@ -70,7 +69,6 @@ public class MoBasicLayout extends MoConstraint {
         subtitle = findViewById(R.id.mo_lib_subtitle);
         linearNested = new MoWrapperLinearLayout(findViewById(R.id.basic_activity_linear_nested_layout));
         linearBottom = new MoWrapperLinearLayout( findViewById(R.id.basic_activity_linear_bottom_layout));
-        linearTop = new MoWrapperLinearLayout(findViewById(R.id.basic_activity_linear_top_layout));
         appBarLayout = findViewById(R.id.basic_activity_appbar);
         toolbar = new MoWrapperToolbar( findViewById(R.id.basic_activity_toolbar)
                 , findViewById(R.id.basic_activity_toolbar_linear_layout));
@@ -129,7 +127,7 @@ public class MoBasicLayout extends MoConstraint {
 
     public MoBasicLayout makeTitleFadingEdge(){
         this.title.setSingleLine(true);
-        this.title.setFadingEdgeLength(MoDynamicUnit.convertDpToPixels(80f));
+        this.title.setFadingEdgeLength(MoDynamicUnit.convertDpToPixels(getContext(),80f));
         this.title.setHorizontalFadingEdgeEnabled(true);
         return this;
     }

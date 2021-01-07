@@ -222,7 +222,7 @@ public class MoMenuBuilder extends MoContext {
      * @return this for nested calling
      */
     public MoMenuBuilder allWith(int padding) {
-        paddingBuilder = new MoPaddingBuilder(padding).convertValuesToDp();
+        paddingBuilder = new MoPaddingBuilder(padding).asDp();
         return this;
     }
 
@@ -236,7 +236,7 @@ public class MoMenuBuilder extends MoContext {
      * @return this for nested calling
      */
     public MoMenuBuilder allWith(int left,int top,int right, int bottom) {
-        this.paddingBuilder = new MoPaddingBuilder(left, top, right, bottom).convertValuesToDp();
+        this.paddingBuilder = new MoPaddingBuilder(left, top, right, bottom).asDp();
         return this;
     }
 
@@ -247,7 +247,7 @@ public class MoMenuBuilder extends MoContext {
      * @return this for nested calling
      */
     public MoMenuBuilder textsWith(int padding) {
-        textPadding = new MoPaddingBuilder(padding).convertValuesToDp();
+        textPadding = new MoPaddingBuilder(padding).asDp();
         return this;
     }
 
@@ -261,7 +261,7 @@ public class MoMenuBuilder extends MoContext {
      * @return this for nested calling
      */
     public MoMenuBuilder textsWith(int left,int top,int right, int bottom) {
-        this.textPadding = new MoPaddingBuilder(left, top, right, bottom).convertValuesToDp();
+        this.textPadding = new MoPaddingBuilder(left, top, right, bottom).asDp();
         return this;
     }
 
@@ -273,7 +273,7 @@ public class MoMenuBuilder extends MoContext {
      * @return this for nested calling
      */
     public MoMenuBuilder iconsWith(int padding) {
-        iconPadding = new MoPaddingBuilder(padding).convertValuesToDp();
+        iconPadding = new MoPaddingBuilder(padding).asDp();
         return this;
     }
 
@@ -287,7 +287,7 @@ public class MoMenuBuilder extends MoContext {
      * @return this for nested calling
      */
     public MoMenuBuilder iconsWith(int left,int top,int right, int bottom) {
-        this.iconPadding = new MoPaddingBuilder(left, top, right, bottom).convertValuesToDp();
+        this.iconPadding = new MoPaddingBuilder(left, top, right, bottom).asDp();
         return this;
     }
 

@@ -11,8 +11,12 @@ import android.view.ViewGroupOverlay;
 import android.view.ViewOverlay;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DimenRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
 
 public class MoViewUtils {
 
@@ -92,6 +96,20 @@ public class MoViewUtils {
         context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
         v.setBackgroundResource(outValue.resourceId);
         v.setClickable(true);
+    }
+
+    /**
+     * sets the size of the view
+     * @param v view to be resized
+     * @param width new width of the view
+     * @param height new height of the view
+     */
+    public static void setSize(View v, @DimenRes int width, @DimenRes int height) {
+        ViewGroup.LayoutParams params = v.getLayoutParams();
+//        params.width = MoDynamicUnit.convertDpToPixels(v.getContext().getResources().getDimension(width));
+//        params.height = MoDynamicUnit.convertDpToPixels(v.getContext().getResources().getDimension(height));
+        params.width = (int) v.getContext().getResources().getDimension(width);
+        params.height = (int) v.getContext().getResources().getDimension(height);
     }
 
 }

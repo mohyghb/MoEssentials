@@ -56,7 +56,7 @@ public class MoCardView extends MaterialCardView {
      * @return this for nested calling
      */
     public MoCardView setContentPadding(float dp) {
-        return this.setContentPadding(MoDynamicUnit.convertDpToPixels(dp));
+        return this.setContentPadding(MoDynamicUnit.convertDpToPixels(getContext(), dp));
     }
 
     /**

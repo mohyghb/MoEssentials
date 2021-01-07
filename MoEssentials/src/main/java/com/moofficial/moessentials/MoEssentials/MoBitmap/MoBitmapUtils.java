@@ -15,9 +15,9 @@ public class MoBitmapUtils {
     static Bitmap createBitmapFromView(@NonNull View view, int width, int height) {
         if (width > 0 && height > 0) {
             view.measure(View.MeasureSpec.makeMeasureSpec(MoDynamicUnit
-                            .convertDpToPixels(width), View.MeasureSpec.EXACTLY),
+                            .convertDpToPixels(view.getContext(), width), View.MeasureSpec.EXACTLY),
                     View.MeasureSpec.makeMeasureSpec(MoDynamicUnit
-                            .convertDpToPixels(height), View.MeasureSpec.EXACTLY));
+                            .convertDpToPixels(view.getContext(), height), View.MeasureSpec.EXACTLY));
         }
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
         int w = view.getMeasuredWidth();

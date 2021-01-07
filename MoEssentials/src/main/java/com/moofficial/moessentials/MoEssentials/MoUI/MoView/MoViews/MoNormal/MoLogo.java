@@ -6,12 +6,15 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -20,6 +23,7 @@ import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 import com.moofficial.moessentials.MoEssentials.MoString.MoString;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDrawable.MoDrawableUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
@@ -38,7 +42,7 @@ public class MoLogo extends MoConstraint {
     private ImageView innerLogo;
     private Drawable savedOuter;
     private Drawable savedInner;
-    private MoViewManager manager = new MoViewManager();
+    private ConstraintLayout layout;
     private @ColorRes int color = MoColor.NULL_COLOR;
 
     public MoLogo(Context context) {
@@ -53,8 +57,30 @@ public class MoLogo extends MoConstraint {
         super(context, attrs, defStyleAttr);
     }
 
-    public TextView getTextView() {
-        return this.innerTextView;
+
+    // todo test
+    public MoLogo small() {
+        MoViewUtils.setSize(this.layout,R.dimen.mo_logo_small,R.dimen.mo_logo_small);
+        MoViewUtils.setSize(this.innerLogo,R.dimen.mo_logo_small_image,R.dimen.mo_logo_small_image);
+        this.innerTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getDimension(R.dimen.mo_logo_small_font));
+        return this;
+    }
+
+    public MoLogo medium() {
+        MoViewUtils.setSize(this.layout,R.dimen.mo_logo_medium,R.dimen.mo_logo_medium);
+        MoViewUtils.setSize(this.innerLogo,R.dimen.mo_logo_medium_image,R.dimen.mo_logo_medium_image);
+        this.innerTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getDimension(R.dimen.mo_logo_medium_font));
+        return this;
+    }
+
+    public MoLogo large() {
+        MoViewUtils.setSize(this.layout,R.dimen.mo_logo_large,R.dimen.mo_logo_large);
+        MoViewUtils.setSize(this.innerLogo,R.dimen.mo_logo_large_image,R.dimen.mo_logo_large_image);
+        this.innerTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getDimension(R.dimen.mo_logo_large_font));
+        return this;
     }
 
 
@@ -105,6 +131,16 @@ public class MoLogo extends MoConstraint {
         return this;
     }
 
+    /**
+     * sets the outer drawable
+     * to the universal one that I usually use
+     * in my apps
+     * @return this for nested calling
+     */
+    public MoLogo setOuter() {
+        return setOuter(MoDrawableUtils.outlineCircle(getContext()));
+    }
+
     public MoLogo setOuter(Drawable d) {
         this.outer.setImageDrawable(d);
         this.savedOuter = d;
@@ -148,7 +184,7 @@ public class MoLogo extends MoConstraint {
         return this;
     }
 
-    public MoLogo showLogoHideText(){
+    public MoLogo showLogoHideText() {
         showLogo();
         return hideText();
     }
@@ -157,20 +193,26 @@ public class MoLogo extends MoConstraint {
      * selects or unSelect depending on whether
      * the item has been selected or not
      * @param o object
+     * @param isIcon is used to determine
+     *               whether the logo is a text logo
+     *               or an icon logo
      * @return this for nested calling
      */
-    public MoLogo onSelect(MoSelectableItem o) {
-        return o.isSelected()? select() : unSelect();
+    public MoLogo onSelect(MoSelectableItem o, boolean isIcon) {
+        return o.isSelected()? select() : unSelect(isIcon);
     }
 
     /**
      * same as onSelect but now it fills
      * the drawable inside it, if it is selected
      * @param o
-     * @return
+     * @param isIcon is used to determine
+     *               whether the logo is a text logo
+     *               or an icon logo
+     * @return this for nested calling
      */
-    public MoLogo onSelectFill(MoSelectableItem o) {
-        return o.isSelected()? selectFill() : unSelect();
+    public MoLogo onSelectFill(MoSelectableItem o, boolean isIcon) {
+        return o.isSelected()? selectFill() : unSelect(isIcon);
     }
 
 
@@ -210,17 +252,24 @@ public class MoLogo extends MoConstraint {
         this.savedInner = this.innerLogo.getDrawable();
         this.outer.setImageDrawable(selectedDrawable);
         this.innerLogo.setImageDrawable(innerDrawable);
-        this.manager = new MoViewManager().saveVisibility(this.outer,this.innerLogo,this.innerTextView);
+        //this.manager = new MoViewManager().saveVisibility(this.outer,this.innerLogo,this.innerTextView);
         showLogoHideText();
         return this;
     }
 
 
-    private MoLogo unSelect() {
+    private MoLogo unSelect(boolean isIcon) {
         this.outer.setImageDrawable(this.savedOuter);
         this.innerLogo.setImageDrawable(this.savedInner);
-        this.manager.deployVisibility(this.outer, this.innerLogo, this.innerTextView);
-        return this;
+        return show(isIcon);
+    }
+
+    private MoLogo show(boolean isIcon) {
+        if (isIcon) {
+            return showLogoHideText();
+        } else {
+            return showText().hideLogo();
+        }
     }
 
     public String signature() {
@@ -245,6 +294,7 @@ public class MoLogo extends MoConstraint {
         innerTextView = findViewById(R.id.mo_logo_text);
         outer = findViewById(R.id.mo_logo_outer_drawable);
         innerLogo = findViewById(R.id.mo_logo_image);
+        layout = findViewById(R.id.mo_logo_layout);
         setOuter(MoDrawableUtils.outlineCircle(getContext()));
     }
 
