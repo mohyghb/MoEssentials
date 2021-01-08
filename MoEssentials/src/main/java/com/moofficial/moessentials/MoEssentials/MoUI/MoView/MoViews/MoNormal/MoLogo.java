@@ -117,17 +117,17 @@ public class MoLogo extends MoConstraint {
     }
 
     public MoLogo filledCircle() {
-        this.outer.setImageDrawable(MoDrawableUtils.filledCircle(getContext(),this.color));
+        setOuter(MoDrawableUtils.filledCircle(getContext(),this.color));
         return this;
     }
 
     public MoLogo filledRec() {
-        this.outer.setImageDrawable(MoDrawableUtils.filledRec(getContext(),this.color));
+        setOuter(MoDrawableUtils.filledRec(getContext(),this.color));
         return this;
     }
 
     public MoLogo filledRoundRec() {
-        this.outer.setImageDrawable(MoDrawableUtils.filledRoundRec(getContext(),this.color));
+        setOuter(MoDrawableUtils.filledRoundRec(getContext(),this.color));
         return this;
     }
 
