@@ -31,7 +31,6 @@ public class MoPopupWindow extends MoContext {
     private ArrayList<View> allViews = new ArrayList<>();
     private PopupWindow popupWindow;
     private MoPopupWindowLayout windowLayout;
-    // max up time for the pop up window, if its zero the duration is infinite
     private long duration = 0;
     private int maxHeight;
     private int maxWidth;
