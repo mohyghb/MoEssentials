@@ -25,6 +25,14 @@ public abstract class MoFragment extends Fragment implements MoLayoutId,MoOnBack
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        init(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    protected abstract void init(View v, Bundle b);
+
     /**
      * finds the view with id
      * inside the root layout

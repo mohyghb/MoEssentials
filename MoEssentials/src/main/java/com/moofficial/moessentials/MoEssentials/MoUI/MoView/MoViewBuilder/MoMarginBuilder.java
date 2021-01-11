@@ -8,7 +8,8 @@ import android.widget.LinearLayout;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
+// todo the linear and card params do not work as dp since
+//  we also need the view to get the context from
 public class MoMarginBuilder extends MoPaddingBuilder{
 
 
