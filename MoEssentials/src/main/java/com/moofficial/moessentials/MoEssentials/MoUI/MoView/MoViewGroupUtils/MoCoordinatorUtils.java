@@ -1,5 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils;
 
+import android.content.Context;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -28,8 +30,8 @@ public class MoCoordinatorUtils {
      * and layout behavior of app bar layout scrolling
      * view behavior
      */
-    public static CoordinatorLayout.LayoutParams getScrollingParams(){
-        return getScrollingParams(new MoPaddingBuilder());
+    public static CoordinatorLayout.LayoutParams getScrollingParams(Context c){
+        return getScrollingParams(new MoPaddingBuilder(c));
     }
 
     /**

@@ -99,6 +99,18 @@ public class MoViewUtils {
     }
 
     /**
+     * makes the view to ripple when clicked
+     * @param v view to apply ripple effect
+     */
+    public static void borderlessRippleOnClick(Context context,View v){
+        TypedValue outValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless,
+                outValue, true);
+        v.setBackgroundResource(outValue.resourceId);
+        v.setClickable(true);
+    }
+
+    /**
      * sets the size of the view
      * @param v view to be resized
      * @param width new width of the view

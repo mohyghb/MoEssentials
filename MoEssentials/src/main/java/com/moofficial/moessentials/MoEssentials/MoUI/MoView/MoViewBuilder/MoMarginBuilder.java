@@ -13,12 +13,12 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 public class MoMarginBuilder extends MoPaddingBuilder{
 
 
-    public MoMarginBuilder() {
-        super();
+    public MoMarginBuilder(Context c) {
+        super(c);
     }
 
-    public MoMarginBuilder(int p) {
-        super(p);
+    public MoMarginBuilder(Context c, int p) {
+        super(c,p);
     }
 
     @Override
@@ -113,9 +113,9 @@ public class MoMarginBuilder extends MoPaddingBuilder{
      * @param b bottom margin
      * @return
      */
-    public static LinearLayout.LayoutParams getLinearParams(int l, int t, int r, int b){
+    public static LinearLayout.LayoutParams getLinearParams(Context c, int l, int t, int r, int b){
         return getLinearParams(
-                new MoMarginBuilder().setTop(t)
+                new MoMarginBuilder(c).setTop(t)
                                      .setLeft(l)
                                      .setRight(r)
                                      .setBottom(b)
@@ -127,8 +127,8 @@ public class MoMarginBuilder extends MoPaddingBuilder{
      * @param m
      * @return
      */
-    public static LinearLayout.LayoutParams getLinearParams(int m){
-        return getLinearParams(m,m,m,m);
+    public static LinearLayout.LayoutParams getLinearParams(Context c, int m){
+        return getLinearParams(c,m,m,m,m);
     }
 
 
@@ -153,8 +153,8 @@ public class MoMarginBuilder extends MoPaddingBuilder{
      * @param bottom
      * @return
      */
-    public static CardView.LayoutParams getCardLayoutParams(int left,int top,int right,int bottom){
-        return getCardLayoutParams(new MoMarginBuilder().setLeft(left).setTop(top)
+    public static CardView.LayoutParams getCardLayoutParams(Context c, int left,int top,int right,int bottom){
+        return getCardLayoutParams(new MoMarginBuilder(c).setLeft(left).setTop(top)
                 .setRight(right).setBottom(bottom).asDp());
     }
 
@@ -163,8 +163,8 @@ public class MoMarginBuilder extends MoPaddingBuilder{
      * @param m
      * @return
      */
-    public static CardView.LayoutParams getCardLayoutParams(int m){
-        return getCardLayoutParams(m,m,m,m);
+    public static CardView.LayoutParams getCardLayoutParams(Context c, int m){
+        return getCardLayoutParams(c,m,m,m,m);
     }
 
 

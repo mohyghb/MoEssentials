@@ -3,24 +3,29 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder;
 import android.content.Context;
 import android.view.View;
 
+import com.moofficial.moessentials.MoEssentials.MoContext.MoContext;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
 
-public class MoPaddingBuilder{
+public class MoPaddingBuilder extends MoContext {
 
     int top,left,bottom,right;
     private boolean asDP = false;
 
 
-    public MoPaddingBuilder(){}
+    public MoPaddingBuilder(Context c){
+        super(c);
+    }
 
-    public MoPaddingBuilder(int p){
+    public MoPaddingBuilder(Context c, int p){
+        super(c);
         top = p;
         left = p;
         bottom = p;
         right = p;
     }
 
-    public MoPaddingBuilder(int left,int top,int right,int bottom) {
+    public MoPaddingBuilder(Context c, int left, int top, int right, int bottom) {
+        super(c);
         setLeft(left).setTop(top).setRight(right).setBottom(bottom);
     }
 
@@ -63,7 +68,7 @@ public class MoPaddingBuilder{
 
 
     public MoPaddingBuilder asDp() {
-        this.asDP = true;
+        this.changeConversionsToDp(this.context);
         return this;
     }
 
@@ -74,17 +79,10 @@ public class MoPaddingBuilder{
     public MoPaddingBuilder apply(View v) {
         if(v == null)
             return this;
-        applyConversion(v);
         v.setPadding(left,top,right,bottom);
         return this;
     }
 
-    private void applyConversion(View v) {
-        if (asDP) {
-            changeConversionsToDp(v.getContext());
-            asDP = false;
-        }
-    }
 
 
     private void changeConversionsToDp(Context c) {
@@ -104,7 +102,6 @@ public class MoPaddingBuilder{
     public MoPaddingBuilder applyToExisting(View v) {
         if(v == null)
             return this;
-        applyConversion(v);
         v.setPadding(left + v.getPaddingLeft(),
                 top + v.getPaddingTop(),
                 right + v.getPaddingRight(),
