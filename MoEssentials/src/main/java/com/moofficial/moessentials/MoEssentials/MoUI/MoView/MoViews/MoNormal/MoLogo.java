@@ -2,6 +2,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -57,8 +58,6 @@ public class MoLogo extends MoConstraint {
         super(context, attrs, defStyleAttr);
     }
 
-
-    // todo test
     public MoLogo small() {
         MoViewUtils.setSize(this.layout,R.dimen.mo_logo_small,R.dimen.mo_logo_small);
         MoViewUtils.setSize(this.innerLogo,R.dimen.mo_logo_small_image,R.dimen.mo_logo_small_image);
@@ -161,6 +160,18 @@ public class MoLogo extends MoConstraint {
         this.color = MoColor.color(b);
         paintColor();
         return this;
+    }
+
+    /**
+     * todo does not work currently
+     * sets the inner bitmap by converting
+     * the bitmap into drawable and
+     * handling it in setInner(Drawable b) method
+     * @param bitmap to set as inner drawable
+     * @return this for nested calling
+     */
+    public MoLogo setInner(Bitmap bitmap) {
+        return this.setInner(new BitmapDrawable(getResources(), bitmap));
     }
 
 
