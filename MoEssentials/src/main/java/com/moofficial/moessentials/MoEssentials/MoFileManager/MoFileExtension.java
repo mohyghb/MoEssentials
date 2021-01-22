@@ -1,5 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoFileManager;
 
+import android.webkit.MimeTypeMap;
+
 import java.io.File;
 import java.util.HashSet;
 
@@ -61,6 +63,20 @@ public class MoFileExtension {
                 .substring(file.getAbsolutePath().lastIndexOf("."))
                 .toLowerCase()
                 .replace(".","");
+    }
+
+    /**
+     * returns the mime type of the file given
+     * @param file
+     * @return
+     */
+    public static String getMimeType(File file) {
+        String type = null;
+        String extension = getExtension(file);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
     }
 
 

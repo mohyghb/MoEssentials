@@ -27,6 +27,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoSwitchers.
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperFloatingActionButton;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperLinearLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperToolbar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViewManager.MoViewHandler;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoViewManager.MoViewManager;
 import com.moofficial.moessentials.R;
 
@@ -36,7 +37,7 @@ public abstract class MoBasicActivity extends MoActivity {
 
 
     protected MoBasicLayout l;
-    //protected MoSectionViewManager
+    protected MoViewHandler progressHandler;
 
     @Override
     protected void setTheContentView() {
@@ -46,8 +47,7 @@ public abstract class MoBasicActivity extends MoActivity {
 
     @Override
     protected void initViews() {
-        // this is already done inside the basic layout
-        // ignore
+        this.progressHandler = new MoViewHandler(this.getGroupRootView());
     }
 
 
@@ -153,16 +153,23 @@ public abstract class MoBasicActivity extends MoActivity {
 
 
     /**
-     * creates a new Progress Dialog with the given title
-     * @return progress dialog
+     * shows the progress view
+     * this is the view that was originally hidden inside the
+     * progress handler
+     * @return this for nested calling
      */
-    public MoBasicActivity showProgress(View progress) {
-        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
-        params.gravity = Gravity.CENTER;
-        progress.setLayoutParams(params);
+    public MoBasicActivity showProgress() {
+        progressHandler.turnUnNormal();
+        return this;
+    }
 
-
+    /**
+     * shows the normal views that are
+     * stored inside the normal views of progress handler
+     * @return this for nested calling
+     */
+    public MoBasicActivity hideProgress() {
+        progressHandler.turnNormal();
         return this;
     }
 
