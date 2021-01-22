@@ -13,7 +13,6 @@ public class MoAddBar extends MoConstraint {
 
     private EditText editText;
     private ImageButton leftButton, rightButton;
-    private MoCardView cardView;
 
 
     public MoAddBar(Context context) {
@@ -41,11 +40,6 @@ public class MoAddBar extends MoConstraint {
     // right button id
     public int RBId(){
         return rightButton.getId();
-    }
-
-    // card view id
-    public int CVId(){
-        return cardView.getId();
     }
 
 
@@ -76,15 +70,6 @@ public class MoAddBar extends MoConstraint {
         return this;
     }
 
-    public MoCardView getCardView() {
-        return cardView;
-    }
-
-    public MoAddBar setCardView(MoCardView cardView) {
-        this.cardView = cardView;
-        return this;
-    }
-
     @Override
     public int getLayoutId() {
         return R.layout.mo_add_bar;
@@ -95,7 +80,6 @@ public class MoAddBar extends MoConstraint {
         editText = findViewById(R.id.add_bar_edit_text);
         rightButton = findViewById(R.id.add_add_bar);
         leftButton = findViewById(R.id.close_add_bar);
-        cardView = findViewById(R.id.add_card_view);
     }
 
     @Override

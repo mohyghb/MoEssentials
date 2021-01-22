@@ -15,7 +15,6 @@ import com.moofficial.moessentials.R;
 
 public class MoToolBar extends MoConstraint {
 
-    private MoCardView cardView;
     private TextView title;
     private ImageButton leftButton, middleButton, rightButton,extraButton,forthButton;
     private CheckBox checkBox;
@@ -50,10 +49,6 @@ public class MoToolBar extends MoConstraint {
     // middle button id
     public int MId(){
         return middleButton.getId();
-    }
-
-    public int CId(){
-        return cardView.getId();
     }
 
     public int EXId(){
@@ -145,15 +140,6 @@ public class MoToolBar extends MoConstraint {
         hideRight();
         hideCheckBox();
         hideExtraButton();
-        return this;
-    }
-
-    public MoCardView getCardView() {
-        return cardView;
-    }
-
-    public MoToolBar setCardView(MoCardView cardView) {
-        this.cardView = cardView;
         return this;
     }
 
@@ -287,7 +273,6 @@ public class MoToolBar extends MoConstraint {
         leftButton = findViewById(R.id.menu_app_bar_back_button);
         middleButton = findViewById(R.id.menu_app_bar_search_button);
         rightButton = findViewById(R.id.menu_app_bar_more_button);
-        cardView = findViewById(R.id.menu_app_bar_card_view);
         extraButton = findViewById(R.id.menu_app_bar_extra_button);
         checkBox = findViewById(R.id.menu_app_bar_checkBox);
         forthButton = findViewById(R.id.menu_app_bar_forth_button);

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState.MoStateChange;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoSearchBar;
 import com.moofficial.moessentials.MoEssentials.MoUtils.MoKeyboardUtils.MoKeyboardUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSearchable.MoState.MoOnScrollToPosition;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoListViews;
@@ -79,6 +80,18 @@ public class MoSearchable extends MoListViews {
     }
 
 
+    /**
+     * automatically uses the elements that are inside
+     * the search bar to sync with the app
+     * @param searchBar
+     * @return this for nested calling
+     */
+    public MoSearchable syncWith(MoSearchBar searchBar) {
+         return setSearchTextView(searchBar.ETId())
+                .addUnNormalViews(searchBar)
+                .setCancelButton(searchBar.LBId())
+                .setClearSearch(searchBar.RBId());
+    }
 
 
     public MoSearchable setSearchTextView(int s) {

@@ -13,7 +13,6 @@ public class MoSearchBar extends MoConstraint {
 
     private EditText editText;
     private ImageButton leftButton, rightButton;
-    private MoCardView cardView;
 
     public MoSearchBar(Context context) {super(context);}
 
@@ -40,10 +39,6 @@ public class MoSearchBar extends MoConstraint {
         return rightButton.getId();
     }
 
-    // card view id
-    public int CVId(){
-        return cardView.getId();
-    }
 
     public EditText getEditText() {
         return editText;
@@ -82,14 +77,7 @@ public class MoSearchBar extends MoConstraint {
         return this;
     }
 
-    public MoCardView getCardView() {
-        return cardView;
-    }
 
-    public MoSearchBar setCardView(MoCardView cardView) {
-        this.cardView = cardView;
-        return this;
-    }
 
     @Override
     public int getLayoutId() {
@@ -101,7 +89,6 @@ public class MoSearchBar extends MoConstraint {
         editText = findViewById(R.id.search_edit_text);
         leftButton = findViewById(R.id.close_search_bar);
         rightButton = findViewById(R.id.clear_search_bar);
-        cardView = findViewById(R.id.search_card_view);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerAdapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.transition.TransitionManager;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,6 +82,37 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
      */
     public void notifyItemInsertedAtEnd() {
         notifyItemInserted(getItemCount()-1);
+    }
+
+
+
+
+    /**
+     * updates the adapter to the new data that
+     * is passed in
+     * @param a activity to update the ui for
+     * @param newData for the adapter
+     * @param viewGroup if it's passed, we animate the update,
+     *                  if null, we don't animate
+     */
+    public void update(Activity a, List<I> newData, ViewGroup viewGroup) {
+        setDataSet(newData);
+        a.runOnUiThread(()-> {
+            if (viewGroup != null) {
+                TransitionManager.beginDelayedTransition(viewGroup);
+            }
+            notifyDataSetChanged();
+        });
+    }
+
+    /**
+     * updates the adapter to the new data that
+     * is passed in
+     * @param a activity to update the ui for
+     * @param newData for the adapter
+     */
+    public void update(Activity a, List<I> newData) {
+        update(a,newData,null);
     }
 
 

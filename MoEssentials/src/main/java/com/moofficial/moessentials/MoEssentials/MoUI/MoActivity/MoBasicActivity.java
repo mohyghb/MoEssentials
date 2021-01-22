@@ -1,9 +1,12 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
+import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 
+import android.app.ProgressDialog;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,10 +22,12 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder.MoCard
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoAppbar.MoAppbarUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoViewGroupUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoSwitchers.MoSectionViewManager;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoSwitchers.MoSwitchViews;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperFloatingActionButton;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperLinearLayout;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoWrappers.MoWrapperToolbar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoViewManager.MoViewManager;
 import com.moofficial.moessentials.R;
 
 
@@ -31,6 +36,7 @@ public abstract class MoBasicActivity extends MoActivity {
 
 
     protected MoBasicLayout l;
+    //protected MoSectionViewManager
 
     @Override
     protected void setTheContentView() {
@@ -143,6 +149,21 @@ public abstract class MoBasicActivity extends MoActivity {
      */
     public void onAppbarLayoutHeightChanged(float r,ViewGroup... considerTheseHeights){
         l.onAppbarLayoutHeightChanged(r,considerTheseHeights);
+    }
+
+
+    /**
+     * creates a new Progress Dialog with the given title
+     * @return progress dialog
+     */
+    public MoBasicActivity showProgress(View progress) {
+        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        params.gravity = Gravity.CENTER;
+        progress.setLayoutParams(params);
+
+
+        return this;
     }
 
 

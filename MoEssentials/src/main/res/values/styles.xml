@@ -17,6 +17,14 @@
         <item name="cardElevation">3dp</item>
     </style>
 
+    <!--style for fading edge text views-->
+    <style name="mo_fading_edge_text_view" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fadingEdgeLength">@dimen/mo_fade_edge_text_view</item>
+        <item name="android:ellipsize">none</item>
+    </style>
+
 
 
 </resources>

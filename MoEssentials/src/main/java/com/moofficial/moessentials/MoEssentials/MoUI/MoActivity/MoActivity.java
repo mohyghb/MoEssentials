@@ -1,14 +1,19 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoActivity.MoActivitySettings.MoActivitySettings;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDialog.MoProgressDialog.MoProgressDialog;
 
 public abstract class MoActivity extends AppCompatActivity {
 
@@ -105,7 +110,6 @@ public abstract class MoActivity extends AppCompatActivity {
     public Context getContext() {
         return this;
     }
-
 
 
 }
