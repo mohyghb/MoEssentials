@@ -36,6 +36,11 @@ public class MoImageButton extends androidx.appcompat.widget.AppCompatImageButto
         setup();
     }
 
+    public MoImageButton setIcon(@DrawableRes int res) {
+        setImageResource(res);
+        return this;
+    }
+
     /**
      * adds the padding
      * and the ripple on click effect

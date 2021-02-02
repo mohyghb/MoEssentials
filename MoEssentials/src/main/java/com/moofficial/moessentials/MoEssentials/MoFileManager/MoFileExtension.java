@@ -59,8 +59,11 @@ public class MoFileExtension {
      * @return extension of the file in string format
      */
     private static String getExtension(File file) {
-        return file.getAbsolutePath()
-                .substring(file.getAbsolutePath().lastIndexOf("."))
+        return getExtension(file.getAbsolutePath());
+    }
+
+    private static String getExtension(String path) {
+        return path.substring(path.lastIndexOf("."))
                 .toLowerCase()
                 .replace(".","");
     }
@@ -71,8 +74,12 @@ public class MoFileExtension {
      * @return
      */
     public static String getMimeType(File file) {
+        return getMimeType(file.getAbsolutePath());
+    }
+
+    public static String getMimeType(String path) {
         String type = null;
-        String extension = getExtension(file);
+        String extension = getExtension(path);
         if (extension != null) {
             type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         }

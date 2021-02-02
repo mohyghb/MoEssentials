@@ -27,10 +27,9 @@ public class MoColor {
             R.color.mo_yellow,
             R.color.mo_amber,
             R.color.mo_orange,
-            R.color.mo_deep_orange,
     };
 
-    public static int NULL_COLOR = R.color.colorPrimary;
+    public static int NULL_COLOR = R.color.colorAccent;
 
 
     /**

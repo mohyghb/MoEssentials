@@ -31,7 +31,7 @@
 
 
     <color name="mo_red">#ef9a9a</color>
-    <color name="mo_pink">#F48FB1</color>
+    <color name="mo_pink">#F8BBD0</color>
     <color name="mo_purple">#CE93D8</color>
     <color name="mo_deep_purple">#B39DDB</color>
     <color name="mo_indigo">#9FA8DA</color>
@@ -45,7 +45,6 @@
     <color name="mo_yellow">#FFF59D</color>
     <color name="mo_amber">#FFE082</color>
     <color name="mo_orange">#FFCC80</color>
-    <color name="mo_deep_orange">#FFAB91</color>
 
 
 
