@@ -2,6 +2,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -137,7 +138,7 @@ public class MoLogo extends MoConstraint {
      * @return this for nested calling
      */
     public MoLogo setOuter() {
-        return setOuter(MoDrawableUtils.outlineCircle(getContext()));
+        return setOuter(MoDrawableUtils.filledCircle(getContext()));
     }
 
     public MoLogo setOuter(Drawable d) {
@@ -155,6 +156,7 @@ public class MoLogo extends MoConstraint {
      * @return this for nested calling
      */
     public MoLogo setInner(Drawable b) {
+        DrawableCompat.setTint(b, getColor(R.color.MoBackground));
         this.innerLogo.setImageDrawable(b);
         this.savedInner = b;
         this.color = MoColor.color(b);
@@ -263,7 +265,6 @@ public class MoLogo extends MoConstraint {
         this.savedInner = this.innerLogo.getDrawable();
         this.outer.setImageDrawable(selectedDrawable);
         this.innerLogo.setImageDrawable(innerDrawable);
-        //this.manager = new MoViewManager().saveVisibility(this.outer,this.innerLogo,this.innerTextView);
         showLogoHideText();
         return this;
     }
@@ -306,7 +307,8 @@ public class MoLogo extends MoConstraint {
         outer = findViewById(R.id.mo_logo_outer_drawable);
         innerLogo = findViewById(R.id.mo_logo_image);
         layout = findViewById(R.id.mo_logo_layout);
-        setOuter(MoDrawableUtils.outlineCircle(getContext()));
+        this.setTextColor(R.color.MoBackground);
+        this.savedOuter = MoDrawableUtils.filledCircle(getContext());
     }
 
     @Override

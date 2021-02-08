@@ -2,6 +2,8 @@ package com.moofficial.moessentials.MoEssentials.MoString;
 
 import android.widget.TextView;
 
+import java.text.Normalizer;
+
 public class MoString {
 
 
@@ -82,12 +84,35 @@ public class MoString {
      * @return
      */
     public static String getSignature(String ... texts){
-        for(String text: texts){
-            if(isValid(text)){
-                return (text.trim().charAt(0) + "").toUpperCase();
+        for(String text: texts) {
+            if(isValid(text)) {
+                return (getCleanText(text).charAt(0)+"").toUpperCase();
             }
         }
         return EMPTY_SIGNATURE;
+    }
+
+
+    private static String getCleanText(String s) {
+        String result;
+        try {
+            s = s.trim();
+            String noHP = s;
+            noHP = noHP.replaceAll("[\\s\\-\\.\\^:,]","");
+            noHP = noHP.replaceAll("[^A-Za-z0-9]","");
+            char isinya = noHP.charAt(0);
+
+            if(isinya == '0')
+                result = "62"+noHP.substring(1);
+            else if(isinya == '+' )
+                result = noHP.substring(1);
+            else
+                result = noHP;
+        }
+        catch (Exception e){
+            return EMPTY_SIGNATURE;
+        }
+        return result == null || result.isEmpty() ? EMPTY_SIGNATURE : result;
     }
 
     /**

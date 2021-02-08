@@ -9,21 +9,21 @@
     <color name="mo_bottom_sheet_color">@color/MoBlack</color>
 
 
-    <color name="mo_red">#CCB71C1C</color>
-    <color name="mo_pink">#CC880E4F</color>
-    <color name="mo_purple">#CC4A148C</color>
-    <color name="mo_deep_purple">#CC311B92</color>
-    <color name="mo_indigo">#CC1A237E</color>
-    <color name="mo_blue">#CC0D47A1</color>
-    <color name="mo_light_blue">#CC01579B</color>
-    <color name="mo_cyan">#CC006064</color>
-    <color name="mo_teal">#CC004D40</color>
-    <color name="mo_green">#CC1B5E20</color>
-    <color name="mo_light_green">#CC33691E</color>
-    <color name="mo_lime">#CC827717</color>
-    <color name="mo_yellow">#CCF57F17</color>
-    <color name="mo_amber">#CCFF6F00</color>
-    <color name="mo_orange">#CCE65100</color>
+<!--    <color name="mo_red">#CCB71C1C</color>-->
+<!--    <color name="mo_pink">#CC880E4F</color>-->
+<!--    <color name="mo_purple">#CC4A148C</color>-->
+<!--    <color name="mo_deep_purple">#CC311B92</color>-->
+<!--    <color name="mo_indigo">#CC1A237E</color>-->
+<!--    <color name="mo_blue">#CC0D47A1</color>-->
+<!--    <color name="mo_light_blue">#CC01579B</color>-->
+<!--    <color name="mo_cyan">#CC006064</color>-->
+<!--    <color name="mo_teal">#CC004D40</color>-->
+<!--    <color name="mo_green">#CC1B5E20</color>-->
+<!--    <color name="mo_light_green">#CC33691E</color>-->
+<!--    <color name="mo_lime">#CC827717</color>-->
+<!--    <color name="mo_yellow">#CCF57F17</color>-->
+<!--    <color name="mo_amber">#CCFF6F00</color>-->
+<!--    <color name="mo_orange">#CCE65100</color>-->
 
 
 <!--    <color name="mo_red">#D50000</color>-->

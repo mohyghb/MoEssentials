@@ -10,7 +10,7 @@ import com.moofficial.moessentials.R;
 
 public class MoPopupWindowLayout extends MoConstraint {
 
-    private MoCardView cardView;
+
     private MoWrapperLinearLayout wrapperLinearLayout;
 
     public MoPopupWindowLayout(Context context) {
@@ -25,10 +25,6 @@ public class MoPopupWindowLayout extends MoConstraint {
         super(context, attrs, defStyleAttr);
     }
 
-    public MoCardView getCardView() {
-        return cardView;
-    }
-
     public MoWrapperLinearLayout getWrapperLinearLayout() {
         return wrapperLinearLayout;
     }
@@ -41,7 +37,6 @@ public class MoPopupWindowLayout extends MoConstraint {
 
     @Override
     public void initViews() {
-        this.cardView = findViewById(R.id.mo_pop_up_window_card);
         this.wrapperLinearLayout = new MoWrapperLinearLayout(findViewById(R.id.mo_pop_up_window_linear));
     }
 
