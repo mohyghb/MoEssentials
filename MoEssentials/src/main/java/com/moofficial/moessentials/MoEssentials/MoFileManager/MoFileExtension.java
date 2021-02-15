@@ -63,6 +63,9 @@ public class MoFileExtension {
     }
 
     private static String getExtension(String path) {
+        if (!path.contains(".")) {
+            return "unknown";
+        }
         return path.substring(path.lastIndexOf("."))
                 .toLowerCase()
                 .replace(".","");
