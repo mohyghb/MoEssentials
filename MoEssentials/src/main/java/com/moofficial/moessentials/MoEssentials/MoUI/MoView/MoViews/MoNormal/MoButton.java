@@ -1,12 +1,14 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
@@ -77,8 +79,16 @@ public class MoButton extends MoConstraint {
         return this;
     }
 
+    /**
+     * sets the icon color to inverse to it accounts
+     * for both light and dark themes
+     * @param r
+     * @return this for nested calling
+     */
     public MoButton setIcon(@DrawableRes int r){
-        icon.setImageDrawable(getDrawable(r));
+        Drawable d = getDrawable(r);
+        DrawableCompat.setTint(d, getColor(R.color.MoInverseColor));
+        icon.setImageDrawable(d);
         return this;
     }
 
