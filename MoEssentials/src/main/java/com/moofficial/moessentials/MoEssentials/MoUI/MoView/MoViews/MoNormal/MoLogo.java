@@ -165,15 +165,15 @@ public class MoLogo extends MoConstraint {
     }
 
     /**
-     * todo does not work currently
-     * sets the inner bitmap by converting
-     * the bitmap into drawable and
+     * sets the inner bitmap,
+     * ATTENTION: this does not work with selecting and unselecting
      * handling it in setInner(Drawable b) method
      * @param bitmap to set as inner drawable
      * @return this for nested calling
      */
     public MoLogo setInner(Bitmap bitmap) {
-        return this.setInner(new BitmapDrawable(getResources(), bitmap));
+        this.innerLogo.setImageBitmap(bitmap);
+        return this;
     }
 
 
