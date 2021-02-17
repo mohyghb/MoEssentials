@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroups.MoConstraint;
 import com.moofficial.moessentials.R;
 
@@ -75,8 +77,8 @@ public class MoButton extends MoConstraint {
         return this;
     }
 
-    public MoButton setIcon(int r){
-        icon.setImageResource(r);
+    public MoButton setIcon(@DrawableRes int r){
+        icon.setImageDrawable(getDrawable(r));
         return this;
     }
 
