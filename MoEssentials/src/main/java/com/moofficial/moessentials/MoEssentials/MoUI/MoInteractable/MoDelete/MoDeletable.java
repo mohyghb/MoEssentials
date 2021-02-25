@@ -260,6 +260,7 @@ public class MoDeletable<T extends MoSelectableItem> extends MoSelectable<T> {
     @Override
     public void onCancel() {
         setDeleteMode(false);
+        canceledListener.onCanceled();
     }
 
     /**

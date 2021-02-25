@@ -33,7 +33,7 @@ public class MoSelectable<T extends MoSelectableItem> extends MoListViews {
     protected TextView counterTextView;
     protected String counterMessage = " Selected";
     private ImageButton confirmImageButton;
-    private MoOnCanceledListener canceledListener = () -> {};
+    protected MoOnCanceledListener canceledListener = () -> {};
     private MoOnSelectFinishedListener<T> selectFinishedListener = pickedItems -> {};
     private MoOnSelectListener<T> onSelectListener = selectableItem -> {};
     private MoOnEmptySelectionListener onEmptySelectionListener = ()->{};

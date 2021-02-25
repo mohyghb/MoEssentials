@@ -118,10 +118,23 @@ public class MoViewUtils {
      */
     public static void setSize(View v, @DimenRes int width, @DimenRes int height) {
         ViewGroup.LayoutParams params = v.getLayoutParams();
-//        params.width = MoDynamicUnit.convertDpToPixels(v.getContext().getResources().getDimension(width));
-//        params.height = MoDynamicUnit.convertDpToPixels(v.getContext().getResources().getDimension(height));
         params.width = (int) v.getContext().getResources().getDimension(width);
         params.height = (int) v.getContext().getResources().getDimension(height);
+    }
+
+    /**
+     * recursively sets enabled for all the children of view group
+     * @param enable whether the view is enable or disbaled
+     * @param v view group to apply enable to
+     */
+    public static void setEnabled(boolean enable, ViewGroup v) {
+        for (int i = 0; i < v.getChildCount(); i++) {
+            View child = v.getChildAt(i);
+            child.setEnabled(enable);
+            if (child instanceof ViewGroup) {
+                setEnabled(enable, (ViewGroup) child);
+            }
+        }
     }
 
 }
