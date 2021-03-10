@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 
@@ -110,6 +111,21 @@ public class MoSelectableUtils {
             MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(s,a));
         }else{
             MoListViewUtils.applyColor(v,ColorUtils.setAlphaComponent(ns,na));
+        }
+    }
+
+    /**
+     * sets teh drawable to the background of the given view if the item is selected
+     * @param context
+     * @param drawable
+     * @param v
+     * @param item
+     */
+    public static void applySelectedDrawable(Context context, @DrawableRes int drawable, View v, MoSelectableItem item) {
+        if (item.isSelected()) {
+            v.setBackground(ContextCompat.getDrawable(context,drawable));
+        } else {
+            v.setBackground(null);
         }
     }
 
