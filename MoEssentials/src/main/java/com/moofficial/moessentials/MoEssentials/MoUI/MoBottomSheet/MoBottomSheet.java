@@ -24,6 +24,7 @@ public class MoBottomSheet extends MoContext {
 
     private BottomSheetDialog bottomSheet;
     private MoBottomSheetLayout layout;
+    private View contentView;
     // duration that the bottom sheet should be shown
     // before dismissing on its own
     private long duration = 0;
@@ -323,13 +324,23 @@ public class MoBottomSheet extends MoContext {
     }
 
     /**
+     * if this is set, contentView is used instead of layout for the bottom sheet
+     * @param contentView
+     * @return
+     */
+    public MoBottomSheet setContentView(View contentView) {
+        this.contentView = contentView;
+        return this;
+    }
+
+    /**
      * builds the class based on the
      * specs that are passed in
      * @return this for nested calling
      */
     public MoBottomSheet build() {
         initBottomSheetDialog();
-        bottomSheet.setContentView(layout);
+        bottomSheet.setContentView(contentView == null ? layout : contentView);
         bottomSheet.setCancelable(cancelable);
         bottomSheet.setDismissWithAnimation(dismissWithAnimation);
         bottomSheet.setCanceledOnTouchOutside(canceledOnTouchOutside);
