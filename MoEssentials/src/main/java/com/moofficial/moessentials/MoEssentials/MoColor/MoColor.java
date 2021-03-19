@@ -55,7 +55,7 @@ public class MoColor {
         if (text == null || text.isEmpty()) {
             return NULL_COLOR;
         }
-        return color((int) text.charAt(0));
+        return color(hash(text));
     }
 
     /**
@@ -71,6 +71,15 @@ public class MoColor {
 
     public static @ColorInt int colorInt(Context c, String string) {
         return ContextCompat.getColor(c, color(string));
+    }
+
+    static int hash(String str) {
+        int hash = 5381;
+
+        for (int i = 0; i < str.length(); i++)
+            hash += ((hash << 5) + hash) + str.codePointAt(i);
+
+        return Math.abs(hash);
     }
 
 }
