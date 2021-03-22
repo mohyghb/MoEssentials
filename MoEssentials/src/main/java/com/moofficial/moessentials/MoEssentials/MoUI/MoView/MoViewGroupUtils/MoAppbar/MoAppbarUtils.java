@@ -1,12 +1,18 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoAppbar;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoLayouts.MoBasicLayout;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.MoViewGroupUtils;
 import com.moofficial.moessentials.R;
 
 import static com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
@@ -20,11 +26,21 @@ import static com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROL
 public class MoAppbarUtils {
 
 
-
-//    public static void sync(View parent, int appbarLayoutId,int collapsingToolbarId,int bt,int st){
-//         sync(parent.findViewById(appbarLayoutId),parent.findViewById(collapsingToolbarId),
-//                 parent.findViewById(bt),parent.findViewById(st));
-//    }
+    /**
+     * changes the app bar layout by considering
+     * the heights of other view groups as well
+     * now has the ability to
+     * change the app bar layout as we continue to add
+     * or remove things from toolbar
+     * @param considerTheseHeights
+     */
+    public static void onAppbarLayoutHeightChanged(Context context, AppBarLayout appBarLayout, float ratio, ViewGroup... considerTheseHeights){
+        float heightDp = (float) context.getResources().getDisplayMetrics().heightPixels /
+                ratio;
+        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)appBarLayout.getLayoutParams();
+        lp.height = (int)heightDp + MoViewGroupUtils.getMeasuredHeight(considerTheseHeights);
+        appBarLayout.setLayoutParams(lp);
+    }
 
     /**
      * transitions between the title inside the collapsing toolbar
