@@ -3,9 +3,12 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerA
 import android.app.Activity;
 import android.content.Context;
 import android.transition.TransitionManager;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoEmptyRecyclerView;
 
 import java.util.List;
 
@@ -13,10 +16,23 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
 
     protected List<I> dataSet;
     protected Context context;
+    private MoEmptyRecyclerView emptyViewListener = new MoEmptyRecyclerView();
 
     public MoRecyclerAdapter(Context c,List<I> dataSet) {
         this.context = c;
         this.dataSet = dataSet;
+    }
+
+    // this is to know which recycler view this adapter belongs to
+    public MoRecyclerAdapter<T, I> setRecyclerView(RecyclerView recyclerView) {
+        this.emptyViewListener.setRecyclerView(recyclerView);
+        return this;
+    }
+
+    // this is the view that is shown when the adapter is empty
+    public MoRecyclerAdapter<T, I> setEmptyView(View emptyView) {
+        this.emptyViewListener.setEmptyView(emptyView);
+        return this;
     }
 
     public List<I> getDataSet() {
@@ -102,6 +118,7 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
                 TransitionManager.beginDelayedTransition(viewGroup);
             }
             notifyDataSetChanged();
+            this.emptyViewListener.notify(newData.size());
         });
     }
 
@@ -115,5 +132,14 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
         update(a,newData,null);
     }
 
+    /**
+     * this should be called whenever you change something in the data set, so we know whether
+     * we need to show empty state or not, this is not required with the update methods above
+     * @return this for nested calling
+     */
+    public MoRecyclerAdapter<T,I> notifyEmptyState() {
+        this.emptyViewListener.notify(this.dataSet.size());
+        return this;
+    }
 
 }
