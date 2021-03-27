@@ -156,7 +156,7 @@ public class MoLogo extends MoConstraint {
      * @return this for nested calling
      */
     public MoLogo setInner(Drawable b) {
-        DrawableCompat.setTint(b, getColor(R.color.MoBackground));
+        DrawableCompat.setTint(b, getColor(R.color.mo_logo_inner_color));
         this.innerLogo.setImageDrawable(b);
         this.savedInner = b;
         this.color = MoColor.color(b);
@@ -307,7 +307,7 @@ public class MoLogo extends MoConstraint {
         outer = findViewById(R.id.mo_logo_outer_drawable);
         innerLogo = findViewById(R.id.mo_logo_image);
         layout = findViewById(R.id.mo_logo_layout);
-        this.setTextColor(R.color.MoBackground);
+        this.setTextColor(R.color.mo_logo_inner_color);
         this.savedOuter = MoDrawableUtils.filledCircle(getContext());
     }
 
