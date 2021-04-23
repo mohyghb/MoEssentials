@@ -5,6 +5,7 @@ import android.content.Context;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ValueCallback;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,16 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
     // this is the view that is shown when the adapter is empty
     public MoRecyclerAdapter<T, I> setEmptyView(View emptyView) {
         this.emptyViewListener.setEmptyView(emptyView);
+        return this;
+    }
+
+    /**
+     * this callback is called when you call notify empty view
+     * @param callback what to do and the state of empty view when calling notifyEmptyView
+     * @return this for nested calling
+     */
+    public MoRecyclerAdapter<T, I> setEmptyViewCallback(ValueCallback<Boolean> callback) {
+        this.emptyViewListener.setShowEmptyCallback(callback);
         return this;
     }
 

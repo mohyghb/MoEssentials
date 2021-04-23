@@ -1,6 +1,7 @@
 package com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView;
 
 import android.view.View;
+import android.webkit.ValueCallback;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,12 @@ public class MoEmptyRecyclerView {
 
     private RecyclerView recyclerView;
     private View emptyView;
+    private ValueCallback<Boolean> showEmptyCallback;
+
+    public MoEmptyRecyclerView setShowEmptyCallback(ValueCallback<Boolean> showEmptyCallback) {
+        this.showEmptyCallback = showEmptyCallback;
+        return this;
+    }
 
     public MoEmptyRecyclerView setRecyclerView(RecyclerView recyclerView) {
         this.recyclerView = recyclerView;
@@ -30,6 +37,9 @@ public class MoEmptyRecyclerView {
             boolean showEmpty = size == 0;
             this.emptyView.setVisibility(showEmpty ? View.VISIBLE : View.GONE);
             this.recyclerView.setVisibility(showEmpty ? View.GONE : View.VISIBLE);
+            if (showEmptyCallback != null) {
+                showEmptyCallback.onReceiveValue(showEmpty);
+            }
         }
     }
 }
