@@ -10,6 +10,7 @@ import android.webkit.ValueCallback;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoEmptyRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewBuilder.MoMarginBuilder;
 
 import java.util.List;
 
@@ -74,13 +75,21 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
      * match parent width with
      * wrap content height
      */
-    public RecyclerView.LayoutParams getMatchWrapParams(){
+    public RecyclerView.LayoutParams getMatchWrapParams() {
+        return getMatchWrapParams(new MoMarginBuilder(context));
+    }
+
+    /**
+     * match parent width with
+     * wrap content height
+     */
+    public RecyclerView.LayoutParams getMatchWrapParams(MoMarginBuilder marginBuilder) {
         return getRecyclerParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.WRAP_CONTENT, marginBuilder);
     }
 
     public  RecyclerView.LayoutParams getWrapWrapParam() {
-        return getRecyclerParams(RecyclerView.LayoutParams.WRAP_CONTENT,RecyclerView.LayoutParams.WRAP_CONTENT);
+        return getRecyclerParams(RecyclerView.LayoutParams.WRAP_CONTENT,RecyclerView.LayoutParams.WRAP_CONTENT, new MoMarginBuilder(context));
     }
 
     /**
@@ -88,8 +97,10 @@ public abstract class MoRecyclerAdapter<T extends RecyclerView.ViewHolder,I> ext
      * @param width of the recycler view item
      * @return the layout params for the recycler view item
      */
-    public RecyclerView.LayoutParams getRecyclerParams(int width,int height){
-        return new RecyclerView.LayoutParams(width,height);
+    public RecyclerView.LayoutParams getRecyclerParams(int width, int height, MoMarginBuilder mb) {
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(width,height);
+        lp.setMargins(mb.getLeft(),mb.getTop(), mb.getRight(),mb.getBottom());
+        return lp;
     }
 
     /**
