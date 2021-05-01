@@ -3,6 +3,7 @@ package com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewGroupUtils.Mo
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -99,6 +100,8 @@ public class MoAppbarUtils {
             int h = collapsingToolbar.getHeight();
             float f = (float)(col-verticalOffset)/h;
             float actualF = verticalOffset==0?0f:Math.abs(verticalOffset)>col?1f:f;
+            // start transition after we have reached half of the collapsing toolbar
+            actualF = Math.abs(verticalOffset) < (col/2) ? 0f : (actualF - 0.4f);
             for(TextView tv: minorTitles){
                 tv.setAlpha(actualF);
             }
