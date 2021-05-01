@@ -78,6 +78,9 @@ public class MoRecyclerView extends RecyclerView {
     @NonNull private MoOnSizeChanged onSizeChanged = (w, h, oldw, oldh) -> {};
     private GestureDetector gestureDetector;
     private int activeFeature = 0;
+    private boolean dynamicallyCalculateSpanCount = false;
+    // this is used to calculate the span count dynamically
+    private float defaultItemWidth = 190f;
 
     public MoRecyclerView(@NonNull Context context) {
         super(context);
@@ -165,6 +168,16 @@ public class MoRecyclerView extends RecyclerView {
         return this;
     }
 
+    public MoRecyclerView setDynamicallyCalculateSpanCount(boolean dynamicallyCalculateSpanCount) {
+        this.dynamicallyCalculateSpanCount = dynamicallyCalculateSpanCount;
+        return this;
+    }
+
+    public MoRecyclerView setDefaultItemWidth(float defaultItemWidth) {
+        this.defaultItemWidth = defaultItemWidth;
+        return this;
+    }
+
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         if(hasMax(maxHeight)){
@@ -174,6 +187,15 @@ public class MoRecyclerView extends RecyclerView {
             widthSpec = MeasureSpec.makeMeasureSpec(maxWidth, MeasureSpec.AT_MOST);
         }
         super.onMeasure(widthSpec, heightSpec);
+
+        if (dynamicallyCalculateSpanCount) {
+            // only update the span count if it is different to what it was
+            int newSpanCount = MoRecyclerUtils.getDynamicNumberOfColumns(getContext(), defaultItemWidth);
+            if (newSpanCount != spanCount) {
+                this.spanCount = newSpanCount;
+                show();
+            }
+        }
     }
 
     /**

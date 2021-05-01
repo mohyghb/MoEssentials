@@ -8,6 +8,7 @@ import androidx.annotation.IdRes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.moofficial.moessentials.MoEssentials.MoUI.MoDynamicUnit.MoDynamicUnit;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoBuilders.MoLLMBuilder;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewInterfaces.MoOnConfigurationChanged;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViewInterfaces.MoOnSizeChanged;
@@ -107,6 +108,18 @@ public class MoRecyclerUtils {
         sendPayloadToAll(adapter, MoOnConfigurationChanged.ON_CONFIG_CHANGED);
     }
 
+    /**
+     * get column count dynamically using this method,
+     * this is only used for the recycler views that are extending the width of phone's screen
+     * @param context
+     * @param minWidthDp
+     * @return
+     */
+    public static int getDynamicNumberOfColumns(Context context, float minWidthDp) {
+        int minWidthPx = MoDynamicUnit.convertDpToPixels(context, minWidthDp);
+        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+        return screenWidth / minWidthPx;
+    }
 
 
 
