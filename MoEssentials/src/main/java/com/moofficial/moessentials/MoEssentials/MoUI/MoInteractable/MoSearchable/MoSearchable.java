@@ -67,6 +67,7 @@ public class MoSearchable extends MoListViews {
     private boolean deactivateFindOperations =  false;
     private boolean deactivateSearchOperations =  false;
     private boolean clearSearchTextAfterDone = true;
+    private boolean animateAppBarLayoutCollapsing = true;
 
 
 
@@ -361,6 +362,10 @@ public class MoSearchable extends MoListViews {
         return deactivateSearchOperations;
     }
 
+    public MoSearchable setAnimateAppBarLayoutCollapsing(boolean animateAppBarLayoutCollapsing) {
+        this.animateAppBarLayoutCollapsing = animateAppBarLayoutCollapsing;
+        return this;
+    }
 
     @Override
     public MoSearchable addUnNormalViews(int... views) {
@@ -445,7 +450,7 @@ public class MoSearchable extends MoListViews {
             // if the app bar layout is defined
             // when the user wants to search, we collapse the toolbar
             // and also focus on the text view
-            appBarLayout.setExpanded(false,true);
+            appBarLayout.setExpanded(false,animateAppBarLayoutCollapsing);
         }
     }
 

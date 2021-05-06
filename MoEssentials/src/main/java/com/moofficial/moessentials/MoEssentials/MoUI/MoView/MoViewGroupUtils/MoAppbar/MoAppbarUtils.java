@@ -101,11 +101,13 @@ public class MoAppbarUtils {
             float f = (float)(col-verticalOffset)/h;
             float actualF = verticalOffset==0?0f:Math.abs(verticalOffset)>col?1f:f;
             // start transition after we have reached half of the collapsing toolbar
-            actualF = Math.abs(verticalOffset) < (col/2) ? 0f : (actualF - 0.4f);
+            if (actualF != 1) {
+                actualF = Math.abs(verticalOffset) < (col/2) ? 0f : (actualF - 0.4f);
+            }
             for(TextView tv: minorTitles){
                 tv.setAlpha(actualF);
             }
-            mainTitle.setAlpha(1f-actualF);
+            mainTitle.setAlpha(Math.max(1f-actualF, 0.3f));
         });
     }
 
