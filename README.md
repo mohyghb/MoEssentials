@@ -8,14 +8,14 @@ No need to write boiler plate codes anymore to make a list searchable or selecta
 ## Create activities with ease!
 Create dynamic, rich, and elegant activities with ease. Customize the toolbar, main content, and more and instantly have it optimized for different layout sizes and screens.
 
-<img src="https://user-images.githubusercontent.com/37986616/123025265-36e9ad00-d38f-11eb-9c6f-a1fee351d5f6.jpg" width="150"><img src="https://user-images.githubusercontent.com/37986616/123025364-63052e00-d38f-11eb-8f49-add0c9df785a.jpg" width="150">
+<img src="https://user-images.githubusercontent.com/37986616/123025265-36e9ad00-d38f-11eb-9c6f-a1fee351d5f6.jpg" width="150">  <img src="https://user-images.githubusercontent.com/37986616/123025364-63052e00-d38f-11eb-8f49-add0c9df785a.jpg" width="150">
 <img src="https://user-images.githubusercontent.com/37986616/123025409-70bab380-d38f-11eb-976d-a93c32f345ee.jpg" width="150">
 <img src="https://user-images.githubusercontent.com/37986616/123025448-7b754880-d38f-11eb-8630-b7c65a84cb3b.jpg" width="150">
 
 ## Android views but better
 Effortlessly work with the views that you know. Utilize the new versions of Recycler View, Card View, Search bar, Input bar, Toolbar, Bottom Sheets, Dialogs, Popup menu, Popup window, View Avatars, and more. Experience the enhanced versions of all the above views and more with MoEssentials.
 
-<img src="https://user-images.githubusercontent.com/37986616/123025615-b7101280-d38f-11eb-87f8-dde05a893720.jpg" width="150"><img src="https://user-images.githubusercontent.com/37986616/123025634-c2633e00-d38f-11eb-9886-8ed61348c237.jpg" width="150">
+<img src="https://user-images.githubusercontent.com/37986616/123025615-b7101280-d38f-11eb-87f8-dde05a893720.jpg" width="150">  <img src="https://user-images.githubusercontent.com/37986616/123025634-c2633e00-d38f-11eb-9886-8ed61348c237.jpg" width="150">
 <img src="https://user-images.githubusercontent.com/37986616/123025640-c5f6c500-d38f-11eb-9de1-6918f1df6127.jpg" width="150">
 <img src="https://user-images.githubusercontent.com/37986616/123025651-cabb7900-d38f-11eb-92fc-068678e1e0f9.jpg" width="150">
 
