@@ -3,9 +3,6 @@ package com.moofficial.moessentials.MoEssentials.MoFileManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
-import androidx.core.content.ContextCompat;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
