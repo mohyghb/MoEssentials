@@ -1,7 +1,7 @@
 # MoEssentials - Develop effortlessly
 
 MoEssentials is an AAR (Android Archive Library):
-1. Add the AAR inside build folder of this project to your project following [this](https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808) or [this](https://stackoverflow.com/questions/16682847/how-to-manually-include-external-aar-package-using-new-gradle-android-build-syst) tutorial
+1. Add the AAR inside [this project](https://github.com/mohyghb/MoEssentials/blob/master/MoEssentials-release/MoEssentials-release.aar) to your project following [this](https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808) or [this](https://stackoverflow.com/questions/16682847/how-to-manually-include-external-aar-package-using-new-gradle-android-build-syst) tutorial
 2. Follow the tutorial [here](https://github.com/mohyghb/Motodo) to understand what MoEssentials can do
 3. Let me know if you have any questions!
 
